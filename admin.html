@@ -181,10 +181,10 @@ tr:hover td{background:var(--table-hover);}
     <button class="nav-item" onclick="showTab('add')">
       <span class="nav-icon">＋</span> Добавить клиента
     </button>
-    <button class="nav-item" onclick="window.open('index.html','_blank')">
+    <button class="nav-item" onclick="window.open(window.location.href.replace('admin.html','index.html'),'_blank')">
       <span class="nav-icon">◇</span> Просмотр сайта
     </button>
-    <button class="nav-item" onclick="window.open('personal-energy-calendar.html','_blank')">
+    <button class="nav-item" onclick="window.open(window.location.href.replace('admin.html','personal-energy-calendar.html'),'_blank')">
       <span class="nav-icon">📅</span> Открыть календарь
     </button>
   </nav>
