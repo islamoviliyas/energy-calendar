@@ -112,7 +112,7 @@ body::before{content:'';position:fixed;width:600px;height:600px;border-radius:50
 <script>
 const SUPABASE_URL = 'https://gigfvlhcrtuosfnkzqpt.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_Hw69inUK0lqA5ECoVeGgRQ_kWEyD4Pt';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ── Tab switching ──────────────────────────────
 function showTab(tab) {
@@ -165,7 +165,7 @@ async function doLogin() {
   btn.textContent = 'Вход...';
   btn.disabled = true;
 
-  var result = await supabase.auth.signInWithPassword({ email: email, password: password });
+  var result = await supabaseClientClient.auth.signInWithPassword({ email: email, password: password });
 
   if (result.error) {
     showMsg('Неверный email или пароль');
@@ -174,7 +174,7 @@ async function doLogin() {
     return;
   }
 
-  var profileResult = await supabase
+  var profileResult = await supabaseClient
     .from('profiles')
     .select('role, is_active')
     .eq('id', result.data.user.id)
@@ -188,7 +188,7 @@ async function doLogin() {
     window.location.href = 'cabinet.html';
   } else {
     showMsg('Ваш аккаунт ожидает активации. Свяжитесь с администратором.');
-    await supabase.auth.signOut();
+    await supabaseClient.auth.signOut();
     btn.textContent = 'Войти в кабинет';
     btn.disabled = false;
   }
@@ -208,7 +208,7 @@ async function doRegister() {
   btn.textContent = 'Регистрация...';
   btn.disabled = true;
 
-  var result = await supabase.auth.signUp({ email: email, password: password });
+  var result = await supabaseClientClient.auth.signUp({ email: email, password: password });
 
   if (result.error) {
     showMsg(result.error.message === 'User already registered'
@@ -219,7 +219,7 @@ async function doRegister() {
     return;
   }
 
-  await supabase.from('profiles').upsert({
+  await supabaseClient.from('profiles').upsert({
     id: result.data.user.id,
     name: name,
     email: email,
@@ -237,9 +237,9 @@ async function doRegister() {
 
 // ── Check existing session ─────────────────────
 async function checkSession() {
-  var sessionResult = await supabase.auth.getSession();
+  var sessionResult = await supabaseClient.auth.getSession();
   if (sessionResult.data.session) {
-    var profileResult = await supabase
+    var profileResult = await supabaseClient
       .from('profiles')
       .select('role, is_active')
       .eq('id', sessionResult.data.session.user.id)
