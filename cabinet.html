@@ -9,67 +9,88 @@
 :root{--gold:#C4922A;--gold2:#E8B84B;--dark:#080706;--dark2:#111009;--dark3:#1A180F;--text:#F0EBE0;--text2:#B8B098;--text3:#6A6450;--border:rgba(196,146,42,0.2);--border2:rgba(255,255,255,0.06);--green:#4A8A60;--red:#C05050;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--dark);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;}
-
-/* Header */
 header{background:var(--dark2);border-bottom:1px solid var(--border2);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:50;}
 .header-logo{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;}
 .header-logo span{color:var(--gold);}
 .header-right{display:flex;align-items:center;gap:16px;}
-.user-name{font-size:13px;color:var(--text2);}
+.user-name-display{font-size:13px;color:var(--text2);}
 .btn-logout-sm{padding:6px 16px;background:transparent;border:1px solid var(--border2);border-radius:2px;color:var(--text3);font-family:'Outfit',sans-serif;font-size:11px;cursor:pointer;transition:all 0.2s;}
 .btn-logout-sm:hover{border-color:var(--red);color:var(--red);}
-
-/* Content */
 .content{max-width:900px;margin:0 auto;padding:40px 24px 80px;}
 
-/* Plan card */
-.plan-banner{background:linear-gradient(135deg,var(--dark3),rgba(196,146,42,0.06));border:1px solid var(--border);padding:24px 28px;border-radius:2px;display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:16px;}
-.plan-info h2{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:4px;}
+/* Tabs */
+.cab-tabs{display:flex;background:rgba(255,255,255,0.04);border-radius:2px;padding:3px;margin-bottom:28px;gap:3px;}
+.cab-tab{flex:1;padding:10px;text-align:center;font-size:12px;color:var(--text3);border-radius:1px;cursor:pointer;transition:all 0.2s;border:none;background:transparent;font-family:'Outfit',sans-serif;}
+.cab-tab.active{background:var(--dark3);color:var(--text);border:1px solid var(--border);}
+.tab-content{display:none;}
+.tab-content.active{display:block;animation:fadeUp 0.3s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* Plan banner */
+.plan-banner{background:linear-gradient(135deg,var(--dark3),rgba(196,146,42,0.06));border:1px solid var(--border);padding:20px 24px;border-radius:2px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+.plan-info h2{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:3px;}
 .plan-info p{font-size:12px;color:var(--text3);}
-.plan-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:500;}
+.plan-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:500;}
 .plan-badge.basic{background:rgba(74,122,170,0.12);color:#7AAAE0;border:1px solid rgba(74,122,170,0.3);}
 .plan-badge.full{background:rgba(196,146,42,0.12);color:var(--gold2);border:1px solid var(--border);}
-.btn-upgrade{padding:10px 24px;background:var(--gold);border:none;border-radius:2px;color:var(--dark);font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:opacity 0.2s;text-decoration:none;}
-.btn-upgrade:hover{opacity:0.88;}
 
-/* Products grid */
-.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}
-.product-btn-card{background:var(--dark2);border:1px solid var(--border2);padding:28px;border-radius:2px;text-decoration:none;display:block;transition:all 0.3s;position:relative;overflow:hidden;}
+/* Products */
+.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.product-btn-card{background:var(--dark2);border:1px solid var(--border2);padding:24px;border-radius:2px;text-decoration:none;display:block;transition:all 0.3s;position:relative;overflow:hidden;}
 .product-btn-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;transition:opacity 0.3s;}
 .product-btn-card:hover{border-color:var(--border);transform:translateY(-2px);}
 .product-btn-card:hover::before{opacity:1;}
-.product-btn-card.locked{opacity:0.6;cursor:not-allowed;}
-.product-btn-card.locked:hover{transform:none;border-color:var(--border2);}
-.product-icon{font-size:32px;margin-bottom:14px;}
-.product-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:6px;color:var(--text);}
-.product-desc{font-size:12px;color:var(--text3);line-height:1.6;margin-bottom:16px;}
-.product-action{font-size:12px;color:var(--gold);letter-spacing:0.5px;}
-.product-action.locked-text{color:var(--text3);}
-.psycho-counter{font-size:11px;color:var(--text3);margin-top:6px;}
-.counter-bar{height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:6px;overflow:hidden;}
-.counter-fill{height:100%;background:var(--gold);border-radius:2px;transition:width 0.5s ease;}
+.product-icon{font-size:28px;margin-bottom:12px;}
+.product-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;margin-bottom:5px;color:var(--text);}
+.product-desc{font-size:12px;color:var(--text3);line-height:1.6;margin-bottom:12px;}
+.product-action{font-size:12px;color:var(--gold);}
 
-/* Locked overlay */
-.locked-badge{position:absolute;top:16px;right:16px;background:rgba(192,80,80,0.12);border:1px solid rgba(192,80,80,0.3);color:#E08080;font-size:10px;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
-
-/* Info cards */
-.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.info-card{background:var(--dark2);border:1px solid var(--border2);padding:18px;border-radius:2px;text-align:center;}
-.info-num{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold);line-height:1;margin-bottom:4px;}
+/* Stats */
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.info-card{background:var(--dark2);border:1px solid var(--border2);padding:16px;border-radius:2px;text-align:center;}
+.info-num{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold);line-height:1;margin-bottom:3px;}
 .info-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);}
 
-.section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+/* Link card */
+.link-card{background:var(--dark2);border:1px solid var(--border);border-radius:2px;padding:24px;margin-bottom:16px;}
+.link-card-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:14px;}
+.link-display{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.link-url{flex:1;padding:11px 14px;background:rgba(196,146,42,0.06);border:1px solid var(--border);border-radius:2px;font-size:12px;color:var(--gold);word-break:break-all;min-width:200px;}
+.btn-copy{padding:11px 20px;background:var(--gold);border:none;border-radius:2px;color:var(--dark);font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:opacity 0.2s;white-space:nowrap;}
+.btn-copy:hover{opacity:0.88;}
+.link-note{font-size:12px;color:var(--text3);margin-top:10px;line-height:1.6;}
+
+/* Profile form */
+.profile-form{background:var(--dark2);border:1px solid var(--border2);border-radius:2px;padding:24px;}
+.profile-form-title{font-size:13px;font-weight:500;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border2);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);}
+.form-input{padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:2px;color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
+.form-input:focus{border-color:var(--gold);}
+.form-input::placeholder{color:var(--text3);}
+.btn-save{padding:11px 28px;background:var(--gold);border:none;border-radius:2px;color:var(--dark);font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:opacity 0.2s;}
+.btn-save:hover{opacity:0.88;}
+.save-msg{font-size:12px;color:#6ACC84;margin-left:12px;display:none;}
+
+/* Preview card */
+.preview-card{background:rgba(196,146,42,0.05);border:1px solid var(--border);border-radius:2px;padding:16px;margin-top:14px;}
+.preview-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;}
+.preview-content{display:flex;align-items:center;gap:12px;}
+.preview-avatar{width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--dark);flex-shrink:0;}
+.preview-name{font-size:14px;font-weight:500;color:var(--text);margin-bottom:2px;}
+.preview-spec{font-size:11px;color:var(--text3);}
+.preview-contacts{font-size:11px;color:var(--gold);margin-top:4px;}
+
+.section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
 .section-label::after{content:'';flex:1;height:1px;background:var(--border2);}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-.animate{animation:fadeUp 0.5s ease both;}
-
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 @media(max-width:600px){
   header{padding:0 20px;}
   .content{padding:24px 16px 60px;}
-  .products-grid{grid-template-columns:1fr;}
+  .products-grid,.form-grid{grid-template-columns:1fr;}
   .info-grid{grid-template-columns:repeat(2,1fr);}
-  .plan-banner{flex-direction:column;}
 }
 </style>
 </head>
@@ -78,7 +99,7 @@ header{background:var(--dark2);border-bottom:1px solid var(--border2);padding:0 
 <header>
   <div class="header-logo">Энергетический <span>Календарь</span></div>
   <div class="header-right">
-    <div class="user-name" id="user-name">Загрузка...</div>
+    <div class="user-name-display" id="user-name-display">Загрузка...</div>
     <button class="btn-logout-sm" onclick="doLogout()">Выйти</button>
   </div>
 </header>
@@ -86,56 +107,119 @@ header{background:var(--dark2);border-bottom:1px solid var(--border2);padding:0 
 <div class="content">
 
   <!-- Plan banner -->
-  <div class="plan-banner animate">
+  <div class="plan-banner">
     <div class="plan-info">
       <h2>Добро пожаловать, <span id="welcome-name" style="color:var(--gold)">—</span></h2>
       <p>Ваш персональный кабинет · Digital Consulting</p>
     </div>
-    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-      <span class="plan-badge" id="plan-badge">—</span>
-      <a href="https://wa.me/77001234567?text=Хочу+перейти+на+полный+пакет" target="_blank" class="btn-upgrade" id="upgrade-btn" style="display:none;">Перейти на полный →</a>
+    <span class="plan-badge" id="plan-badge">—</span>
+  </div>
+
+  <!-- Tabs -->
+  <div class="cab-tabs">
+    <button class="cab-tab active" onclick="showCabTab('main')">Главная</button>
+    <button class="cab-tab" onclick="showCabTab('link')">Моя ссылка</button>
+    <button class="cab-tab" onclick="showCabTab('profile')">Мой профиль</button>
+  </div>
+
+  <!-- TAB: MAIN -->
+  <div id="cab-main" class="tab-content active">
+    <div class="section-label">Статистика</div>
+    <div class="info-grid" style="margin-bottom:24px;">
+      <div class="info-card">
+        <div class="info-num" id="stat-psycho">—</div>
+        <div class="info-label">Психоанализов</div>
+      </div>
+      <div class="info-card">
+        <div class="info-num" id="stat-plan">—</div>
+        <div class="info-label">Тариф</div>
+      </div>
+      <div class="info-card">
+        <div class="info-num">∞</div>
+        <div class="info-label">Дней календаря</div>
+      </div>
+    </div>
+
+    <div class="section-label">Продукты</div>
+    <div class="products-grid">
+      <a href="personal-energy-calendar.html" class="product-btn-card">
+        <div class="product-icon">📅</div>
+        <div class="product-name">Энергетический Календарь</div>
+        <p class="product-desc">Узнайте энергию дня, месяца и года. Рекомендации и мантры на каждый день.</p>
+        <div class="product-action">Открыть календарь →</div>
+      </a>
+      <a href="personal-energy-calendar.html#psycho" class="product-btn-card">
+        <div class="product-icon">🧠</div>
+        <div class="product-name">Психоанализ личности</div>
+        <p class="product-desc">Глубокий анализ числа личности, миссии, матрицы чисел и профессиональной ориентации.</p>
+        <div class="product-action">Открыть анализ →</div>
+      </a>
     </div>
   </div>
 
-  <!-- Stats -->
-  <div class="section-label animate">Ваша статистика</div>
-  <div class="info-grid animate" style="margin-bottom:28px;">
-    <div class="info-card">
-      <div class="info-num" id="stat-psycho">—</div>
-      <div class="info-label">Психоанализов</div>
+  <!-- TAB: LINK -->
+  <div id="cab-link" class="tab-content">
+    <div class="link-card">
+      <div class="link-card-title">Ваша персональная ссылка для клиентов</div>
+      <div class="link-display">
+        <div class="link-url" id="master-link">Загрузка...</div>
+        <button class="btn-copy" onclick="copyLink()">Скопировать</button>
+      </div>
+      <div class="link-note">
+        Отправьте эту ссылку своим клиентам. Клиент введёт дату рождения и получит персональный энергетический календарь. Ваше имя и контакты будут отображаться внизу страницы.
+      </div>
     </div>
-    <div class="info-card">
-      <div class="info-num" id="stat-plan-name">—</div>
-      <div class="info-label">Тариф</div>
-    </div>
-    <div class="info-card">
-      <div class="info-num">∞</div>
-      <div class="info-label">Дней календаря</div>
+
+    <div style="background:var(--dark2);border:1px solid var(--border2);border-radius:2px;padding:20px 24px;">
+      <div class="link-card-title">Как выглядит страница вашего клиента</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.8;">
+        ✦ Клиент открывает вашу ссылку<br>
+        ✦ Видит ваше имя и специализацию вверху<br>
+        ✦ Вводит дату рождения<br>
+        ✦ Получает полный энергетический календарь<br>
+        ✦ Ваши контакты отображаются внизу страницы
+      </div>
     </div>
   </div>
 
-  <!-- Products -->
-  <div class="section-label animate">Продукты</div>
-  <div class="products-grid animate">
+  <!-- TAB: PROFILE -->
+  <div id="cab-profile" class="tab-content">
+    <div class="profile-form">
+      <div class="profile-form-title">Данные профиля — отображаются на странице ваших клиентов</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Ваше имя</label>
+          <input class="form-input" id="prof-name" type="text" placeholder="Имя и фамилия">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Специализация</label>
+          <input class="form-input" id="prof-spec" type="text" placeholder="Мастер цифровой психологии">
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp / Телефон</label>
+          <input class="form-input" id="prof-whatsapp" type="text" placeholder="+7 700 000 00 00">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Instagram</label>
+          <input class="form-input" id="prof-instagram" type="text" placeholder="@yourname">
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;">
+        <button class="btn-save" onclick="saveProfile()">Сохранить</button>
+        <span class="save-msg" id="save-msg">✓ Сохранено!</span>
+      </div>
 
-    <!-- Calendar -->
-    <a href="calendar-page.html" class="product-btn-card">
-      <div class="product-icon">📅</div>
-      <div class="product-name">Энергетический Календарь</div>
-      <p class="product-desc">Узнайте энергию дня, месяца и года. Рекомендации и мантры на каждый день.</p>
-      <div class="product-action">Открыть календарь →</div>
-    </a>
-
-    <!-- Psycho -->
-    <div class="product-btn-card" id="psycho-card" onclick="openPsycho()">
-      <div class="locked-badge" id="locked-badge" style="display:none;">БАЗОВЫЙ</div>
-      <div class="product-icon">🧠</div>
-      <div class="product-name">Психоанализ личности</div>
-      <p class="product-desc">Глубокий анализ числа личности, миссии, матрицы чисел и профессиональной ориентации.</p>
-      <div class="product-action" id="psycho-action">Открыть анализ →</div>
-      <div class="psycho-counter" id="psycho-counter" style="display:none;"></div>
-      <div class="counter-bar" id="counter-bar" style="display:none;">
-        <div class="counter-fill" id="counter-fill"></div>
+      <!-- Preview -->
+      <div class="preview-card">
+        <div class="preview-title">Так вы выглядите для клиентов</div>
+        <div class="preview-content">
+          <div class="preview-avatar" id="preview-avatar">А</div>
+          <div>
+            <div class="preview-name" id="preview-name">Ваше имя</div>
+            <div class="preview-spec" id="preview-spec">Специализация</div>
+            <div class="preview-contacts" id="preview-contacts">WhatsApp · Instagram</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -148,22 +232,23 @@ const SUPABASE_URL = 'https://gigfvlhcrtuosfnkzqpt.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_Hw69inUK0lqA5ECoVeGgRQ_kWEyD4Pt';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const PSYCHO_LIMIT = 3; // бесплатный лимит
 let userProfile = null;
+let userId = null;
 
 async function init(){
   const { data: { session } } = await supabaseClient.auth.getSession();
   if(!session){ window.location.href = 'login.html'; return; }
+  userId = session.user.id;
 
-  const { data: profile } = await supabase
+  const { data: profile } = await supabaseClient
     .from('profiles')
     .select('*')
     .eq('id', session.user.id)
     .single();
 
-  if(!profile?.is_active){
+  if(!profile || !profile.is_active){
     await supabaseClient.auth.signOut();
-    window.location.href = 'login.html?msg=inactive';
+    window.location.href = 'login.html';
     return;
   }
 
@@ -177,48 +262,85 @@ async function init(){
 }
 
 function renderProfile(p){
-  const name = p.name || p.email || 'Клиент';
-  document.getElementById('user-name').textContent = name;
-  document.getElementById('welcome-name').textContent = name.split(' ')[0];
+  const name = p.name || p.email || 'Мастер';
+  const firstName = name.split(' ')[0];
+
+  document.getElementById('user-name-display').textContent = name;
+  document.getElementById('welcome-name').textContent = firstName;
   document.getElementById('stat-psycho').textContent = p.psycho_count || 0;
+  document.getElementById('stat-plan').textContent = p.plan === 'full' ? 'Полный' : 'Базовый';
 
-  const isFull = p.plan === 'full';
   const badge = document.getElementById('plan-badge');
-  badge.textContent = isFull ? '✦ Полный пакет' : '◇ Базовый';
-  badge.className = `plan-badge ${isFull ? 'full' : 'basic'}`;
-  document.getElementById('stat-plan-name').textContent = isFull ? 'Полный' : 'Базовый';
+  badge.textContent = p.plan === 'full' ? '✦ Полный пакет' : '◇ Базовый';
+  badge.className = 'plan-badge ' + (p.plan === 'full' ? 'full' : 'basic');
 
-  if(!isFull){
-    document.getElementById('upgrade-btn').style.display = 'flex';
-    const used = p.psycho_count || 0;
-    const remaining = Math.max(0, PSYCHO_LIMIT - used);
-    if(used >= PSYCHO_LIMIT){
-      document.getElementById('psycho-card').classList.add('locked');
-      document.getElementById('locked-badge').style.display = 'block';
-      document.getElementById('psycho-action').textContent = 'Лимит исчерпан — перейдите на полный пакет';
-      document.getElementById('psycho-action').className = 'product-action locked-text';
-    } else {
-      document.getElementById('psycho-counter').style.display = 'block';
-      document.getElementById('psycho-counter').textContent = `Использовано ${used} из ${PSYCHO_LIMIT} бесплатных анализов`;
-      document.getElementById('counter-bar').style.display = 'block';
-      document.getElementById('counter-fill').style.width = `${(used/PSYCHO_LIMIT)*100}%`;
-    }
+  // Master link
+  const link = window.location.origin + window.location.pathname.replace('cabinet.html', '') + 'master.html?id=' + p.id;
+  document.getElementById('master-link').textContent = link;
+
+  // Profile form
+  document.getElementById('prof-name').value = p.name || '';
+  document.getElementById('prof-spec').value = p.specialization || '';
+  document.getElementById('prof-whatsapp').value = p.whatsapp || '';
+  document.getElementById('prof-instagram').value = p.instagram || '';
+
+  updatePreview(p.name, p.specialization, p.whatsapp, p.instagram);
+}
+
+function updatePreview(name, spec, wa, ig){
+  const n = name || 'Ваше имя';
+  document.getElementById('preview-name').textContent = n;
+  document.getElementById('preview-avatar').textContent = n.charAt(0).toUpperCase();
+  document.getElementById('preview-spec').textContent = spec || 'Специализация';
+  const contacts = [wa, ig].filter(Boolean).join(' · ');
+  document.getElementById('preview-contacts').textContent = contacts || 'WhatsApp · Instagram';
+}
+
+async function saveProfile(){
+  const name = document.getElementById('prof-name').value.trim();
+  const spec = document.getElementById('prof-spec').value.trim();
+  const wa   = document.getElementById('prof-whatsapp').value.trim();
+  const ig   = document.getElementById('prof-instagram').value.trim();
+
+  const btn = document.querySelector('.btn-save');
+  btn.textContent = 'Сохранение...';
+  btn.disabled = true;
+
+  const { error } = await supabaseClient.from('profiles').update({
+    name: name,
+    specialization: spec,
+    whatsapp: wa,
+    instagram: ig
+  }).eq('id', userId);
+
+  btn.textContent = 'Сохранить';
+  btn.disabled = false;
+
+  if(!error){
+    const msg = document.getElementById('save-msg');
+    msg.style.display = 'inline';
+    setTimeout(()=>{ msg.style.display='none'; }, 3000);
+    updatePreview(name, spec, wa, ig);
+    document.getElementById('welcome-name').textContent = name.split(' ')[0] || 'Мастер';
+    document.getElementById('user-name-display').textContent = name;
   }
 }
 
-function openPsycho(){
-  if(!userProfile) return;
-  const isFull = userProfile.plan === 'full';
-  const used = userProfile.psycho_count || 0;
-  if(!isFull && used >= PSYCHO_LIMIT){
-    alert('Вы использовали все бесплатные анализы.\n\nДля получения полного доступа свяжитесь с администратором:\n+7 ___ ___ __ __');
-    return;
-  }
-  // Store user data for psycho page
-  sessionStorage.setItem('user_plan', userProfile.plan);
-  sessionStorage.setItem('user_id', userProfile.id);
-  sessionStorage.setItem('psycho_count', used);
-  window.location.href = 'psycho-page.html';
+function copyLink(){
+  const link = document.getElementById('master-link').textContent;
+  navigator.clipboard.writeText(link).catch(()=>{});
+  const btn = document.querySelector('.btn-copy');
+  btn.textContent = 'Скопировано ✓';
+  btn.style.background = '#4A8A60';
+  setTimeout(()=>{ btn.textContent = 'Скопировать'; btn.style.background = ''; }, 2000);
+}
+
+function showCabTab(tab){
+  document.querySelectorAll('.cab-tab').forEach((t,i)=>{
+    t.classList.toggle('active', ['main','link','profile'][i] === tab);
+  });
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('cab-'+tab).classList.add('active');
 }
 
 async function doLogout(){
