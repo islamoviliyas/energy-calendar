@@ -145,10 +145,8 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 
 @media(max-width:768px){
   /* Скрываем десктопные элементы */
-  .sidebar{display:none;transition:transform 0.25s ease;}
-  .sidebar.mob-open{display:flex;position:fixed;top:0;left:0;bottom:0;z-index:160;width:260px;transform:translateX(0);animation:slideIn 0.25s ease;}
-  @keyframes slideIn{from{transform:translateX(-260px);}to{transform:translateX(0);}}
-  .page-header{display:none;}
+  .sidebar{display:none !important;}
+  .page-header{display:none !important;}
   .main{margin-left:0;padding:0 0 80px;}
 
   /* Мобильная шапка */
@@ -224,12 +222,9 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
   <div class="mob-user">
     <div class="mob-avatar" id="mob-avatar">М</div>
     <div class="mob-username" id="mob-username">Загрузка...</div>
-    <button class="hamburger" onclick="toggleSidebar()" aria-label="Меню">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </div>
-<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <!-- Sidebar -->
 <div class="sidebar">
@@ -637,10 +632,7 @@ function showTab(tab){
 }
 
 function toggleSidebar(){
-  const sb = document.querySelector('.sidebar');
-  const ov = document.getElementById('sidebar-overlay');
-  sb.classList.toggle('mob-open');
-  ov.classList.toggle('open');
+  // sidebar скрыт на мобильном - ничего не делаем
 }
 
 function setMobActive(tab){
