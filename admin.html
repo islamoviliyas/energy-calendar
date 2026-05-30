@@ -181,11 +181,11 @@ tr:hover td{background:var(--table-hover);}
     <button class="nav-item" onclick="showTab('add')">
       <span class="nav-icon">＋</span> Добавить клиента
     </button>
-    <button class="nav-item" onclick="window.open(window.location.href.replace('admin.html','index.html'),'_blank')">
-      <span class="nav-icon">◇</span> Просмотр сайта
-    <button class="nav-item" onclick="window.open(window.location.href.replace('admin.html','index.html'),'_blank')">
-  <span class="nav-icon">◇</span> Просмотр сайта
-</button>
+    <button class="nav-item" onclick="window.open(window.location.href.replace('admin.html','personal-energy-calendar.html'),'_blank')">
+      <span class="nav-icon">📅</span> Энергетический календарь
+    </button>
+    <button class="nav-item" onclick="openPsycho()">
+      <span class="nav-icon">🧠</span> Психоанализ личности
     </button>
   </nav>
   <div>
@@ -576,6 +576,11 @@ function toggleTheme(){
 async function doLogout(){
   await supabaseClient.auth.signOut();
   window.location.href = 'login.html';
+}
+
+function openPsycho(){
+  const url = window.location.href.replace('admin.html','personal-energy-calendar.html') + '#psycho';
+  window.open(url,'_blank');
 }
 
 // Close modal on overlay click
