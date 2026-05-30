@@ -137,35 +137,82 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 .agreement-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px 18px;font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:20px;}
 .agreement-box strong{color:var(--text);}
 
-/* Mobile hamburger */
-.mob-header{display:none;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--sidebar-bg);position:sticky;top:0;z-index:200;}
-.mob-logo{font-family:'Playfair Display',serif;font-size:14px;color:var(--sidebar-text);}
-.mob-logo span{color:var(--gold);}
-.mob-right{display:flex;align-items:center;gap:10px;}
-.hamburger{background:none;border:none;cursor:pointer;padding:6px;display:flex;flex-direction:column;gap:5px;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--sidebar-text);border-radius:2px;transition:all 0.3s;}
-
-/* Sidebar overlay on mobile */
-.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:150;}
+/* ── MOBILE ── */
+.mob-header{display:none;}
+.mob-nav{display:none;}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:150;backdrop-filter:blur(2px);}
 .sidebar-overlay.open{display:block;}
 
-/* Bottom nav bar */
-.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--sidebar-bg);border-top:1px solid rgba(255,255,255,0.08);z-index:100;padding:8px 0 calc(8px + env(safe-area-inset-bottom));}
-.mob-nav-inner{display:flex;justify-content:space-around;}
-.mob-nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:6px 12px;font-family:'Inter',sans-serif;font-size:10px;color:var(--sidebar-muted);transition:color 0.2s;}
-.mob-nav-btn.active{color:var(--gold);}
-.mob-nav-btn .icon{font-size:18px;}
-
 @media(max-width:768px){
-  .sidebar{display:none;}
-  .sidebar.mob-open{display:flex;z-index:160;animation:slideIn 0.25s ease;}
-  @keyframes slideIn{from{transform:translateX(-100%);}to{transform:translateX(0);}}
-  .mob-header{display:flex;}
-  .mob-nav{display:block;}
-  .main{margin-left:0;padding:16px 16px 90px;}
-  .stats-row{grid-template-columns:repeat(2,1fr);}
-  .products-grid,.form-grid{grid-template-columns:1fr;}
+  /* Скрываем десктопные элементы */
+  .sidebar{display:none;transition:transform 0.25s ease;}
+  .sidebar.mob-open{display:flex;position:fixed;top:0;left:0;bottom:0;z-index:160;width:260px;transform:translateX(0);animation:slideIn 0.25s ease;}
+  @keyframes slideIn{from{transform:translateX(-260px);}to{transform:translateX(0);}}
   .page-header{display:none;}
+  .main{margin-left:0;padding:0 0 80px;}
+
+  /* Мобильная шапка */
+  .mob-header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 16px;background:var(--sidebar-bg);
+    position:sticky;top:0;z-index:200;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .mob-logo{font-family:'Playfair Display',serif;font-size:15px;color:#F0EDE4;line-height:1.2;}
+  .mob-logo span{color:var(--gold);}
+  .mob-user{display:flex;align-items:center;gap:8px;}
+  .mob-avatar{width:30px;height:30px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:13px;color:#fff;flex-shrink:0;}
+  .mob-username{font-size:12px;color:#C0BDB0;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .hamburger{background:none;border:none;cursor:pointer;padding:4px;display:flex;flex-direction:column;gap:5px;margin-left:8px;}
+  .hamburger span{display:block;width:22px;height:2px;background:#F0EDE4;border-radius:2px;}
+
+  /* Контент */
+  .main-content-wrap{padding:16px 14px;}
+
+  /* Карточки статистики */
+  .stats-row{grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
+  .stat-card{padding:14px 12px;}
+  .stat-num{font-size:28px;}
+
+  /* Продукты */
+  .products-grid{grid-template-columns:1fr;gap:12px;}
+  .product-card{padding:18px;}
+  .product-icon{font-size:24px;margin-bottom:10px;}
+  .product-name{font-size:16px;}
+  .product-desc{font-size:12px;}
+
+  /* Ссылка */
+  .link-row{flex-direction:column;}
+  .link-display{font-size:12px;word-break:break-all;}
+  .btn-copy{width:100%;text-align:center;}
+
+  /* Профиль */
+  .form-grid{grid-template-columns:1fr;gap:12px;}
+  .profile-avatar-row{flex-wrap:wrap;}
+
+  /* Нижнее меню */
+  .mob-nav{
+    display:block;
+    position:fixed;bottom:0;left:0;right:0;
+    background:var(--sidebar-bg);
+    border-top:1px solid rgba(255,255,255,0.08);
+    z-index:100;
+    padding:6px 0;
+    padding-bottom:calc(6px + env(safe-area-inset-bottom));
+  }
+  .mob-nav-inner{display:flex;justify-content:space-around;align-items:center;}
+  .mob-nav-btn{
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+    background:none;border:none;cursor:pointer;
+    padding:6px 10px;min-width:56px;
+    font-family:'Inter',sans-serif;font-size:9px;letter-spacing:0.3px;
+    color:#5A5850;transition:color 0.2s;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .mob-nav-btn.active{color:var(--gold);}
+  .mob-nav-btn .mob-icon{font-size:20px;line-height:1;margin-bottom:1px;}
+  .mob-nav-btn.active .mob-icon{transform:scale(1.1);}
+  .agreement-box{font-size:11px;padding:12px 14px;}
 }
 </style>
 </head>
@@ -173,12 +220,11 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 
 <!-- Mobile header -->
 <div class="mob-header">
-  <div class="mob-logo">Энергетический <span>Календарь</span></div>
-  <div class="mob-right">
-    <button class="theme-btn" onclick="toggleTheme()" style="padding:6px 12px;font-size:10px;">
-      <span id="theme-icon-mob">🌙</span>
-    </button>
-    <button class="hamburger" onclick="toggleSidebar()">
+  <div class="mob-logo">Энерг. <span>Календарь</span></div>
+  <div class="mob-user">
+    <div class="mob-avatar" id="mob-avatar">М</div>
+    <div class="mob-username" id="mob-username">Загрузка...</div>
+    <button class="hamburger" onclick="toggleSidebar()" aria-label="Меню">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -224,8 +270,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 
 <!-- Main -->
 <div class="main">
-
-  <div class="page-header">
+<div class="main-content-wrap">
     <div>
       <h1 class="page-title">Добро пожаловать, <span id="welcome-name">—</span></h1>
       <p style="font-size:13px;color:var(--text3);margin-top:4px;">Ваш кабинет мастера · Digital Consulting</p>
@@ -372,25 +417,25 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
     </div>
   </div>
 
-</div>
+</div></div>
 
 <!-- Mobile bottom nav -->
 <nav class="mob-nav">
   <div class="mob-nav-inner">
     <button class="mob-nav-btn active" id="mob-btn-overview" onclick="showTab('overview');setMobActive('overview')">
-      <span class="icon">◈</span>Обзор
+      <span class="mob-icon">🏠</span>Обзор
     </button>
     <button class="mob-nav-btn" id="mob-btn-link" onclick="showTab('link');setMobActive('link')">
-      <span class="icon">🔗</span>Ссылка
+      <span class="mob-icon">🔗</span>Ссылка
     </button>
     <button class="mob-nav-btn" id="mob-btn-profile" onclick="showTab('profile');setMobActive('profile')">
-      <span class="icon">○</span>Профиль
+      <span class="mob-icon">👤</span>Профиль
     </button>
-    <button class="mob-nav-btn" onclick="window.open('psycho-page.html','_blank')">
-      <span class="icon">🧠</span>Анализ
+    <button class="mob-nav-btn" onclick="openPsycho()">
+      <span class="mob-icon">🧠</span>Анализ
     </button>
     <button class="mob-nav-btn" onclick="doLogout()">
-      <span class="icon">↩</span>Выйти
+      <span class="mob-icon">🚪</span>Выйти
     </button>
   </div>
 </nav>
@@ -441,6 +486,12 @@ function renderAll(p){
   document.getElementById('sb-avatar').textContent = name.charAt(0).toUpperCase();
   document.getElementById('sb-name').textContent = name;
   document.getElementById('sb-role').textContent = p.specialization || 'Digital Consulting';
+
+  // Mobile header
+  const mobAv = document.getElementById('mob-avatar');
+  const mobUn = document.getElementById('mob-username');
+  if(mobAv) mobAv.textContent = name.charAt(0).toUpperCase();
+  if(mobUn) mobUn.textContent = firstName;
 
   // Header
   document.getElementById('welcome-name').textContent = firstName;
@@ -602,11 +653,8 @@ function toggleTheme(){
   const h = document.documentElement;
   const dark = h.getAttribute('data-theme')==='dark';
   h.setAttribute('data-theme', dark?'light':'dark');
-  const icon = dark?'🌙':'☀️';
-  document.getElementById('theme-icon').textContent = icon;
+  document.getElementById('theme-icon').textContent = dark?'🌙':'☀️';
   document.getElementById('theme-label').textContent = dark?'Тёмная тема':'Светлая тема';
-  const mobIcon = document.getElementById('theme-icon-mob');
-  if(mobIcon) mobIcon.textContent = icon;
 }
 
 async function doLogout(){
