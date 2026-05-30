@@ -166,7 +166,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
     <button class="nav-item" onclick="window.open('personal-energy-calendar.html','_blank')">
       <span class="nav-icon">📅</span> Открыть календарь
     </button>
-    <button class="nav-item" onclick="window.open('personal-energy-calendar.html#psycho','_blank')">
+    <button class="nav-item" onclick="window.open('psycho-page.html','_blank')">
       <span class="nav-icon">🧠</span> Психоанализ
     </button>
   </nav>
@@ -463,7 +463,7 @@ function openPsycho(){
     alert(`Вы использовали все ${PSYCHO_LIMIT} бесплатных психоанализа.\n\nДля получения полного доступа свяжитесь с администратором Digital Consulting.`);
     return;
   }
-  window.open('personal-energy-calendar.html#psycho','_blank');
+  window.open('psycho-page.html','_blank');
 }
 
 async function saveProfile(){
