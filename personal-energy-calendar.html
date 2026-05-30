@@ -70,13 +70,9 @@ header{display:flex;align-items:center;justify-content:space-between;padding:32p
 .theme-btn{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:40px;padding:7px 14px;cursor:pointer;font-size:11px;color:var(--text2);font-family:'Inter',sans-serif;transition:all var(--transition);user-select:none;}
 .theme-btn:hover{border-color:var(--gold);color:var(--gold);}
 
-.main-tabs{display:flex;background:var(--bg3);border-radius:12px;padding:4px;margin-bottom:24px;gap:4px;}
-.main-tab{flex:1;padding:11px 16px;text-align:center;font-size:12px;font-weight:400;color:var(--text3);border-radius:9px;cursor:pointer;transition:all 0.2s;border:none;background:transparent;font-family:'Inter',sans-serif;}
-.main-tab.active{background:var(--bg2);color:var(--text);box-shadow:0 1px 10px rgba(0,0,0,0.08);font-weight:500;}
-.main-tab:hover:not(.active){color:var(--gold);}
 
-.tab-panel{display:none;}
-.tab-panel.active{display:block;animation:fadeUp 0.4s ease both;}
+
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
 .input-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:32px 36px;box-shadow:var(--shadow);margin-bottom:20px;text-align:center;}
@@ -244,16 +240,15 @@ input[type="text"].name-input{min-width:200px;}
   .e-head{flex-direction:column;text-align:center;}
   .input-card{padding:22px 16px;}
   .week-grid{grid-template-columns:repeat(4,1fr);}
-  .main-tab{font-size:10px;padding:9px 6px;}
+
 }
 
 /* ── PDF PRINT WITH COLORS ── */
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}
   body{background:#F6F4EF!important;color:#1A1814!important;}
-  header,.main-tabs,.btn-pdf,.btn-main,.theme-btn,#psycho-preview,.today-line{display:none!important;}
-  .tab-panel{display:block!important;}
-  #tab-calendar{display:none!important;}
+  header,.btn-main,.theme-btn,.today-line{display:none!important;}
+
   .wrap{max-width:100%;padding:0 12px 20px;}
   .e-card{box-shadow:none!important;break-inside:avoid;border:1px solid rgba(0,0,0,0.1)!important;}
   .e-badge{background:#F8F0DC!important;border-color:#B8892A!important;color:#B8892A!important;}
@@ -317,13 +312,10 @@ input[type="text"].name-input{min-width:200px;}
   </button>
 </header>
 
-<div class="main-tabs">
-  <button class="main-tab active" onclick="switchTab('calendar')">📅 Энергетический календарь</button>
-  <button class="main-tab" onclick="switchTab('psycho')">🧠 Психоанализ личности</button>
-</div>
+
 
 <!-- ══ CALENDAR ══ -->
-<div id="tab-calendar" class="tab-panel active">
+<div id="tab-calendar">
   <div class="input-card">
     <h2>Введите вашу дату рождения</h2>
     <p class="sub">Получите персональную энергию на сегодня и рекомендации на неделю вперёд</p>
@@ -358,23 +350,6 @@ input[type="text"].name-input{min-width:200px;}
   </div>
 </div>
 
-<!-- ══ PSYCHO ══ -->
-<div id="tab-psycho" class="tab-panel">
-  <div class="input-card">
-    <h2>Психоанализ личности</h2>
-    <p class="sub">Введите имя и дату рождения для персонального анализа</p>
-    <div id="psycho-preview" class="preview-row" style="display:none;">
-      <div class="preview-badge"><div class="pb-label">Число личности</div><div class="pb-val" id="p-cs-val">—</div></div>
-      <div class="preview-badge"><div class="pb-label">Миссия</div><div class="pb-val" id="p-m-val">—</div></div>
-    </div>
-    <div class="input-row">
-      <input type="text" class="name-input" id="psycho-name" placeholder="Имя клиента">
-      <input type="text" id="psycho-dob" placeholder="ДД.ММ.ГГГГ" maxlength="10" oninput="psychoInput(this)">
-      <button class="btn-main" id="psycho-btn" onclick="calcPsycho()" disabled>Получить анализ</button>
-      <button class="btn-pdf" id="pdf-btn" onclick="downloadPDF()">📄 Скачать PDF</button>
-    </div>
-  </div>
-  <div id="psycho-results"></div>
 </div>
 
 </div>
@@ -852,6 +827,34 @@ function psychoInput(el){
 }
 
 function calcPsycho(){
+  // Check limit
+  var LIMIT = 5;
+  var used = parseInt(localStorage.getItem('psycho_used') || '0');
+  var isPaid = localStorage.getItem('psycho_paid') === 'true';
+  
+  if(!isPaid && used >= LIMIT){
+    var r = document.getElementById('psycho-results');
+    r.innerHTML = `<div style="text-align:center;padding:60px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;margin-top:8px;">
+      <div style="font-size:48px;margin-bottom:16px;">🔒</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;margin-bottom:12px;color:var(--text);">Бесплатный лимит исчерпан</h3>
+      <p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto;">
+        Вы использовали ${LIMIT} бесплатных психоанализа.<br>
+        Для получения полного доступа свяжитесь с администратором.
+      </p>
+      <a href="https://wa.me/77001234567" 
+         style="display:inline-block;padding:14px 36px;background:var(--gold);color:#fff;text-decoration:none;font-weight:600;font-size:14px;border-radius:8px;margin-bottom:12px;">
+        Написать в WhatsApp →
+      </a>
+    </div>`;
+    r.style.display = 'block';
+    setTimeout(()=>r.scrollIntoView({behavior:'smooth',block:'start'}),100);
+    return;
+  }
+  
+  // Increment counter
+  if(!isPaid){
+    localStorage.setItem('psycho_used', used + 1);
+  }
   const v=document.getElementById('psycho-dob').value;
   const name=document.getElementById('psycho-name').value.trim();
   const nums=calcPsychoNums(v);
@@ -1006,14 +1009,7 @@ function calcPsycho(){
     </ul>
   </div></div>
 
-  <div class="contact-footer">
-    <div class="cf-name">Ислам Iлияс</div>
-    <div class="cf-title">Digital Consulting · Цифровая психология</div>
-    <div class="cf-contacts">
-      <div class="cf-contact"><strong>WhatsApp:</strong> +7 ___ ___ __ __</div>
-      <div class="cf-contact"><strong>Instagram:</strong> @islam_ilyas</div>
-    </div>
-  </div>`;
+`;
 
   const r=document.getElementById('psycho-results');
   r.innerHTML=html;
@@ -1035,10 +1031,28 @@ function downloadPDF(){
   },300);
 }
 
+function updatePsychoCounter(){
+  var LIMIT = 5;
+  var used = parseInt(localStorage.getItem('psycho_used') || '0');
+  var isPaid = localStorage.getItem('psycho_paid') === 'true';
+  var bar = document.getElementById('psycho-counter-bar');
+  if(!bar) return;
+  if(isPaid){
+    bar.style.display = 'none';
+    return;
+  }
+  bar.style.display = 'block';
+  document.getElementById('psycho-counter-text').textContent = 
+    'Использовано ' + used + ' из ' + LIMIT + ' бесплатных анализов';
+  document.getElementById('psycho-counter-fill').style.width = 
+    Math.min(100, (used/LIMIT)*100) + '%';
+}
+
 function switchTab(id){
   document.querySelectorAll('.main-tab').forEach((t,i)=>t.classList.toggle('active',['calendar','psycho'][i]===id));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
+  if(id==='psycho') updatePsychoCounter();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -1052,6 +1066,8 @@ function toggleTheme(){
 
 const t=new Date();
 document.getElementById('today-line').textContent='Сегодня: '+t.toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'});
+
+
 </script>
 </body>
 </html>
