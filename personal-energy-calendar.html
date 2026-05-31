@@ -1011,11 +1011,11 @@ function calcPsycho(){
 
 `;
 
-  const r=document.getElementById('psycho-results');
-  r.innerHTML=html;
-  r.style.display='block';
+  const r2=document.getElementById('psycho-results');
+  r2.innerHTML=html;
+  r2.style.display='block';
   document.getElementById('pdf-btn').style.display='inline-flex';
-  setTimeout(()=>r.scrollIntoView({behavior:'smooth',block:'start'}),100);
+  setTimeout(()=>r2.scrollIntoView({behavior:'smooth',block:'start'}),100);
 }
 
 function downloadPDF(){
