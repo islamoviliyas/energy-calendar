@@ -272,10 +272,25 @@ input[type="text"].name-input{min-width:160px;}
 <script>
 const PSYCHO_LIMIT = 5;
 
+// Глобальный профиль мастера (загружается при старте)
+let masterProfile = null;
+
+async function loadMasterProfile(){
+  const urlParams = new URLSearchParams(window.location.search);
+  const masterId = urlParams.get('master');
+  if(!masterId) return;
+  try {
+    const { data } = await sbClient.from('profiles').select('plan,psycho_count,name').eq('id', masterId).single();
+    if(data) masterProfile = data;
+    initLimitBar();
+  } catch(e){}
+}
+
 function initLimitBar(){
-  var used = parseInt(localStorage.getItem('psycho_used') || '0');
-  var isPaid = localStorage.getItem('psycho_paid') === 'true';
-  if(!isPaid){
+  if(!masterProfile) return;
+  const isFull = masterProfile.plan === 'full';
+  const used = masterProfile.psycho_count || 0;
+  if(!isFull){
     document.getElementById('limit-bar').style.display = 'flex';
     document.getElementById('limit-text').textContent = 'Использовано ' + used + ' из ' + PSYCHO_LIMIT + ' бесплатных анализов';
     document.getElementById('limit-fill').style.width = Math.min(100, (used/PSYCHO_LIMIT)*100) + '%';
@@ -349,14 +364,27 @@ function psychoInput(el){
 
 function calcPsycho(){
   var LIMIT=5;
-  var used=parseInt(localStorage.getItem('psycho_used')||'0');
-  var isPaid=localStorage.getItem('psycho_paid')==='true';
-  if(!isPaid&&used>=LIMIT){
-    document.getElementById('psycho-results').innerHTML=`<div style="text-align:center;padding:60px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;margin-top:8px;"><div style="font-size:48px;margin-bottom:16px;">🔒</div><h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;margin-bottom:12px;">Бесплатный лимит исчерпан</h3><p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto;">Вы использовали все ${LIMIT} бесплатных психоанализа.<br>Для полного доступа свяжитесь с администратором.</p><a href="cabinet.html" style="display:inline-block;padding:14px 36px;background:var(--gold);color:#fff;text-decoration:none;font-weight:600;font-size:14px;border-radius:8px;">← Вернуться в кабинет</a></div>`;
-    document.getElementById('psycho-results').style.display='block';
-    return;
+  // Проверка лимита из Supabase профиля
+  if(masterProfile){
+    const isFull = masterProfile.plan === 'full';
+    const used = masterProfile.psycho_count || 0;
+    if(!isFull && used>=LIMIT){
+      document.getElementById('psycho-results').innerHTML=`<div style="text-align:center;padding:60px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;margin-top:8px;"><div style="font-size:48px;margin-bottom:16px;">🔒</div><h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;margin-bottom:12px;">Бесплатный лимит исчерпан</h3><p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto;">Вы использовали все ${LIMIT} бесплатных психоанализа.<br>Для полного доступа свяжитесь с администратором.</p><a href="cabinet.html" style="display:inline-block;padding:14px 36px;background:var(--gold);color:#fff;text-decoration:none;font-weight:600;font-size:14px;border-radius:8px;">← Вернуться в кабинет</a></div>`;
+      document.getElementById('psycho-results').style.display='block';
+      return;
+    }
+    // Увеличиваем счётчик в Supabase (только для базового тарифа)
+    if(!isFull){
+      const urlParams = new URLSearchParams(window.location.search);
+      const masterId = urlParams.get('master');
+      if(masterId){
+        sbClient.from('profiles').update({psycho_count: used+1}).eq('id', masterId).then(()=>{
+          if(masterProfile) masterProfile.psycho_count = used+1;
+          initLimitBar();
+        });
+      }
+    }
   }
-  if(!isPaid) localStorage.setItem('psycho_used',used+1);
   const v=document.getElementById('psycho-dob').value;
   const name=document.getElementById('psycho-name').value.trim();
   const p=parseDate(v);
@@ -572,7 +600,7 @@ function toggleTheme(){
   document.getElementById('theme-label').textContent=dark?'Тёмная тема':'Светлая тема';
 }
 
-initLimitBar();
+loadMasterProfile();
 </script>
 </body>
 </html>
