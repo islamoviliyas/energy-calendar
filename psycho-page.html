@@ -281,7 +281,7 @@ async function loadMasterProfile(){
   const masterId = urlParams.get('master');
   if(!masterId) return;
   try {
-    const { data } = await sbClient.from('profiles').select('plan,psycho_count,name').eq('id', masterId).single();
+    const { data } = await getClient().from('profiles').select('plan,psycho_count,name').eq('id', masterId).single();
     if(data) masterProfile = data;
     initLimitBar();
   } catch(e){}
@@ -379,7 +379,7 @@ function calcPsycho(){
       const urlParams = new URLSearchParams(window.location.search);
       const masterId = urlParams.get('master');
       if(masterId){
-        sbClient.from('profiles').update({psycho_count: used+1}).eq('id', masterId).then(()=>{
+        getClient().from('profiles').update({psycho_count: used+1}).eq('id', masterId).then(()=>{
           if(masterProfile) masterProfile.psycho_count = used+1;
           initLimitBar();
         });
@@ -505,9 +505,13 @@ ${sl('Общие рекомендации')}
 }
 
 // ── Supabase для сохранения отчётов ──
-const SUPABASE_URL_R = 'https://gigfvlhcrtuosfnkzqpt.supabase.co';
-const SUPABASE_KEY_R = 'sb_publishable_Hw69inUK0lqA5ECoVeGgRQ_kWEyD4Pt';
-const sbClient = window.supabase.createClient(SUPABASE_URL_R, SUPABASE_KEY_R);
+// sbClient инициализируется в getClient()
+function getClient(){
+  if(!window._sbClient){
+    window._sbClient = window.supabase.createClient('https://gigfvlhcrtuosfnkzqpt.supabase.co','sb_publishable_Hw69inUK0lqA5ECoVeGgRQ_kWEyD4Pt');
+  }
+  return window._sbClient;
+}
 
 async function createLink(){
   const btn = document.getElementById('pdf-btn');
@@ -527,14 +531,14 @@ async function createLink(){
   let masterId = urlParams.get("master") || null;
   if(!masterId){
     try {
-      const sessionPromise = sbClient.auth.getSession();
+      const sessionPromise = getClient().auth.getSession();
       const timeoutPromise = new Promise(r => setTimeout(()=>r({data:{session:null}}), 2000));
       const { data: { session } } = await Promise.race([sessionPromise, timeoutPromise]);
       masterId = session ? session.user.id : null;
     } catch(e){ masterId = null; }
   }
 
-  const { data, error } = await sbClient.from('psycho_reports').insert({
+  const { data, error } = await getClient().from('psycho_reports').insert({
     master_id: masterId,
     client_name: name || 'Клиент',
     dob: dob,
