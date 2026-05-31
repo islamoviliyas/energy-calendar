@@ -262,7 +262,7 @@ input[type="text"].name-input{min-width:160px;}
     <input type="text" class="name-input" id="psycho-name" placeholder="Имя клиента">
     <input type="text" id="psycho-dob" placeholder="ДД.ММ.ГГГГ" maxlength="10" oninput="psychoInput(this)">
     <button class="btn-main" id="psycho-btn" onclick="calcPsycho()" disabled>Получить анализ</button>
-    <button class="btn-pdf" id="pdf-btn" onclick="downloadPDF()">📄 PDF</button>
+    <button class="btn-pdf" id="pdf-btn" onclick="createLink()">🔗 Создать ссылку</button>
   </div>
 </div>
 
@@ -475,8 +475,85 @@ ${sl('Общие рекомендации')}
   setTimeout(()=>r.scrollIntoView({behavior:'smooth',block:'start'}),100);
 }
 
-function downloadPDF(){
-  window.print();
+// ── Supabase для сохранения отчётов ──
+const SUPABASE_URL_R = 'https://gigfvlhcrtuosfnkzqpt.supabase.co';
+const SUPABASE_KEY_R = 'sb_publishable_Hw69inUK0lqA5ECoVeGgRQ_kWEyD4Pt';
+const sbClient = window.supabase.createClient(SUPABASE_URL_R, SUPABASE_KEY_R);
+
+async function createLink(){
+  const btn = document.getElementById('pdf-btn');
+  btn.textContent = '⏳ Создаём...';
+  btn.disabled = true;
+
+  const name = document.getElementById('psycho-name').value.trim();
+  const dob = document.getElementById('psycho-dob').value.trim();
+  const p = parseDate(dob);
+  if(!p){ btn.textContent = '🔗 Создать ссылку'; btn.disabled = false; return; }
+
+  const cs = digitSum(p.d);
+  const mission = digitSum((p.d.toString()+p.m.toString()+p.y.toString()).split('').reduce((a,c)=>a+parseInt(c),0));
+
+  // Получаем текущего мастера
+  const { data: { session } } = await sbClient.auth.getSession();
+  const masterId = session ? session.user.id : null;
+
+  const { data, error } = await sbClient.from('psycho_reports').insert({
+    master_id: masterId,
+    client_name: name || 'Клиент',
+    dob: dob,
+    cs: cs,
+    mission: mission
+  }).select().single();
+
+  if(error || !data){
+    btn.textContent = '🔗 Создать ссылку';
+    btn.disabled = false;
+    alert('Ошибка при создании ссылки. Попробуйте ещё раз.');
+    return;
+  }
+
+  const base = window.location.origin + window.location.pathname.replace('psycho-page.html','');
+  const link = base + 'report.html?id=' + data.id;
+
+  // Показываем модальное окно со ссылкой
+  showLinkModal(link, name);
+
+  btn.textContent = '🔗 Создать ссылку';
+  btn.disabled = false;
+}
+
+function showLinkModal(link, name){
+  // Удаляем старый модал если есть
+  const old = document.getElementById('link-modal');
+  if(old) old.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'link-modal';
+  modal.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);`;
+  modal.innerHTML = `
+    <div style="background:var(--bg2);border:1px solid var(--border-gold);border-radius:16px;padding:28px;max-width:480px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,0.2);">
+      <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);margin-bottom:6px;">Ссылка готова ✦</div>
+      <div style="font-size:12px;color:var(--text3);margin-bottom:18px;">Отправьте эту ссылку ${name ? `клиенту <strong style="color:var(--text)">${name}</strong>` : 'клиенту'}</div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:11px 14px;font-size:12px;color:var(--gold);word-break:break-all;margin-bottom:14px;">${link}</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button onclick="copyReportLink('${link}',this)" style="flex:1;padding:11px;background:var(--gold);border:none;border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">Скопировать ссылку</button>
+        <button onclick="document.getElementById('link-modal').remove()" style="padding:11px 18px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-family:'Inter',sans-serif;font-size:13px;cursor:pointer;">Закрыть</button>
+      </div>
+      <div style="margin-top:12px;font-size:11px;color:var(--text3);">Ссылка действует бессрочно и открывается на любом устройстве</div>
+    </div>`;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', e => { if(e.target === modal) modal.remove(); });
+}
+
+function copyReportLink(link, btn){
+  navigator.clipboard.writeText(link).catch(()=>{
+    const el = document.createElement('textarea');
+    el.value = link; document.body.appendChild(el); el.select();
+    document.execCommand('copy'); document.body.removeChild(el);
+  });
+  btn.textContent = 'Скопировано ✓';
+  btn.style.background = '#4A8A60';
+  setTimeout(()=>{ btn.textContent='Скопировать ссылку'; btn.style.background=''; }, 2500);
 }
 
 function toggleTheme(){
