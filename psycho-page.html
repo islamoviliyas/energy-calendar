@@ -493,9 +493,17 @@ async function createLink(){
   const cs = digitSum(p.d);
   const mission = digitSum((p.d.toString()+p.m.toString()+p.y.toString()).split('').reduce((a,c)=>a+parseInt(c),0));
 
-  // Получаем текущего мастера
-  const { data: { session } } = await sbClient.auth.getSession();
-  const masterId = session ? session.user.id : null;
+  // Получаем master_id из URL или сессии (с таймаутом)
+  const urlParams = new URLSearchParams(window.location.search);
+  let masterId = urlParams.get("master") || null;
+  if(!masterId){
+    try {
+      const sessionPromise = sbClient.auth.getSession();
+      const timeoutPromise = new Promise(r => setTimeout(()=>r({data:{session:null}}), 2000));
+      const { data: { session } } = await Promise.race([sessionPromise, timeoutPromise]);
+      masterId = session ? session.user.id : null;
+    } catch(e){ masterId = null; }
+  }
 
   const { data, error } = await sbClient.from('psycho_reports').insert({
     master_id: masterId,
