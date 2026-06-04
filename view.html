@@ -3,132 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Энерго Компас - Ваша консультация</title>
+  <title>Энерго Компас</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #F6F4EF 0%, #F0EDE6 100%);
       min-height: 100vh;
-    }
-    
-    .warning {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #fff3cd;
-      border: 1px solid #ffc107;
-      color: #856404;
-      padding: 15px 20px;
-      border-radius: 6px;
-      max-width: 400px;
-      z-index: 10000;
-      font-size: 14px;
-      line-height: 1.5;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    
-    .error-container {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
       padding: 20px;
     }
-    
-    .error-box {
+    .container {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
       text-align: center;
-      color: white;
-      max-width: 500px;
     }
-    
-    .error-icon {
-      font-size: 64px;
-      margin-bottom: 20px;
-    }
-    
-    .error-title {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 15px;
-      line-height: 1.4;
-    }
-    
-    .error-text {
-      color: rgba(255,255,255,0.8);
-      font-size: 14px;
-    }
-    
-    .content-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    
-    .loading {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      color: white;
-      font-size: 18px;
-    }
+    .icon { font-size: 60px; margin-bottom: 20px; }
+    h1 { font-size: 24px; color: #1A1814; margin-bottom: 10px; }
+    p { font-size: 14px; color: #8A8680; line-height: 1.6; margin-bottom: 10px; }
+    .loading { font-size: 48px; animation: spin 1s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .error { color: #7A1E1E; }
+    .success { color: #1E5C34; }
   </style>
 </head>
 <body>
-  <div id="content"></div>
 
-  <script>
-    // Подключаем Supabase
-    const SUPABASE_URL = 'https://gigfvlhcrtuosfnkzqpt.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpZ2Z2bGhjcnR1b3NmbmtzcXB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQ1MjI3MzMsImV4cCI6MTk3NzkyMjczM30.v1E7Y6h8-xH7YTVZzMvAXLXYbKFiGMQvNgPkT_aK7f4';
-    
-    const { createClient } = window.supabase;
-    const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
+<div class="container" id="container">
+  <div class="icon loading">⏳</div>
+  <h1>Загружаем...</h1>
+  <p>Пожалуйста, подождите</p>
+</div>
 
-    async function loadAccessByToken() {
-      const token = new URLSearchParams(window.location.search).get('token');
-      
-      console.log('Token из URL:', token);
-      
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = 'https://gigfvlhcrtuosfnkzqpt.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpZ2Z2bGhjcnR1b3NmbmtzcXB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQ1MjI3MzMsImV4cCI6MTk3NzkyMjczM30.v1E7Y6h8-xH7YTVZzMvAXLXYbKFiGMQvNgPkT_aK7f4';
+  
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  async function loadAccess() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+
+      console.log('Токен:', token);
+
       if (!token) {
-        showError('❌ Ссылка невалидна', 'Отсутствует токен доступа');
+        showError('❌ Ошибка', 'Ссылка невалидна — отсутствует токен доступа');
         return;
       }
 
-      // Загружаем доступ
-      const { data: grant, error } = await supabaseClient
+      // Загружаем доступ из БД
+      const { data: grant, error: dbError } = await supabaseClient
         .from('access_grants')
         .select('*')
         .eq('access_token', token)
         .single();
 
       console.log('Grant:', grant);
-      console.log('Error:', error);
+      console.log('DB Error:', dbError);
 
-      if (error || !grant) {
-        showError(
-          '❌ Ссылка не найдена',
-          'Эта ссылка больше не активна или неправильно скопирована'
-        );
+      if (dbError || !grant) {
+        showError('❌ Ссылка не найдена', 'Эта ссылка больше не активна или неправильно скопирована');
         return;
       }
 
-      // ПРОВЕРКА: Исчерпан ли лимит?
+      // Проверка: исчерпан ли лимит?
       if (grant.opens_count >= grant.max_opens) {
-        showError(
-          '❌ Лимит открытий исчерпан',
-          `Эта ссылка была открыта ${grant.opens_count} раз.\n\nПопросите новую ссылку у мастера.`
-        );
+        showError('❌ Лимит исчерпан', `Эта ссылка была открыта ${grant.opens_count} раз. Попросите новую ссылку у мастера.`);
         return;
       }
 
-      // УВЕЛИЧИВАЕМ СЧЁТЧИК
+      // Увеличиваем счётчик
       const { error: updateError } = await supabaseClient
         .from('access_grants')
         .update({
@@ -138,65 +91,43 @@
         .eq('id', grant.id);
 
       if (updateError) {
-        console.error('Ошибка обновления счётчика:', updateError);
+        console.error('Ошибка обновления:', updateError);
       }
 
       // Показываем предупреждение об оставшихся открытиях
       const remaining = grant.max_opens - grant.opens_count - 1;
-      
       if (remaining <= 2 && remaining > 0) {
-        showWarning(`⚠️ Осталось ${remaining} открытий.\nПосле этого потребуется новая ссылка от мастера.`);
+        setTimeout(() => {
+          alert(`⚠️ Осталось ${remaining} открытий.\nПосле этого потребуется новая ссылка от мастера.`);
+        }, 1000);
       }
 
-      // ПОКАЗЫВАЕМ КОНТЕНТ
-      const permissions = grant.permissions;
+      // Перенаправляем на календарь мастера
       const masterId = grant.master_id;
+      console.log('Переход на календарь мастера:', masterId);
+      
+      window.location.href = '/personal-energy-calendar.html?master_id=' + masterId + '&token=' + token;
 
-      console.log('Permissions:', permissions);
-
-      // Очищаем страницу
-      const content = document.getElementById('content');
-      content.innerHTML = `<div class="content-container"><h1>Загружаем данные...</h1></div>`;
-
-      // Загружаем календарь или психоанализ в зависимости от прав
-      if (permissions.calendar || permissions.psycho) {
-        // Перенаправляем на личный календарь мастера с токеном
-        window.location.href = `/personal-energy-calendar.html?master_id=${masterId}&token=${token}`;
-      } else {
-        showError('❌ Нет прав доступа', 'У вас нет разрешения на просмотр этого контента');
-      }
+    } catch (err) {
+      console.error('Ошибка:', err);
+      showError('❌ Ошибка загрузки', err.message);
     }
+  }
 
-    function showError(title, message) {
-      const content = document.getElementById('content');
-      content.innerHTML = `
-        <div class="error-container">
-          <div class="error-box">
-            <div class="error-icon">❌</div>
-            <div class="error-title">${title}</div>
-            <div class="error-text">${message}</div>
-          </div>
-        </div>
-      `;
-    }
+  function showError(title, message) {
+    const container = document.getElementById('container');
+    container.innerHTML = `
+      <div class="icon error">❌</div>
+      <h1>${title}</h1>
+      <p>${message}</p>
+      <p style="margin-top: 20px; font-size: 12px; color: #999;">
+        Свяжитесь с мастером для получения новой ссылки.
+      </p>
+    `;
+  }
 
-    function showWarning(message) {
-      const warning = document.createElement('div');
-      warning.className = 'warning';
-      warning.innerHTML = message;
-      document.body.appendChild(warning);
+  window.addEventListener('load', loadAccess);
+</script>
 
-      // Закрывается автоматически через 5 секунд
-      setTimeout(() => {
-        warning.remove();
-      }, 5000);
-    }
-
-    // При загрузке страницы
-    window.addEventListener('load', loadAccessByToken);
-  </script>
-
-  <!-- Подключаем Supabase JS -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/+esm"></script>
 </body>
 </html>
