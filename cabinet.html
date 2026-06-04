@@ -1,844 +1,901 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Энерго Компас - Кабинет мастера</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f0ede6;
-      color: #333;
-      line-height: 1.6;
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* === БОКОВАЯ ПАНЕЛЬ === */
-    .sidebar {
-      width: 250px;
-      background: #2a2a2a;
-      color: white;
-      padding: 30px 20px;
-      position: fixed;
-      left: 0;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
-    }
-
-    .sidebar-title {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 5px;
-      color: #c9a961;
-    }
-
-    .sidebar-subtitle {
-      font-size: 10px;
-      color: #999;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 30px;
-    }
-
-    .sidebar-nav {
-      list-style: none;
-      margin-bottom: 30px;
-    }
-
-    .sidebar-nav li {
-      margin-bottom: 15px;
-    }
-
-    .sidebar-nav a {
-      color: #ccc;
-      text-decoration: none;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px;
-      border-radius: 6px;
-      transition: all 0.3s;
-    }
-
-    .sidebar-nav a:hover {
-      color: #c9a961;
-      background: rgba(201, 169, 97, 0.1);
-    }
-
-    .sidebar-nav a.active {
-      color: #c9a961;
-      background: rgba(201, 169, 97, 0.2);
-    }
-
-    .sidebar-user {
-      border-top: 1px solid #444;
-      padding-top: 20px;
-      margin-top: auto;
-      text-align: center;
-    }
-
-    .user-avatar {
-      width: 50px;
-      height: 50px;
-      background: #c9a961;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      color: #2a2a2a;
-      margin: 0 auto 15px;
-      font-size: 20px;
-    }
-
-    .user-email {
-      font-size: 12px;
-      color: #999;
-      margin-bottom: 15px;
-    }
-
-    .logout-btn {
-      background: transparent;
-      color: #c9a961;
-      border: 1px solid #c9a961;
-      padding: 8px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 12px;
-      transition: all 0.3s;
-      width: 100%;
-    }
-
-    .logout-btn:hover {
-      background: #c9a961;
-      color: #2a2a2a;
-    }
-
-    /* === ОСНОВНОЙ КОНТЕНТ === */
-    .main-content {
-      margin-left: 250px;
-      flex: 1;
-      padding: 40px;
-    }
-
-    .header {
-      margin-bottom: 40px;
-    }
-
-    .header h1 {
-      font-size: 32px;
-      color: #333;
-      margin-bottom: 5px;
-    }
-
-    .header h1 .gold {
-      color: #c9a961;
-    }
-
-    .header-subtitle {
-      color: #999;
-      font-size: 14px;
-    }
-
-    /* === СЕКЦИИ === */
-    .cabinet-section {
-      background: white;
-      border-radius: 12px;
-      padding: 40px;
-      margin-bottom: 40px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .cabinet-section h2 {
-      font-size: 18px;
-      color: #333;
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #999;
-    }
-
-    /* === ФОРМА === */
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-bottom: 30px;
-    }
-
-    .form-row.full {
-      grid-template-columns: 1fr;
-    }
-
-    .form-group {
-      margin-bottom: 0;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 12px;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #999;
-    }
-
-    .form-group input[type="text"],
-    .form-group input[type="email"] {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #e0e0e0;
-      border-radius: 4px;
-      font-size: 14px;
-      background: #f9f9f9;
-    }
-
-    .form-group input[type="text"]:focus,
-    .form-group input[type="email"]:focus {
-      outline: none;
-      background: white;
-      border-color: #c9a961;
-    }
-
-    .checkbox-group {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .checkbox-group label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: normal;
-      color: #666;
-      cursor: pointer;
-      font-size: 14px;
-      margin: 0;
-    }
-
-    .checkbox-group input[type="checkbox"] {
-      cursor: pointer;
-      width: 18px;
-      height: 18px;
-      accent-color: #c9a961;
-    }
-
-    .form-info {
-      background: #f5f5f5;
-      padding: 20px;
-      border-radius: 6px;
-      margin-bottom: 30px;
-      font-size: 13px;
-      color: #666;
-      line-height: 1.6;
-    }
-
-    .btn-gold {
-      background: #c9a961;
-      color: white;
-      padding: 12px 40px;
-      border: none;
-      border-radius: 4px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s;
-    }
-
-    .btn-gold:hover {
-      background: #b89651;
-    }
-
-    /* === СПИСОК ССЫЛОК === */
-    .links-container {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-
-    .link-card {
-      background: #f5f3f0;
-      border: 1px solid #e0ddd8;
-      border-radius: 8px;
-      padding: 30px;
-      transition: all 0.3s;
-    }
-
-    .link-card:hover {
-      border-color: #c9a961;
-      box-shadow: 0 4px 12px rgba(201, 169, 97, 0.1);
-    }
-
-    .link-card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 25px;
-    }
-
-    .link-card-name {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .link-avatar {
-      width: 50px;
-      height: 50px;
-      background: #c9a961;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 600;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .link-info h3 {
-      font-size: 16px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 3px;
-    }
-
-    .link-info p {
-      font-size: 12px;
-      color: #999;
-      margin: 0;
-    }
-
-    .link-status {
-      display: inline-block;
-      padding: 6px 14px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .status-active {
-      background: #d4edda;
-      color: #155724;
-    }
-
-    .status-exhausted {
-      background: #f8d7da;
-      color: #721c24;
-    }
-
-    .link-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-bottom: 25px;
-      padding-bottom: 25px;
-      border-bottom: 1px solid #e0ddd8;
-    }
-
-    .stat {
-      font-size: 13px;
-    }
-
-    .stat-label {
-      color: #999;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
-
-    .stat-value {
-      color: #333;
-      font-weight: 600;
-      font-size: 18px;
-    }
-
-    .link-progress {
-      margin-bottom: 20px;
-    }
-
-    .progress-label {
-      font-size: 12px;
-      color: #666;
-      margin-bottom: 8px;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 6px;
-      background: #e0ddd8;
-      border-radius: 3px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: #c9a961;
-      transition: width 0.3s;
-    }
-
-    .link-url {
-      background: white;
-      padding: 12px;
-      border-radius: 4px;
-      margin-bottom: 20px;
-      word-break: break-all;
-      font-size: 11px;
-      font-family: 'Monaco', 'Courier New', monospace;
-      border: 1px solid #e0ddd8;
-      cursor: pointer;
-      color: #666;
-    }
-
-    .link-actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    .btn-small {
-      flex: 1;
-      padding: 10px 12px;
-      border: 1px solid #e0ddd8;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      transition: all 0.2s;
-      background: white;
-      color: #333;
-    }
-
-    .btn-copy {
-      border-color: #c9a961;
-      color: #c9a961;
-    }
-
-    .btn-copy:hover {
-      background: #c9a961;
-      color: white;
-    }
-
-    .btn-revoke {
-      border-color: #d9534f;
-      color: #d9534f;
-    }
-
-    .btn-revoke:hover {
-      background: #d9534f;
-      color: white;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: #999;
-    }
-
-    .empty-state-icon {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
-
-    .empty-state p {
-      font-size: 14px;
-      margin: 0;
-    }
-
-    .loading {
-      text-align: center;
-      padding: 40px;
-      color: #999;
-    }
-
-    @media (max-width: 1024px) {
-      .sidebar {
-        width: 200px;
-        padding: 20px 15px;
-      }
-
-      .main-content {
-        margin-left: 200px;
-        padding: 30px 20px;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding: 20px;
-      }
-
-      .main-content {
-        margin-left: 0;
-        padding: 20px;
-      }
-
-      .cabinet-section {
-        padding: 20px;
-      }
-
-      .link-stats {
-        grid-template-columns: 1fr;
-        gap: 15px;
-      }
-
-      .link-actions {
-        flex-direction: column;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кабинет · Энергетический Календарь</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#B8892A;--gold-light:#D4A84B;--gold-pale:#F8F0DC;--radius:14px;--transition:0.3s ease;}
+[data-theme="light"]{
+  --bg:#F6F4EF;--bg2:#FFFFFF;--bg3:#F0EDE6;--bg4:#E8E4D8;
+  --text:#1A1814;--text2:#3A3830;--text3:#8A8680;
+  --border:rgba(0,0,0,0.08);--border-gold:rgba(184,137,42,0.3);
+  --shadow:0 2px 20px rgba(0,0,0,0.06);
+  --green-bg:#F0F7F2;--green-border:#B8DEC4;--green-text:#1E5C34;
+  --red-bg:#FBF0F0;--red-border:#E8B8B8;--red-text:#7A1E1E;
+  --blue-bg:#EEF4FB;--blue-border:#B8CDE8;--blue-text:#1E3C6A;
+  --warn-bg:#FDF6E8;--warn-border:#E8C870;--warn-text:#7A5010;
+  --sidebar-bg:#1A1814;--sidebar-text:#F0EDE4;--sidebar-muted:#6A6660;
+}
+[data-theme="dark"]{
+  --bg:#0E0D0A;--bg2:#181610;--bg3:#201E16;--bg4:#28261C;
+  --text:#F0EDE4;--text2:#C0BDB0;--text3:#6A6660;
+  --border:rgba(255,255,255,0.07);--border-gold:rgba(184,137,42,0.35);
+  --shadow:0 2px 24px rgba(0,0,0,0.35);
+  --green-bg:#0E1C12;--green-border:#1E4228;--green-text:#6ACC84;
+  --red-bg:#1C0E0E;--red-border:#421E1E;--red-text:#E08080;
+  --blue-bg:#0E1220;--blue-border:#1E2E48;--blue-text:#7AAAE0;
+  --warn-bg:#1A1408;--warn-border:#3E3010;--warn-text:#D4A84B;
+  --sidebar-bg:#0A0908;--sidebar-text:#F0EDE4;--sidebar-muted:#5A5850;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+/* ── DESKTOP LAYOUT ── */
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  font-weight:300;
+  min-height:100vh;
+  display:flex;
+  flex-direction:row;
+  transition:background var(--transition),color var(--transition);
+}
+
+.sidebar{
+  width:240px;min-height:100vh;background:var(--sidebar-bg);
+  display:flex;flex-direction:column;
+  position:fixed;top:0;left:0;bottom:0;z-index:100;
+}
+.sidebar-logo{padding:28px 20px 24px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.sidebar-logo h2{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:var(--sidebar-text);line-height:1.3;}
+.sidebar-logo h2 span{color:var(--gold);}
+.sidebar-logo p{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sidebar-muted);margin-top:4px;}
+.sidebar-nav{padding:16px 12px;flex:1;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--sidebar-muted);transition:all 0.2s;margin-bottom:2px;border:none;background:transparent;width:100%;text-align:left;font-family:'Inter',sans-serif;}
+.nav-item:hover{background:rgba(255,255,255,0.05);color:var(--sidebar-text);}
+.nav-item.active{background:rgba(184,137,42,0.15);color:var(--gold);}
+.nav-icon{font-size:15px;width:18px;text-align:center;}
+.sidebar-user{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:10px;}
+.user-avatar{width:34px;height:34px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:14px;color:#fff;font-weight:600;flex-shrink:0;}
+.user-name-sb{font-size:12px;color:var(--sidebar-text);font-weight:400;}
+.user-role-sb{font-size:10px;color:var(--sidebar-muted);margin-top:1px;}
+
+.main{
+  margin-left:240px;
+  flex:1;min-width:0;
+  width:calc(100% - 240px);
+  padding:36px 36px 80px;
+  min-height:100vh;
+  background:var(--bg);
+}
+.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px;}
+.page-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:400;}
+.page-title span{color:var(--gold);}
+.theme-btn{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:40px;padding:7px 14px;cursor:pointer;font-size:11px;color:var(--text2);font-family:'Inter',sans-serif;transition:all var(--transition);user-select:none;}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ── Tabs ── */
+.tab-content{display:none;}
+.tab-content.active{display:block;animation:fadeUp 0.4s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── Stats ── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);}
+.stat-card.highlight{border-color:var(--gold);}
+.stat-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
+.stat-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:400;color:var(--gold);line-height:1;margin-bottom:4px;}
+.stat-sub{font-size:11px;color:var(--text3);}
+
+/* ── Products ── */
+.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+.product-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:26px;text-decoration:none;display:block;transition:all 0.3s;position:relative;overflow:hidden;box-shadow:var(--shadow);}
+.product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;transition:opacity 0.3s;}
+.product-card:hover{transform:translateY(-3px);border-color:var(--border-gold);}
+.product-card:hover::before{opacity:1;}
+.product-icon{font-size:30px;margin-bottom:14px;}
+.product-name{font-family:'Playfair Display',serif;font-size:19px;font-weight:400;margin-bottom:6px;color:var(--text);}
+.product-desc{font-size:12.5px;color:var(--text3);line-height:1.65;margin-bottom:14px;}
+.product-action{font-size:12px;color:var(--gold);letter-spacing:0.3px;}
+.psycho-limit-bar{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:10px;}
+.plb-text{font-size:11px;color:var(--text3);margin-bottom:6px;}
+.plb-track{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;}
+.plb-fill{height:100%;background:var(--gold);border-radius:2px;transition:width 0.5s;}
+
+/* ── Link card ── */
+.link-card{background:var(--bg2);border:1px solid var(--border-gold);border-radius:var(--radius);padding:24px 28px;margin-bottom:20px;box-shadow:var(--shadow);}
+.link-card-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:14px;}
+.link-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.link-display{flex:1;padding:11px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--gold);word-break:break-all;min-width:200px;}
+.btn-copy{padding:11px 20px;background:var(--gold);border:none;border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:opacity 0.2s;white-space:nowrap;}
+.btn-copy:hover{opacity:0.88;}
+.link-note{font-size:12px;color:var(--text3);margin-top:10px;line-height:1.6;}
+
+/* ── Profile ── */
+.profile-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:20px;box-shadow:var(--shadow);}
+.profile-card-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.profile-avatar-row{display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap;}
+.profile-avatar{width:56px;height:56px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:#fff;flex-shrink:0;}
+.profile-avatar-info h3{font-size:16px;font-weight:500;margin-bottom:3px;}
+.profile-avatar-info p{font-size:12px;color:var(--text3);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.form-group{display:flex;flex-direction:column;gap:7px;}
+.form-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);}
+.form-input{padding:11px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color var(--transition);}
+.form-input:focus{border-color:var(--gold);}
+.form-input::placeholder{color:var(--text3);}
+.btn-save{padding:11px 28px;background:var(--gold);border:none;border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:opacity 0.2s;}
+.btn-save:hover{opacity:0.88;}
+.save-ok{font-size:12px;color:var(--green-text);margin-left:12px;display:none;}
+
+/* Preview */
+.preview-box{background:var(--bg3);border:1px solid var(--border-gold);border-radius:10px;padding:16px 18px;margin-top:16px;}
+.preview-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px;}
+.preview-inner{display:flex;align-items:center;gap:12px;}
+.preview-av{width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;color:#fff;flex-shrink:0;}
+.preview-nm{font-size:14px;font-weight:500;color:var(--text);margin-bottom:2px;}
+.preview-sp{font-size:11px;color:var(--text3);}
+.preview-ct{font-size:11px;color:var(--gold);margin-top:3px;}
+
+/* Badge */
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:500;}
+.badge-active{background:var(--green-bg);color:var(--green-text);border:1px solid var(--green-border);}
+.badge-basic{background:var(--blue-bg);color:var(--blue-text);border:1px solid var(--blue-border);}
+.badge-full{background:rgba(184,137,42,0.12);color:var(--gold-light);border:1px solid var(--border-gold);}
+.section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.btn-logout{width:100%;padding:9px;background:transparent;border:1px solid rgba(255,255,255,0.06);border-radius:6px;color:var(--sidebar-muted);font-family:'Inter',sans-serif;font-size:12px;cursor:pointer;transition:all 0.2s;margin-top:8px;}
+.btn-logout:hover{border-color:#E08080;color:#E08080;}
+
+/* Agreement */
+.agreement-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px 18px;font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:20px;}
+.agreement-box strong{color:var(--text);}
+
+/* ── CLIENT LINKS STYLES ── */
+.client-links-section{margin-bottom:24px;}
+.client-links-grid{display:grid;grid-template-columns:1fr;gap:16px;}
+.client-link-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow);}
+.client-link-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+.client-link-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--text);}
+.client-link-email{font-size:11px;color:var(--text3);margin-top:2px;}
+.client-link-status{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:500;}
+.client-link-status.active{background:var(--green-bg);color:var(--green-text);border:1px solid var(--green-border);}
+.client-link-status.exhausted{background:var(--red-bg);color:var(--red-text);border:1px solid var(--red-border);}
+.client-link-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.client-link-stat{font-size:12px;}
+.client-link-stat-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+.client-link-stat-value{font-size:18px;font-weight:600;color:var(--gold);}
+.client-link-progress{margin-bottom:16px;}
+.client-link-progress-bar{height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;}
+.client-link-progress-fill{height:100%;background:var(--gold);border-radius:2px;transition:width 0.3s;}
+.client-link-url{background:var(--bg3);padding:10px 14px;border-radius:8px;border:1px solid var(--border);font-size:11px;font-family:monospace;color:var(--gold);word-break:break-all;margin-bottom:12px;cursor:pointer;transition:all 0.2s;}
+.client-link-url:hover{background:var(--bg4);}
+.client-link-actions{display:flex;gap:8px;}
+.client-link-btn{flex:1;padding:9px 14px;border:1px solid var(--border);background:transparent;border-radius:8px;font-family:'Inter',sans-serif;font-size:11px;font-weight:500;cursor:pointer;transition:all 0.2s;}
+.client-link-btn-copy{border-color:var(--gold);color:var(--gold);}
+.client-link-btn-copy:hover{background:rgba(184,137,42,0.1);}
+.client-link-btn-delete{border-color:#E08080;color:#E08080;}
+.client-link-btn-delete:hover{background:rgba(224,128,128,0.1);}
+.empty-state{text-align:center;padding:40px 20px;color:var(--text3);}
+.empty-state-icon{font-size:40px;margin-bottom:12px;}
+.empty-state-text{font-size:13px;}
+
+/* ── MOBILE ── */
+.mob-header{display:none;}
+.mob-nav{display:none;}
+.mob-wrap{display:contents;}
+
+@media(max-width:768px){
+  html,body{overflow-x:hidden;width:100%;}
+  body{flex-direction:column !important;}
+  .sidebar{display:none !important;}
+  .page-header{display:none !important;}
+  .mob-wrap{
+    display:flex !important;
+    flex-direction:column;
+    width:100%;
+    min-height:100vh;
+    background:var(--bg);
+  }
+  .mob-header{
+    display:flex !important;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 16px;
+    background:var(--sidebar-bg);
+    position:sticky;
+    top:0;
+    z-index:200;
+    width:100%;
+    min-height:52px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    box-sizing:border-box;
+    flex-shrink:0;
+  }
+  .mob-logo{font-family:'Playfair Display',serif;font-size:14px;color:#F0EDE4;line-height:1.2;flex-shrink:0;}
+  .mob-logo span{color:var(--gold);}
+  .mob-user{display:flex;align-items:center;gap:8px;}
+  .mob-avatar{width:30px;height:30px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;flex-shrink:0;font-weight:600;}
+  .mob-username{font-size:12px;color:#C0BDB0;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .main{
+    margin-left:0 !important;
+    width:100% !important;
+    min-width:0 !important;
+    padding:0 !important;
+    flex:1;
+    background:var(--bg);
+  }
+  .main-content-wrap{
+    padding:16px 14px 96px !important;
+    box-sizing:border-box;
+    width:100%;
+    background:var(--bg);
+  }
+  .stats-row{grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
+  .stat-card{padding:14px 12px;}
+  .stat-num{font-size:28px;}
+  .stat-label{font-size:9px;}
+  .products-grid{grid-template-columns:1fr;gap:12px;margin-bottom:16px;}
+  .product-card{padding:18px;}
+  .product-icon{font-size:24px;margin-bottom:10px;}
+  .product-name{font-size:16px;}
+  .product-desc{font-size:12px;margin-bottom:10px;}
+  .link-card{padding:16px;}
+  .link-row{flex-direction:column;gap:8px;}
+  .link-display{font-size:11px;word-break:break-all;padding:10px 12px;}
+  .btn-copy{width:100%;text-align:center;padding:12px;}
+  .profile-card{padding:16px;}
+  .form-grid{grid-template-columns:1fr;gap:12px;}
+  .profile-avatar-row{flex-wrap:wrap;gap:10px;}
+  .mob-nav{
+    display:block !important;
+    position:fixed;
+    bottom:0;left:0;right:0;
+    width:100%;
+    background:var(--sidebar-bg);
+    border-top:1px solid rgba(255,255,255,0.12);
+    z-index:199;
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    box-sizing:border-box;
+  }
+  .mob-nav-inner{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    padding:6px 0 8px;
+  }
+  .mob-nav-btn{
+    display:flex;flex-direction:column;align-items:center;gap:3px;
+    background:none;border:none;cursor:pointer;
+    padding:4px 6px;flex:1;
+    font-family:'Inter',sans-serif;font-size:9px;
+    color:#5A5850;transition:color 0.2s;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+  }
+  .mob-nav-btn.active{color:var(--gold);}
+  .mob-nav-btn .mob-icon{font-size:20px;line-height:1;}
+  .agreement-box{font-size:11px;padding:12px;margin-bottom:10px;}
+  .section-label{font-size:9px;}
+  .client-link-stats{grid-template-columns:1fr;}
+  .client-link-actions{flex-direction:column;}
+}
+</style>
 </head>
 <body>
-  <!-- БОКОВАЯ ПАНЕЛЬ -->
-  <aside class="sidebar">
-    <div class="sidebar-title">Энергетический<br><span class="sidebar-subtitle" style="color: #c9a961; text-transform: none;">Календарь</span></div>
-    <p class="sidebar-subtitle">Кабинет мастера</p>
 
-    <nav class="sidebar-nav">
-      <li><a href="#" class="active">◇ Обзор</a></li>
-      <li><a href="#">◇ Мои ссылки</a></li>
-      <li><a href="#">◇ Профиль</a></li>
-      <li><a href="#">◇ Психоанализ</a></li>
-    </nav>
-
+<!-- ── Sidebar (desktop only) ── -->
+<div class="sidebar">
+  <div class="sidebar-logo">
+    <h2>Энергетический <span>Календарь</span></h2>
+    <p>Кабинет мастера</p>
+  </div>
+  <nav class="sidebar-nav">
+    <button class="nav-item active" onclick="showTab('overview')">
+      <span class="nav-icon">◈</span> Обзор
+    </button>
+    <button class="nav-item" onclick="showTab('links')">
+      <span class="nav-icon">🔗</span> Ссылки клиентов
+    </button>
+    <button class="nav-item" onclick="showTab('link')">
+      <span class="nav-icon">◇</span> Моя ссылка
+    </button>
+    <button class="nav-item" onclick="showTab('profile')">
+      <span class="nav-icon">○</span> Профиль
+    </button>
+    <button class="nav-item" onclick="window.open('personal-energy-calendar.html','_blank')">
+      <span class="nav-icon">📅</span> Открыть календарь
+    </button>
+    <button class="nav-item" onclick="window.open('psycho-page.html?master='+userId,'_blank')">
+      <span class="nav-icon">🧠</span> Психоанализ
+    </button>
+  </nav>
+  <div>
     <div class="sidebar-user">
-      <div id="userInitial" class="user-avatar">К</div>
-      <div id="userEmail" class="user-email">загружаем...</div>
-      <button class="logout-btn" onclick="logout()">Выход</button>
-    </div>
-  </aside>
-
-  <!-- ОСНОВНОЙ КОНТЕНТ -->
-  <main class="main-content">
-    
-    <!-- ЗАГОЛОВОК -->
-    <div class="header">
-      <h1>Добро пожаловать, <span class="gold" id="userName">Мастер</span></h1>
-      <p class="header-subtitle">Ваш кабинет мастера - Digital Consulting</p>
-    </div>
-
-    <!-- РАЗДЕЛ: СОЗДАНИЕ ССЫЛКИ ДЛЯ КЛИЕНТА -->
-    <div class="cabinet-section">
-      <h2>🔗 Создать ссылку для клиента</h2>
-      
-      <form id="createLinkForm">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="clientName">Имя клиента</label>
-            <input type="text" id="clientName" placeholder="Анна" required>
-          </div>
-          <div class="form-group">
-            <label for="clientEmail">Email клиента</label>
-            <input type="email" id="clientEmail" placeholder="anna@mail.com">
-          </div>
-        </div>
-
-        <div class="form-row full">
-          <div class="form-group">
-            <label>Права доступа</label>
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" name="permissions" value="calendar" checked>
-                📅 Календарь (энергетические расчёты)
-              </label>
-              <label>
-                <input type="checkbox" name="permissions" value="psycho" checked>
-                🧠 Психоанализ личности
-              </label>
-              <label>
-                <input type="checkbox" name="permissions" value="chat">
-                💬 Чат консультаций
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-info">
-          💡 <strong>Как это работает:</strong> Ссылка работает ровно 6 открытий без ограничения по времени.
-          Клиент может открывать её в разные дни, но после 6 открытий потребуется новая ссылка от вас.
-          Это защищает от распространения ссылки среди других мастеров.
-        </div>
-
-        <button type="submit" class="btn-gold">Создать ссылку</button>
-      </form>
-    </div>
-
-    <!-- РАЗДЕЛ: СПИСОК АКТИВНЫХ ССЫЛОК -->
-    <div class="cabinet-section">
-      <h2>📋 Ваши ссылки для клиентов</h2>
-      <div id="linksList" class="links-container">
-        <div class="loading">Загружаем ваши ссылки...</div>
+      <div class="user-avatar" id="sb-avatar">М</div>
+      <div>
+        <div class="user-name-sb" id="sb-name">Загрузка...</div>
+        <div class="user-role-sb" id="sb-role">Digital Consulting</div>
       </div>
     </div>
+    <div style="padding:0 12px 16px;">
+      <button class="btn-logout" onclick="doLogout()">Выйти</button>
+    </div>
+  </div>
+</div>
 
-  </main>
+<!-- ── Мобильный хедер + main в одной колонке ── -->
+<div class="mob-wrap">
 
-  <!-- Подключаем Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/+esm"></script>
+  <!-- Мобильный хедер -->
+  <div class="mob-header">
+    <div class="mob-logo">Энергетический <span>Календарь</span></div>
+    <div class="mob-user">
+      <div class="mob-avatar" id="mob-avatar">М</div>
+      <div class="mob-username" id="mob-username">...</div>
+    </div>
+  </div>
 
-  <script>
-    // ===== ИНИЦИАЛИЗАЦИЯ SUPABASE =====
-    const SUPABASE_URL = 'https://gigfvlhcrtuosfnkzqpt.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpZ2Z2bGhjcnR1b3NmbmtzcXB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQ1MjI3MzMsImV4cCI6MTk3NzkyMjczM30.v1E7Y6h8-xH7YTVZzMvAXLXYbKFiGMQvNgPkT_aK7f4';
-    
-    const { createClient } = window.supabase;
-    const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
+  <!-- Main content -->
+  <div class="main">
+    <div class="main-content-wrap">
 
-    let currentUser = null;
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Добро пожаловать, <span id="welcome-name">—</span></h1>
+          <p style="font-size:13px;color:var(--text3);margin-top:4px;">Ваш кабинет мастера · Digital Consulting</p>
+        </div>
+        <button class="theme-btn" onclick="toggleTheme()">
+          <span id="theme-icon">🌙</span>
+          <span id="theme-label">Тёмная тема</span>
+        </button>
+      </div>
 
-    // ===== ПРОВЕРЯЕМ АУТЕНТИФИКАЦИЮ =====
-    async function checkAuth() {
-      const { data: { session } } = await supabaseClient.auth.getSession();
-      
-      if (!session) {
-        window.location.href = '/login.html';
-        return;
-      }
-
-      currentUser = session.user;
-      
-      // Получаем имя из профиля
-      const { data: profile } = await supabaseClient
-        .from('profiles')
-        .select('name')
-        .eq('id', currentUser.id)
-        .single();
-
-      const userName = profile?.name || currentUser.email?.split('@')[0] || 'Мастер';
-      document.getElementById('userName').textContent = userName;
-      document.getElementById('userEmail').textContent = currentUser.email;
-      
-      // Инициалы для аватара
-      const initials = userName.substring(0, 1).toUpperCase();
-      document.getElementById('userInitial').textContent = initials;
-
-      loadAccessGrants();
-    }
-
-    // ===== ВЫХОД =====
-    async function logout() {
-      await supabaseClient.auth.signOut();
-      window.location.href = '/login.html';
-    }
-
-    // ===== ЗАГРУЖАЕМ СПИСОК ССЫЛОК =====
-    async function loadAccessGrants() {
-      if (!currentUser) return;
-
-      const { data: grants, error } = await supabaseClient
-        .from('access_grants')
-        .select('*')
-        .eq('master_id', currentUser.id)
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Ошибка загрузки ссылок:', error);
-        return;
-      }
-
-      const linksList = document.getElementById('linksList');
-      linksList.innerHTML = '';
-
-      if (!grants || grants.length === 0) {
-        linksList.innerHTML = `
-          <div class="empty-state">
-            <div class="empty-state-icon">🔗</div>
-            <p>Вы ещё не создали ссылки для клиентов</p>
-            <p style="font-size: 12px; margin-top: 8px; color: #999;">Заполните форму выше и создайте первую ссылку</p>
+      <!-- ======= OVERVIEW TAB ======= -->
+      <div id="tab-overview" class="tab-content active">
+        <div class="stats-row">
+          <div class="stat-card highlight">
+            <div class="stat-label">Тариф</div>
+            <div class="stat-num" id="stat-plan-icon">—</div>
+            <div class="stat-sub" id="stat-plan-name">—</div>
           </div>
-        `;
-        return;
-      }
-
-      grants.forEach(grant => {
-        const card = createLinkCard(grant);
-        linksList.appendChild(card);
-      });
-    }
-
-    // ===== СОЗДАЁМ КАРТОЧКУ ССЫЛКИ =====
-    function createLinkCard(grant) {
-      const card = document.createElement('div');
-      card.className = 'link-card';
-
-      const isExhausted = grant.opens_count >= grant.max_opens;
-      const statusClass = isExhausted ? 'status-exhausted' : 'status-active';
-      const statusText = isExhausted ? '❌ Лимит исчерпан' : '✅ Активна';
-
-      const progress = (grant.opens_count / grant.max_opens) * 100;
-      const fullUrl = `${window.location.origin}/view.html?token=${grant.access_token}`;
-      const createdAt = new Date(grant.created_at).toLocaleDateString('ru-RU');
-      const remaining = Math.max(0, grant.max_opens - grant.opens_count);
-      
-      // Инициалы для аватара
-      const initials = (grant.client_name || 'К').substring(0, 1).toUpperCase();
-
-      card.innerHTML = `
-        <div class="link-card-top">
-          <div class="link-card-name">
-            <div class="link-avatar">${initials}</div>
-            <div class="link-info">
-              <h3>${grant.client_name || 'Безымянный клиент'}</h3>
-              ${grant.client_email ? `<p>📧 ${grant.client_email}</p>` : ''}
-              <p>Создана: ${createdAt}</p>
+          <div class="stat-card">
+            <div class="stat-label">Психоанализов</div>
+            <div class="stat-num" id="stat-psycho">—</div>
+            <div class="stat-sub" id="stat-psycho-sub">использовано</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Статус</div>
+            <div style="margin-top:10px;">
+              <span class="badge badge-active" id="stat-status">● Активен</span>
             </div>
           </div>
-          <div class="link-status ${statusClass}">${statusText}</div>
-        </div>
-
-        <div class="link-stats">
-          <div class="stat">
-            <div class="stat-label">Осталось открытий</div>
-            <div class="stat-value">${remaining} / ${grant.max_opens}</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Использовано</div>
-            <div class="stat-value">${grant.opens_count} раз</div>
+          <div class="stat-card">
+            <div class="stat-label">Дней календаря</div>
+            <div class="stat-num">∞</div>
+            <div class="stat-sub">безлимит</div>
           </div>
         </div>
 
-        <div class="link-progress">
-          <div class="progress-label">Прогресс использования: ${Math.round(progress)}%</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: ${Math.min(progress, 100)}%"></div>
+        <div class="section-label">Продукты</div>
+        <div class="products-grid">
+          <a href="personal-energy-calendar.html" target="_blank" class="product-card">
+            <div class="product-icon">📅</div>
+            <div class="product-name">Энергетический Календарь</div>
+            <p class="product-desc">Узнайте энергию дня, месяца и года. Рекомендации, мантры и утренний ритуал на каждый день.</p>
+            <div class="product-action">Открыть календарь →</div>
+          </a>
+          <div class="product-card" id="psycho-card" style="cursor:pointer;" onclick="openPsycho()">
+            <div class="product-icon">🧠</div>
+            <div class="product-name">Психоанализ личности</div>
+            <p class="product-desc">Глубокий анализ числа личности, миссии, матрицы чисел, профессиональной ориентации и совместимости.</p>
+            <div class="product-action" id="psycho-action">Открыть анализ →</div>
+            <div class="psycho-limit-bar" id="psycho-limit-bar" style="display:none;">
+              <div class="plb-text" id="psycho-limit-text">Использовано 0 из 5</div>
+              <div class="plb-track"><div class="plb-fill" id="psycho-limit-fill" style="width:0%"></div></div>
+            </div>
           </div>
         </div>
 
-        <div class="link-url" title="Клик для копирования" onclick="copyToClipboard('${fullUrl}', event)">
-          ${fullUrl}
+        <div class="agreement-box">
+          <strong>Правила использования:</strong> Ваша лицензия предназначена исключительно для личного использования и работы с вашими клиентами через персональную ссылку. Передача доступа третьим лицам нарушает условия соглашения. По вопросам: <strong style="color:var(--gold)">Digital Consulting</strong>
+        </div>
+      </div>
+      <!-- ======= /OVERVIEW TAB ======= -->
+
+      <!-- ======= CLIENT LINKS TAB ======= -->
+      <div id="tab-links" class="tab-content">
+        <div class="profile-card">
+          <div class="profile-card-title">Создать новую ссылку для клиента</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Имя клиента</label>
+              <input class="form-input" id="inp-client-name" type="text" placeholder="Анна">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email клиента (опционально)</label>
+              <input class="form-input" id="inp-client-email" type="email" placeholder="anna@mail.com">
+            </div>
+            <div class="form-group" style="grid-column:1/-1;">
+              <label class="form-label">Права доступа</label>
+              <div style="display:flex;gap:20px;flex-wrap:wrap;">
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:400;color:var(--text);">
+                  <input type="checkbox" name="perm" value="calendar" checked style="cursor:pointer;"> 📅 Календарь
+                </label>
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:400;color:var(--text);">
+                  <input type="checkbox" name="perm" value="psycho" checked style="cursor:pointer;"> 🧠 Психоанализ
+                </label>
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:400;color:var(--text);">
+                  <input type="checkbox" name="perm" value="chat" style="cursor:pointer;"> 💬 Чат
+                </label>
+              </div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--text3);line-height:1.6;margin:16px 0;padding:12px;background:var(--bg3);border-radius:8px;">
+            💡 <strong style="color:var(--text);">Как это работает:</strong> Ссылка будет работать ровно <strong>6 открытий</strong> без ограничения по времени. Клиент сможет открывать её в разные дни, но после 6 открытий потребуется новая ссылка. Это защищает от распространения ссылки среди других мастеров.
+          </div>
+          <button class="btn-save" onclick="createClientLink()" style="width:auto;">Создать ссылку</button>
         </div>
 
-        <div class="link-actions">
-          <button class="btn-small btn-copy" onclick="copyToClipboard('${fullUrl}', event)">
-            📋 Копировать
-          </button>
-          <button class="btn-small btn-revoke" onclick="revokeAccess('${grant.id}', event)">
-            🚫 Отозвать
-          </button>
+        <div class="client-links-section">
+          <div class="section-label">Активные ссылки</div>
+          <div class="client-links-grid" id="client-links-list">
+            <div class="empty-state">
+              <div class="empty-state-icon">🔗</div>
+              <div class="empty-state-text">Ссылок для клиентов ещё нет</div>
+            </div>
+          </div>
         </div>
-      `;
+      </div>
+      <!-- ======= /CLIENT LINKS TAB ======= -->
 
-      return card;
+      <!-- ======= LINK TAB ======= -->
+      <div id="tab-link" class="tab-content">
+        <div class="link-card">
+          <div class="link-card-title">Ваша персональная ссылка для клиентов</div>
+          <div class="link-row">
+            <div class="link-display" id="master-link">Загрузка...</div>
+            <button class="btn-copy" onclick="copyLink()">Скопировать</button>
+          </div>
+          <div class="link-note">
+            Отправьте эту ссылку своим клиентам. Клиент откроет страницу с вашим именем и брендом, введёт дату рождения и получит персональный расчёт энергии. Ваши контакты будут отображаться внизу страницы клиента.
+          </div>
+        </div>
+        <div class="profile-card">
+          <div class="profile-card-title">Как выглядит страница вашего клиента</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.9;">
+            ✦ Клиент открывает вашу ссылку<br>
+            ✦ Видит ваше имя и специализацию вверху страницы<br>
+            ✦ Вводит дату рождения и получает полный энергетический календарь<br>
+            ✦ Видит рекомендации на неделю вперёд с мантрами и ритуалами<br>
+            ✦ Ваши контакты (WhatsApp и Instagram) отображаются внизу страницы
+          </div>
+        </div>
+      </div>
+      <!-- ======= /LINK TAB ======= -->
+
+      <!-- ======= PROFILE TAB ======= -->
+      <div id="tab-profile" class="tab-content">
+        <div class="profile-card">
+          <div class="profile-card-title">Мой профиль — что видят клиенты</div>
+          <div class="profile-avatar-row">
+            <div class="profile-avatar" id="prof-avatar">М</div>
+            <div class="profile-avatar-info">
+              <h3 id="prof-name-display">—</h3>
+              <p id="prof-spec-display">—</p>
+            </div>
+            <span class="badge badge-active" style="margin-left:auto;">● Активен</span>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Имя (для клиентов)</label>
+              <input class="form-input" id="inp-name" type="text" placeholder="Имя и фамилия" oninput="livePreview()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Специализация</label>
+              <input class="form-input" id="inp-spec" type="text" placeholder="Мастер цифровой психологии" oninput="livePreview()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">WhatsApp <span style="font-size:10px;color:var(--text3);text-transform:none;letter-spacing:0;">(только цифры со знаком +)</span></label>
+              <input class="form-input" id="inp-wa" type="text" placeholder="+7 700 000 00 00" oninput="livePreview()">
+              <div id="wa-hint" style="font-size:11px;color:var(--text3);display:none;">Пример: +77001234567 или +996700123456</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Instagram</label>
+              <input class="form-input" id="inp-ig" type="text" placeholder="@yourname" oninput="livePreview()">
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <button class="btn-save" onclick="saveProfile()">Сохранить изменения</button>
+            <span class="save-ok" id="save-ok">✓ Сохранено!</span>
+          </div>
+          <div class="preview-box">
+            <div class="preview-label">Предпросмотр — так вас видят клиенты</div>
+            <div class="preview-inner">
+              <div class="preview-av" id="prev-av">М</div>
+              <div>
+                <div class="preview-nm" id="prev-name">Ваше имя</div>
+                <div class="preview-sp" id="prev-spec">Специализация</div>
+                <div class="preview-ct" id="prev-ct">WhatsApp · Instagram</div>
+              </div>
+            </div>
+            <div id="prev-wa-btn" style="display:none;margin-top:12px;">
+              <a id="prev-wa-link" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;text-decoration:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:500;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Написать в WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ======= /PROFILE TAB ======= -->
+
+    </div>
+  </div>
+
+  <!-- Mobile bottom nav -->
+  <nav class="mob-nav">
+    <div class="mob-nav-inner">
+      <button class="mob-nav-btn active" id="mob-btn-overview" onclick="showTab('overview');setMobActive('overview')">
+        <span class="mob-icon">🏠</span>Обзор
+      </button>
+      <button class="mob-nav-btn" id="mob-btn-links" onclick="showTab('links');setMobActive('links')">
+        <span class="mob-icon">🔗</span>Ссылки
+      </button>
+      <button class="mob-nav-btn" id="mob-btn-profile" onclick="showTab('profile');setMobActive('profile')">
+        <span class="mob-icon">👤</span>Профиль
+      </button>
+      <button class="mob-nav-btn" onclick="openPsycho()">
+        <span class="mob-icon">🧠</span>Анализ
+      </button>
+      <button class="mob-nav-btn" onclick="doLogout()">
+        <span class="mob-icon">🚪</span>Выйти
+      </button>
+    </div>
+  </nav>
+
+</div><!-- /mob-wrap -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://gigfvlhcrtuosfnkzqpt.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_Hw69inUK0lqA5ECoVeGgRQ_kWEyD4Pt';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const PSYCHO_LIMIT = 5;
+let userProfile = null;
+let userId = null;
+
+async function init(){
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if(!session){ window.location.href = 'login.html'; return; }
+  userId = session.user.id;
+  const { data: profile } = await supabaseClient
+    .from('profiles').select('*').eq('id', session.user.id).single();
+  if(!profile || !profile.is_active){
+    await supabaseClient.auth.signOut();
+    window.location.href = 'login.html';
+    return;
+  }
+  if(profile.role === 'admin'){
+    window.location.href = 'admin.html';
+    return;
+  }
+  userProfile = profile;
+  renderAll(profile);
+  loadClientLinks();
+}
+
+function renderAll(p){
+  const name = p.name || p.email || 'Мастер';
+  const firstName = name.split(' ')[0];
+  const isFull = p.plan === 'full';
+  const used = p.psycho_count || 0;
+
+  document.getElementById('sb-avatar').textContent = name.charAt(0).toUpperCase();
+  document.getElementById('sb-name').textContent = name;
+  document.getElementById('sb-role').textContent = p.specialization || 'Digital Consulting';
+
+  const mobAv = document.getElementById('mob-avatar');
+  const mobUn = document.getElementById('mob-username');
+  if(mobAv) mobAv.textContent = name.charAt(0).toUpperCase();
+  if(mobUn) mobUn.textContent = firstName;
+
+  document.getElementById('welcome-name').textContent = firstName;
+
+  document.getElementById('stat-plan-icon').textContent = isFull ? '★' : '◇';
+  document.getElementById('stat-plan-name').textContent = isFull ? 'Полный пакет' : 'Базовый';
+  document.getElementById('stat-psycho').textContent = used;
+  document.getElementById('stat-psycho-sub').textContent = isFull ? 'безлимит' : `из ${PSYCHO_LIMIT} бесплатных`;
+
+  if(!isFull){
+    document.getElementById('psycho-limit-bar').style.display = 'block';
+    document.getElementById('psycho-limit-text').textContent = `Использовано ${used} из ${PSYCHO_LIMIT} бесплатных`;
+    document.getElementById('psycho-limit-fill').style.width = Math.min(100,(used/PSYCHO_LIMIT)*100) + '%';
+    if(used >= PSYCHO_LIMIT){
+      document.getElementById('psycho-action').textContent = 'Лимит исчерпан — свяжитесь для апгрейда';
+      document.getElementById('psycho-action').style.color = 'var(--red-text)';
     }
+  }
 
-    // ===== КОПИРОВАНИЕ ССЫЛКИ =====
-    function copyToClipboard(text, event) {
-      if (event) event.preventDefault();
-      
-      navigator.clipboard.writeText(text).then(() => {
-        alert('✅ Ссылка скопирована в буфер обмена!');
-      }).catch(err => {
-        console.error('Ошибка копирования:', err);
-        alert('❌ Ошибка копирования');
-      });
-    }
+  const base = window.location.origin + window.location.pathname.replace('cabinet.html','');
+  const link = base + 'master.html?id=' + p.id;
+  document.getElementById('master-link').textContent = link;
 
-    // ===== ОТОЗВАТЬ ДОСТУП =====
-    async function revokeAccess(grantId, event) {
-      if (event) event.preventDefault();
-      
-      if (!confirm('⚠️ Вы уверены? Клиент больше не сможет открыть эту ссылку.')) {
-        return;
-      }
+  document.getElementById('inp-name').value = p.name || '';
+  document.getElementById('inp-spec').value = p.specialization || '';
+  document.getElementById('inp-wa').value = p.whatsapp || '';
+  document.getElementById('inp-ig').value = p.instagram || '';
 
-      const { error } = await supabaseClient
-        .from('access_grants')
-        .delete()
-        .eq('id', grantId);
+  document.getElementById('prof-avatar').textContent = name.charAt(0).toUpperCase();
+  document.getElementById('prof-name-display').textContent = name;
+  document.getElementById('prof-spec-display').textContent = p.specialization || 'Специализация не указана';
 
-      if (error) {
-        alert('❌ Ошибка: ' + error.message);
-        return;
-      }
+  updatePreview(p.name, p.specialization, p.whatsapp, p.instagram);
+}
 
-      alert('✅ Доступ отозван!');
-      loadAccessGrants();
-    }
+function updatePreview(name, spec, wa, ig){
+  const n = name || 'Ваше имя';
+  document.getElementById('prev-av').textContent = n.charAt(0).toUpperCase();
+  document.getElementById('prev-name').textContent = n;
+  document.getElementById('prev-spec').textContent = spec || 'Специализация';
+  const ct = [wa, ig].filter(Boolean).join(' · ');
+  document.getElementById('prev-ct').textContent = ct || 'WhatsApp · Instagram';
+  const waClean = wa ? wa.replace(/\D/g,'') : '';
+  const waBtn = document.getElementById('prev-wa-btn');
+  const waLink = document.getElementById('prev-wa-link');
+  if(waClean && waClean.length >= 10){
+    waBtn.style.display = 'block';
+    waLink.href = 'https://wa.me/' + waClean;
+    document.getElementById('wa-hint').style.display = 'none';
+  } else if(wa && wa.length > 0){
+    waBtn.style.display = 'none';
+    document.getElementById('wa-hint').style.display = 'block';
+  } else {
+    waBtn.style.display = 'none';
+    document.getElementById('wa-hint').style.display = 'none';
+  }
+}
 
-    // ===== ГЕНЕРИРУЕМ ТОКЕН =====
-    function generateToken() {
-      return 'token_' + Math.random().toString(36).substr(2, 32);
-    }
+function livePreview(){
+  updatePreview(
+    document.getElementById('inp-name').value.trim(),
+    document.getElementById('inp-spec').value.trim(),
+    document.getElementById('inp-wa').value.trim(),
+    document.getElementById('inp-ig').value.trim()
+  );
+}
 
-    // ===== СОЗДАНИЕ НОВОЙ ССЫЛКИ =====
-    document.getElementById('createLinkForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
+function openPsycho(){
+  if(!userProfile) return;
+  const isFull = userProfile.plan === 'full';
+  const used = userProfile.psycho_count || 0;
+  if(!isFull && used >= PSYCHO_LIMIT){
+    alert(`Вы использовали все ${PSYCHO_LIMIT} бесплатных психоанализа.\n\nДля получения полного доступа свяжитесь с администратором Digital Consulting.`);
+    return;
+  }
+  window.open('psycho-page.html?master='+userId,'_blank');
+}
 
-      if (!currentUser) {
-        alert('❌ Вы не авторизованы');
-        return;
-      }
+async function saveProfile(){
+  const name = document.getElementById('inp-name').value.trim();
+  const spec = document.getElementById('inp-spec').value.trim();
+  const wa = document.getElementById('inp-wa').value.trim();
+  const ig = document.getElementById('inp-ig').value.trim();
+  const btn = document.querySelector('.btn-save');
+  btn.textContent = 'Сохранение...';
+  btn.disabled = true;
+  const { error } = await supabaseClient.from('profiles').update({
+    name, specialization: spec, whatsapp: wa, instagram: ig
+  }).eq('id', userId);
+  btn.textContent = 'Сохранить изменения';
+  btn.disabled = false;
+  if(!error){
+    const ok = document.getElementById('save-ok');
+    ok.style.display = 'inline';
+    setTimeout(()=>{ ok.style.display='none'; }, 3000);
+    document.getElementById('sb-avatar').textContent = (name||'М').charAt(0).toUpperCase();
+    document.getElementById('sb-name').textContent = name || 'Мастер';
+    document.getElementById('sb-role').textContent = spec || 'Digital Consulting';
+    document.getElementById('welcome-name').textContent = (name||'').split(' ')[0] || 'Мастер';
+    document.getElementById('prof-avatar').textContent = (name||'М').charAt(0).toUpperCase();
+    document.getElementById('prof-name-display').textContent = name || '—';
+    document.getElementById('prof-spec-display').textContent = spec || 'Специализация не указана';
+    updatePreview(name, spec, wa, ig);
+    if(userProfile){ userProfile.name=name; userProfile.specialization=spec; userProfile.whatsapp=wa; userProfile.instagram=ig; }
+  }
+}
 
-      const clientName = document.getElementById('clientName').value.trim();
-      const clientEmail = document.getElementById('clientEmail').value.trim() || null;
+function copyLink(){
+  const link = document.getElementById('master-link').textContent;
+  navigator.clipboard.writeText(link).catch(()=>{
+    const el = document.createElement('textarea');
+    el.value = link; document.body.appendChild(el); el.select();
+    document.execCommand('copy'); document.body.removeChild(el);
+  });
+  const btn = document.querySelector('.btn-copy');
+  btn.textContent = 'Скопировано ✓';
+  btn.style.background = '#4A8A60';
+  setTimeout(()=>{ btn.textContent='Скопировать'; btn.style.background=''; }, 2000);
+}
 
-      if (!clientName) {
-        alert('❌ Укажите имя клиента');
-        return;
-      }
+function showTab(tab){
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const tabIndex = {overview:0, links:1, link:2, profile:3};
+  const navItems = document.querySelectorAll('.nav-item');
+  if(tabIndex[tab] !== undefined) navItems[tabIndex[tab]].classList.add('active');
+}
 
-      // Собираем права
-      const permissions = {};
-      document.querySelectorAll('input[name="permissions"]:checked').forEach(checkbox => {
-        permissions[checkbox.value] = true;
-      });
+function setMobActive(tab){
+  document.querySelectorAll('.mob-nav-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('mob-btn-' + tab);
+  if(btn) btn.classList.add('active');
+}
 
-      if (Object.keys(permissions).length === 0) {
-        alert('❌ Выберите хотя бы одно право доступа');
-        return;
-      }
+function toggleTheme(){
+  const h = document.documentElement;
+  const dark = h.getAttribute('data-theme') === 'dark';
+  h.setAttribute('data-theme', dark ? 'light' : 'dark');
+  document.getElementById('theme-icon').textContent = dark ? '🌙' : '☀️';
+  document.getElementById('theme-label').textContent = dark ? 'Тёмная тема' : 'Светлая тема';
+}
 
-      const accessToken = generateToken();
+async function doLogout(){
+  await supabaseClient.auth.signOut();
+  window.location.href = 'login.html';
+}
 
-      const { error } = await supabaseClient
-        .from('access_grants')
-        .insert({
-          master_id: currentUser.id,
-          client_name: clientName,
-          client_email: clientEmail,
-          access_token: accessToken,
-          permissions: permissions,
-          max_opens: 6,
-          opens_count: 0
-        });
+// ── CLIENT LINKS LOGIC ──
 
-      if (error) {
-        alert('❌ Ошибка: ' + error.message);
-        console.error(error);
-        return;
-      }
+function generateToken(){
+  return 'token_' + Math.random().toString(36).substr(2, 32);
+}
 
-      alert('✅ Ссылка создана успешно!');
-      document.getElementById('createLinkForm').reset();
-      loadAccessGrants();
-    });
+async function createClientLink(){
+  if(!userId) return;
+  const name = document.getElementById('inp-client-name').value.trim();
+  const email = document.getElementById('inp-client-email').value.trim() || null;
+  
+  if(!name){
+    alert('Укажите имя клиента');
+    return;
+  }
 
-    // ===== ПРИ ЗАГРУЗКЕ СТРАНИЦЫ =====
-    window.addEventListener('load', checkAuth);
-  </script>
+  const perms = {};
+  document.querySelectorAll('input[name="perm"]:checked').forEach(cb => {
+    perms[cb.value] = true;
+  });
+
+  if(!Object.keys(perms).length){
+    alert('Выберите хотя бы одно право доступа');
+    return;
+  }
+
+  const token = generateToken();
+  const { error } = await supabaseClient.from('access_grants').insert({
+    master_id: userId,
+    client_name: name,
+    client_email: email,
+    access_token: token,
+    permissions: perms,
+    max_opens: 6,
+    opens_count: 0
+  });
+
+  if(error){
+    alert('Ошибка: ' + error.message);
+    return;
+  }
+
+  alert('✓ Ссылка создана!');
+  document.getElementById('inp-client-name').value = '';
+  document.getElementById('inp-client-email').value = '';
+  loadClientLinks();
+}
+
+async function loadClientLinks(){
+  if(!userId) return;
+  const { data: links } = await supabaseClient
+    .from('access_grants')
+    .select('*')
+    .eq('master_id', userId)
+    .order('created_at', { ascending: false });
+
+  const container = document.getElementById('client-links-list');
+  container.innerHTML = '';
+
+  if(!links || !links.length){
+    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔗</div><div class="empty-state-text">Ссылок для клиентов ещё нет</div></div>';
+    return;
+  }
+
+  links.forEach(link => {
+    const isExhausted = link.opens_count >= link.max_opens;
+    const progress = (link.opens_count / link.max_opens) * 100;
+    const url = window.location.origin + window.location.pathname.replace('cabinet.html', '') + 'view.html?token=' + link.access_token;
+    const createdAt = new Date(link.created_at).toLocaleDateString('ru-RU');
+
+    const el = document.createElement('div');
+    el.className = 'client-link-item';
+    el.innerHTML = `
+      <div class="client-link-header">
+        <div>
+          <div class="client-link-name">${link.client_name}</div>
+          ${link.client_email ? `<div class="client-link-email">📧 ${link.client_email}</div>` : ''}
+        </div>
+        <span class="client-link-status ${isExhausted ? 'exhausted' : 'active'}">
+          ${isExhausted ? '❌ Исчерпана' : '✅ Активна'}
+        </span>
+      </div>
+      <div class="client-link-stats">
+        <div class="client-link-stat">
+          <div class="client-link-stat-label">Открытий осталось</div>
+          <div class="client-link-stat-value">${Math.max(0, link.max_opens - link.opens_count)} / ${link.max_opens}</div>
+        </div>
+        <div class="client-link-stat">
+          <div class="client-link-stat-label">Использовано</div>
+          <div class="client-link-stat-value">${link.opens_count} раз</div>
+        </div>
+      </div>
+      <div class="client-link-progress">
+        <div class="client-link-progress-bar">
+          <div class="client-link-progress-fill" style="width: ${Math.min(progress, 100)}%"></div>
+        </div>
+      </div>
+      <div class="client-link-url" onclick="copyUrl(this)">${url}</div>
+      <div class="client-link-actions">
+        <button class="client-link-btn client-link-btn-copy" onclick="copyUrlFromBtn('${url}')">📋 Копировать</button>
+        <button class="client-link-btn client-link-btn-delete" onclick="deleteLink('${link.id}')">🗑️ Удалить</button>
+      </div>
+    `;
+    container.appendChild(el);
+  });
+}
+
+function copyUrl(el){
+  const text = el.textContent;
+  navigator.clipboard.writeText(text).catch(() => {
+    const a = document.createElement('textarea');
+    a.value = text;
+    document.body.appendChild(a);
+    a.select();
+    document.execCommand('copy');
+    document.body.removeChild(a);
+  });
+  alert('✓ Скопировано!');
+}
+
+function copyUrlFromBtn(url){
+  navigator.clipboard.writeText(url).catch(() => {
+    const a = document.createElement('textarea');
+    a.value = url;
+    document.body.appendChild(a);
+    a.select();
+    document.execCommand('copy');
+    document.body.removeChild(a);
+  });
+  alert('✓ Скопировано!');
+}
+
+async function deleteLink(id){
+  if(!confirm('Удалить эту ссылку? Клиент больше не сможет её использовать.')) return;
+  const { error } = await supabaseClient.from('access_grants').delete().eq('id', id);
+  if(!error){
+    alert('✓ Удалено!');
+    loadClientLinks();
+  } else {
+    alert('Ошибка: ' + error.message);
+  }
+}
+
+init();
+</script>
 </body>
 </html>
