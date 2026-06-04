@@ -13,120 +13,206 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f5f5f5;
+      background: #f0ede6;
       color: #333;
       line-height: 1.6;
-    }
-
-    .header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      min-height: 100vh;
     }
 
-    .header h1 {
-      font-size: 28px;
+    /* === БОКОВАЯ ПАНЕЛЬ === */
+    .sidebar {
+      width: 250px;
+      background: #2a2a2a;
+      color: white;
+      padding: 30px 20px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar-title {
+      font-size: 16px;
       font-weight: 600;
+      margin-bottom: 5px;
+      color: #c9a961;
     }
 
-    .header-user {
+    .sidebar-subtitle {
+      font-size: 10px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 30px;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    .sidebar-nav li {
+      margin-bottom: 15px;
+    }
+
+    .sidebar-nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 14px;
       display: flex;
       align-items: center;
-      gap: 15px;
-    }
-
-    .logout-btn {
-      background: rgba(255,255,255,0.2);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.3);
-      padding: 8px 16px;
+      gap: 10px;
+      padding: 10px;
       border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
       transition: all 0.3s;
     }
 
+    .sidebar-nav a:hover {
+      color: #c9a961;
+      background: rgba(201, 169, 97, 0.1);
+    }
+
+    .sidebar-nav a.active {
+      color: #c9a961;
+      background: rgba(201, 169, 97, 0.2);
+    }
+
+    .sidebar-user {
+      border-top: 1px solid #444;
+      padding-top: 20px;
+      margin-top: auto;
+      text-align: center;
+    }
+
+    .user-avatar {
+      width: 50px;
+      height: 50px;
+      background: #c9a961;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #2a2a2a;
+      margin: 0 auto 15px;
+      font-size: 20px;
+    }
+
+    .user-email {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 15px;
+    }
+
+    .logout-btn {
+      background: transparent;
+      color: #c9a961;
+      border: 1px solid #c9a961;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.3s;
+      width: 100%;
+    }
+
     .logout-btn:hover {
-      background: rgba(255,255,255,0.3);
+      background: #c9a961;
+      color: #2a2a2a;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 30px 20px;
+    /* === ОСНОВНОЙ КОНТЕНТ === */
+    .main-content {
+      margin-left: 250px;
+      flex: 1;
+      padding: 40px;
     }
 
+    .header {
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .header h1 .gold {
+      color: #c9a961;
+    }
+
+    .header-subtitle {
+      color: #999;
+      font-size: 14px;
+    }
+
+    /* === СЕКЦИИ === */
     .cabinet-section {
       background: white;
       border-radius: 12px;
-      padding: 30px;
-      margin-bottom: 30px;
+      padding: 40px;
+      margin-bottom: 40px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
     .cabinet-section h2 {
-      font-size: 22px;
-      margin-bottom: 20px;
+      font-size: 18px;
       color: #333;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #999;
     }
 
-    /* === СТИЛИ ДЛЯ СОЗДАНИЯ ССЫЛКИ === */
-    .create-link {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
+    /* === ФОРМА === */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
     }
 
-    .create-link h2 {
-      color: white;
+    .form-row.full {
+      grid-template-columns: 1fr;
     }
 
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 0;
     }
 
     .form-group label {
       display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.95);
+      margin-bottom: 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #999;
     }
 
     .form-group input[type="text"],
     .form-group input[type="email"] {
       width: 100%;
       padding: 12px;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
       font-size: 14px;
-      background: rgba(255,255,255,0.1);
-      color: white;
-    }
-
-    .form-group input[type="text"]::placeholder,
-    .form-group input[type="email"]::placeholder {
-      color: rgba(255,255,255,0.6);
+      background: #f9f9f9;
     }
 
     .form-group input[type="text"]:focus,
     .form-group input[type="email"]:focus {
       outline: none;
-      background: rgba(255,255,255,0.15);
-      border-color: rgba(255,255,255,0.4);
+      background: white;
+      border-color: #c9a961;
     }
 
     .checkbox-group {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
     }
 
     .checkbox-group label {
@@ -134,54 +220,48 @@
       align-items: center;
       gap: 10px;
       font-weight: normal;
-      color: rgba(255,255,255,0.95);
+      color: #666;
       cursor: pointer;
+      font-size: 14px;
+      margin: 0;
     }
 
     .checkbox-group input[type="checkbox"] {
       cursor: pointer;
       width: 18px;
       height: 18px;
+      accent-color: #c9a961;
     }
 
     .form-info {
-      font-size: 12px;
-      color: rgba(255,255,255,0.8);
-      margin-top: 15px;
-      margin-bottom: 20px;
-      padding: 12px;
-      background: rgba(0,0,0,0.1);
+      background: #f5f5f5;
+      padding: 20px;
       border-radius: 6px;
-      border-left: 3px solid rgba(255,255,255,0.3);
+      margin-bottom: 30px;
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
     }
 
-    .btn-primary {
-      background: white;
-      color: #667eea;
-      padding: 12px 30px;
+    .btn-gold {
+      background: #c9a961;
+      color: white;
+      padding: 12px 40px;
       border: none;
-      border-radius: 6px;
+      border-radius: 4px;
       font-weight: 600;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       transition: all 0.3s;
-      width: 100%;
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    .btn-gold:hover {
+      background: #b89651;
     }
 
-    .btn-primary:active {
-      transform: translateY(0);
-    }
-
-    /* === СТИЛИ ДЛЯ СПИСКА ССЫЛОК === */
-    .active-links {
-      margin-top: 40px;
-    }
-
+    /* === СПИСОК ССЫЛОК === */
     .links-container {
       display: grid;
       grid-template-columns: 1fr;
@@ -189,45 +269,66 @@
     }
 
     .link-card {
-      background: #f8f9fa;
-      border: 2px solid #e0e0e0;
-      border-radius: 12px;
-      padding: 20px;
+      background: #f5f3f0;
+      border: 1px solid #e0ddd8;
+      border-radius: 8px;
+      padding: 30px;
       transition: all 0.3s;
     }
 
     .link-card:hover {
-      border-color: #667eea;
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+      border-color: #c9a961;
+      box-shadow: 0 4px 12px rgba(201, 169, 97, 0.1);
     }
 
-    .link-card-header {
+    .link-card-top {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 15px;
+      margin-bottom: 25px;
     }
 
-    .link-card-info h3 {
+    .link-card-name {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .link-avatar {
+      width: 50px;
+      height: 50px;
+      background: #c9a961;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .link-info h3 {
       font-size: 16px;
       font-weight: 600;
       color: #333;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
-    .link-card-info p {
+    .link-info p {
       font-size: 12px;
-      color: #666;
+      color: #999;
       margin: 0;
     }
 
-    .link-card-status {
+    .link-status {
       display: inline-block;
       padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 12px;
+      border-radius: 4px;
+      font-size: 11px;
       font-weight: 600;
-      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .status-active {
@@ -240,14 +341,13 @@
       color: #721c24;
     }
 
-    .link-card-stats {
+    .link-stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 15px;
-      padding: 12px;
-      background: white;
-      border-radius: 8px;
+      gap: 30px;
+      margin-bottom: 25px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid #e0ddd8;
     }
 
     .stat {
@@ -255,105 +355,105 @@
     }
 
     .stat-label {
-      color: #666;
-      font-weight: 500;
-      margin-bottom: 4px;
+      color: #999;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
     }
 
     .stat-value {
       color: #333;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 18px;
     }
 
     .link-progress {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     .progress-label {
       font-size: 12px;
       color: #666;
-      margin-bottom: 6px;
-      display: flex;
-      justify-content: space-between;
+      margin-bottom: 8px;
     }
 
     .progress-bar {
       width: 100%;
-      height: 8px;
-      background: #e0e0e0;
-      border-radius: 4px;
+      height: 6px;
+      background: #e0ddd8;
+      border-radius: 3px;
       overflow: hidden;
     }
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      background: #c9a961;
       transition: width 0.3s;
     }
 
     .link-url {
       background: white;
       padding: 12px;
-      border-radius: 6px;
-      margin-bottom: 15px;
+      border-radius: 4px;
+      margin-bottom: 20px;
       word-break: break-all;
-      font-size: 12px;
+      font-size: 11px;
       font-family: 'Monaco', 'Courier New', monospace;
-      border: 1px solid #e0e0e0;
+      border: 1px solid #e0ddd8;
       cursor: pointer;
-      transition: all 0.2s;
-      color: #333;
-    }
-
-    .link-url:hover {
-      background: #f0f0f0;
-      border-color: #667eea;
+      color: #666;
     }
 
     .link-actions {
       display: flex;
-      gap: 8px;
+      gap: 10px;
     }
 
     .btn-small {
       flex: 1;
-      padding: 8px 12px;
-      border: none;
+      padding: 10px 12px;
+      border: 1px solid #e0ddd8;
       border-radius: 4px;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       cursor: pointer;
       transition: all 0.2s;
+      background: white;
+      color: #333;
     }
 
     .btn-copy {
-      background: #667eea;
-      color: white;
+      border-color: #c9a961;
+      color: #c9a961;
     }
 
     .btn-copy:hover {
-      background: #5568d3;
+      background: #c9a961;
+      color: white;
     }
 
     .btn-revoke {
-      background: #f8d7da;
-      color: #721c24;
+      border-color: #d9534f;
+      color: #d9534f;
     }
 
     .btn-revoke:hover {
-      background: #f5c6cb;
+      background: #d9534f;
+      color: white;
     }
 
     .empty-state {
       text-align: center;
-      padding: 40px 20px;
+      padding: 60px 20px;
       color: #999;
     }
 
     .empty-state-icon {
       font-size: 48px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     .empty-state p {
@@ -363,110 +463,139 @@
 
     .loading {
       text-align: center;
-      padding: 20px;
-      color: #666;
+      padding: 40px;
+      color: #999;
+    }
+
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 200px;
+        padding: 20px 15px;
+      }
+
+      .main-content {
+        margin-left: 200px;
+        padding: 30px 20px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
     }
 
     @media (max-width: 768px) {
-      .header-content {
-        flex-direction: column;
-        gap: 15px;
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 20px;
       }
 
-      .container {
-        padding: 15px 10px;
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
       }
 
       .cabinet-section {
         padding: 20px;
       }
 
-      .link-card-stats {
+      .link-stats {
         grid-template-columns: 1fr;
+        gap: 15px;
       }
 
-      .btn-primary {
-        padding: 12px 20px;
-        font-size: 14px;
+      .link-actions {
+        flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
-  <!-- ЗАГОЛОВОК -->
-  <div class="header">
-    <div class="header-content">
-      <div>
-        <h1>🌟 Энерго Компас</h1>
-        <p style="margin: 0; font-size: 14px; opacity: 0.9;">Кабинет мастера</p>
-      </div>
-      <div class="header-user">
-        <div id="userEmail" style="text-align: right;">
-          <p style="margin: 0; font-size: 12px; opacity: 0.8;">Вы вошли как</p>
-          <p style="margin: 0; font-weight: 600;" id="emailDisplay">Загружаем...</p>
-        </div>
-        <button class="logout-btn" onclick="logout()">Выход</button>
-      </div>
+  <!-- БОКОВАЯ ПАНЕЛЬ -->
+  <aside class="sidebar">
+    <div class="sidebar-title">Энергетический<br><span class="sidebar-subtitle" style="color: #c9a961; text-transform: none;">Календарь</span></div>
+    <p class="sidebar-subtitle">Кабинет мастера</p>
+
+    <nav class="sidebar-nav">
+      <li><a href="#" class="active">◇ Обзор</a></li>
+      <li><a href="#">◇ Мои ссылки</a></li>
+      <li><a href="#">◇ Профиль</a></li>
+      <li><a href="#">◇ Психоанализ</a></li>
+    </nav>
+
+    <div class="sidebar-user">
+      <div id="userInitial" class="user-avatar">К</div>
+      <div id="userEmail" class="user-email">загружаем...</div>
+      <button class="logout-btn" onclick="logout()">Выход</button>
     </div>
-  </div>
+  </aside>
 
   <!-- ОСНОВНОЙ КОНТЕНТ -->
-  <div class="container">
+  <main class="main-content">
     
+    <!-- ЗАГОЛОВОК -->
+    <div class="header">
+      <h1>Добро пожаловать, <span class="gold" id="userName">Мастер</span></h1>
+      <p class="header-subtitle">Ваш кабинет мастера - Digital Consulting</p>
+    </div>
+
     <!-- РАЗДЕЛ: СОЗДАНИЕ ССЫЛКИ ДЛЯ КЛИЕНТА -->
-    <div class="cabinet-section create-link">
+    <div class="cabinet-section">
       <h2>🔗 Создать ссылку для клиента</h2>
       
       <form id="createLinkForm">
-        <div class="form-group">
-          <label for="clientName">Имя клиента:</label>
-          <input type="text" id="clientName" placeholder="Например: Анна" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="clientEmail">Email клиента (опционально):</label>
-          <input type="email" id="clientEmail" placeholder="anna@mail.com">
-        </div>
-        
-        <div class="form-group">
-          <label>Права доступа:</label>
-          <div class="checkbox-group">
-            <label>
-              <input type="checkbox" name="permissions" value="calendar" checked>
-              📅 Календарь (энергетические расчёты)
-            </label>
-            <label>
-              <input type="checkbox" name="permissions" value="psycho" checked>
-              🧠 Психоанализ личности
-            </label>
-            <label>
-              <input type="checkbox" name="permissions" value="chat">
-              💬 Чат консультаций
-            </label>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="clientName">Имя клиента</label>
+            <input type="text" id="clientName" placeholder="Анна" required>
+          </div>
+          <div class="form-group">
+            <label for="clientEmail">Email клиента</label>
+            <input type="email" id="clientEmail" placeholder="anna@mail.com">
           </div>
         </div>
-        
+
+        <div class="form-row full">
+          <div class="form-group">
+            <label>Права доступа</label>
+            <div class="checkbox-group">
+              <label>
+                <input type="checkbox" name="permissions" value="calendar" checked>
+                📅 Календарь (энергетические расчёты)
+              </label>
+              <label>
+                <input type="checkbox" name="permissions" value="psycho" checked>
+                🧠 Психоанализ личности
+              </label>
+              <label>
+                <input type="checkbox" name="permissions" value="chat">
+                💬 Чат консультаций
+              </label>
+            </div>
+          </div>
+        </div>
+
         <div class="form-info">
           💡 <strong>Как это работает:</strong> Ссылка работает ровно 6 открытий без ограничения по времени.
           Клиент может открывать её в разные дни, но после 6 открытий потребуется новая ссылка от вас.
-          Это защищает от распространения ссылки.
+          Это защищает от распространения ссылки среди других мастеров.
         </div>
-        
-        <button type="submit" class="btn-primary">
-          ✨ Создать ссылку
-        </button>
+
+        <button type="submit" class="btn-gold">Создать ссылку</button>
       </form>
     </div>
 
     <!-- РАЗДЕЛ: СПИСОК АКТИВНЫХ ССЫЛОК -->
-    <div class="cabinet-section active-links">
+    <div class="cabinet-section">
       <h2>📋 Ваши ссылки для клиентов</h2>
       <div id="linksList" class="links-container">
         <div class="loading">Загружаем ваши ссылки...</div>
       </div>
     </div>
 
-  </div>
+  </main>
 
   <!-- Подключаем Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/+esm"></script>
@@ -491,7 +620,22 @@
       }
 
       currentUser = session.user;
-      document.getElementById('emailDisplay').textContent = currentUser.email;
+      
+      // Получаем имя из профиля
+      const { data: profile } = await supabaseClient
+        .from('profiles')
+        .select('name')
+        .eq('id', currentUser.id)
+        .single();
+
+      const userName = profile?.name || currentUser.email?.split('@')[0] || 'Мастер';
+      document.getElementById('userName').textContent = userName;
+      document.getElementById('userEmail').textContent = currentUser.email;
+      
+      // Инициалы для аватара
+      const initials = userName.substring(0, 1).toUpperCase();
+      document.getElementById('userInitial').textContent = initials;
+
       loadAccessGrants();
     }
 
@@ -524,7 +668,7 @@
           <div class="empty-state">
             <div class="empty-state-icon">🔗</div>
             <p>Вы ещё не создали ссылки для клиентов</p>
-            <p style="font-size: 12px; margin-top: 8px;">Заполните форму выше и создайте первую ссылку</p>
+            <p style="font-size: 12px; margin-top: 8px; color: #999;">Заполните форму выше и создайте первую ссылку</p>
           </div>
         `;
         return;
@@ -549,18 +693,24 @@
       const fullUrl = `${window.location.origin}/view.html?token=${grant.access_token}`;
       const createdAt = new Date(grant.created_at).toLocaleDateString('ru-RU');
       const remaining = Math.max(0, grant.max_opens - grant.opens_count);
+      
+      // Инициалы для аватара
+      const initials = (grant.client_name || 'К').substring(0, 1).toUpperCase();
 
       card.innerHTML = `
-        <div class="link-card-header">
-          <div class="link-card-info">
-            <h3>${grant.client_name || 'Безымянный клиент'}</h3>
-            ${grant.client_email ? `<p>📧 ${grant.client_email}</p>` : ''}
-            <p style="color: #999; font-size: 11px;">Создана: ${createdAt}</p>
+        <div class="link-card-top">
+          <div class="link-card-name">
+            <div class="link-avatar">${initials}</div>
+            <div class="link-info">
+              <h3>${grant.client_name || 'Безымянный клиент'}</h3>
+              ${grant.client_email ? `<p>📧 ${grant.client_email}</p>` : ''}
+              <p>Создана: ${createdAt}</p>
+            </div>
           </div>
-          <div class="link-card-status ${statusClass}">${statusText}</div>
+          <div class="link-status ${statusClass}">${statusText}</div>
         </div>
 
-        <div class="link-card-stats">
+        <div class="link-stats">
           <div class="stat">
             <div class="stat-label">Осталось открытий</div>
             <div class="stat-value">${remaining} / ${grant.max_opens}</div>
@@ -572,10 +722,7 @@
         </div>
 
         <div class="link-progress">
-          <div class="progress-label">
-            <span>Прогресс использования</span>
-            <span>${Math.round(progress)}%</span>
-          </div>
+          <div class="progress-label">Прогресс использования: ${Math.round(progress)}%</div>
           <div class="progress-bar">
             <div class="progress-fill" style="width: ${Math.min(progress, 100)}%"></div>
           </div>
@@ -606,7 +753,7 @@
         alert('✅ Ссылка скопирована в буфер обмена!');
       }).catch(err => {
         console.error('Ошибка копирования:', err);
-        alert('❌ Ошибка копирования: ' + err);
+        alert('❌ Ошибка копирования');
       });
     }
 
