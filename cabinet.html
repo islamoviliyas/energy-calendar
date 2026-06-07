@@ -78,6 +78,10 @@ body{
 .page-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:400;}
 .page-title span{color:var(--gold);}
 .theme-btn{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:40px;padding:7px 14px;cursor:pointer;font-size:11px;color:var(--text2);font-family:'Inter',sans-serif;transition:all var(--transition);user-select:none;}
+.header-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.lang-switch{display:flex;align-items:center;gap:2px;background:var(--bg3);border:1px solid var(--border);border-radius:40px;padding:3px;}
+.lang-btn{background:transparent;border:none;border-radius:30px;padding:4px 10px;font-size:11px;font-weight:500;color:var(--text3);cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.2s;letter-spacing:0.5px;}
+.lang-btn.active{background:var(--gold);color:#fff;}
 .theme-btn:hover{border-color:var(--gold);color:var(--gold);}
 
 /* ── Tabs ── */
@@ -281,23 +285,23 @@ body{
 <div class="sidebar">
   <div class="sidebar-logo">
     <h2>Энергетический <span>Календарь</span></h2>
-    <p>Кабинет мастера</p>
+    <p data-i18n="sidebar_sub">Кабинет мастера</p>
   </div>
   <nav class="sidebar-nav">
     <button class="nav-item active" onclick="showTab('overview')">
-      <span class="nav-icon">◈</span> Обзор
+      <span class="nav-icon">◈</span> <span data-i18n="nav_overview">Обзор</span>
     </button>
     <button class="nav-item" onclick="showTab('links')">
-      <span class="nav-icon">🔗</span> Ссылки клиентов
+      <span class="nav-icon">🔗</span> <span data-i18n="nav_links">Ссылки клиентов</span>
     </button>
     <button class="nav-item" onclick="showTab('profile')">
-      <span class="nav-icon">○</span> Профиль
+      <span class="nav-icon">○</span> <span data-i18n="nav_profile">Профиль</span>
     </button>
     <button class="nav-item" onclick="window.open('personal-energy-calendar.html','_blank')">
-      <span class="nav-icon">📅</span> Открыть календарь
+      <span class="nav-icon">📅</span> <span data-i18n="nav_calendar">Открыть календарь</span>
     </button>
     <button class="nav-item" onclick="window.open('psycho-page.html?master='+userId,'_blank')">
-      <span class="nav-icon">🧠</span> Психоанализ
+      <span class="nav-icon">🧠</span> <span data-i18n="nav_psycho">Психоанализ</span>
     </button>
   </nav>
   <div>
@@ -309,7 +313,7 @@ body{
       </div>
     </div>
     <div style="padding:0 12px 16px;">
-      <button class="btn-logout" onclick="doLogout()">Выйти</button>
+      <button class="btn-logout" onclick="doLogout()" data-i18n="nav_logout">Выйти</button>
     </div>
   </div>
 </div>
@@ -332,54 +336,61 @@ body{
 
       <div class="page-header">
         <div>
-          <h1 class="page-title">Добро пожаловать, <span id="welcome-name">—</span></h1>
-          <p style="font-size:13px;color:var(--text3);margin-top:4px;">Ваш кабинет мастера · Digital Consulting</p>
+          <h1 class="page-title"><span data-i18n="welcome">Добро пожаловать,</span> <span id="welcome-name">—</span></h1>
+          <p style="font-size:13px;color:var(--text3);margin-top:4px;" data-i18n="header_subtitle">Ваш кабинет мастера · Digital Consulting</p>
         </div>
-        <button class="theme-btn" onclick="toggleTheme()">
-          <span id="theme-icon">🌙</span>
-          <span id="theme-label">Тёмная тема</span>
-        </button>
+        <div class="header-controls">
+          <div class="lang-switch">
+            <button class="lang-btn active" id="lang-ru" onclick="setLang('ru')">RU</button>
+            <button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" id="lang-kz" onclick="setLang('kz')">ҚЗ</button>
+          </div>
+          <button class="theme-btn" onclick="toggleTheme()">
+            <span id="theme-icon">🌙</span>
+            <span id="theme-label" data-i18n="theme_dark">Тёмная тема</span>
+          </button>
+        </div>
       </div>
 
       <!-- ======= OVERVIEW TAB ======= -->
       <div id="tab-overview" class="tab-content active">
         <div class="stats-row">
           <div class="stat-card highlight">
-            <div class="stat-label">Тариф</div>
+            <div class="stat-label" data-i18n="stat_plan">Тариф</div>
             <div class="stat-num" id="stat-plan-icon">—</div>
             <div class="stat-sub" id="stat-plan-name">—</div>
           </div>
           <div class="stat-card">
-            <div class="stat-label">Психоанализов</div>
+            <div class="stat-label" data-i18n="stat_psycho_label">Психоанализов</div>
             <div class="stat-num" id="stat-psycho">—</div>
-            <div class="stat-sub" id="stat-psycho-sub">использовано</div>
+            <div class="stat-sub" id="stat-psycho-sub" data-i18n="stat_used">использовано</div>
           </div>
           <div class="stat-card">
-            <div class="stat-label">Статус</div>
+            <div class="stat-label" data-i18n="stat_status">Статус</div>
             <div style="margin-top:10px;">
-              <span class="badge badge-active" id="stat-status">● Активен</span>
+              <span class="badge badge-active" id="stat-status" data-i18n="stat_active">● Активен</span>
             </div>
           </div>
           <div class="stat-card">
-            <div class="stat-label">Дней календаря</div>
+            <div class="stat-label" data-i18n="stat_calendar">Дней календаря</div>
             <div class="stat-num">∞</div>
-            <div class="stat-sub">безлимит</div>
+            <div class="stat-sub" data-i18n="stat_unlimited">безлимит</div>
           </div>
         </div>
 
-        <div class="section-label">Продукты</div>
+        <div class="section-label" data-i18n="section_products">Продукты</div>
         <div class="products-grid">
           <a href="personal-energy-calendar.html" target="_blank" class="product-card">
             <div class="product-icon">📅</div>
-            <div class="product-name">Энергетический Календарь</div>
-            <p class="product-desc">Узнайте энергию дня, месяца и года. Рекомендации, мантры и утренний ритуал на каждый день.</p>
-            <div class="product-action">Открыть календарь →</div>
+            <div class="product-name" data-i18n="cal_name">Энергетический Календарь</div>
+            <p class="product-desc" data-i18n="cal_desc">Узнайте энергию дня, месяца и года. Рекомендации, мантры и утренний ритуал на каждый день.</p>
+            <div class="product-action" data-i18n="cal_action">Открыть календарь →</div>
           </a>
           <div class="product-card" id="psycho-card" style="cursor:pointer;" onclick="openPsycho()">
             <div class="product-icon">🧠</div>
-            <div class="product-name">Психоанализ личности</div>
-            <p class="product-desc">Глубокий анализ числа личности, миссии, матрицы чисел, профессиональной ориентации и совместимости.</p>
-            <div class="product-action" id="psycho-action">Открыть анализ →</div>
+            <div class="product-name" data-i18n="psycho_name">Психоанализ личности</div>
+            <p class="product-desc" data-i18n="psycho_desc">Глубокий анализ числа личности, миссии, матрицы чисел, профессиональной ориентации и совместимости.</p>
+            <div class="product-action" id="psycho-action" data-i18n="psycho_action">Открыть анализ →</div>
             <div class="psycho-limit-bar" id="psycho-limit-bar" style="display:none;">
               <div class="plb-text" id="psycho-limit-text">Использовано 0 из 5</div>
               <div class="plb-track"><div class="plb-fill" id="psycho-limit-fill" style="width:0%"></div></div>
@@ -388,7 +399,7 @@ body{
         </div>
 
         <div class="agreement-box">
-          <strong>Правила использования:</strong> Ваша лицензия предназначена исключительно для личного использования и работы с вашими клиентами через персональную ссылку. Передача доступа третьим лицам нарушает условия соглашения. По вопросам: <strong style="color:var(--gold)">Digital Consulting</strong>
+          <strong data-i18n="agreement_title">Правила использования:</strong> <span data-i18n="agreement_text">Ваша лицензия предназначена исключительно для личного использования и работы с вашими клиентами через персональную ссылку. Передача доступа третьим лицам нарушает условия соглашения. По вопросам:</span> <strong style="color:var(--gold)">Digital Consulting</strong>
         </div>
       </div>
       <!-- ======= /OVERVIEW TAB ======= -->
@@ -396,30 +407,30 @@ body{
       <!-- ======= CLIENT LINKS TAB ======= -->
       <div id="tab-links" class="tab-content">
         <div class="profile-card">
-          <div class="profile-card-title">Создать новую ссылку для клиента</div>
+          <div class="profile-card-title" data-i18n="links_create">Создать новую ссылку для клиента</div>
           <div class="form-grid">
             <div class="form-group">
-              <label class="form-label">Имя клиента</label>
+              <label class="form-label" data-i18n="links_client_name">Имя клиента</label>
               <input class="form-input" id="inp-client-name" type="text" placeholder="Анна">
             </div>
           </div>
           <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;">
             <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:400;color:var(--text);">
-              <input type="checkbox" name="perm" value="calendar" checked style="cursor:pointer;"> 📅 Календарь
+              <input type="checkbox" name="perm" value="calendar" checked style="cursor:pointer;"> <span data-i18n="links_calendar">📅 Календарь</span>
             </label>
           </div>
           <div style="font-size:12px;color:var(--text3);line-height:1.6;margin:16px 0;padding:12px;background:var(--bg3);border-radius:8px;">
-            💡 <strong style="color:var(--text);">Как это работает:</strong> Ссылка будет работать ровно <strong>6 открытий</strong> без ограничения по времени. Клиент сможет открывать её в разные дни, но после 6 открытий потребуется новая ссылка. Это защищает от распространения ссылки среди других мастеров.
+            💡 <strong style="color:var(--text);" data-i18n="links_how">Как это работает:</strong> <span data-i18n="links_how_text">Ссылка будет работать ровно 6 открытий без ограничения по времени. Клиент сможет открывать её в разные дни, но после 6 открытий потребуется новая ссылка. Это защищает от распространения ссылки среди других мастеров.</span>
           </div>
-          <button class="btn-save" onclick="createClientLink()" style="width:auto;">Создать ссылку</button>
+          <button class="btn-save" onclick="createClientLink()" style="width:auto;" data-i18n="links_create_btn">Создать ссылку</button>
         </div>
 
         <div class="client-links-section">
-          <div class="section-label">Активные ссылки</div>
+          <div class="section-label" data-i18n="links_active">Активные ссылки</div>
           <div class="client-links-grid" id="client-links-list">
             <div class="empty-state">
               <div class="empty-state-icon">🔗</div>
-              <div class="empty-state-text">Ссылок для клиентов ещё нет</div>
+              <div class="empty-state-text" data-i18n="links_empty">Ссылок для клиентов ещё нет</div>
             </div>
           </div>
         </div>
@@ -429,28 +440,28 @@ body{
       <!-- ======= PROFILE TAB ======= -->
       <div id="tab-profile" class="tab-content">
         <div class="profile-card">
-          <div class="profile-card-title">Мой профиль — что видят клиенты</div>
+          <div class="profile-card-title" data-i18n="profile_title">Мой профиль — что видят клиенты</div>
           <div class="profile-avatar-row">
             <div class="profile-avatar" id="prof-avatar">М</div>
             <div class="profile-avatar-info">
               <h3 id="prof-name-display">—</h3>
               <p id="prof-spec-display">—</p>
             </div>
-            <span class="badge badge-active" style="margin-left:auto;">● Активен</span>
+            <span class="badge badge-active" style="margin-left:auto;" data-i18n="stat_active">● Активен</span>
           </div>
           <div class="form-grid">
             <div class="form-group">
-              <label class="form-label">Имя (для клиентов)</label>
+              <label class="form-label" data-i18n="profile_name">Имя (для клиентов)</label>
               <input class="form-input" id="inp-name" type="text" placeholder="Имя и фамилия" oninput="livePreview()">
             </div>
             <div class="form-group">
-              <label class="form-label">Специализация</label>
+              <label class="form-label" data-i18n="profile_spec">Специализация</label>
               <input class="form-input" id="inp-spec" type="text" placeholder="Мастер цифровой психологии" oninput="livePreview()">
             </div>
             <div class="form-group">
-              <label class="form-label">WhatsApp <span style="font-size:10px;color:var(--text3);text-transform:none;letter-spacing:0;">(только цифры со знаком +)</span></label>
+              <label class="form-label">WhatsApp <span style="font-size:10px;color:var(--text3);text-transform:none;letter-spacing:0;" data-i18n="profile_wa_hint">(только цифры со знаком +)</span></label>
               <input class="form-input" id="inp-wa" type="text" placeholder="+7 700 000 00 00" oninput="livePreview()">
-              <div id="wa-hint" style="font-size:11px;color:var(--text3);display:none;">Пример: +77001234567 или +996700123456</div>
+              <div id="wa-hint" style="font-size:11px;color:var(--text3);display:none;" data-i18n="profile_wa_example">Пример: +77001234567 или +996700123456</div>
             </div>
             <div class="form-group">
               <label class="form-label">Instagram</label>
@@ -458,11 +469,11 @@ body{
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-            <button class="btn-save" onclick="saveProfile()">Сохранить изменения</button>
-            <span class="save-ok" id="save-ok">✓ Сохранено!</span>
+            <button class="btn-save" onclick="saveProfile()" data-i18n="profile_save">Сохранить изменения</button>
+            <span class="save-ok" id="save-ok" data-i18n="profile_saved">✓ Сохранено!</span>
           </div>
           <div class="preview-box">
-            <div class="preview-label">Предпросмотр — так вас видят клиенты</div>
+            <div class="preview-label" data-i18n="profile_preview">Предпросмотр — так вас видят клиенты</div>
             <div class="preview-inner">
               <div class="preview-av" id="prev-av">М</div>
               <div>
@@ -474,7 +485,7 @@ body{
             <div id="prev-wa-btn" style="display:none;margin-top:12px;">
               <a id="prev-wa-link" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;text-decoration:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:500;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                Написать в WhatsApp
+                <span data-i18n="wa_write">Написать в WhatsApp</span>
               </a>
             </div>
           </div>
@@ -489,19 +500,19 @@ body{
   <nav class="mob-nav">
     <div class="mob-nav-inner">
       <button class="mob-nav-btn active" id="mob-btn-overview" onclick="showTab('overview');setMobActive('overview')">
-        <span class="mob-icon">🏠</span>Обзор
+        <span class="mob-icon">🏠</span><span data-i18n="mob_overview">Обзор</span>
       </button>
       <button class="mob-nav-btn" id="mob-btn-links" onclick="showTab('links');setMobActive('links')">
-        <span class="mob-icon">🔗</span>Ссылки
+        <span class="mob-icon">🔗</span><span data-i18n="mob_links">Ссылки</span>
       </button>
       <button class="mob-nav-btn" id="mob-btn-profile" onclick="showTab('profile');setMobActive('profile')">
-        <span class="mob-icon">👤</span>Профиль
+        <span class="mob-icon">👤</span><span data-i18n="mob_profile">Профиль</span>
       </button>
       <button class="mob-nav-btn" onclick="openPsycho()">
-        <span class="mob-icon">🧠</span>Анализ
+        <span class="mob-icon">🧠</span><span data-i18n="mob_analysis">Анализ</span>
       </button>
       <button class="mob-nav-btn" onclick="doLogout()">
-        <span class="mob-icon">🚪</span>Выйти
+        <span class="mob-icon">🚪</span><span data-i18n="nav_logout">Выйти</span>
       </button>
     </div>
   </nav>
@@ -518,6 +529,7 @@ let userProfile = null;
 let userId = null;
 
 async function init(){
+  applyTranslations();
   const { data: { session } } = await supabaseClient.auth.getSession();
   if(!session){ window.location.href = 'login.html'; return; }
   userId = session.user.id;
@@ -538,7 +550,7 @@ async function init(){
 }
 
 function renderAll(p){
-  const name = p.name || p.email || 'Мастер';
+  const name = p.name || p.email || t('default_master');
   const firstName = name.split(' ')[0];
   const isFull = p.plan === 'full';
   const used = p.psycho_count || 0;
@@ -555,16 +567,16 @@ function renderAll(p){
   document.getElementById('welcome-name').textContent = firstName;
 
   document.getElementById('stat-plan-icon').textContent = isFull ? '★' : '◇';
-  document.getElementById('stat-plan-name').textContent = isFull ? 'Полный пакет' : 'Базовый';
+  document.getElementById('stat-plan-name').textContent = isFull ? t('plan_full') : t('plan_basic');
   document.getElementById('stat-psycho').textContent = used;
-  document.getElementById('stat-psycho-sub').textContent = isFull ? 'безлимит' : `из ${PSYCHO_LIMIT} бесплатных`;
+  document.getElementById('stat-psycho-sub').textContent = isFull ? t('stat_unlimited') : `${t('psycho_limit_of')} ${PSYCHO_LIMIT} ${t('psycho_limit_free')}`;
 
   if(!isFull){
     document.getElementById('psycho-limit-bar').style.display = 'block';
-    document.getElementById('psycho-limit-text').textContent = `Использовано ${used} из ${PSYCHO_LIMIT} бесплатных`;
+    document.getElementById('psycho-limit-text').textContent = `${t('psycho_limit_used')} ${used} ${t('psycho_limit_of')} ${PSYCHO_LIMIT} ${t('psycho_limit_free')}`;
     document.getElementById('psycho-limit-fill').style.width = Math.min(100,(used/PSYCHO_LIMIT)*100) + '%';
     if(used >= PSYCHO_LIMIT){
-      document.getElementById('psycho-action').textContent = 'Лимит исчерпан — свяжитесь для апгрейда';
+      document.getElementById('psycho-action').textContent = t('psycho_upgrade');
       document.getElementById('psycho-action').style.color = 'var(--red-text)';
     }
   }
@@ -576,9 +588,10 @@ function renderAll(p){
 
   document.getElementById('prof-avatar').textContent = name.charAt(0).toUpperCase();
   document.getElementById('prof-name-display').textContent = name;
-  document.getElementById('prof-spec-display').textContent = p.specialization || 'Специализация не указана';
+  document.getElementById('prof-spec-display').textContent = p.specialization || t('spec_not_set');
 
   updatePreview(p.name, p.specialization, p.whatsapp, p.instagram);
+  applyTranslations();
 }
 
 function updatePreview(name, spec, wa, ig){
@@ -618,7 +631,7 @@ function openPsycho(){
   const isFull = userProfile.plan === 'full';
   const used = userProfile.psycho_count || 0;
   if(!isFull && used >= PSYCHO_LIMIT){
-    alert(`Вы использовали все ${PSYCHO_LIMIT} бесплатных психоанализа.\n\nДля получения полного доступа свяжитесь с администратором Digital Consulting.`);
+    alert(t('psycho_upgrade'));
     return;
   }
   window.open('psycho-page.html?master='+userId,'_blank');
@@ -630,24 +643,24 @@ async function saveProfile(){
   const wa = document.getElementById('inp-wa').value.trim();
   const ig = document.getElementById('inp-ig').value.trim();
   const btn = document.querySelector('.btn-save');
-  btn.textContent = 'Сохранение...';
+  btn.textContent = t('profile_saving');
   btn.disabled = true;
   const { error } = await supabaseClient.from('profiles').update({
     name, specialization: spec, whatsapp: wa, instagram: ig
   }).eq('id', userId);
-  btn.textContent = 'Сохранить изменения';
+  btn.textContent = t('profile_save');
   btn.disabled = false;
   if(!error){
     const ok = document.getElementById('save-ok');
     ok.style.display = 'inline';
     setTimeout(()=>{ ok.style.display='none'; }, 3000);
     document.getElementById('sb-avatar').textContent = (name||'М').charAt(0).toUpperCase();
-    document.getElementById('sb-name').textContent = name || 'Мастер';
+    document.getElementById('sb-name').textContent = name || t('default_master');
     document.getElementById('sb-role').textContent = spec || 'Digital Consulting';
-    document.getElementById('welcome-name').textContent = (name||'').split(' ')[0] || 'Мастер';
+    document.getElementById('welcome-name').textContent = (name||'').split(' ')[0] || t('default_master');
     document.getElementById('prof-avatar').textContent = (name||'М').charAt(0).toUpperCase();
     document.getElementById('prof-name-display').textContent = name || '—';
-    document.getElementById('prof-spec-display').textContent = spec || 'Специализация не указана';
+    document.getElementById('prof-spec-display').textContent = spec || t('spec_not_set');
     updatePreview(name, spec, wa, ig);
     if(userProfile){ userProfile.name=name; userProfile.specialization=spec; userProfile.whatsapp=wa; userProfile.instagram=ig; }
   }
@@ -673,7 +686,7 @@ function toggleTheme(){
   const dark = h.getAttribute('data-theme') === 'dark';
   h.setAttribute('data-theme', dark ? 'light' : 'dark');
   document.getElementById('theme-icon').textContent = dark ? '🌙' : '☀️';
-  document.getElementById('theme-label').textContent = dark ? 'Тёмная тема' : 'Светлая тема';
+  document.getElementById('theme-label').textContent = dark ? t('theme_dark') : t('theme_light');
 }
 
 async function doLogout(){
@@ -691,37 +704,22 @@ async function createClientLink(){
   if(!userId) return;
   const name = document.getElementById('inp-client-name').value.trim();
   
-  if(!name){
-    alert('Укажите имя клиента');
-    return;
-  }
+  if(!name){ alert(t('alert_no_name')); return; }
 
   const perms = {};
-  document.querySelectorAll('input[name="perm"]:checked').forEach(cb => {
-    perms[cb.value] = true;
-  });
+  document.querySelectorAll('input[name="perm"]:checked').forEach(cb => { perms[cb.value] = true; });
 
-  if(!Object.keys(perms).length){
-    alert('Выберите хотя бы одно право доступа');
-    return;
-  }
+  if(!Object.keys(perms).length){ alert(t('alert_no_perm')); return; }
 
   const token = generateToken();
   const { error } = await supabaseClient.from('access_grants').insert({
-    master_id: userId,
-    client_name: name,
-    access_token: token,
-    permissions: perms,
-    max_opens: 6,
-    opens_count: 0
+    master_id: userId, client_name: name,
+    access_token: token, permissions: perms, max_opens: 6, opens_count: 0
   });
 
-  if(error){
-    alert('Ошибка: ' + error.message);
-    return;
-  }
+  if(error){ alert(t('alert_error') + error.message); return; }
 
-  alert('✓ Ссылка создана!');
+  alert(t('alert_created'));
   document.getElementById('inp-client-name').value = '';
   loadClientLinks();
 }
@@ -729,16 +727,14 @@ async function createClientLink(){
 async function loadClientLinks(){
   if(!userId) return;
   const { data: links } = await supabaseClient
-    .from('access_grants')
-    .select('*')
-    .eq('master_id', userId)
+    .from('access_grants').select('*').eq('master_id', userId)
     .order('created_at', { ascending: false });
 
   const container = document.getElementById('client-links-list');
   container.innerHTML = '';
 
   if(!links || !links.length){
-    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔗</div><div class="empty-state-text">Ссылок для клиентов ещё нет</div></div>';
+    container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔗</div><div class="empty-state-text">${t('links_empty')}</div></div>`;
     return;
   }
 
@@ -746,28 +742,24 @@ async function loadClientLinks(){
     const isExhausted = link.opens_count >= link.max_opens;
     const progress = (link.opens_count / link.max_opens) * 100;
     const url = window.location.origin + window.location.pathname.replace('cabinet.html', '') + 'view.html?token=' + link.access_token;
-    const createdAt = new Date(link.created_at).toLocaleDateString('ru-RU');
 
     const el = document.createElement('div');
     el.className = 'client-link-item';
     el.innerHTML = `
       <div class="client-link-header">
-        <div>
-          <div class="client-link-name">${link.client_name}</div>
-          ${link.client_email ? `<div class="client-link-email">📧 ${link.client_email}</div>` : ''}
-        </div>
+        <div><div class="client-link-name">${link.client_name}</div></div>
         <span class="client-link-status ${isExhausted ? 'exhausted' : 'active'}">
-          ${isExhausted ? '❌ Исчерпана' : '✅ Активна'}
+          ${isExhausted ? t('link_status_exhausted') : t('link_status_active')}
         </span>
       </div>
       <div class="client-link-stats">
         <div class="client-link-stat">
-          <div class="client-link-stat-label">Открытий осталось</div>
+          <div class="client-link-stat-label">${t('link_opens_left')}</div>
           <div class="client-link-stat-value">${Math.max(0, link.max_opens - link.opens_count)} / ${link.max_opens}</div>
         </div>
         <div class="client-link-stat">
-          <div class="client-link-stat-label">Использовано</div>
-          <div class="client-link-stat-value">${link.opens_count} раз</div>
+          <div class="client-link-stat-label">${t('link_used')}</div>
+          <div class="client-link-stat-value">${link.opens_count} ${t('link_used_times')}</div>
         </div>
       </div>
       <div class="client-link-progress">
@@ -777,8 +769,8 @@ async function loadClientLinks(){
       </div>
       <div class="client-link-url" onclick="copyUrl(this)">${url}</div>
       <div class="client-link-actions">
-        <button class="client-link-btn client-link-btn-copy" onclick="copyUrlFromBtn('${url}')">📋 Копировать</button>
-        <button class="client-link-btn client-link-btn-delete" onclick="deleteLink('${link.id}')">🗑️ Удалить</button>
+        <button class="client-link-btn client-link-btn-copy" onclick="copyUrlFromBtn('${url}')">${t('link_copy')}</button>
+        <button class="client-link-btn client-link-btn-delete" onclick="deleteLink('${link.id}')">${t('link_delete')}</button>
       </div>
     `;
     container.appendChild(el);
@@ -789,36 +781,183 @@ function copyUrl(el){
   const text = el.textContent;
   navigator.clipboard.writeText(text).catch(() => {
     const a = document.createElement('textarea');
-    a.value = text;
-    document.body.appendChild(a);
-    a.select();
-    document.execCommand('copy');
-    document.body.removeChild(a);
+    a.value = text; document.body.appendChild(a); a.select();
+    document.execCommand('copy'); document.body.removeChild(a);
   });
-  alert('✓ Скопировано!');
+  alert(t('alert_copied'));
 }
 
 function copyUrlFromBtn(url){
   navigator.clipboard.writeText(url).catch(() => {
     const a = document.createElement('textarea');
-    a.value = url;
-    document.body.appendChild(a);
-    a.select();
-    document.execCommand('copy');
-    document.body.removeChild(a);
+    a.value = url; document.body.appendChild(a); a.select();
+    document.execCommand('copy'); document.body.removeChild(a);
   });
-  alert('✓ Скопировано!');
+  alert(t('alert_copied'));
 }
 
 async function deleteLink(id){
-  if(!confirm('Удалить эту ссылку? Клиент больше не сможет её использовать.')) return;
+  if(!confirm(t('confirm_delete'))) return;
   const { error } = await supabaseClient.from('access_grants').delete().eq('id', id);
   if(!error){
-    alert('✓ Удалено!');
+    alert(t('alert_deleted'));
     loadClientLinks();
   } else {
-    alert('Ошибка: ' + error.message);
+    alert(t('alert_error') + error.message);
   }
+}
+
+// ── i18n ──
+const TRANSLATIONS = {
+  ru: {
+    sidebar_sub:'Кабинет мастера', nav_overview:'Обзор', nav_links:'Ссылки клиентов',
+    nav_profile:'Профиль', nav_calendar:'Открыть календарь', nav_psycho:'Психоанализ',
+    nav_logout:'Выйти', welcome:'Добро пожаловать,',
+    header_subtitle:'Ваш кабинет мастера · Digital Consulting',
+    theme_dark:'Тёмная тема', theme_light:'Светлая тема',
+    stat_plan:'Тариф', stat_psycho_label:'Психоанализов', stat_used:'использовано',
+    stat_unlimited:'безлимит', stat_status:'Статус', stat_active:'● Активен',
+    stat_calendar:'Дней календаря', section_products:'Продукты',
+    cal_name:'Энергетический Календарь',
+    cal_desc:'Узнайте энергию дня, месяца и года. Рекомендации, мантры и утренний ритуал на каждый день.',
+    cal_action:'Открыть календарь →',
+    psycho_name:'Психоанализ личности',
+    psycho_desc:'Глубокий анализ числа личности, миссии, матрицы чисел, профессиональной ориентации и совместимости.',
+    psycho_action:'Открыть анализ →',
+    agreement_title:'Правила использования:',
+    agreement_text:'Ваша лицензия предназначена исключительно для личного использования и работы с вашими клиентами через персональную ссылку. Передача доступа третьим лицам нарушает условия соглашения. По вопросам:',
+    links_create:'Создать новую ссылку для клиента', links_client_name:'Имя клиента',
+    links_calendar:'📅 Календарь', links_how:'Как это работает:',
+    links_how_text:'Ссылка будет работать ровно 6 открытий без ограничения по времени. Клиент сможет открывать её в разные дни, но после 6 открытий потребуется новая ссылка. Это защищает от распространения ссылки среди других мастеров.',
+    links_create_btn:'Создать ссылку', links_active:'Активные ссылки',
+    links_empty:'Ссылок для клиентов ещё нет',
+    link_status_active:'✅ Активна', link_status_exhausted:'❌ Исчерпана',
+    link_opens_left:'Открытий осталось', link_used:'Использовано', link_used_times:'раз',
+    link_copy:'📋 Копировать', link_delete:'🗑️ Удалить',
+    profile_title:'Мой профиль — что видят клиенты', profile_name:'Имя (для клиентов)',
+    profile_spec:'Специализация', profile_wa_hint:'(только цифры со знаком +)',
+    profile_wa_example:'Пример: +77001234567 или +996700123456',
+    profile_save:'Сохранить изменения', profile_saving:'Сохранение...',
+    profile_saved:'✓ Сохранено!', profile_preview:'Предпросмотр — так вас видят клиенты',
+    wa_write:'Написать в WhatsApp',
+    mob_overview:'Обзор', mob_links:'Ссылки', mob_profile:'Профиль', mob_analysis:'Анализ',
+    plan_full:'Полный пакет', plan_basic:'Базовый',
+    psycho_limit_used:'Использовано', psycho_limit_of:'из', psycho_limit_free:'бесплатных',
+    psycho_upgrade:'Лимит исчерпан — свяжитесь для апгрейда',
+    alert_no_name:'Укажите имя клиента', alert_no_perm:'Выберите хотя бы одно право доступа',
+    alert_created:'✓ Ссылка создана!', alert_error:'Ошибка: ',
+    alert_copied:'✓ Скопировано!', alert_deleted:'✓ Удалено!',
+    confirm_delete:'Удалить эту ссылку? Клиент больше не сможет её использовать.',
+    spec_not_set:'Специализация не указана', default_master:'Мастер',
+  },
+  en: {
+    sidebar_sub:'Master\'s Cabinet', nav_overview:'Overview', nav_links:'Client Links',
+    nav_profile:'Profile', nav_calendar:'Open Calendar', nav_psycho:'Psychoanalysis',
+    nav_logout:'Log Out', welcome:'Welcome,',
+    header_subtitle:'Your Master\'s Cabinet · Digital Consulting',
+    theme_dark:'Dark Mode', theme_light:'Light Mode',
+    stat_plan:'Plan', stat_psycho_label:'Psychoanalyses', stat_used:'used',
+    stat_unlimited:'unlimited', stat_status:'Status', stat_active:'● Active',
+    stat_calendar:'Calendar Days', section_products:'Products',
+    cal_name:'Energy Calendar',
+    cal_desc:'Discover the energy of the day, month and year. Daily recommendations, mantras and a morning ritual for every day.',
+    cal_action:'Open Calendar →',
+    psycho_name:'Personality Psychoanalysis',
+    psycho_desc:'Deep analysis of your personality number, life mission, number matrix, professional direction and compatibility.',
+    psycho_action:'Open Analysis →',
+    agreement_title:'Terms of Use:',
+    agreement_text:'Your license is intended solely for personal use and working with your clients through a personal link. Sharing access with third parties violates the terms of the agreement. For inquiries:',
+    links_create:'Create a New Client Link', links_client_name:'Client Name',
+    links_calendar:'📅 Calendar', links_how:'How it works:',
+    links_how_text:'The link will work for exactly 6 opens with no time limit. Your client can open it on different days, but after 6 opens a new link will be needed. This protects against the link being shared among other masters.',
+    links_create_btn:'Create Link', links_active:'Active Links',
+    links_empty:'No client links yet',
+    link_status_active:'✅ Active', link_status_exhausted:'❌ Exhausted',
+    link_opens_left:'Opens Remaining', link_used:'Used', link_used_times:'times',
+    link_copy:'📋 Copy', link_delete:'🗑️ Delete',
+    profile_title:'My Profile — what clients see', profile_name:'Name (for clients)',
+    profile_spec:'Specialization', profile_wa_hint:'(numbers only with +)',
+    profile_wa_example:'Example: +77001234567 or +996700123456',
+    profile_save:'Save Changes', profile_saving:'Saving...',
+    profile_saved:'✓ Saved!', profile_preview:'Preview — this is what clients see',
+    wa_write:'Message on WhatsApp',
+    mob_overview:'Overview', mob_links:'Links', mob_profile:'Profile', mob_analysis:'Analysis',
+    plan_full:'Full Package', plan_basic:'Basic',
+    psycho_limit_used:'Used', psycho_limit_of:'of', psycho_limit_free:'free',
+    psycho_upgrade:'Limit reached — contact us to upgrade',
+    alert_no_name:'Please enter the client\'s name', alert_no_perm:'Please select at least one access right',
+    alert_created:'✓ Link created!', alert_error:'Error: ',
+    alert_copied:'✓ Copied!', alert_deleted:'✓ Deleted!',
+    confirm_delete:'Delete this link? The client will no longer be able to use it.',
+    spec_not_set:'Specialization not set', default_master:'Master',
+  },
+  kz: {
+    sidebar_sub:'Мастер кабинеті', nav_overview:'Шолу', nav_links:'Клиент сілтемелері',
+    nav_profile:'Профиль', nav_calendar:'Күнтізбені ашу', nav_psycho:'Психоанализ',
+    nav_logout:'Шығу', welcome:'Қош келдіңіз,',
+    header_subtitle:'Сіздің мастер кабинеті · Digital Consulting',
+    theme_dark:'Күңгірт тақырып', theme_light:'Жарық тақырып',
+    stat_plan:'Тариф', stat_psycho_label:'Психоанализ', stat_used:'қолданылды',
+    stat_unlimited:'шексіз', stat_status:'Мәртебе', stat_active:'● Белсенді',
+    stat_calendar:'Күнтізбе күндері', section_products:'Өнімдер',
+    cal_name:'Энергия Күнтізбесі',
+    cal_desc:'Күн, ай және жылдың энергиясын біліңіз. Әр күнге арналған ұсыныстар, мантралар мен таңғы рәсімдер.',
+    cal_action:'Күнтізбені ашу →',
+    psycho_name:'Тұлға психоанализі',
+    psycho_desc:'Тұлға саны, өмір миссиясы, сандар матрицасы, кәсіби бағдар және үйлесімділіктің терең талдауы.',
+    psycho_action:'Талдауды ашу →',
+    agreement_title:'Пайдалану шарттары:',
+    agreement_text:'Сіздің лицензияңыз тек жеке пайдалану және жеке сілтеме арқылы клиенттермен жұмыс жасау үшін арналған. Үшінші тұлғаларға қол жеткізуді беру келісім шарттарын бұзады. Сұрақтар бойынша:',
+    links_create:'Клиентке жаңа сілтеме жасау', links_client_name:'Клиент аты',
+    links_calendar:'📅 Күнтізбе', links_how:'Қалай жұмыс істейді:',
+    links_how_text:'Сілтеме уақыт шектеусіз дәл 6 рет ашылады. Клиент оны әртүрлі күндері ашуы мүмкін, бірақ 6 ашылымнан кейін жаңа сілтеме қажет болады. Бұл сілтеменің басқа мастерлер арасында таралуынан қорғайды.',
+    links_create_btn:'Сілтеме жасау', links_active:'Белсенді сілтемелер',
+    links_empty:'Клиент сілтемелері әлі жоқ',
+    link_status_active:'✅ Белсенді', link_status_exhausted:'❌ Таусылды',
+    link_opens_left:'Қалған ашылымдар', link_used:'Пайдаланылды', link_used_times:'рет',
+    link_copy:'📋 Көшіру', link_delete:'🗑️ Жою',
+    profile_title:'Менің профилім — клиенттер нені көреді', profile_name:'Аты (клиенттер үшін)',
+    profile_spec:'Мамандандыру', profile_wa_hint:'(тек + белгісімен сандар)',
+    profile_wa_example:'Мысал: +77001234567 немесе +996700123456',
+    profile_save:'Өзгерістерді сақтау', profile_saving:'Сақталуда...',
+    profile_saved:'✓ Сақталды!', profile_preview:'Алдын ала қарау — клиенттер солай көреді',
+    wa_write:'WhatsApp-та жазу',
+    mob_overview:'Шолу', mob_links:'Сілтемелер', mob_profile:'Профиль', mob_analysis:'Талдау',
+    plan_full:'Толық пакет', plan_basic:'Базалық',
+    psycho_limit_used:'Қолданылды', psycho_limit_of:'/', psycho_limit_free:'тегін',
+    psycho_upgrade:'Лимит таусылды — жаңарту үшін хабарласыңыз',
+    alert_no_name:'Клиент атын енгізіңіз', alert_no_perm:'Кем дегенде бір рұқсат таңдаңыз',
+    alert_created:'✓ Сілтеме жасалды!', alert_error:'Қате: ',
+    alert_copied:'✓ Көшірілді!', alert_deleted:'✓ Жойылды!',
+    confirm_delete:'Бұл сілтемені жою керек пе? Клиент оны енді пайдалана алмайды.',
+    spec_not_set:'Мамандандыру көрсетілмеген', default_master:'Мастер',
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'ru';
+
+function t(key){ return TRANSLATIONS[currentLang][key] || TRANSLATIONS.ru[key] || key; }
+
+function applyTranslations(){
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = t(key);
+  });
+  // обновляем активную кнопку языка
+  ['ru','en','kz'].forEach(l => {
+    const btn = document.getElementById('lang-' + l);
+    if(btn) btn.classList.toggle('active', l === currentLang);
+  });
+  document.documentElement.lang = currentLang;
+}
+
+function setLang(lang){
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  applyTranslations();
+  // перерисовываем динамический контент
+  if(userProfile) renderAll(userProfile);
+  loadClientLinks();
 }
 
 init();
