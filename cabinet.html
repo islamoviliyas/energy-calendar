@@ -402,24 +402,14 @@ body{
               <label class="form-label">Имя клиента</label>
               <input class="form-input" id="inp-client-name" type="text" placeholder="Анна">
             </div>
-            <div class="form-group">
-              <label class="form-label">Email клиента (опционально)</label>
-              <input class="form-input" id="inp-client-email" type="email" placeholder="anna@mail.com">
-            </div>
-            <div class="form-group" style="grid-column:1/-1;">
-              <label class="form-label">Права доступа</label>
-              <div style="display:flex;gap:20px;flex-wrap:wrap;">
-                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:400;color:var(--text);">
-                  <input type="checkbox" name="perm" value="calendar" checked style="cursor:pointer;"> 📅 Календарь
-                </label>
-                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:400;color:var(--text);">
-                  <input type="checkbox" name="perm" value="psycho" checked style="cursor:pointer;"> 🧠 Психоанализ
-                </label>
-                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:400;color:var(--text);">
-                  <input type="checkbox" name="perm" value="chat" style="cursor:pointer;"> 💬 Чат
-                </label>
-              </div>
-            </div>
+          </div>
+          <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:400;color:var(--text);">
+              <input type="checkbox" name="perm" value="calendar" checked style="cursor:pointer;"> 📅 Календарь
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:400;color:var(--text);">
+              <input type="checkbox" name="perm" value="psycho" checked style="cursor:pointer;"> 🧠 Психоанализ
+            </label>
           </div>
           <div style="font-size:12px;color:var(--text3);line-height:1.6;margin:16px 0;padding:12px;background:var(--bg3);border-radius:8px;">
             💡 <strong style="color:var(--text);">Как это работает:</strong> Ссылка будет работать ровно <strong>6 открытий</strong> без ограничения по времени. Клиент сможет открывать её в разные дни, но после 6 открытий потребуется новая ссылка. Это защищает от распространения ссылки среди других мастеров.
@@ -703,7 +693,6 @@ function generateToken(){
 async function createClientLink(){
   if(!userId) return;
   const name = document.getElementById('inp-client-name').value.trim();
-  const email = document.getElementById('inp-client-email').value.trim() || null;
   
   if(!name){
     alert('Укажите имя клиента');
@@ -724,7 +713,6 @@ async function createClientLink(){
   const { error } = await supabaseClient.from('access_grants').insert({
     master_id: userId,
     client_name: name,
-    client_email: email,
     access_token: token,
     permissions: perms,
     max_opens: 6,
@@ -738,7 +726,6 @@ async function createClientLink(){
 
   alert('✓ Ссылка создана!');
   document.getElementById('inp-client-name').value = '';
-  document.getElementById('inp-client-email').value = '';
   loadClientLinks();
 }
 
