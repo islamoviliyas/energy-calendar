@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Психоанализ личности · Digital Consulting</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#B8892A;--gold-light:#D4A84B;--radius:14px;--transition:0.3s ease;}
 [data-theme="light"]{--bg:#F6F4EF;--bg2:#FFFFFF;--bg3:#F0EDE6;--bg4:#E8E4D8;--text:#1A1814;--text2:#3A3830;--text3:#8A8680;--border:rgba(0,0,0,0.08);--border-gold:rgba(184,137,42,0.3);--shadow:0 2px 20px rgba(0,0,0,0.06);--plus-bg:#F0F7F2;--plus-border:#B8DEC4;--plus-text:#1E5C34;--minus-bg:#FBF0F0;--minus-border:#E8B8B8;--minus-text:#7A1E1E;--tag-green-bg:#E8F7EE;--tag-green-text:#1E5C34;--tag-red-bg:#FBF0F0;--tag-red-text:#7A1E1E;--tag-blue-bg:#EEF4FB;--tag-blue-text:#1E3C6A;--matrix-empty-bg:#F6F4EF;--matrix-empty-border:rgba(0,0,0,0.1);--matrix-empty-text:#C0BDB0;--matrix-full-bg:#F8F0DC;--matrix-full-border:#B8892A;--line-active-bg:#F8F0DC;--line-active-border:rgba(184,137,42,0.4);--how-bg:#FFFBF0;--how-border:rgba(184,137,42,0.25);--how-title:#8B6010;--energy-present-bg:#F0F7F2;--energy-present-border:#B8DEC4;--energy-present-text:#1E5C34;--energy-absent-bg:#FBF0F0;--energy-absent-border:#E8B8B8;--energy-absent-text:#C06060;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;min-height:100vh;line-height:1.6;}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans',sans-serif;font-weight:300;min-height:100vh;line-height:1.6;}
 .wrap{max-width:820px;margin:0 auto;padding:0 20px 60px;}
 
 /* Header */
@@ -35,12 +35,13 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 
 /* Sections */
 .section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.lang-badge{display:inline-block;padding:3px 10px;background:var(--gold);color:#fff;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-left:8px;}
 .section-label::after{content:'';flex:1;height:1px;background:var(--border);}
 .divider{border:none;border-top:1px solid var(--border);margin:18px 0;}
 .e-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);}
 .e-body{padding:18px 20px;display:flex;flex-direction:column;gap:12px;}
 .e-desc{font-size:13px;color:var(--text2);line-height:1.85;}
-.e-desc pre{white-space:pre-wrap;font-family:'Inter',sans-serif;font-size:13px;line-height:1.85;}
+.e-desc pre{white-space:pre-wrap;font-family:'Noto Sans',sans-serif;font-size:13px;line-height:1.85;}
 .pm-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .pm-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
 .pm-box.plus{background:var(--plus-bg);border-color:var(--plus-border);}
@@ -117,6 +118,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 <body>
 
 <div class="report-header">
+  <!-- lang indicator injected by JS -->
   <div class="report-header-inner">
     <div>
       <div class="logo-text">Психоанализ <span>личности</span></div>
@@ -141,11 +143,85 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
   </div>
 </div>
 
+<script src="translations-content.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL = 'https://gigfvlhcrtuosfnkzqpt.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_Hw69inUK0lqA5ECoVeGgRQ_kWEyD4Pt';
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ── Language from URL param ──
+const _urlLang = new URLSearchParams(window.location.search).get('lang');
+const reportLang = (['ru','en','kz'].includes(_urlLang)) ? _urlLang : 'ru';
+document.documentElement.lang = reportLang;
+
+function getC() {
+  if ((reportLang === 'en' || reportLang === 'kz') && typeof CONTENT !== 'undefined' && CONTENT[reportLang]) {
+    return CONTENT[reportLang];
+  }
+  // RU fallback — use local constants defined below
+  return {
+    PERSONALITY: PERSONALITY, DOBROTAS: DOBROTAS, SOUL: SOUL,
+    EGO_VEC: EGO_VEC, WANTS: WANTS, GOAL_CS: GOAL_CS, EGO_JOY: EGO_JOY,
+    DESTROY: DESTROY, DISEASES: DISEASES, PLUS_CS: PLUS_CS, MINUS_CS: MINUS_CS,
+    MISSION_TEXT: MISSION_TEXT, MISSION_PLUS: MISSION_PLUS,
+    MISSION_MINUS: MISSION_MINUS, MISSION_GOAL: MISSION_GOAL,
+    TRIGGERS: TRIGGERS, HOW_TO: HOW_TO,
+    PROF_BEFORE33: PROF_BEFORE33, PROF_MISSION: PROF_MISSION,
+    CS_NAMES: CS_NAMES, COLOR_CS: COLOR_CS,
+    COLOR_CLOTHES: COLOR_CLOTHES, COLOR_WALLET: COLOR_WALLET,
+    WEEK_DAYS: WEEK_DAYS, ENERGY_LABELS: ENERGY_LABELS
+  };
+}
+function getLines() {
+  if (reportLang === 'en' && typeof CONTENT !== 'undefined') return CONTENT.en.ALL_LINES_EN || ALL_LINES;
+  if (reportLang === 'kz' && typeof CONTENT !== 'undefined') return CONTENT.kz.ALL_LINES_KZ || ALL_LINES;
+  return ALL_LINES;
+}
+function ri(key) {
+  var c = getC();
+  var ui = (c.UI || {});
+  var RU_REPORT_UI = {
+    cs_label:'Число личности', mis_label:'Миссия',
+    s_cs:'Число личности', s_char:'Характеристики', s_pm:'В плюсе и в минусе',
+    s_destroy:'Разрушаетесь от', s_diseases:'Заболевания при страдании ЭГО',
+    s_prof33:'Профориентация до 33 лет', s_mission:'Миссия',
+    s_prof_mission:'Профориентация по миссии',
+    s_compat:'Совместимость по числу личности',
+    s_colors:'Цвета и символы', s_matrix:'Матрица чисел',
+    s_active_lines:'Активные линии в вашей матрице',
+    s_no_lines_text:'В вашей матрице нет полных линий.',
+    s_energies:'Энергии в матрице',
+    s_how_to:'Как наработать отсутствующие энергии',
+    s_triggers:'Триггеры — что раздражает',
+    s_gen_rec:'Общие рекомендации',
+    matrix_hint:'Числа, присутствующие в дате рождения, выделены золотым',
+    present:'✓ Есть', absent:'✗ Нет',
+    present_e:'Присутствующие энергии', absent_e:'Отсутствующие энергии',
+    all_e:'✅ В вашей матрице присутствуют все энергии!',
+    compat_best:'Лучшая:', compat_good:'Хорошая:',
+    compat_neutral:'Нейтральная:', compat_bad:'Отрицательная:',
+    color_num:'Цвет числа личности', color_clothes:'Цветовая гамма одежды',
+    color_wallet:'Цвет кошелька / сумки', week_day:'Ваш день недели',
+    dobrata:'Доброта', soul:'Душа реализуется',
+    ego_vec:'Вектор ЭГО направлен', cs_wants:'Число личности хочет',
+    cs_goal:'Цель числа личности', ego_joy:'ЭГО наслаждается от',
+    plus_lbl:'В плюсе', minus_lbl:'В минусе', mission_goal:'Цель миссии',
+    competence:'Личность / Компетентность', industry:'Отрасль / Потребность',
+    activity:'Деятельность', proftype:'Тип личности',
+    rec_spheres:'Рекомендуемые сферы',
+    analysis_sub:'Персональный анализ · Digital Consulting',
+    gen_1:'Стремитесь к выполнению своей Жизненной задачи',
+    gen_2:'Пейте тёплую воду до 45°C (на 30 кг веса — 1 литр воды)',
+    gen_3:'Ежедневно ходите от 6 км со скоростью 5 км/час',
+    gen_4:'Употребляйте кислые фрукты и овощи в течение дня',
+    gen_5:'Принимайте завтрак через 1 час после ходьбы',
+    gen_6:'Посещайте баню не реже 2-х раз в неделю',
+    gen_money:'Деньги:', gen_money_text:'работайте и ешьте лицом на север. Спите головой на юг. Сейф храните в северной части помещения',
+    gen_contracts:'Контракты:', gen_contracts_text:'читайте лицом на север, подписывайте повернувшись на восток'
+  };
+  return ui[key] || RU_REPORT_UI[key] || key;
+}
 
 // ══ Все данные (копия из psycho-page.html) ══
 const CS_NAMES={1:'Лидер',2:'Психолог',3:'Наставник',4:'Новатор',5:'Коммуникатор',6:'Творец',7:'Технолог',8:'Реалист',9:'Воин'};
@@ -180,18 +256,19 @@ const ALL_LINES=[{name:'Линия 1-9: Программа эгоцентриз�
 function digitSum(n){let s=n.toString().split('').reduce((a,c)=>a+parseInt(c),0);return s>9?digitSum(s):s;}
 
 function renderReport(data, master){
+  const c = getC();
   const {client_name, dob, cs, mission} = data;
   const p = dob.split('.');
   const dateDigits = new Set((p[0]+p[1]+p[2]).split('').map(Number).filter(n=>n>0));
   const matrixOrder = [7,8,9,4,5,6,1,2,3];
   const ec = ENERGY_COMPAT[cs];
-  const colorCS = COLOR_CS[cs];
+  const colorCS = c.COLOR_CS[cs];
   const colorHex = COLOR_MAP[colorCS]||'#B8892A';
-  const activeLines = ALL_LINES.filter(l=>l.nums.every(n=>dateDigits.has(n)));
+  const activeLines = getLines().filter(l=>l.nums.every(n=>dateDigits.has(n)));
   const absentEnergies = [1,2,3,4,5,6,7,8,9].filter(n=>!dateDigits.has(n));
   const presentEnergies = [1,2,3,4,5,6,7,8,9].filter(n=>dateDigits.has(n));
-  const profBefore = PROF_BEFORE33[cs];
-  const profMission = PROF_MISSION[mission];
+  const profBefore = c.PROF_BEFORE33[cs];
+  const profMission = c.PROF_MISSION[mission];
 
   // Обновляем заголовок страницы
   document.title = `Психоанализ · ${client_name} · Digital Consulting`;
@@ -216,50 +293,50 @@ function renderReport(data, master){
   </div>
 </div>
 
-${sl('Число личности ' + cs)}
-<div class="e-card"><div class="e-body"><div class="e-desc"><pre>${PERSONALITY[cs]}</pre></div></div></div>
+${sl(ri('s_cs')+' ' + cs)}
+<div class="e-card"><div class="e-body"><div class="e-desc"><pre>${c.PERSONALITY[cs]}</pre></div></div></div>
 
-${sl('Характеристики')}
+${sl(ri('s_char'))}
 <div class="e-card"><div class="e-body"><div class="grid-2">
-  <div class="pm-box"><div class="pm-title">Доброта</div><div class="pm-text">${DOBROTAS[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Душа реализуется</div><div class="pm-text">${SOUL[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Вектор ЭГО</div><div class="pm-text">${EGO_VEC[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Число личности хочет</div><div class="pm-text">${WANTS[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Цель</div><div class="pm-text">${GOAL_CS[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">ЭГО наслаждается</div><div class="pm-text">${EGO_JOY[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">Доброта</div><div class="pm-text">${c.DOBROTAS[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">Душа реализуется</div><div class="pm-text">${c.SOUL[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">Вектор ЭГО</div><div class="pm-text">${c.EGO_VEC[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">Число личности хочет</div><div class="pm-text">${c.WANTS[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">Цель</div><div class="pm-text">${c.GOAL_CS[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">ЭГО наслаждается</div><div class="pm-text">${c.EGO_JOY[cs]}</div></div>
 </div></div></div>
 
-${sl('В плюсе и в минусе')}
+${sl(ri('s_pm'))}
 <div class="e-card"><div class="e-body"><div class="pm-grid">
-  <div class="pm-box plus"><div class="pm-title">В плюсе</div><div class="pm-text">${PLUS_CS[cs]}</div></div>
-  <div class="pm-box minus"><div class="pm-title">В минусе</div><div class="pm-text">${MINUS_CS[cs]}</div></div>
+  <div class="pm-box plus"><div class="pm-title">В плюсе</div><div class="pm-text">${c.PLUS_CS[cs]}</div></div>
+  <div class="pm-box minus"><div class="pm-title">В минусе</div><div class="pm-text">${c.MINUS_CS[cs]}</div></div>
 </div></div></div>
 
-${sl('Разрушаетесь от')}
-<div class="e-card"><div class="e-body"><div class="pm-box minus"><div class="pm-text">${DESTROY[cs]}</div></div></div></div>
+${sl(ri('s_destroy'))}
+<div class="e-card"><div class="e-body"><div class="pm-box minus"><div class="pm-text">${c.DESTROY[cs]}</div></div></div></div>
 
-${sl('Заболевания при страдании ЭГО')}
-<div class="e-card"><div class="e-body"><span class="tag tag-red">${DISEASES[cs]}</span></div></div>
+${sl(ri('s_diseases'))}
+<div class="e-card"><div class="e-body"><span class="tag tag-red">${c.DISEASES[cs]}</span></div></div>
 
 <div class="divider"></div>
-${sl('Профориентация до 33 лет')}
+${sl(ri('s_prof33'))}
 <div class="prof-card">
   <div class="prof-card-title">${profBefore.type}</div>
   <div class="pm-box"><div class="pm-title">Рекомендуемые сферы</div><div class="pm-text">${profBefore.institutes}</div></div>
 </div>
 
 <div class="divider"></div>
-${sl('Миссия ' + mission)}
-<div class="e-card"><div class="e-body"><div class="e-desc">${MISSION_TEXT[mission]}</div></div></div>
+${sl(ri('s_mission')+' ' + mission)}
+<div class="e-card"><div class="e-body"><div class="e-desc">${c.MISSION_TEXT[mission]}</div></div></div>
 <div class="e-card"><div class="e-body">
   <div class="pm-grid">
-    <div class="pm-box plus"><div class="pm-title">В плюсе</div><div class="pm-text">${MISSION_PLUS[mission]}</div></div>
-    <div class="pm-box minus"><div class="pm-title">В минусе</div><div class="pm-text">${MISSION_MINUS[mission]}</div></div>
+    <div class="pm-box plus"><div class="pm-title">В плюсе</div><div class="pm-text">${c.MISSION_PLUS[mission]}</div></div>
+    <div class="pm-box minus"><div class="pm-title">В минусе</div><div class="pm-text">${c.MISSION_MINUS[mission]}</div></div>
   </div>
-  <div class="pm-box"><div class="pm-title">Цель миссии</div><div class="pm-text">${MISSION_GOAL[mission]}</div></div>
+  <div class="pm-box"><div class="pm-title">Цель миссии</div><div class="pm-text">${c.MISSION_GOAL[mission]}</div></div>
 </div></div>
 
-${sl('Профориентация по миссии')}
+${sl(ri('s_prof_mission'))}
 <div class="prof-card">
   <div class="grid-2">
     <div class="pm-box"><div class="pm-title">Компетентность</div><div class="pm-text">${profMission.competence}</div></div>
@@ -271,23 +348,23 @@ ${sl('Профориентация по миссии')}
 <div class="divider"></div>
 ${sl('Совместимость')}
 <div class="e-card"><div class="e-body">
-  <div class="compat-row"><span class="compat-label">Лучшая:</span>${ec.best.map(n=>`<span class="compat-item c-best">ЧЛ ${n} — ${CS_NAMES[n]}</span>`).join('')}</div>
-  <div class="compat-row"><span class="compat-label">Хорошая:</span>${ec.good.map(n=>`<span class="compat-item c-good">ЧЛ ${n} — ${CS_NAMES[n]}</span>`).join('')}</div>
-  ${ec.neutral.length?`<div class="compat-row"><span class="compat-label">Нейтральная:</span>${ec.neutral.map(n=>`<span class="compat-item c-neutral">ЧЛ ${n} — ${CS_NAMES[n]}</span>`).join('')}</div>`:''}
-  <div class="compat-row"><span class="compat-label">Отрицательная:</span>${ec.bad.map(n=>`<span class="compat-item c-bad">ЧЛ ${n} — ${CS_NAMES[n]}</span>`).join('')}</div>
+  <div class="compat-row"><span class="compat-label">Лучшая:</span>${ec.best.map(n=>`<span class="compat-item c-best">ЧЛ ${n} — ${c.CS_NAMES[n]}</span>`).join('')}</div>
+  <div class="compat-row"><span class="compat-label">Хорошая:</span>${ec.good.map(n=>`<span class="compat-item c-good">ЧЛ ${n} — ${c.CS_NAMES[n]}</span>`).join('')}</div>
+  ${ec.neutral.length?`<div class="compat-row"><span class="compat-label">Нейтральная:</span>${ec.neutral.map(n=>`<span class="compat-item c-neutral">ЧЛ ${n} — ${c.CS_NAMES[n]}</span>`).join('')}</div>`:''}
+  <div class="compat-row"><span class="compat-label">Отрицательная:</span>${ec.bad.map(n=>`<span class="compat-item c-bad">ЧЛ ${n} — ${c.CS_NAMES[n]}</span>`).join('')}</div>
 </div></div>
 
 <div class="divider"></div>
-${sl('Цвета и символы')}
+${sl(ri('s_colors'))}
 <div class="e-card"><div class="e-body"><div class="grid-2">
   <div class="pm-box"><div class="pm-title">Цвет числа личности</div><div class="pm-text"><span class="color-dot" style="background:${colorHex};"></span>${colorCS}</div></div>
-  <div class="pm-box"><div class="pm-title">Цветовая гамма одежды</div><div class="pm-text">${COLOR_CLOTHES[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Цвет кошелька</div><div class="pm-text">${COLOR_WALLET[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Ваш день недели</div><div class="pm-text">${WEEK_DAYS[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">Цветовая гамма одежды</div><div class="pm-text">${c.COLOR_CLOTHES[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">Цвет кошелька</div><div class="pm-text">${c.COLOR_WALLET[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">Ваш день недели</div><div class="pm-text">${c.WEEK_DAYS[cs]}</div></div>
 </div></div></div>
 
 <div class="divider"></div>
-${sl('Матрица чисел')}
+${sl(ri('s_matrix'))}
 <div class="e-card"><div class="e-body">
   <div style="font-size:11px;color:var(--text3);margin-bottom:10px;">Числа присутствующие в дате рождения выделены золотым</div>
   <div class="matrix-wrap">${matrixOrder.map(n=>`<div class="matrix-cell ${dateDigits.has(n)?'present':''}">${n}</div>`).join('')}</div>
@@ -296,21 +373,21 @@ ${sl('Матрица чисел')}
 ${activeLines.length?`${sl('Активные линии в матрице')}<div class="e-card"><div class="e-body">${activeLines.map(l=>`<div class="line-item"><div class="line-name">${l.name}</div><div class="line-desc">${l.desc}</div></div>`).join('')}</div></div>`:''}
 
 <div class="divider"></div>
-${sl('Энергии в матрице')}
+${sl(ri('s_energies'))}
 <div class="e-card"><div class="e-body">
-  <div class="energy-grid">${[1,2,3,4,5,6,7,8,9].map(n=>`<div class="energy-cell ${dateDigits.has(n)?'present':'absent'}"><div class="ec-num">${n}</div><div class="ec-label">${dateDigits.has(n)?'✓ Есть':'✗ Нет'}</div></div>`).join('')}</div>
-  ${presentEnergies.length?`<div class="pm-box" style="margin-bottom:8px;"><div class="pm-title">Присутствующие</div><div class="pm-text">${presentEnergies.map(n=>`<span class="tag tag-green">${n} — ${ENERGY_LABELS[n]}</span>`).join(' ')}</div></div>`:''}
-  ${absentEnergies.length?`<div class="pm-box minus"><div class="pm-title">Отсутствующие</div><div class="pm-text">${absentEnergies.map(n=>`<span class="tag tag-red">${n} — ${ENERGY_LABELS[n]}</span>`).join(' ')}</div></div>`:`<div class="pm-box plus"><div class="pm-title">✅ Все энергии присутствуют!</div></div>`}
+  <div class="energy-grid">${[1,2,3,4,5,6,7,8,9].map(n=>`<div class="energy-cell ${dateDigits.has(n)?'present':'absent'}"><div class="ec-num">${n}</div><div class="ec-label">${dateDigits.has(n)?ri('present'):ri('absent')}</div></div>`).join('')}</div>
+  ${presentEnergies.length?`<div class="pm-box" style="margin-bottom:8px;"><div class="pm-title">Присутствующие</div><div class="pm-text">${presentEnergies.map(n=>`<span class="tag tag-green">${n} — ${c.ENERGY_LABELS[n]}</span>`).join(' ')}</div></div>`:''}
+  ${absentEnergies.length?`<div class="pm-box minus"><div class="pm-title">Отсутствующие</div><div class="pm-text">${absentEnergies.map(n=>`<span class="tag tag-red">${n} — ${c.ENERGY_LABELS[n]}</span>`).join(' ')}</div></div>`:`<div class="pm-box plus"><div class="pm-title">✅ Все энергии присутствуют!</div></div>`}
 </div></div>
 
-${absentEnergies.length?`${sl('Как наработать отсутствующие энергии')}${absentEnergies.map(n=>`<div class="how-card"><div class="how-title">Энергия «${n}» — ${ENERGY_LABELS[n]}</div><div class="how-body">${HOW_TO[n]}</div></div>`).join('')}`:''}
+${absentEnergies.length?`${sl(ri('s_how_to'))}${absentEnergies.map(n=>`<div class="how-card"><div class="how-title">Энергия «${n}» — ${c.ENERGY_LABELS[n]}</div><div class="how-body">${c.HOW_TO[n]}</div></div>`).join('')}`:''}
 
 <div class="divider"></div>
 ${sl('Триггеры')}
-<div class="e-card"><div class="e-body"><ul class="trigger-list">${TRIGGERS[cs].map(t=>`<li>${t}</li>`).join('')}</ul></div></div>
+<div class="e-card"><div class="e-body"><ul class="trigger-list">${c.TRIGGERS[cs].map(t=>`<li>${t}</li>`).join('')}</ul></div></div>
 
 <div class="divider"></div>
-${sl('Общие рекомендации')}
+${sl(ri('s_gen_rec'))}
 <div class="e-card"><div class="e-body"><ul class="gen-rec-list">
   <li>Пейте тёплую воду до 45°C (на 30 кг — 1 литр воды)</li>
   <li>Ежедневно ходите от 6 км со скоростью 5 км/час и выше</li>
