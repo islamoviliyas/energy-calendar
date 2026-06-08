@@ -7,9 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#B8892A;--gold-light:#D4A84B;--gold-pale:#F8F0DC;--radius:14px;--transition:0.3s ease;}
-[data-theme="light"]{--bg:#F6F4EF;--bg2:#FFFFFF;--bg3:#F0EDE6;--bg4:#E8E4D8;--text:#1A1814;--text2:#3A3830;--text3:#8A8680;--border:rgba(0,0,0,0.08);--border-gold:rgba(184,137,42,0.3);--shadow:0 2px 20px rgba(0,0,0,0.06);--do-bg:#F0F7F2;--do-border:#B8DEC4;--do-text:#1E5C34;--dont-bg:#FBF0F0;--dont-border:#E8B8B8;--dont-text:#7A1E1E;--plus-bg:#F0F7F2;--plus-border:#B8DEC4;--plus-text:#1E5C34;--minus-bg:#FBF0F0;--minus-border:#E8B8B8;--minus-text:#7A1E1E;--tag-green-bg:#E8F7EE;--tag-green-text:#1E5C34;--tag-red-bg:#FBF0F0;--tag-red-text:#7A1E1E;--tag-blue-bg:#EEF4FB;--tag-blue-text:#1E3C6A;--matrix-empty-bg:#F6F4EF;--matrix-empty-border:rgba(0,0,0,0.1);--matrix-empty-text:#C0BDB0;--matrix-full-bg:#F8F0DC;--matrix-full-border:#B8892A;--matrix-full-text:#1A1814;--line-active-bg:#F8F0DC;--line-active-border:rgba(184,137,42,0.4);--how-bg:#FFFBF0;--how-border:rgba(184,137,42,0.25);--how-title:#8B6010;--energy-present-bg:#F0F7F2;--energy-present-border:#B8DEC4;--energy-present-text:#1E5C34;--energy-absent-bg:#FBF0F0;--energy-absent-border:#E8B8B8;--energy-absent-text:#C06060;}
-[data-theme="dark"]{--bg:#0E0D0A;--bg2:#181610;--bg3:#201E16;--bg4:#28261C;--text:#F0EDE4;--text2:#C0BDB0;--text3:#6A6660;--border:rgba(255,255,255,0.07);--border-gold:rgba(184,137,42,0.35);--shadow:0 2px 24px rgba(0,0,0,0.35);--do-bg:#0E1C12;--do-border:#1E4228;--do-text:#6ACC84;--dont-bg:#1C0E0E;--dont-border:#421E1E;--dont-text:#E08080;--plus-bg:#0E1C12;--plus-border:#1E4228;--plus-text:#6ACC84;--minus-bg:#1C0E0E;--minus-border:#421E1E;--minus-text:#E08080;--tag-green-bg:rgba(30,92,52,0.2);--tag-green-text:#6ACC84;--tag-red-bg:rgba(122,30,30,0.2);--tag-red-text:#E08080;--tag-blue-bg:rgba(30,60,106,0.25);--tag-blue-text:#7AAAE0;--matrix-empty-bg:#141208;--matrix-empty-border:rgba(255,255,255,0.08);--matrix-empty-text:#4A4840;--matrix-full-bg:rgba(184,137,42,0.15);--matrix-full-border:#B8892A;--matrix-full-text:#F0EDE4;--line-active-bg:rgba(184,137,42,0.1);--line-active-border:rgba(184,137,42,0.35);--how-bg:rgba(184,137,42,0.06);--how-border:rgba(184,137,42,0.2);--how-title:#D4A84B;--energy-present-bg:rgba(30,92,52,0.15);--energy-present-border:#1E4228;--energy-present-text:#6ACC84;--energy-absent-bg:rgba(122,30,30,0.15);--energy-absent-border:#421E1E;--energy-absent-text:#E08080;}
-
+[data-theme="light"]{--bg:#F6F4EF;--bg2:#FFFFFF;--bg3:#F0EDE6;--text:#1A1814;--text2:#3A3830;--text3:#8A8680;--border:rgba(0,0,0,0.08);--border-gold:rgba(184,137,42,0.3);--shadow:0 2px 20px rgba(0,0,0,0.06);--do-bg:#F0F7F2;--do-border:#B8DEC4;--do-text:#1E5C34;--dont-bg:#FBF0F0;--dont-border:#E8B8B8;--dont-text:#7A1E1E;--plus-bg:#F0F7F2;--plus-border:#B8DEC4;--plus-text:#1E5C34;--minus-bg:#FBF0F0;--minus-border:#E8B8B8;--minus-text:#7A1E1E;--tag-green-bg:#E8F7EE;--tag-green-text:#1E5C34;--tag-red-bg:#FBF0F0;--tag-red-text:#7A1E1E;--tag-blue-bg:#EEF4FB;--tag-blue-text:#1E3C6A;--matrix-empty-bg:#F6F4EF;--matrix-empty-border:rgba(0,0,0,0.1);--matrix-empty-text:#C0BDB0;--matrix-full-bg:#F8F0DC;--matrix-full-border:#B8892A;--matrix-full-text:#1A1814;--line-active-bg:#F8F0DC;--line-active-border:rgba(184,137,42,0.4);--how-bg:#FFFBF0;--how-border:rgba(184,137,42,0.25);--how-title:#8B6010;--energy-present-bg:#F0F7F2;--energy-present-border:#B8DEC4;--energy-present-text:#1E5C34;--energy-absent-bg:#FBF0F0;--energy-absent-border:#E8B8B8;--energy-absent-text:#C06060;}
+[data-theme="dark"]{--bg:#0E0D0A;--bg2:#181610;--bg3:#201E16;--text:#F0EDE4;--text2:#C0BDB0;--text3:#6A6660;--border:rgba(255,255,255,0.07);--border-gold:rgba(184,137,42,0.35);--shadow:0 2px 24px rgba(0,0,0,0.35);--do-bg:#0E1C12;--do-border:#1E4228;--do-text:#6ACC84;--dont-bg:#1C0E0E;--dont-border:#421E1E;--dont-text:#E08080;--plus-bg:#0E1C12;--plus-border:#1E4228;--plus-text:#6ACC84;--minus-bg:#1C0E0E;--minus-border:#421E1E;--minus-text:#E08080;--tag-green-bg:rgba(30,92,52,0.2);--tag-green-text:#6ACC84;--tag-red-bg:rgba(122,30,30,0.2);--tag-red-text:#E08080;--tag-blue-bg:rgba(30,60,106,0.25);--tag-blue-text:#7AAAE0;--matrix-empty-bg:#141208;--matrix-empty-border:rgba(255,255,255,0.08);--matrix-empty-text:#4A4840;--matrix-full-bg:rgba(184,137,42,0.15);--matrix-full-border:#B8892A;--matrix-full-text:#F0EDE4;--line-active-bg:rgba(184,137,42,0.1);--line-active-border:rgba(184,137,42,0.35);--how-bg:rgba(184,137,42,0.06);--how-border:rgba(184,137,42,0.2);--how-title:#D4A84B;--energy-present-bg:rgba(30,92,52,0.15);--energy-present-border:#1E4228;--energy-present-text:#6ACC84;--energy-absent-bg:rgba(122,30,30,0.15);--energy-absent-border:#421E1E;--energy-absent-text:#E08080;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;min-height:100vh;transition:background var(--transition),color var(--transition);line-height:1.6;}
 .wrap{max-width:880px;margin:0 auto;padding:0 24px 80px;}
@@ -17,7 +16,10 @@ header{display:flex;align-items:center;justify-content:space-between;padding:28p
 .logo h1{font-family:'Playfair Display',serif;font-size:20px;font-weight:500;}
 .logo h1 span{color:var(--gold);}
 .logo p{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-top:4px;}
-.header-right{display:flex;align-items:center;gap:10px;}
+.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.lang-switch{display:flex;align-items:center;gap:2px;background:var(--bg3);border:1px solid var(--border);border-radius:40px;padding:3px;}
+.lang-btn{background:transparent;border:none;border-radius:30px;padding:4px 10px;font-size:11px;font-weight:500;color:var(--text3);cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.2s;}
+.lang-btn.active{background:var(--gold);color:#fff;}
 .back-btn{padding:7px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:40px;color:var(--text2);font-family:'Inter',sans-serif;font-size:12px;cursor:pointer;text-decoration:none;transition:all var(--transition);}
 .back-btn:hover{border-color:var(--gold);color:var(--gold);}
 .theme-btn{display:flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border);border-radius:40px;padding:7px 14px;cursor:pointer;font-size:11px;color:var(--text2);font-family:'Inter',sans-serif;transition:all var(--transition);}
@@ -106,143 +108,25 @@ input[type="text"].name-input{min-width:160px;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 #psycho-results{animation:fadeUp 0.4s ease both;}
 @media(max-width:640px){.pm-grid,.grid-2{grid-template-columns:1fr;}.energy-grid{grid-template-columns:repeat(3,1fr);}.input-card{padding:22px 16px;}}
-
-/* ══════════════════════════════════════
-   PDF / PRINT СТИЛИ — плотная верстка
-   ══════════════════════════════════════ */
-@media print {
-  @page {
-    size: A4;
-    margin: 12mm 14mm 12mm 14mm;
-  }
-
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  /* Скрываем лишнее */
-  header, .btn-pdf, .btn-main, .theme-btn, .back-btn,
-  .limit-bar, #psycho-preview, .input-card { display: none !important; }
-
-  body {
-    background: #F6F4EF !important;
-    font-size: 11px !important;
-    line-height: 1.4 !important;
-  }
-
-  .wrap {
-    max-width: 100% !important;
-    padding: 0 !important;
-  }
-
-  /* Убираем анимации и тени */
-  #psycho-results { animation: none !important; }
-  .e-card { box-shadow: none !important; }
-
-  /* Компактные отступы */
-  .e-card { margin-bottom: 6px !important; }
-  .e-body { padding: 10px 12px !important; gap: 8px !important; }
-  .divider { margin: 8px 0 !important; }
-  .section-label { margin-bottom: 6px !important; font-size: 8px !important; }
-  .big-nums-row { margin-bottom: 10px !important; }
-  .big-num-card { padding: 10px 8px !important; }
-  .bn-num { font-size: 32px !important; }
-  .name-display { font-size: 18px !important; margin-bottom: 2px !important; }
-  .name-sub { margin-bottom: 10px !important; }
-
-  /* Текст компактнее */
-  .e-desc, .e-desc pre { font-size: 11px !important; line-height: 1.5 !important; }
-  .pm-text { font-size: 11px !important; line-height: 1.45 !important; }
-  .pm-box { padding: 8px 10px !important; }
-  .pm-title { font-size: 8px !important; margin-bottom: 3px !important; }
-
-  /* Grid — 2 колонки сохраняем */
-  .pm-grid { gap: 6px !important; }
-  .grid-2 { gap: 6px !important; }
-
-  /* Матрица компактнее */
-  .matrix-wrap { grid-template-columns: repeat(3, 44px) !important; gap: 4px !important; }
-  .matrix-cell { width: 44px !important; height: 44px !important; font-size: 16px !important; }
-
-  /* Энергии компактнее */
-  .energy-grid { gap: 5px !important; margin-bottom: 6px !important; }
-  .energy-cell { padding: 8px 4px !important; }
-  .ec-num { font-size: 20px !important; }
-  .ec-label { font-size: 7px !important; }
-
-  /* Линии */
-  .line-item { padding: 7px 10px !important; margin-bottom: 4px !important; }
-  .line-name { font-size: 11px !important; }
-  .line-desc { font-size: 10px !important; }
-
-  /* Триггеры */
-  .trigger-list li { padding: 5px 9px !important; font-size: 11px !important; }
-  .trigger-list { gap: 3px !important; }
-
-  /* Совместимость */
-  .compat-row { margin-bottom: 4px !important; }
-  .compat-item { font-size: 10px !important; padding: 2px 8px !important; }
-
-  /* Рекомендации */
-  .gen-rec-list li { padding: 6px 10px !important; font-size: 11px !important; }
-  .gen-rec-list { gap: 4px !important; }
-
-  /* how-card */
-  .how-card { padding: 9px 11px !important; margin-bottom: 5px !important; }
-  .how-title { font-size: 9px !important; margin-bottom: 4px !important; }
-  .how-body { font-size: 10.5px !important; line-height: 1.55 !important; }
-
-  /* prof-card */
-  .prof-card { padding: 10px 12px !important; margin-bottom: 6px !important; }
-
-  /* Контроль разрывов страниц */
-  .e-card { break-inside: avoid; }
-  .pm-box { break-inside: avoid; }
-  .how-card { break-inside: avoid; }
-  .line-item { break-inside: avoid; }
-  .prof-card { break-inside: avoid; }
-  .big-num-card { break-inside: avoid; }
-
-  /* Разделы которые лучше не разрывать */
-  .big-nums-row { break-inside: avoid; }
-  .pm-grid { break-inside: avoid; }
-  .matrix-wrap { break-inside: avoid; }
-  .energy-grid { break-inside: avoid; }
-
-  /* Цвета для print */
-  .pm-box.plus { background: #F0F7F2 !important; border-color: #B8DEC4 !important; }
-  .pm-box.minus { background: #FBF0F0 !important; border-color: #E8B8B8 !important; }
-  .big-num-card { background: #F8F0DC !important; border-color: #B8892A !important; }
-  .bn-num { color: #B8892A !important; }
-  .line-item { background: #F8F0DC !important; border-color: rgba(184,137,42,0.4) !important; }
-  .prof-card { background: #EEF4FB !important; border-color: #B8CDE8 !important; }
-  .energy-cell.present { background: #F0F7F2 !important; border-color: #B8DEC4 !important; }
-  .energy-cell.absent { background: #FBF0F0 !important; border-color: #E8B8B8 !important; }
-  .tag-green { background: #E8F7EE !important; color: #1E5C34 !important; }
-  .tag-red { background: #FBF0F0 !important; color: #7A1E1E !important; }
-  .how-card { background: #FFFBF0 !important; border-color: rgba(184,137,42,0.25) !important; }
-  .matrix-cell.present { background: #F8F0DC !important; border-color: #B8892A !important; }
-  .c-best { background: #E8F7EE !important; color: #1E5C34 !important; }
-  .c-good { background: #EEF4FB !important; color: #1E3C6A !important; }
-  .c-neutral { background: #FDF6E8 !important; color: #7A5010 !important; }
-  .c-bad { background: #FBF0F0 !important; color: #7A1E1E !important; }
-  .section-label { color: #8A8680 !important; }
-  .name-display { color: #B8892A !important; }
-  .gold, .line-name { color: #B8892A !important; }
-}
+@media print{@page{size:A4;margin:12mm 14mm;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}header,.btn-pdf,.btn-main,.theme-btn,.back-btn,.limit-bar,#psycho-preview,.input-card{display:none!important;}body{background:#F6F4EF!important;font-size:11px!important;}#psycho-results{animation:none!important;}.e-card{box-shadow:none!important;break-inside:avoid;}.e-body{padding:10px 12px!important;gap:8px!important;}.divider{margin:8px 0!important;}.section-label{margin-bottom:6px!important;font-size:8px!important;}.big-num-card{background:#F8F0DC!important;border-color:#B8892A!important;padding:10px 8px!important;}.bn-num{font-size:32px!important;color:#B8892A!important;}.pm-box.plus{background:#F0F7F2!important;border-color:#B8DEC4!important;}.pm-box.minus{background:#FBF0F0!important;border-color:#E8B8B8!important;}.pm-box{padding:8px 10px!important;}.line-item{background:#F8F0DC!important;border-color:rgba(184,137,42,0.4)!important;break-inside:avoid;}.energy-cell.present{background:#F0F7F2!important;border-color:#B8DEC4!important;}.energy-cell.absent{background:#FBF0F0!important;border-color:#E8B8B8!important;}.prof-card{background:#EEF4FB!important;border-color:#B8CDE8!important;break-inside:avoid;}.how-card{background:#FFFBF0!important;break-inside:avoid;}.tag-green{background:#E8F7EE!important;color:#1E5C34!important;}.tag-red{background:#FBF0F0!important;color:#7A1E1E!important;}.matrix-cell.present{background:#F8F0DC!important;border-color:#B8892A!important;}.c-best{background:#E8F7EE!important;color:#1E5C34!important;}.c-good{background:#EEF4FB!important;color:#1E3C6A!important;}.c-neutral{background:#FDF6E8!important;color:#7A5010!important;}.c-bad{background:#FBF0F0!important;color:#7A1E1E!important;}.trigger-list li{background:#F0EDE6!important;}.gen-rec-list li{background:#F0EDE6!important;}.name-display{color:#B8892A!important;}.section-label{color:#8A8680!important;}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="translations-content.js"></script>
 </head>
 <body>
 <div class="wrap">
 <header>
   <div class="logo">
-    <h1>Психоанализ <span>личности</span></h1>
+    <h1 id="logo-h1">Психоанализ <span>личности</span></h1>
     <p>Digital Consulting</p>
   </div>
   <div class="header-right">
-    <a href="cabinet.html" class="back-btn">← Кабинет</a>
+    <div class="lang-switch">
+      <button class="lang-btn active" id="lang-ru" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="lang-kz" onclick="setLang('kz')">ҚЗ</button>
+    </div>
+    <a href="cabinet.html" class="back-btn" id="back-btn">← Кабинет</a>
     <button class="theme-btn" onclick="toggleTheme()"><span id="theme-icon">🌙</span> <span id="theme-label">Тёмная тема</span></button>
   </div>
 </header>
@@ -253,11 +137,11 @@ input[type="text"].name-input{min-width:160px;}
 </div>
 
 <div class="input-card">
-  <h2>Психоанализ личности</h2>
-  <p class="sub">Введите имя и дату рождения для персонального анализа</p>
+  <h2 id="psycho-h2">Психоанализ личности</h2>
+  <p class="sub" id="psycho-sub">Введите имя и дату рождения для персонального анализа</p>
   <div id="psycho-preview" class="preview-row" style="display:none;">
-    <div class="preview-badge"><div class="pb-label">Число личности</div><div class="pb-val" id="p-cs-val">—</div></div>
-    <div class="preview-badge"><div class="pb-label">Миссия</div><div class="pb-val" id="p-m-val">—</div></div>
+    <div class="preview-badge"><div class="pb-label" id="lbl-cs">Число личности</div><div class="pb-val" id="p-cs-val">—</div></div>
+    <div class="preview-badge"><div class="pb-label" id="lbl-mis">Миссия</div><div class="pb-val" id="p-m-val">—</div></div>
   </div>
   <div class="input-row">
     <input type="text" class="name-input" id="psycho-name" placeholder="Имя клиента">
@@ -269,90 +153,183 @@ input[type="text"].name-input{min-width:160px;}
 
 <div id="psycho-results"></div>
 </div>
-
 <script>
-const PSYCHO_LIMIT = 5;
+var currentLang = localStorage.getItem('lang') || 'ru';
 
-// Глобальный профиль мастера (загружается при старте)
-let masterProfile = null;
+// ── RU Data (kept locally for fallback) ──
+var ENERGY_COMPAT={1:{best:[2],good:[3],neutral:[5],bad:[4,6,7,8,9]},2:{best:[1],good:[2,3,9],neutral:[],bad:[4,5,6,7,8]},3:{best:[9],good:[1,2,3],neutral:[4,7,8],bad:[5,6]},4:{best:[7],good:[4,5,6,8],neutral:[3],bad:[1,2,9]},5:{best:[5],good:[4,6,7,8],neutral:[9,1],bad:[2,3]},6:{best:[6],good:[4,5,7,8],neutral:[9],bad:[1,2,3]},7:{best:[4],good:[5,6],neutral:[3,9],bad:[1,2,7,8]},8:{best:[6],good:[4,5],neutral:[3],bad:[1,2,7,8,9]},9:{best:[6],good:[4,5],neutral:[3],bad:[1,2,7,8,9]}};
+var ALL_LINES=[{name:'Линия 1-9: Программа эгоцентризма',nums:[1,9],desc:'«Я хочу, чтобы все думали и делали только так, как я хочу»'},{name:'Линия здоровья (1-2-3)',nums:[1,2,3],desc:'1 — психическое состояние, 2 — умение чувствовать себя, 3 — сам себе лекарь'},{name:'Линия достижений (3-6-9)',nums:[3,6,9],desc:'3 — механизм реализации целей, 6 — видение конечного результата, 9 — возможности и действия'},{name:'Линия 7-8-9: Трансформации и бесконечных денег',nums:[7,8,9],desc:'Человек, обладающий этой линией, может трансформироваться за одну ночь.'},{name:'Линия 4-8: Знания → Быстрая карма',nums:[4,8],desc:'4 — знания/опыт, 8 — карма. Знания перетекают в быструю карму.'},{name:'Линия 6-8: Отдых внутри сознания',nums:[6,8],desc:'Человек способен быстро восстанавливать свои силы.'},{name:'Линия 6-2: Духовное богатство',nums:[6,2],desc:'Человек рано или поздно станет богатым, но деньги придут только при развитии сознания.'},{name:'Линия 6-9: Конечный результат',nums:[6,9],desc:'Видение конечного результата, умение завершать дела.'},{name:'Линия 1-4-7: Деньги и сексуальность',nums:[1,4,7],desc:'1 — принятие решения, 4 — постановка целей и родовые знания, 7 — сексуальность/харизма/гениальность'},{name:'Линия 4-5-6: Интеллект',nums:[4,5,6],desc:'4 — родовые знания, 5 — технический интеллект/логика, 6 — мудрость'},{name:'Линия 3-5-7: Линия успеха',nums:[3,5,7],desc:'3 — анализ, 5 — деловая коммуникация, 7 — быстрая реализация идей/гениальность'},{name:'Линия 2-5-8: Семейный очаг',nums:[2,5,8],desc:'2 — понимание/чувственность, 5 — правильная коммуникация, 8 — глубинная мудрость'},{name:'Линия 1-5-9: Коммуникация',nums:[1,5,9],desc:'1 — принятие решения на дружбу, 5 — коммуникация, 9 — эмоции'},{name:'Линия 4-2: Знания → Реальность',nums:[4,2],desc:'2 — понимание реальности, 4 — знания. Знания перетекают в реальность.'}];
+// Lines translated (EN)
+var ALL_LINES_EN=[{name:'Line 1-9: Egocentrism Program',nums:[1,9],desc:'"I want everyone to think and act only as I want"'},{name:'Health Line (1-2-3)',nums:[1,2,3],desc:'1 — mental state, 2 — ability to sense and understand oneself, 3 — one\'s own healer'},{name:'Achievement Line (3-6-9)',nums:[3,6,9],desc:'3 — goal realisation mechanism through analysis, 6 — vision of the final result, 9 — opportunities and actions'},{name:'Line 7-8-9: Transformation & Endless Money',nums:[7,8,9],desc:'A person with this line can transform overnight.'},{name:'Line 4-8: Knowledge → Fast Karma',nums:[4,8],desc:'4 — knowledge/experience, 8 — karma. Knowledge flows into fast karma.'},{name:'Line 6-8: Inner Rest',nums:[6,8],desc:'A person can quickly restore their energy.'},{name:'Line 6-2: Spiritual Wealth',nums:[6,2],desc:'The person will eventually become wealthy, but money comes only through development of consciousness.'},{name:'Line 6-9: Final Result',nums:[6,9],desc:'Vision of the final result, ability to complete tasks.'},{name:'Line 1-4-7: Money & Sexuality',nums:[1,4,7],desc:'1 — decision making, 4 — goal setting and ancestral knowledge, 7 — sexuality/charisma/genius'},{name:'Line 4-5-6: Intellect',nums:[4,5,6],desc:'4 — ancestral knowledge, 5 — technical intelligence/logic, 6 — wisdom'},{name:'Line 3-5-7: Success Line',nums:[3,5,7],desc:'3 — analysis, 5 — business communication, 7 — rapid idea realisation/genius'},{name:'Line 2-5-8: Family Hearth',nums:[2,5,8],desc:'2 — understanding/sensitivity, 5 — proper communication, 8 — deep wisdom'},{name:'Line 1-5-9: Communication',nums:[1,5,9],desc:'1 — decision to befriend, 5 — communication, 9 — emotions'},{name:'Line 4-2: Knowledge → Reality',nums:[4,2],desc:'2 — understanding reality, 4 — knowledge. Knowledge flows into reality.'}];
+// Lines KZ
+var ALL_LINES_KZ=[{name:'1-9 Сызығы: Эгоцентризм бағдарламасы',nums:[1,9],desc:'«Мен барлығының тек мен қалағандай ойлауын және жасауын қалаймын»'},{name:'Денсаулық сызығы (1-2-3)',nums:[1,2,3],desc:'1 — психикалық күй, 2 — өзін сезіну мен түсіну қабілеті, 3 — өзіне-өзі дәрігер'},{name:'Жетістіктер сызығы (3-6-9)',nums:[3,6,9],desc:'3 — талдау арқылы мақсат іске асыру механизмі, 6 — соңғы нәтижені бейнелеу, 9 — мүмкіндіктер мен іс-қимылдар'},{name:'7-8-9 Сызығы: Трансформация және шексіз ақша',nums:[7,8,9],desc:'Бұл сызығы бар адам бір түнде трансформациялана алады.'},{name:'4-8 Сызығы: Білім → Жылдам карма',nums:[4,8],desc:'4 — білім/тәжірибе, 8 — карма. Білім жылдам кармаға айналады.'},{name:'6-8 Сызығы: Сана ішіндегі демалыс',nums:[6,8],desc:'Адам күштерін жылдам қалпына келтіре алады.'},{name:'6-2 Сызығы: Рухани байлық',nums:[6,2],desc:'Адам ерте ме, кеш пе бай болады, бірақ ақша тек сана дамытқанда келеді.'},{name:'6-9 Сызығы: Соңғы нәтиже',nums:[6,9],desc:'Соңғы нәтижені бейнелеу, істерді аяқтай білу.'},{name:'1-4-7 Сызығы: Ақша және сексуалдылық',nums:[1,4,7],desc:'1 — шешім қабылдау, 4 — мақсат қою және ата-бабалар білімі, 7 — сексуалдылық/харизма/данышпандық'},{name:'4-5-6 Сызығы: Интеллект',nums:[4,5,6],desc:'4 — ата-бабалар білімі, 5 — техникалық интеллект/логика, 6 — даналық'},{name:'3-5-7 Сызығы: Табыс сызығы',nums:[3,5,7],desc:'3 — талдау, 5 — іскери коммуникация, 7 — идеяларды жылдам іске асыру/данышпандық'},{name:'2-5-8 Сызығы: Отбасылық ошақ',nums:[2,5,8],desc:'2 — түсіністік/сезімталдық, 5 — дұрыс коммуникация, 8 — тереңгі даналық'},{name:'1-5-9 Сызығы: Коммуникация',nums:[1,5,9],desc:'1 — достыққа шешім, 5 — коммуникация, 9 — эмоциялар'},{name:'4-2 Сызығы: Білім → Шындық',nums:[4,2],desc:'2 — шындықты түсіну, 4 — білім. Білім шындыққа айналады.'}];
+var COLOR_MAP={'Жёлтый':'#fbbf24','Yellow':'#fbbf24','Сары':'#fbbf24','Серебристый':'#9ca3af','Silver':'#9ca3af','Күміс':'#9ca3af','Оранжевый':'#f97316','Orange':'#f97316','Қызғылт сары':'#f97316','Серо-коричневый':'#92400e','Grey-brown':'#92400e','Сұр-қоңыр':'#92400e','Зелёный':'#22c55e','Green':'#22c55e','Жасыл':'#22c55e','Сиреневый':'#a855f7','Lilac':'#a855f7','Сирень':'#a855f7','Серо-лиловый':'#7c3aed','Grey-lilac':'#7c3aed','Сұр-сирень':'#7c3aed','Чёрный/тёмно-синий':'#1e3a5f','Black/dark blue':'#1e3a5f','Қара/қою-көк':'#1e3a5f','Красный':'#ef4444','Red':'#ef4444','Қызыл':'#ef4444'};
 
-async function loadMasterProfile(){
-  const urlParams = new URLSearchParams(window.location.search);
-  const masterId = urlParams.get('master');
-  if(!masterId) return;
-  try {
-    const { data } = await getClient().from('profiles').select('plan,psycho_count,name').eq('id', masterId).single();
-    if(data) masterProfile = data;
-    initLimitBar();
-  } catch(e){}
+// RU fallback labels
+var RU_UI = {
+  logo:'Психоанализ <span>личности</span>',
+  back:'← Кабинет',
+  theme_dark:'Тёмная тема',theme_light:'Светлая тема',
+  h2:'Психоанализ личности',sub:'Введите имя и дату рождения для персонального анализа',
+  name_ph:'Имя клиента',dob_ph:'ДД.ММ.ГГГГ',btn:'Получить анализ',link_btn:'🔗 Создать ссылку',
+  cs_lbl:'Число личности',mis_lbl:'Миссия',
+  s_cs:'Число личности',s_char:'Характеристики',s_plus_minus:'В плюсе и в минусе',
+  s_destroy:'Разрушаетесь от',s_diseases:'Заболевания при страдании ЭГО',
+  s_prof33:'Профориентация до 33 лет',s_mission:'Миссия',s_prof_mission:'Профориентация по миссии',
+  s_compat:'Совместимость по числу личности',s_colors:'Цвета и символы',
+  s_matrix:'Матрица чисел',s_active_lines:'Активные линии в вашей матрице',
+  s_no_lines_text:'В вашей матрице нет полных линий. Все качества развиваются через жизненный опыт.',
+  s_energies:'Энергии в матрице',s_how_to:'Как наработать отсутствующие энергии',
+  s_triggers:'Триггеры — что раздражает',s_gen_rec:'Общие рекомендации',
+  present:'✓ Есть',absent:'✗ Нет',present_e:'Присутствующие энергии',absent_e:'Отсутствующие энергии',
+  all_e:'✅ В вашей матрице присутствуют все энергии!',
+  compat_best:'Лучшая:',compat_good:'Хорошая:',compat_neutral:'Нейтральная:',compat_bad:'Отрицательная:',
+  color_num:'Цвет числа личности',color_clothes:'Цветовая гамма одежды',color_wallet:'Цвет кошелька / сумки',week_day:'Ваш день недели',
+  matrix_hint:'Числа, присутствующие в дате рождения, выделены золотым',
+  dobrata:'Доброта',soul:'Душа реализуется',ego_vec:'Вектор ЭГО направлен',cs_wants:'Число личности хочет',
+  cs_goal:'Цель числа личности',ego_joy:'ЭГО наслаждается от',
+  competence:'Личность / Компетентность',industry:'Отрасль / Потребность',activity:'Деятельность',
+  proftype:'Тип личности',rec_spheres:'Рекомендуемые сферы и институты',
+  plus_lbl:'В плюсе',minus_lbl:'В минусе',mission_goal:'Цель миссии',
+  analysis_sub:'Персональный анализ · Digital Consulting',
+  gen_1:'Стремитесь к выполнению своей Жизненной задачи и не делите людей',
+  gen_2:'Пейте тёплую воду до 45°C (на 30 кг веса — 1 литр воды)',
+  gen_3:'Ежедневно ходите от 6 км со скоростью 5 км/час и выше',
+  gen_4:'Употребляйте кислые фрукты и овощи в течение дня (вырабатывают серотонин)',
+  gen_5:'Принимайте завтрак через 1 час после ходьбы (желательно фрукты)',
+  gen_6:'Посещайте баню не реже 2-х раз в неделю',
+  gen_money:'Деньги:',gen_money_text:'работайте, ешьте, говорите по телефону лицом на север. Спите головой на юг. Сейф и наличные деньги храните в северной части помещения',
+  gen_contracts:'Контракты:',gen_contracts_text:'читайте лицом на север, после чего поверните корпус на восток и ставьте подпись',
+  limit_prefix:'Использовано',limit_mid:'из',limit_suffix:'бесплатных анализов',
+  limit_title:'Бесплатный лимит исчерпан',limit_sub:'Вы использовали все бесплатные психоанализы. Для полного доступа свяжитесь с администратором.',
+  back_cabinet:'← Вернуться в кабинет',
+  link_ready:'Ссылка готова ✦',link_send:'Отправьте эту ссылку',link_client:'клиенту',
+  link_valid:'Ссылка действует бессрочно и открывается на любом устройстве',
+  link_copied:'Скопировано ✓',copy_link:'Скопировать ссылку',close:'Закрыть'
+};
+
+// RU content fallback (from original)
+var PERSONALITY_RU={1:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе (позитиве) или в минусе (негативе). В плюсе у человека будет один набор качеств, а в минусе — соответственно противоположный. Ваша реализация в жизни напрямую будет зависеть от того, в каком состоянии Вы находитесь.\n\nВы — сильная личность. Самостоятельный, независимый и амбициозный человек. Вектор сознания направлен только на себя. Вы не любите, когда Вам указывают, что делать и как. Ваш внутренний девиз: «Я сам(а) всё знаю». Вы — первопроходец, пионер — идёте туда, куда другие боятся идти.\n\nВ плюсе: самостоятельность, смелость, целеустремлённость, уверенность. В минусе: эгоизм, агрессивность, властность, деспотизм.\n\nДля успешной реализации в жизни Вам необходимо работать над собственным эгоизмом!`,2:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе (позитиве) или в минусе (негативе).\n\nВы — тонкий психолог. Умеете чувствовать людей. Вектор сознания направлен на желание понять другого человека. В Вас заложен дар — понимать людей и ситуации лучше, чем другие.\n\nВ плюсе: понимание, дипломатичность, интуиция, мягкость. В минусе: депрессия, сомнения, двуличность, манипулятивность.\n\nДля успешной реализации в жизни Вам необходимо научиться понимать других людей!`,3:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе или в минусе.\n\nВы — прирождённый наставник и аналитик. Вектор сознания направлен на анализ и управление. Вы очень умный, рассудительный, справедливый человек. Знания и интеллект — Ваши главные активы.\n\nВ плюсе: аналитический склад ума, наставничество, справедливость, мудрость. В минусе: холодность, расчётливость, жёсткость, несправедливость.\n\nДля успешной реализации в жизни Вам необходимо развивать мудрость наставника!`,4:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе или в минусе.\n\nВы человек с креативным мышлением, новатор, трансформатор и борец за справедливость. Вы очень добрый человек. Рождены отдавать и при этом для Вас важно, чтобы всё было по-честному. Вектор сознания направлен на поиск целей.\n\nКомфортнее всего Вы чувствуете себя в состоянии стабильности. В минусе: неудовлетворённость, разрушение, отчуждённость, апатия.\n\nДля успешной реализации в жизни Вам необходимо изучать законы позитивного мышления!`,5:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе или в минусе.\n\nУ Вас отлично работает логика, ум и интеллект — действуете исходя из целесообразности. Свобода для Вас дороже денег. У Вас заложена высокая коммуникация, поэтому в сфере торговли и бизнеса Вам нет равных.\n\nВектор сознания направлен на логику: правильно/неправильно, логично/нелогично. Преобладает изысканный вкус и чувство стиля.\n\nВаша задача — увеличение любви.`,6:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе или в минусе.\n\nВы — бриллиант общества. Творец наделил Вас энергиями мудрости и сексуальности. В сравнении с другими людьми Вы легко привлекаете инвестиции и получаете материальные блага.\n\nВектор сознания направлен на свой личный комфорт, любовь и секс. Душа реализуется через творчество. Вы полны молодости, учтивы, любите роскошь, артистичны.\n\nВ минусе: мстительность, неразборчивость в отношениях.`,7:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе или в минусе.\n\nУ Вас с рождения заложена харизма, 100% интуиция и сексуальная энергия. Вектор сознания направлен на признание Ваших действий. Если работаете над собой и поднимаете энергию в голову — становитесь гениальным человеком.\n\n97% всей Вашей энергии сосредоточено в первой чакре, поэтому если её не поднимать в голову, будут проявляться хаос в голове, рассеянность.\n\nДля успешной реализации в жизни Вам необходимо жить в дисциплине ума!`,8:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе или в минусе.\n\nУ Вас заложены такие качества, как: контроль, скрупулёзность, материализм и реализм. Вектор сознания направлен на контроль за материальным миром. Душа реализуется через труд — чем труднее работа, тем яснее ум.\n\nВ минусе: сомнения, недоверие обществу, тотальный контроль, тунеядство и отшельничество.\n\nДля успешной реализации в жизни Вам необходимо уйти от контроля и прийти к служению людям!`,9:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе или в минусе.\n\nВы человек действия, обладаете сверхэмоциональным, достаточно вспыльчивым характером. Вектор сознания направлен только на победу.\n\nВ плюсе: стремительность, спортивность, динамичность, воинственность. В минусе: ярость, паранойя, наивность.\n\nДля успешной реализации в жизни Вам необходимо уйти от эмоций и действовать исходя из целесообразности!`};
+var DOBROTAS_RU={1:'Щедрая (должна измениться на целесообразную)',2:'Мистическая (должна измениться на заботливую)',3:'Холодная (должна измениться на добрую)',4:'Самая добрая (должна измениться на доброту через анализ)',5:'Неизвестная (должна измениться на безусловную любовь)',6:'Избирательная (должна измениться на доброту через духовность)',7:'Агрессивная (доброты нет, есть агрессия)',8:'Эгоистическая (должна измениться на отзывчивую)',9:'«Ты мне — я тебе» (должна измениться на щедрую)'};
+var SOUL_RU={1:'Через руководство или автономный труд',2:'Через отношения',3:'Через наставничество',4:'Везде через креатив',5:'Через технический интеллект',6:'Через творчество',7:'Везде через йогу и дисциплину тела',8:'Через труд (любая среда)',9:'Через идею'};
+var EGO_VEC_RU={1:'Только на себя',2:'На желание понять другого человека и ситуацию',3:'На анализ и управление',4:'На поиск цели',5:'На логику',6:'На свой комфорт',7:'На признание действий',8:'На контроль и результат',9:'На победу'};
+var WANTS_RU={1:'Власти, независимости, признания значимости',2:'Понимания, отношений',3:'Анализировать, управлять, заботиться',4:'Честности, достижения целей, креатива',5:'Свободы, пользы для себя',6:'Комфорта, любви, наслаждения',7:'Признания действий, быстрой реализации идей',8:'Контролировать материальный мир, результата',9:'Помогать, авантюры, победы'};
+var GOAL_RU={1:'Материальная (власть, карьера, деньги)',2:'Морально-кармическая (отношения)',3:'Материальная (анализ, управление)',4:'Морально-кармическая (взаимоотношения)',5:'Холодная коммуникация (для бизнеса)',6:'Мокша (высвобождение сексуальной энергии, комфорт)',7:'Духовная (развитие и наполнение для души)',8:'Материальная (деньги, недвижимость)',9:'Морально-кармическая (отношения)'};
+var EGO_JOY_RU={1:'Собственной индивидуальности и реализации своего эго',2:'Отношений, в которых есть взаимопонимание',3:'Наставничества и приобретения знания',4:'Того, что отдаёт',5:'Свободы, реализации технического интеллекта, коммуникации',6:'Собственного комфорта',7:'Признания',8:'Пересчёта денег, контроля, результата',9:'Побед и процесса войны'};
+var DESTROY_RU={1:'Невозможности приобрести индивидуальность, собственного консерватизма',2:'Непонимания, постоянных сомнений, глубокого перфекционизма',3:'Если не реализуетесь в наставничестве, несправедливости',4:'Невозможности проявить креатив, нечестности',5:'Потери свободы, отсутствия логики',6:'Повышенных эмоций, отсутствия комфорта',7:'Отсутствия признания, если не поднимается энергия кундалини',8:'Отсутствия результата, повышенного контроля',9:'Высоких эмоций, отсутствия идеи, собственного авантюризма'};
+var DISEASES_RU={1:'Сердечные заболевания',2:'Почечные, мочеполовые заболевания',3:'Заболевания печени',4:'Заболевания нервной системы',5:'Заболевания кожи, аллергии',6:'Сахарный диабет, почки',7:'Заболевания репродуктивной системы',8:'Заболевания костной системы',9:'Травмы, хирургические вмешательства'};
+var PLUS_RU={1:'Самостоятельность, смелость, целеустремлённость, уверенность, инициативность',2:'Понимание, дипломатичность, интуиция, мягкость, умение слушать',3:'Аналитический склад ума, наставничество, справедливость, мудрость, интеллект',4:'Креативность, честность, доброта, трансформационное мышление',5:'Логика, коммуникабельность, стиль, масштабное мышление',6:'Мудрость, творчество, сексуальность, привлечение инвестиций',7:'Харизма, интуиция, быстрая реализация идей, гениальность',8:'Трудолюбие, объективность, практичность, высокая работоспособность',9:'Стремительность, воинственность, динамичность, стремление помогать'};
+var MINUS_RU={1:'Эгоизм, агрессивность, властность, деспотизм, нежелание слушать',2:'Депрессия, сомнения, двуличность, манипулятивность',3:'Холодность, расчётливость, жёсткость, несправедливость',4:'Неудовлетворённость, разрушение выстроенного, апатия',5:'Борьба, несогласие, обидчивость, уход в конфронтацию',6:'Мстительность, лень, неразборчивость в отношениях',7:'Хаос в голове, агрессия, отсутствие золотой середины',8:'Тотальный контроль, недоверие, тунеядство',9:'Ярость, паранойя, эмоциональное выгорание'};
+var MISSION_TEXT_RU={1:'Обладаете прекрасными организаторскими способностями. Испытываете стремление к власти, главенству и почёту. Деньги стремитесь заработать через власть. Ваша задача — передавать знания стратегии другим людям, не привязывая их к себе.',2:'В Ваших действиях заложены вечные сомнения. Действия дуальные — теряете время пока сомневаетесь. Миссия маленьких, но постоянных возможностей. Ваша задача — выстраивать правильные последовательные шаги и действовать!',3:'Часто в действиях Вы испытываете стремление к получению выгоды через анализ. Это самая эффективная миссия. Ваша задача — с мудростью и любовью создавать возможности для других людей.',4:'Вы испытываете невероятное стремление к передаче знаний. Если этого не происходит — испытываете неудовлетворение. При передаче истинных знаний у Вас надувается парус финансового успеха.',5:'Часто в действиях Вы испытываете стремление к борьбе, а борьба приводит к потере энергии. Ваше первое слово «нет». Если уйдёте от борьбы — откроются огромные возможности.',6:'В действиях Вы стараетесь во всём обеспечить себе удобство и комфорт. Вам важно реализоваться в творчестве — в противном случае Вы можете прожечь свою жизнь впустую.',7:'Испытываете сильное стремление к самоутверждению. Вы можете реализоваться в любой сфере, если научитесь действовать через стратегию и обоснование.',8:'Одиночество нисколько не угнетает Вас. Финансы для Вас не основная цель — Вы скорее человек идеи. У Вас заложена высокая работоспособность.',9:'Вы испытываете стремление эмоционально помогать кому-то. Ваш девиз: «Сделай добро и брось ключ в воду. Не жди ничего взамен». Действуйте через анализ.'};
+var MISSION_PLUS_RU={1:'Лидерство, покровительство, защита',2:'Дипломатичные действия через понимание',3:'Справедливая выгода и управление',4:'Креативные, честные действия, передача знаний',5:'Высокая коммуникация',6:'Творческие действия, направленные на развитие людей',7:'Согласованная трансформация',8:'Высокая работоспособность',9:'Служение и польза обществу'};
+var MISSION_MINUS_RU={1:'Агрессия, подавление воли других людей, деспотизм',2:'Непонимание, дуальность, двуличие, депрессивность',3:'Корыстный расчёт и азарт',4:'Негативная трансформация',5:'Борьба, несогласие',6:'Уход в депрессию и страдания из-за любви, мстительность',7:'Создание кризиса, иллюзия',8:'Отшельничество, тунеядство',9:'Самоедство, эмоциональное выгорание'};
+var MISSION_GOAL_RU={1:'Материальная (власть, карьера)',2:'Морально-кармическая',3:'Материальная (анализ, управление)',4:'Морально-кармическая',5:'Холодная коммуникация',6:'Мокша (комфорт для себя)',7:'Духовная коммуникация',8:'Материальная (деньги, недвижимость)',9:'Морально-кармическая (отношения)'};
+var TRIGGERS_RU={1:['Люди не делают так, как хочу я','Разрушаются от несогласия','Не реагируют на просьбы','Когда человек отстаивает свою точку зрения','Раздражают нытики, слабые, медлительные','Успех другого человека','Не терпит, когда её учат жизни','Когда не признают авторитет','Когда спорят'],2:['Когда не понимают','Когда уделяют мало внимания','Когда не дают обратной связи','Когда торопят с принятием решений','Раздражаются, когда их поймали на манипуляции','Игнорирование','Холодность в отношениях','Грубость'],3:['Раздражают тупые','Раздражает хаос','Когда нарушают их инструкции','Когда меня учат без спроса','Когда не оценивают мою заботу','Раздражает бестактность','Раздражает несправедливость','Раздражает пустая трата времени'],4:['Когда нечестно (нарушают договорённости, обманывают)','Не любят бездельников, нытиков','Однообразие, монотонность','Когда перебивают','Когда ставят в рамки','Лицемерие','Непунктуальность','Когда используют'],5:['Ограничение свободы: дедлайны, контроль','Когда не понимают с первого раза','Раздражает однообразие','Медлительность, неэффективность','Навязчивость','Когда указывают как нужно делать'],6:['Когда не комфортно','Когда нарушают планы','Необходимость быть дисциплинированным','Когда наводят суету','Нехватка любви','Конфликтные ситуации'],7:['Ведут себя лучше чем 7ка','Не признание','Слабые духом','Раздражает лень','Когда не признают гениальные идеи','Публичное унижение, критика'],8:['Те кто не видит пути заработка','Медлительные','Те кто обесценивает труд','Недисциплинированные люди','Раздражают очереди','Непунктуальность'],9:['Когда не благодарны за помощь','Раздражают эгоисты','Лживые и неискренние люди','Когда обижают слабых','Отказы, слово «нет»']};
+var HOW_TO_RU={1:`• Скажите «нет» перфекционизму. Работайте с тем, что есть сейчас.\n• Принимайте решения\n• Разрабатывайте стратегию и действуйте в соответствии с ней\n• Берите ответственность на себя`,2:`• Посещайте театр 2 раза в месяц\n• Посетите 5 религиозных конфессий\n• В отношениях чаще идите на компромисс\n• Задавайте глубинные вопросы: «Правильно ли я Вас понял?»`,3:`• Ведите планер/ежедневник. Утром планируйте день, вечером анализируйте.\n• Составьте план на неделю / месяц / год.`,4:`• Сделайте практику «Колесо жизненного баланса».`,5:`• Выпишите 5 человек на которых держите обиду. Попросите прощения.\n• Не замыкайтесь в себе, идите к людям.\n• Ежедневно общайтесь с людьми выше по уровню успешности.\n• Разработайте презентацию себя на 30 секунд, 1 минуту и 3 минуты.`,6:`• Прочитайте книгу «Пять языков любви»\n• Наблюдайте за рассветами и закатами\n• Ежедневно делайте «Практику благодарности»\n• Ведите «Дневник успеха»`,7:`• Поднимайте энергию кундалини: занимайтесь йогой, спортом, танцуйте. Пульс около 130 уд./мин`,8:`• Нарабатывайте опыт в своём деле (около 1000 часов)\n• Избегайте лени и прокрастинации`,9:`• Занимайтесь своим здоровьем: спорт, массаж, питание`};
+var PROF_BEFORE33_RU={1:{type:'Стратег · Стратегическое мышление',institutes:'Менеджмент и управление, Экономика и финансы, Политология, Предпринимательство и стартапы, Корпоративное право, Психология лидерства, Ораторское искусство'},2:{type:'Дипломат · Эмпатическое мышление',institutes:'Психология и психотерапия, Международные отношения и дипломатия, Медиация и конфликтология, Управление персоналом (HR), Социальные науки и коммуникации, Культурология, Лингвистика'},3:{type:'Аналитик · Аналитическое мышление',institutes:'Анализ данных, Финансовая аналитика, Экономика и статистика, Бизнес-аналитика, Бухгалтерский учёт, Программирование и IT, Математика, Медицина, Системная инженерия'},4:{type:'Новатор · Креативное мышление',institutes:'Маркетинг и реклама, Медиа и коммуникации, Журналистика, Искусство и креативные индустрии, Режиссура, Технологии и IT, Предпринимательство и инновации'},5:{type:'Бизнес-логика · Логическое мышление',institutes:'Бизнес и предпринимательство, Логистика, Программирование, IT и автоматизация, Связи с общественностью (PR), Математика и физика, Мода, стиль и эстетика'},6:{type:'Корпоративная культура · Творческое мышление',institutes:'Искусство и дизайн (архитектура, интерьер, одежда), Финансы и инвестиции, Туризм и гостиничный бизнес, Luxury-менеджмент, Психология эмоций и отношений'},7:{type:'Технолог · Интуитивное мышление',institutes:'Кризис-менеджмент, Управление рисками, Альтернативная медицина и йога, Духовные и философские исследования, Когнитивная психология и нейронаука, Экология, Юриспруденция'},8:{type:'Контроль · Практичное мышление',institutes:'Финансы, кредит и управление (аудит, учёт), Инвестиционный анализ, Управление недвижимостью, Контроль качества (ISO), Операционный менеджмент, Налоговое право'},9:{type:'Социальная поддержка · Тактическое мышление',institutes:'Спорт и физическая культура, Военные науки, Медицина и хирургия, Управление проектами, Ивент, Социальная работа, Театр и Кино'}};
+var PROF_MISSION_RU={1:{competence:'Стратег. Компетентность в выстраивании стратегии и её внедрении',industry:'Управление всеми ресурсами',activity:'Менеджмент / стратегия / руководство'},2:{competence:'Дипломат. Компетентность в дипломатии, понимании отношений, управление конфликтами',industry:'Дипломатия и управление межличностными отношениями',activity:'Построение отношений / менторство / тренерство / деловые связи'},3:{competence:'Аналитик. Компетентность в анализе, системное управление, финансы и кредиты',industry:'Анализ и управление статистикой и информацией',activity:'Анализ, систематизация, управление / образование / наставничество'},4:{competence:'Новатор. Компетентность в постановке целей и их достижении. Креативное мышление',industry:'Новаторство, креативная индустрия',activity:'Определение и постановка целей / маркетинг / передача знаний'},5:{competence:'Бизнес-логика. Компетентность в выявлении потребностей рынка. Правильно-последовательные действия',industry:'Управление коммуникациями. Технический интеллект',activity:'Выявление пользы продукта / продажи / логистика / сервис'},6:{competence:'Корпоративная культура. Компетентность в создании корпоративной среды и улучшении качества сервиса',industry:'Творческая, корпоративная культура',activity:'Сервис / психология / создание комфорта и творчества / HR'},7:{competence:'Технолог. Компетентность в технологических процессах и разработке решений',industry:'Инновационное развитие и внедрение',activity:'Быстрое внедрение целей / технология / инновации'},8:{competence:'Контроль. Компетентность в создании регламента для достижения целевых показателей',industry:'Регламент и трудовая дисциплина',activity:'Контроль производственных процессов / контроль качества / ОТК'},9:{competence:'Социальная поддержка. Компетентность в объединении людей и идей',industry:'Безопасность и управление социальными проектами',activity:'Генерация идей и продвижение / благотворительность / производство'}};
+var CS_NAMES_RU={1:'Лидер',2:'Психолог',3:'Наставник',4:'Новатор',5:'Коммуникатор',6:'Творец',7:'Технолог',8:'Реалист',9:'Воин'};
+var COLOR_CS_RU={1:'Жёлтый',2:'Серебристый',3:'Оранжевый',4:'Серо-коричневый',5:'Зелёный',6:'Сиреневый',7:'Серо-лиловый',8:'Чёрный/тёмно-синий',9:'Красный'};
+var COLOR_CLOTHES_RU={1:'Красный, белый',2:'Белый, светло-зелёный',3:'Жёлтый',4:'Зелёный, синий, серый',5:'Зелёный, синий',6:'Розовый, бирюзовый, голубой',7:'Зелёный, серый, синий',8:'Синий, голубой',9:'Красный, коричневый, розовый'};
+var COLOR_WALLET_RU={1:'Серебристый',2:'Жёлтый',3:'Красный',4:'Серо-лиловый',5:'Зелёный',6:'Сиреневый',7:'Серо-коричневый',8:'Сиреневый',9:'Оранжевый'};
+var WEEK_DAYS_RU={1:'Воскресенье',2:'Понедельник',3:'Четверг',4:'Четверг',5:'Среда',6:'Пятница',7:'Пятница',8:'Суббота',9:'Вторник'};
+var ENERGY_LABELS_RU={1:'Принятие решений, психическая энергия',2:'Понимание и чувственность',3:'Анализ, механизм реализации цели',4:'Цель / идея / родовые знания',5:'Адекватная коммуникация',6:'Мудрость, ощущение счастья',7:'Энергия кундалини / божественный бензин',8:'Труд / опыт прошлой жизни',9:'Энергия действия / возможности'};
+
+// ── getContent / getUI ──
+function getContent(lang) {
+  if ((lang === 'en' || lang === 'kz') && typeof CONTENT !== 'undefined' && CONTENT[lang]) {
+    return CONTENT[lang];
+  }
+  return {
+    PERSONALITY: PERSONALITY_RU, DOBROTAS: DOBROTAS_RU, SOUL: SOUL_RU,
+    EGO_VEC: EGO_VEC_RU, WANTS: WANTS_RU, GOAL_CS: GOAL_RU, EGO_JOY: EGO_JOY_RU,
+    DESTROY: DESTROY_RU, DISEASES: DISEASES_RU, PLUS_CS: PLUS_RU, MINUS_CS: MINUS_RU,
+    MISSION_TEXT: MISSION_TEXT_RU, MISSION_PLUS: MISSION_PLUS_RU,
+    MISSION_MINUS: MISSION_MINUS_RU, MISSION_GOAL: MISSION_GOAL_RU,
+    TRIGGERS: TRIGGERS_RU, HOW_TO: HOW_TO_RU,
+    PROF_BEFORE33: PROF_BEFORE33_RU, PROF_MISSION: PROF_MISSION_RU,
+    CS_NAMES: CS_NAMES_RU, COLOR_CS: COLOR_CS_RU,
+    COLOR_CLOTHES: COLOR_CLOTHES_RU, COLOR_WALLET: COLOR_WALLET_RU,
+    WEEK_DAYS: WEEK_DAYS_RU, ENERGY_LABELS: ENERGY_LABELS_RU,
+    UI: RU_UI
+  };
+}
+function getUI(lang) { return getContent(lang).UI || RU_UI; }
+function ui(key) { return (getContent(currentLang).UI || RU_UI)[key] || RU_UI[key] || key; }
+
+function getLines(lang) {
+  if (lang === 'en') return ALL_LINES_EN;
+  if (lang === 'kz') return ALL_LINES_KZ;
+  return ALL_LINES;
 }
 
-function initLimitBar(){
-  if(!masterProfile) return;
-  const isFull = masterProfile.plan === 'full';
-  const used = masterProfile.psycho_count || 0;
-  if(!isFull){
-    document.getElementById('limit-bar').style.display = 'flex';
-    document.getElementById('limit-text').textContent = 'Использовано ' + used + ' из ' + PSYCHO_LIMIT + ' бесплатных анализов';
-    document.getElementById('limit-fill').style.width = Math.min(100, (used/PSYCHO_LIMIT)*100) + '%';
+// ── i18n ──
+var PSYCHO_LOGOS = {ru:'Психоанализ <span>личности</span>',en:'Personality <span>Psychoanalysis</span>',kz:'Тұлғалық <span>Психоанализ</span>'};
+function applyUI() {
+  document.getElementById('logo-h1').innerHTML = PSYCHO_LOGOS[currentLang] || PSYCHO_LOGOS.ru;
+  document.getElementById('back-btn').textContent = ui('back');
+  document.getElementById('theme-label').textContent = ui('theme_dark');
+  document.getElementById('psycho-h2').textContent = ui('h2');
+  document.getElementById('psycho-sub').textContent = ui('sub');
+  document.getElementById('psycho-name').placeholder = ui('name_ph');
+  document.getElementById('psycho-dob').placeholder = ui('dob_ph');
+  document.getElementById('psycho-btn').textContent = ui('btn');
+  document.getElementById('pdf-btn').textContent = ui('link_btn');
+  document.getElementById('lbl-cs').textContent = ui('cs_lbl');
+  document.getElementById('lbl-mis').textContent = ui('mis_lbl');
+  ['ru','en','kz'].forEach(function(l){var b=document.getElementById('lang-'+l);if(b)b.classList.toggle('active',l===currentLang);});
+  document.documentElement.lang = currentLang;
+}
+function setLang(lang){
+  currentLang=lang; localStorage.setItem('lang',lang); applyUI();
+  if(document.getElementById('psycho-results').innerHTML) {
+    // re-render if results shown
+    var v=document.getElementById('psycho-dob').value, n=document.getElementById('psycho-name').value;
+    if(v && v.length===10) { renderPsycho(v, n); }
   }
 }
 
-const CS_NAMES={1:'Лидер',2:'Психолог',3:'Наставник',4:'Новатор',5:'Коммуникатор',6:'Творец',7:'Технолог',8:'Реалист',9:'Воин'};
-const M_NAMES={1:'Власть и одиночество',2:'Творческая психология',3:'Анализ и управление',4:'Управление из тени',5:'Борьба',6:'Творчество',7:'Трансформация и кризис',8:'Упорный труд',9:'Служение'};
-const COLOR_CS={1:'Жёлтый',2:'Серебристый',3:'Оранжевый',4:'Серо-коричневый',5:'Зелёный',6:'Сиреневый',7:'Серо-лиловый',8:'Чёрный/тёмно-синий',9:'Красный'};
-const COLOR_CLOTHES={1:'Красный, белый',2:'Белый, светло-зелёный',3:'Жёлтый',4:'Зелёный, синий, серый',5:'Зелёный, синий',6:'Розовый, бирюзовый, голубой',7:'Зелёный, серый, синий',8:'Синий, голубой',9:'Красный, коричневый, розовый'};
-const COLOR_WALLET={1:'Серебристый',2:'Жёлтый',3:'Красный',4:'Серо-лиловый',5:'Зелёный',6:'Сиреневый',7:'Серо-коричневый',8:'Сиреневый',9:'Оранжевый'};
-const WEEK_DAYS={1:'Воскресенье',2:'Понедельник',3:'Четверг',4:'Четверг',5:'Среда',6:'Пятница',7:'Пятница',8:'Суббота',9:'Вторник'};
-const COLOR_MAP={'Жёлтый':'#fbbf24','Серебристый':'#9ca3af','Оранжевый':'#f97316','Серо-коричневый':'#92400e','Зелёный':'#22c55e','Сиреневый':'#a855f7','Серо-лиловый':'#7c3aed','Чёрный/тёмно-синий':'#1e3a5f','Красный':'#ef4444'};
-const ENERGY_LABELS={1:'Принятие решений, психическая энергия',2:'Понимание и чувственность',3:'Анализ, механизм реализации цели',4:'Цель / идея / родовые знания',5:'Адекватная коммуникация',6:'Мудрость, ощущение счастья',7:'Энергия кундалини / божественный бензин',8:'Труд / опыт прошлой жизни',9:'Энергия действия / возможности'};
-const DOBROTAS={1:'Щедрая (должна измениться на целесообразную)',2:'Мистическая (должна измениться на заботливую)',3:'Холодная (должна измениться на добрую)',4:'Самая добрая (должна измениться на доброту через анализ)',5:'Неизвестная (должна измениться на безусловную любовь)',6:'Избирательная (должна измениться на доброту через духовность)',7:'Агрессивная (доброты нет, есть агрессия)',8:'Эгоистическая (должна измениться на отзывчивую)',9:'«Ты мне — я тебе» (должна измениться на щедрую)'};
-const SOUL={1:'Через руководство или автономный труд',2:'Через отношения',3:'Через наставничество',4:'Везде через креатив',5:'Через технический интеллект',6:'Через творчество',7:'Везде через йогу и дисциплину тела',8:'Через труд (любая среда)',9:'Через идею'};
-const EGO_VEC={1:'Только на себя',2:'На желание понять другого человека и ситуацию',3:'На анализ и управление',4:'На поиск цели',5:'На логику',6:'На свой комфорт',7:'На признание действий',8:'На контроль и результат',9:'На победу'};
-const WANTS={1:'Власти, независимости, признания значимости',2:'Понимания, отношений',3:'Анализировать, управлять, заботиться',4:'Честности, достижения целей, креатива',5:'Свободы, пользы для себя',6:'Комфорта, любви, наслаждения',7:'Признания действий, быстрой реализации идей',8:'Контролировать материальный мир, результата',9:'Помогать, авантюры, победы'};
-const GOAL_CS={1:'Материальная (власть, карьера, деньги)',2:'Морально-кармическая (отношения)',3:'Материальная (анализ, управление)',4:'Морально-кармическая (выстраивание взаимоотношений)',5:'Холодная коммуникация (для бизнеса)',6:'Мокша (высвобождение сексуальной энергии, комфорт)',7:'Духовная (развитие и наполнение для души)',8:'Материальная (деньги, недвижимость)',9:'Морально-кармическая (отношения)'};
-const EGO_JOY={1:'Собственной индивидуальности и реализации своего эго',2:'Отношений, в которых есть взаимопонимание',3:'Наставничества и приобретения знания',4:'Того, что отдаёт',5:'Свободы, реализации технического интеллекта, коммуникации',6:'Собственного комфорта',7:'Признания',8:'Пересчёта денег, контроля, результата',9:'Побед и процесса войны'};
-const DESTROY={1:'Невозможности приобрести индивидуальность, собственного консерватизма',2:'Непонимания, постоянных сомнений, глубокого перфекционизма',3:'Если не реализуетесь в наставничестве, несправедливости',4:'Невозможности проявить креатив, нечестности',5:'Потери свободы, отсутствия логики',6:'Повышенных эмоций, отсутствия комфорта',7:'Отсутствия признания, если не поднимается энергия кундалини',8:'Отсутствия результата, повышенного контроля',9:'Высоких эмоций, отсутствия идеи, собственного авантюризма'};
-const DISEASES={1:'Сердечные заболевания',2:'Почечные, мочеполовые заболевания',3:'Заболевания печени',4:'Заболевания нервной системы',5:'Заболевания кожи, аллергии',6:'Сахарный диабет, почки',7:'Заболевания репродуктивной системы',8:'Заболевания костной системы',9:'Травмы, хирургические вмешательства'};
-const PERSONALITY={1:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе (позитиве) или в минусе (негативе). В плюсе у человека будет один набор качеств, а в минусе — соответственно противоположный. Ваша реализация в жизни напрямую будет зависеть от того, в каком состоянии Вы находитесь.\n\nВы — сильная личность. Самостоятельный, независимый и амбициозный человек. Вектор сознания направлен только на себя. Вы не любите, когда Вам указывают, что делать и как. Ваш внутренний девиз: «Я сам(а) всё знаю». Вы — первопроходец, пионер — идёте туда, куда другие боятся идти.\n\nВ плюсе (когда в позитивных эмоциях) в Вас заложены такие качества, как: самостоятельность, смелость, целеустремлённость, уверенность. В минусе (когда в негативных эмоциях) проявляются эгоизм, агрессивность, властность, деспотизм.\n\nДля успешной реализации в жизни Вам необходимо работать над собственным эгоизмом!`,2:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе (позитиве) или в минусе (негативе). В плюсе у человека будет один набор качеств, а в минусе — соответственно противоположный. Ваша реализация в жизни напрямую будет зависеть от того, в каком состоянии Вы находитесь.\n\nВы — тонкий психолог. Умеете чувствовать людей. Вектор сознания направлен на желание понять другого человека. В Вас заложен дар — понимать людей и ситуации лучше, чем другие. Вы можете стать прекрасным дипломатом, психологом, медиатором.\n\nВ плюсе заложены такие качества, как: понимание, дипломатичность, интуиция, мягкость. В минусе проявляется: депрессия, сомнения, двуличность, манипулятивность.\n\nДля успешной реализации в жизни Вам необходимо научиться понимать других людей!`,3:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе (позитиве) или в минусе (негативе). В плюсе у человека будет один набор качеств, а в минусе — соответственно противоположный. Ваша реализация в жизни напрямую будет зависеть от того, в каком состоянии Вы находитесь.\n\nВы — прирождённый наставник и аналитик. Вектор сознания направлен на анализ и управление. Вы очень умный, рассудительный, справедливый человек. Знания и интеллект — Ваши главные активы.\n\nВ плюсе заложены такие качества, как: аналитический склад ума, наставничество, справедливость, мудрость, интеллект. В минусе проявляются: холодность, расчётливость, жёсткость, несправедливость.\n\nДля успешной реализации в жизни Вам необходимо развивать мудрость наставника!`,4:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе (позитиве) или в минусе (негативе). В плюсе у человека будет один набор качеств, а в минусе — соответственно противоположный. Ваша реализация в жизни напрямую будет зависеть от того, в каком состоянии Вы находитесь.\n\nВы человек с креативным мышлением, новатор, трансформатор и борец за справедливость. Вы очень добрый человек. Рождены отдавать и при этом для Вас важно, чтобы всё было по-честному. Вектор сознания направлен на поиск целей.\n\nКомфортнее всего Вы чувствуете себя в состоянии стабильности. В минусе будут проявляться такие качества как: неудовлетворённость, разрушение, отчуждённость, апатия.\n\nДля успешной реализации в жизни Вам необходимо изучать законы позитивного мышления!`,5:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе (позитиве) или в минусе (негативе). В плюсе у человека будет один набор качеств, а в минусе — соответственно противоположный. Ваша реализация в жизни напрямую будет зависеть от того, в каком состоянии Вы находитесь.\n\nУ Вас отлично работает логика, ум и интеллект — действуете исходя из целесообразности, а не эмоционального порыва. Свобода для Вас дороже денег. У Вас заложена высокая коммуникация, поэтому в сфере торговли и бизнеса Вам нет равных.\n\nВектор сознания направлен на логику: правильно/неправильно, логично/нелогично. Как правило, преобладает изысканный вкус и чувство стиля.\n\nВ связи с тем, что Вы обладаете тонкой аурой, Вас очень легко обидеть. Поэтому Вашей задачей является увеличение любви.`,6:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе (позитиве) или в минусе (негативе). В плюсе у человека будет один набор качеств, а в минусе — соответственно противоположный. Ваша реализация в жизни напрямую будет зависеть от того, в каком состоянии Вы находитесь.\n\nВы — бриллиант общества. Творец наделил Вас энергиями мудрости и сексуальности. В сравнении с другими людьми Вы легко привлекаете инвестиции и получаете материальные блага.\n\nВектор сознания направлен на свой личный комфорт, любовь и секс. Душа реализуется через творчество. Вы полны молодости, учтивы, любите роскошь, артистичны.\n\nВ минусе проявляются такие качества как мстительность, неразборчивость в отношениях.`,7:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе (позитиве) или в минусе (негативе). В плюсе у человека будет один набор качеств, а в минусе — соответственно противоположный. Ваша реализация в жизни напрямую будет зависеть от того, в каком состоянии Вы находитесь.\n\nУ Вас с рождения заложена харизма, 100% интуиция и сексуальная энергия. Вектор сознания направлен на признание Ваших действий. Если работаете над собой и поднимаете энергию в голову — становитесь гениальным человеком.\n\n97% всей Вашей энергии сосредоточено в первой чакре, поэтому если её не поднимать в голову, то будут проявляться такие качества как хаос в голове, рассеянность.\n\nДля успешной реализации в жизни Вам необходимо жить в дисциплине ума!`,8:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе (позитиве) или в минусе (негативе). В плюсе у человека будет один набор качеств, а в минусе — соответственно противоположный. Ваша реализация в жизни напрямую будет зависеть от того, в каком состоянии Вы находитесь.\n\nУ Вас заложены такие качества, как: контроль, скрупулёзность, материализм и реализм. Вектор сознания направлен на контроль за материальным миром. Душа реализуется через труд — чем труднее работа, тем яснее ум.\n\nВ минусе заложены сомнения, недоверие обществу, тотальный контроль, тунеядство и отшельничество.\n\nДля успешной реализации в жизни Вам необходимо уйти от контроля и прийти к служению людям!`,9:`При описании личности важно понимать, что каждый человек может находиться в двух состояниях: в плюсе (позитиве) или в минусе (негативе). В плюсе у человека будет один набор качеств, а в минусе — соответственно противоположный. Ваша реализация в жизни напрямую будет зависеть от того, в каком состоянии Вы находитесь.\n\nВы человек действия, обладаете сверхэмоциональным, достаточно вспыльчивым характером. Вектор сознания направлен только на победу.\n\nВ плюсе заложены такие качества, как: стремительность, спортивность, динамичность, воинственность. В минусе проявляются такие качества как ярость, паранойя, наивность.\n\nДля успешной реализации в жизни Вам необходимо уйти от эмоций и действовать исходя из целесообразности!`};
-const PLUS_CS={1:'Самостоятельность, смелость, целеустремлённость, уверенность, инициативность',2:'Понимание, дипломатичность, интуиция, мягкость, умение слушать',3:'Аналитический склад ума, наставничество, справедливость, мудрость, интеллект',4:'Креативность, честность, доброта, трансформационное мышление',5:'Логика, коммуникабельность, стиль, масштабное мышление',6:'Мудрость, творчество, сексуальность, привлечение инвестиций',7:'Харизма, интуиция, быстрая реализация идей, гениальность',8:'Трудолюбие, объективность, практичность, высокая работоспособность',9:'Стремительность, воинственность, динамичность, стремление помогать'};
-const MINUS_CS={1:'Эгоизм, агрессивность, властность, деспотизм, нежелание слушать',2:'Депрессия, сомнения, двуличность, манипулятивность',3:'Холодность, расчётливость, жёсткость, несправедливость',4:'Неудовлетворённость, разрушение выстроенного, апатия',5:'Борьба, несогласие, обидчивость, уход в конфронтацию',6:'Мстительность, лень, неразборчивость в отношениях',7:'Хаос в голове, агрессия, отсутствие золотой середины',8:'Тотальный контроль, недоверие, тунеядство',9:'Ярость, паранойя, эмоциональное выгорание'};
-const MISSION_TEXT={1:'Обладаете прекрасными организаторскими способностями. Испытываете стремление к власти, главенству и почёту. Деньги стремитесь заработать через власть. Для Вас очень важно, чтобы последнее слово всегда оставалось за Вами. Ваша задача — передавать знания стратегии другим людям, не привязывая их к себе.',2:'В Ваших действиях заложены вечные сомнения. Действия дуальные — теряете время пока сомневаетесь. Миссия маленьких, но постоянных возможностей. Ваша задача — выстраивать правильные последовательные шаги и действовать!',3:'Часто в действиях Вы испытываете стремление к получению выгоды через анализ. Это самая эффективная миссия, потому что в ней нет «дружбы народов», а есть только анализ. Ваша задача — с мудростью и любовью создавать возможности для других людей.',4:'Вы испытываете невероятное стремление к передаче знаний. Если этого не происходит — испытываете неудовлетворение. При передаче истинных знаний у Вас надувается парус финансового успеха.',5:'Часто в действиях Вы испытываете стремление к борьбе, а борьба приводит к потере энергии. Ваше первое слово «нет». Если уйдёте от борьбы — откроются огромные возможности.',6:'В действиях Вы стараетесь во всём обеспечить себе удобство и комфорт. Вам важно реализоваться в творчестве — в противном случае Вы можете прожечь свою жизнь впустую.',7:'Испытываете сильное стремление к самоутверждению. Вы можете реализоваться в любой сфере, если научитесь действовать через стратегию и обоснование.',8:'Одиночество нисколько не угнетает Вас. Финансы для Вас не основная цель — Вы скорее человек идеи. У Вас заложена высокая работоспособность.',9:'Вы испытываете стремление эмоционально помогать кому-то. Ваш девиз: «Сделай добро и брось ключ в воду. Не жди ничего взамен». Действуйте через анализ.'};
-const MISSION_PLUS={1:'Лидерство, покровительство, защита',2:'Дипломатичные действия через понимание',3:'Справедливая выгода и управление',4:'Креативные, честные действия, передача знаний',5:'Высокая коммуникация',6:'Творческие действия, направленные на развитие людей',7:'Согласованная трансформация',8:'Высокая работоспособность',9:'Служение и польза обществу'};
-const MISSION_MINUS={1:'Агрессия, подавление воли других, деспотизм',2:'Непонимание, дуальность, депрессивность',3:'Корыстный расчёт и азарт',4:'Негативная трансформация',5:'Борьба, несогласие',6:'Уход в депрессию, мстительность',7:'Создание кризиса, иллюзия',8:'Отшельничество, тунеядство',9:'Самоедство, эмоциональное выгорание'};
-const MISSION_GOAL={1:'Материальная (власть, карьера)',2:'Морально-кармическая',3:'Материальная (анализ, управление)',4:'Морально-кармическая',5:'Холодная коммуникация',6:'Мокша (комфорт для себя)',7:'Духовная коммуникация',8:'Материальная (деньги, недвижимость)',9:'Морально-кармическая (отношения)'};
-const TRIGGERS={1:['Люди не делают так, как хочу я','Разрушаются от несогласия','Не реагируют на просьбы','Когда человек отстаивает свою точку зрения','Раздражают нытики, слабые, медлительные','Успех другого человека','Не терпит, когда её учат жизни','Когда не признают авторитет','Когда спорят'],2:['Когда не понимают','Когда уделяют мало внимания','Когда не дают обратной связи','Когда торопят с принятием решений','Раздражаются, когда их поймали на манипуляции','Игнорирование','Холодность в отношениях','Грубость'],3:['Раздражают тупые','Раздражает хаос','Когда нарушают их инструкции','Когда меня учат без спроса','Когда не оценивают мою заботу','Раздражает бестактность','Раздражает несправедливость','Раздражает пустая трата времени'],4:['Когда нечестно (нарушают договорённости, обманывают)','Не любят бездельников, нытиков','Однообразие, монотонность','Когда перебивают','Когда ставят в рамки','Лицемерие','Непунктуальность','Когда используют'],5:['Ограничение свободы: дедлайны, контроль','Когда не понимают с первого раза','Раздражает однообразие','Медлительность, неэффективность','Навязчивость','Когда указывают как нужно делать'],6:['Когда не комфортно','Когда нарушают планы','Необходимость быть дисциплинированным','Когда наводят суету','Нехватка любви','Конфликтные ситуации'],7:['Ведут себя лучше чем 7ка','Не признание','Слабые духом','Раздражает лень','Когда не признают гениальные идеи','Публичное унижение, критика'],8:['Те кто не видит пути заработка','Медлительные','Те кто обесценивает труд','Недисциплинированные люди','Раздражают очереди','Непунктуальность'],9:['Когда не благодарны за помощь','Раздражают эгоисты','Лживые и неискренние люди','Когда обижают слабых','Отказы, слово «нет»']};
+// ── HELPERS ──
+var PSYCHO_LIMIT = 5;
+var masterProfile = null;
+function digitSum(n){var s=n.toString().split('').reduce(function(a,c){return a+parseInt(c);},0);return s>9?digitSum(s):s;}
+function parseDate(str){var p=str.split('.');if(p.length!==3)return null;var d=parseInt(p[0]),m=parseInt(p[1]),y=parseInt(p[2]);if(isNaN(d)||isNaN(m)||isNaN(y)||d<1||d>31||m<1||m>12||y<1900||y>2030)return null;return{d:d,m:m,y:y};}
 
-const ENERGY_COMPAT={
-  1:{best:[2],    good:[3],      neutral:[5],    bad:[4,6,7,8,9]},
-  2:{best:[1],    good:[2,3,9],  neutral:[],     bad:[4,5,6,7,8]},
-  3:{best:[9],    good:[1,2,3],  neutral:[4,7,8],bad:[5,6]},
-  4:{best:[7],    good:[4,5,6,8],neutral:[3],    bad:[1,2,9]},
-  5:{best:[5],    good:[4,6,7,8],neutral:[9,1],  bad:[2,3]},
-  6:{best:[6],    good:[4,5,7,8],neutral:[9],    bad:[1,2,3]},
-  7:{best:[4],    good:[5,6],    neutral:[3,9],  bad:[1,2,7,8]},
-  8:{best:[6],    good:[4,5],    neutral:[3],    bad:[1,2,7,8,9]},
-  9:{best:[6],    good:[4,5],    neutral:[3],    bad:[1,2,7,8,9]}
-};
+function getClient(){
+  if(!window._sbClient){window._sbClient=window.supabase.createClient('https://gigfvlhcrtuosfnkzqpt.supabase.co','sb_publishable_Hw69inUK0lqA5ECoVeGgRQ_kWEyD4Pt');}
+  return window._sbClient;
+}
 
-const HOW_TO={1:`• Скажите «нет» перфекционизму. Работайте с тем, что есть сейчас.\n• Принимайте решения\n• Разрабатывайте стратегию и действуйте в соответствии с ней\n• Берите ответственность на себя`,2:`• Посещайте театр 2 раза в месяц\n• Посетите 5 религиозных конфессий\n• В отношениях чаще идите на компромисс\n• Задавайте глубинные вопросы: «Правильно ли я Вас понял?»`,3:`• Ведите планер/ежедневник. Утром планируйте день, вечером анализируйте.\n• Составьте план на неделю / месяц / год.`,4:`• Сделайте практику «Колесо жизненного баланса».`,5:`• Выпишите 5 человек на которых держите обиду. Попросите прощения.\n• Не замыкайтесь в себе, идите к людям.\n• Ежедневно общайтесь с людьми выше по уровню успешности.\n• Разработайте презентацию себя на 30 секунд, 1 минуту и 3 минуты.`,6:`• Прочитайте книгу «Пять языков любви»\n• Наблюдайте за рассветами и закатами\n• Ежедневно делайте «Практику благодарности»\n• Ведите «Дневник успеха»`,7:`• Поднимайте энергию: занимайтесь йогой, спортом, танцуйте. Пульс около 130 уд./мин`,8:`• Нарабатывайте опыт в своём деле (около 1000 часов)\n• Избегайте лени и прокрастинации`,9:`• Занимайтесь своим здоровьем: спорт, массаж, питание`};
-const PROF_BEFORE33={1:{type:'Стратег · Стратегическое мышление',institutes:'Менеджмент и управление, Экономика и финансы, Политология, Предпринимательство и стартапы, Корпоративное право, Психология лидерства, Ораторское искусство'},2:{type:'Дипломат · Эмпатическое мышление',institutes:'Психология и психотерапия, Международные отношения и дипломатия, Медиация и конфликтология, Управление персоналом (HR), Социальные науки и коммуникации, Культурология, Лингвистика'},3:{type:'Аналитик · Аналитическое мышление',institutes:'Анализ данных, Финансовая аналитика, Экономика и статистика, Бизнес-аналитика, Бухгалтерский учёт, Программирование и IT, Математика, Медицина, Системная инженерия'},4:{type:'Новатор · Креативное мышление',institutes:'Маркетинг и реклама, Медиа и коммуникации, Журналистика, Искусство и креативные индустрии, Режиссура, Технологии и IT, Предпринимательство и инновации'},5:{type:'Бизнес-логика · Логическое мышление',institutes:'Бизнес и предпринимательство, Логистика, Программирование, IT и автоматизация, Связи с общественностью (PR), Математика и физика, Мода, стиль и эстетика'},6:{type:'Корпоративная культура · Творческое мышление',institutes:'Искусство и дизайн (архитектура, интерьер, одежда), Финансы и инвестиции, Туризм и гостиничный бизнес, Luxury-менеджмент, Психология эмоций и отношений'},7:{type:'Технолог · Интуитивное мышление',institutes:'Кризис-менеджмент, Управление рисками, Альтернативная медицина и йога, Духовные и философские исследования, Когнитивная психология и нейронаука, Экология, Юриспруденция'},8:{type:'Контроль · Практичное мышление',institutes:'Финансы, кредит и управление (аудит, учёт), Инвестиционный анализ, Управление недвижимостью, Контроль качества (ISO), Операционный менеджмент, Налоговое право'},9:{type:'Социальная поддержка · Тактическое мышление',institutes:'Спорт и физическая культура, Военные науки, Медицина и хирургия, Управление проектами, Ивент, Социальная работа, Театр и Кино'}};
-const PROF_MISSION={1:{competence:'Стратег. Компетентность в выстраивании стратегии и её внедрении',industry:'Управление всеми ресурсами',activity:'Менеджмент / стратегия / руководство'},2:{competence:'Дипломат. Компетентность в дипломатии, понимании отношений, управление конфликтами',industry:'Дипломатия и управление межличностными отношениями',activity:'Построение отношений / менторство / тренерство / деловые связи'},3:{competence:'Аналитик. Компетентность в анализе, системное управление, финансы и кредиты',industry:'Анализ и управление статистикой и информацией',activity:'Анализ, систематизация, управление / образование / наставничество'},4:{competence:'Новатор. Компетентность в постановке целей и их достижении. Креативное мышление',industry:'Новаторство, креативная индустрия',activity:'Определение и постановка целей / маркетинг / передача знаний'},5:{competence:'Бизнес-логика. Компетентность в выявлении потребностей рынка. Правильно-последовательные действия',industry:'Управление коммуникациями. Технический интеллект',activity:'Выявление пользы продукта / продажи / логистика / сервис'},6:{competence:'Корпоративная культура. Компетентность в создании корпоративной среды и улучшении качества сервиса',industry:'Творческая, корпоративная культура',activity:'Сервис / психология / создание комфорта и творчества / HR'},7:{competence:'Технолог. Компетентность в технологических процессах и разработке решений',industry:'Инновационное развитие и внедрение',activity:'Быстрое внедрение целей / технология / инновации'},8:{competence:'Контроль. Компетентность в создании регламента для достижения целевых показателей',industry:'Регламент и трудовая дисциплина',activity:'Контроль производственных процессов / контроль качества / ОТК'},9:{competence:'Социальная поддержка. Компетентность в объединении людей и идей для продвижения общих целей',industry:'Безопасность и управление социальными проектами',activity:'Генерация идей и продвижение / благотворительность / производство'}};
-const ALL_LINES=[{name:'Линия 1-9: Программа эгоцентризма',nums:[1,9],desc:'«Я хочу, чтобы все думали и делали только так, как я хочу»'},{name:'Линия здоровья (1-2-3)',nums:[1,2,3],desc:'1 — психическое состояние, 2 — умение чувствовать себя, 3 — сам себе лекарь'},{name:'Линия достижений (3-6-9)',nums:[3,6,9],desc:'3 — механизм реализации целей через анализ, 6 — видение конечного результата, 9 — возможности и действия'},{name:'Линия 7-8-9: Трансформации и бесконечных денег',nums:[7,8,9],desc:'Человек, обладающий этой линией, может трансформироваться за одну ночь.'},{name:'Линия 4-8: Знания → Быстрая карма',nums:[4,8],desc:'4 — знания/опыт, 8 — карма. Знания перетекают в быструю карму.'},{name:'Линия 6-8: Отдых внутри сознания',nums:[6,8],desc:'Человек способен быстро восстанавливать свои силы.'},{name:'Линия 6-2: Духовное богатство',nums:[6,2],desc:'Человек рано или поздно станет богатым, но деньги придут только при развитии сознания.'},{name:'Линия 6-9: Конечный результат',nums:[6,9],desc:'Видение конечного результата, умение завершать дела.'},{name:'Линия 1-4-7: Деньги и сексуальность',nums:[1,4,7],desc:'1 — принятие решения, 4 — постановка целей и родовые знания, 7 — сексуальность/харизма/гениальность'},{name:'Линия 4-5-6: Интеллект',nums:[4,5,6],desc:'4 — родовые знания, 5 — технический интеллект/логика, 6 — мудрость'},{name:'Линия 3-5-7: Линия успеха',nums:[3,5,7],desc:'3 — анализ, 5 — деловая коммуникация, 7 — быстрая реализация идей/гениальность'},{name:'Линия 2-5-8: Семейный очаг',nums:[2,5,8],desc:'2 — понимание/чувственность, 5 — правильная коммуникация, 8 — глубинная мудрость'},{name:'Линия 1-5-9: Коммуникация',nums:[1,5,9],desc:'1 — принятие решения на дружбу, 5 — коммуникация, 9 — эмоции'},{name:'Линия 4-2: Знания → Реальность',nums:[4,2],desc:'2 — понимание реальности, 4 — знания. Знания перетекают в реальность.'}];
-
-function digitSum(n){let s=n.toString().split('').reduce((a,c)=>a+parseInt(c),0);return s>9?digitSum(s):s;}
-function parseDate(str){const p=str.split('.');if(p.length!==3)return null;const d=parseInt(p[0]),m=parseInt(p[1]),y=parseInt(p[2]);if(isNaN(d)||isNaN(m)||isNaN(y))return null;if(d<1||d>31||m<1||m>12||y<1900||y>2030)return null;return{d,m,y};}
+async function loadMasterProfile(){
+  var urlParams=new URLSearchParams(window.location.search);
+  var masterId=urlParams.get('master');
+  if(!masterId)return;
+  try{var r=await getClient().from('profiles').select('plan,psycho_count,name').eq('id',masterId).single();if(r.data)masterProfile=r.data;initLimitBar();}catch(e){}
+}
+function initLimitBar(){
+  if(!masterProfile)return;
+  var isFull=masterProfile.plan==='full';
+  var used=masterProfile.psycho_count||0;
+  if(!isFull){
+    var bar=document.getElementById('limit-bar');
+    if(bar){bar.style.display='flex';}
+    var lt=document.getElementById('limit-text');
+    if(lt)lt.textContent=ui('limit_prefix')+' '+used+' '+ui('limit_mid')+' '+PSYCHO_LIMIT+' '+ui('limit_suffix');
+    var lf=document.getElementById('limit-fill');
+    if(lf)lf.style.width=Math.min(100,(used/PSYCHO_LIMIT)*100)+'%';
+  }
+}
 
 function psychoInput(el){
-  let v=el.value,clean=v.replace(/\D/g,''),fmt='';
-  for(let i=0;i<clean.length&&i<8;i++){if(i===2||i===4)fmt+='.';fmt+=clean[i];}
+  var v=el.value,clean=v.replace(/\D/g,''),fmt='';
+  for(var i=0;i<clean.length&&i<8;i++){if(i===2||i===4)fmt+='.';fmt+=clean[i];}
   if(fmt!==v)el.value=fmt;
-  const p=parseDate(el.value);
-  const btn=document.getElementById('psycho-btn');
-  const prev=document.getElementById('psycho-preview');
+  var p=parseDate(el.value);
+  var btn=document.getElementById('psycho-btn');
+  var prev=document.getElementById('psycho-preview');
   if(p){
-    const cs=digitSum(p.d);
-    const mission=digitSum((p.d.toString()+p.m.toString()+p.y.toString()).split('').reduce((a,c)=>a+parseInt(c),0));
+    var cs=digitSum(p.d);
+    var mission=digitSum((p.d.toString()+p.m.toString()+p.y.toString()).split('').reduce(function(a,c){return a+parseInt(c);},0));
     prev.style.display='flex';
     document.getElementById('p-cs-val').textContent=cs;
     document.getElementById('p-m-val').textContent=mission;
@@ -364,247 +341,171 @@ function psychoInput(el){
 }
 
 function calcPsycho(){
-  var LIMIT=5;
-  // Проверка лимита из Supabase профиля
+  var LIMIT=PSYCHO_LIMIT;
   if(masterProfile){
-    const isFull = masterProfile.plan === 'full';
-    const used = masterProfile.psycho_count || 0;
-    if(!isFull && used>=LIMIT){
-      document.getElementById('psycho-results').innerHTML=`<div style="text-align:center;padding:60px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;margin-top:8px;"><div style="font-size:48px;margin-bottom:16px;">🔒</div><h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;margin-bottom:12px;">Бесплатный лимит исчерпан</h3><p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto;">Вы использовали все ${LIMIT} бесплатных психоанализа.<br>Для полного доступа свяжитесь с администратором.</p><a href="cabinet.html" style="display:inline-block;padding:14px 36px;background:var(--gold);color:#fff;text-decoration:none;font-weight:600;font-size:14px;border-radius:8px;">← Вернуться в кабинет</a></div>`;
-      document.getElementById('psycho-results').style.display='block';
-      return;
+    var isFull=masterProfile.plan==='full';
+    var used=masterProfile.psycho_count||0;
+    if(!isFull&&used>=LIMIT){
+      var r=document.getElementById('psycho-results');
+      r.innerHTML='<div style="text-align:center;padding:60px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;margin-top:8px;"><div style="font-size:48px;margin-bottom:16px;">🔒</div><h3 style="font-family:\'Playfair Display\',serif;font-size:22px;font-weight:400;margin-bottom:12px;">'+ui('limit_title')+'</h3><p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:24px;">'+ui('limit_sub')+'</p><a href="cabinet.html" style="display:inline-block;padding:14px 36px;background:var(--gold);color:#fff;text-decoration:none;font-weight:600;font-size:14px;border-radius:8px;">'+ui('back_cabinet')+'</a></div>';
+      r.style.display='block';return;
     }
-    // Увеличиваем счётчик в Supabase (только для базового тарифа)
     if(!isFull){
-      const urlParams = new URLSearchParams(window.location.search);
-      const masterId = urlParams.get('master');
+      var urlParams=new URLSearchParams(window.location.search);
+      var masterId=urlParams.get('master');
       if(masterId){
-        getClient().from('profiles').update({psycho_count: used+1}).eq('id', masterId).then(()=>{
-          if(masterProfile) masterProfile.psycho_count = used+1;
-          initLimitBar();
-        });
+        getClient().from('profiles').update({psycho_count:used+1}).eq('id',masterId).then(function(){if(masterProfile)masterProfile.psycho_count=used+1;initLimitBar();});
       }
     }
   }
-  const v=document.getElementById('psycho-dob').value;
-  const name=document.getElementById('psycho-name').value.trim();
-  const p=parseDate(v);
-  if(!p)return;
-  const cs=digitSum(p.d);
-  const mission=digitSum((p.d.toString()+p.m.toString()+p.y.toString()).split('').reduce((a,c)=>a+parseInt(c),0));
-  const dateDigits=new Set((p.d.toString()+p.m.toString()+p.y.toString()).split('').map(Number).filter(n=>n>0));
-  const matrixOrder=[7,8,9,4,5,6,1,2,3];
-  const ec=ENERGY_COMPAT[cs];
-  const colorCS=COLOR_CS[cs];
-  const colorHex=COLOR_MAP[colorCS]||'#B8892A';
-  const activeLines=ALL_LINES.filter(l=>l.nums.every(n=>dateDigits.has(n)));
-  const absentEnergies=[1,2,3,4,5,6,7,8,9].filter(n=>!dateDigits.has(n));
-  const presentEnergies=[1,2,3,4,5,6,7,8,9].filter(n=>dateDigits.has(n));
-  const profBefore=PROF_BEFORE33[cs];
-  const profMission=PROF_MISSION[mission];
-  const sl=(t)=>`<div class="section-label">${t}</div>`;
-  const nameHtml=name?`<div class="name-display">${name}</div><div class="name-sub">Персональный анализ · Digital Consulting</div>`:'';
-
-  let html=`${nameHtml}
-<div class="big-nums-row">
-  <div class="big-num-card"><div class="bn-label">Число личности</div><div class="bn-num">${cs}</div></div>
-  <div class="big-num-card"><div class="bn-label">Миссия</div><div class="bn-num">${mission}</div></div>
-</div>
-${sl('Число личности ' + cs)}
-<div class="e-card"><div class="e-body"><div class="e-desc"><pre>${PERSONALITY[cs]}</pre></div></div></div>
-${sl('Характеристики')}
-<div class="e-card"><div class="e-body"><div class="grid-2">
-  <div class="pm-box"><div class="pm-title">Доброта</div><div class="pm-text">${DOBROTAS[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Душа реализуется</div><div class="pm-text">${SOUL[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Вектор ЭГО</div><div class="pm-text">${EGO_VEC[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Число личности хочет</div><div class="pm-text">${WANTS[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Цель</div><div class="pm-text">${GOAL_CS[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">ЭГО наслаждается</div><div class="pm-text">${EGO_JOY[cs]}</div></div>
-</div></div></div>
-${sl('В плюсе и в минусе')}
-<div class="e-card"><div class="e-body"><div class="pm-grid">
-  <div class="pm-box plus"><div class="pm-title">В плюсе</div><div class="pm-text">${PLUS_CS[cs]}</div></div>
-  <div class="pm-box minus"><div class="pm-title">В минусе</div><div class="pm-text">${MINUS_CS[cs]}</div></div>
-</div></div></div>
-${sl('Разрушаетесь от')}
-<div class="e-card"><div class="e-body"><div class="pm-box minus"><div class="pm-text">${DESTROY[cs]}</div></div></div></div>
-${sl('Заболевания при страдании ЭГО')}
-<div class="e-card"><div class="e-body"><span class="tag tag-red">${DISEASES[cs]}</span></div></div>
-<div class="divider"></div>
-${sl('Профориентация до 33 лет')}
-<div class="prof-card"><div class="prof-card-title">${profBefore.type}</div>
-<div class="pm-box" style="margin-bottom:0;"><div class="pm-title">Рекомендуемые сферы</div><div class="pm-text">${profBefore.institutes}</div></div></div>
-<div class="divider"></div>
-${sl('Миссия ' + mission)}
-<div class="e-card"><div class="e-body"><div class="e-desc"><pre>${MISSION_TEXT[mission]}</pre></div></div></div>
-<div class="e-card"><div class="e-body">
-  <div class="pm-grid">
-    <div class="pm-box plus"><div class="pm-title">В плюсе</div><div class="pm-text">${MISSION_PLUS[mission]}</div></div>
-    <div class="pm-box minus"><div class="pm-title">В минусе</div><div class="pm-text">${MISSION_MINUS[mission]}</div></div>
-  </div>
-  <div class="pm-box" style="margin-top:10px;"><div class="pm-title">Цель миссии</div><div class="pm-text">${MISSION_GOAL[mission]}</div></div>
-</div></div>
-${sl('Профориентация по миссии')}
-<div class="prof-card"><div class="grid-2">
-  <div class="pm-box"><div class="pm-title">Компетентность</div><div class="pm-text">${profMission.competence}</div></div>
-  <div class="pm-box"><div class="pm-title">Отрасль</div><div class="pm-text">${profMission.industry}</div></div>
-</div>
-<div class="pm-box" style="margin-top:10px;"><div class="pm-title">Деятельность</div><div class="pm-text">${profMission.activity}</div></div></div>
-<div class="divider"></div>
-${sl('Совместимость')}
-<div class="e-card"><div class="e-body">
-  <div class="compat-row"><span class="compat-label">Лучшая:</span>${ec.best.map(n=>`<span class="compat-item c-best">ЧЛ ${n} — ${CS_NAMES[n]}</span>`).join('')}</div>
-  <div class="compat-row"><span class="compat-label">Хорошая:</span>${ec.good.map(n=>`<span class="compat-item c-good">ЧЛ ${n} — ${CS_NAMES[n]}</span>`).join('')}</div>
-  ${ec.neutral.length?`<div class="compat-row"><span class="compat-label">Нейтральная:</span>${ec.neutral.map(n=>`<span class="compat-item c-neutral">ЧЛ ${n} — ${CS_NAMES[n]}</span>`).join('')}</div>`:''}
-  <div class="compat-row"><span class="compat-label">Отрицательная:</span>${ec.bad.map(n=>`<span class="compat-item c-bad">ЧЛ ${n} — ${CS_NAMES[n]}</span>`).join('')}</div>
-</div></div>
-<div class="divider"></div>
-${sl('Цвета и символы')}
-<div class="e-card"><div class="e-body"><div class="grid-2">
-  <div class="pm-box"><div class="pm-title">Цвет числа личности</div><div class="pm-text"><span class="color-dot" style="background:${colorHex};"></span>${colorCS}</div></div>
-  <div class="pm-box"><div class="pm-title">Цветовая гамма одежды</div><div class="pm-text">${COLOR_CLOTHES[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Цвет кошелька</div><div class="pm-text">${COLOR_WALLET[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Ваш день недели</div><div class="pm-text">${WEEK_DAYS[cs]}</div></div>
-</div></div></div>
-<div class="divider"></div>
-${sl('Матрица чисел')}
-<div class="e-card"><div class="e-body">
-  <div style="font-size:11px;color:var(--text3);margin-bottom:10px;">Числа присутствующие в дате рождения выделены золотым</div>
-  <div class="matrix-wrap">${matrixOrder.map(n=>`<div class="matrix-cell ${dateDigits.has(n)?'present':''}">${n}</div>`).join('')}</div>
-</div></div>
-${activeLines.length?`${sl('Активные линии в матрице')}<div class="e-card"><div class="e-body">${activeLines.map(l=>`<div class="line-item"><div class="line-name">${l.name}</div><div class="line-desc">${l.desc}</div></div>`).join('')}</div></div>`:''}
-<div class="divider"></div>
-${sl('Энергии в матрице')}
-<div class="e-card"><div class="e-body">
-  <div class="energy-grid">${[1,2,3,4,5,6,7,8,9].map(n=>`<div class="energy-cell ${dateDigits.has(n)?'present':'absent'}"><div class="ec-num">${n}</div><div class="ec-label">${dateDigits.has(n)?'✓ Есть':'✗ Нет'}</div></div>`).join('')}</div>
-  ${presentEnergies.length?`<div class="pm-box" style="margin-bottom:8px;"><div class="pm-title">Присутствующие</div><div class="pm-text">${presentEnergies.map(n=>`<span class="tag tag-green">${n} — ${ENERGY_LABELS[n]}</span>`).join(' ')}</div></div>`:''}
-  ${absentEnergies.length?`<div class="pm-box minus"><div class="pm-title">Отсутствующие</div><div class="pm-text">${absentEnergies.map(n=>`<span class="tag tag-red">${n} — ${ENERGY_LABELS[n]}</span>`).join(' ')}</div></div>`:`<div class="pm-box plus"><div class="pm-title">✅ Все энергии присутствуют!</div></div>`}
-</div></div>
-${absentEnergies.length?`${sl('Как наработать отсутствующие энергии')}${absentEnergies.map(n=>`<div class="how-card"><div class="how-title">Энергия «${n}» — ${ENERGY_LABELS[n]}</div><div class="how-body">${HOW_TO[n]}</div></div>`).join('')}`:''}
-<div class="divider"></div>
-${sl('Триггеры')}
-<div class="e-card"><div class="e-body"><ul class="trigger-list">${TRIGGERS[cs].map(t=>`<li>${t}</li>`).join('')}</ul></div></div>
-<div class="divider"></div>
-${sl('Общие рекомендации')}
-<div class="e-card"><div class="e-body"><ul class="gen-rec-list">
-  <li>Пейте тёплую воду до 45°C (на 30 кг — 1 литр воды)</li>
-  <li>Ежедневно ходите от 6 км со скоростью 5 км/час и выше</li>
-  <li>Употребляйте кислые фрукты и овощи в течение дня</li>
-  <li>Принимайте завтрак через 1 час после ходьбы</li>
-  <li>Посещайте баню не реже 2-х раз в неделю</li>
-  <li><strong>Деньги:</strong> работайте и ешьте лицом на север. Спите головой на юг. Сейф храните в северной части помещения</li>
-  <li><strong>Контракты:</strong> читайте лицом на север, подписывайте повернувшись на восток</li>
-</ul></div></div>`;
-
-  const r=document.getElementById('psycho-results');
-  r.innerHTML=html;
-  r.style.display='block';
-  document.getElementById('pdf-btn').style.display='inline-block';
-  initLimitBar();
-  setTimeout(()=>r.scrollIntoView({behavior:'smooth',block:'start'}),100);
+  var v=document.getElementById('psycho-dob').value;
+  var name=document.getElementById('psycho-name').value.trim();
+  renderPsycho(v, name);
 }
 
-// ── Supabase для сохранения отчётов ──
-// sbClient инициализируется в getClient()
-function getClient(){
-  if(!window._sbClient){
-    window._sbClient = window.supabase.createClient('https://gigfvlhcrtuosfnkzqpt.supabase.co','sb_publishable_Hw69inUK0lqA5ECoVeGgRQ_kWEyD4Pt');
-  }
-  return window._sbClient;
+function renderPsycho(dobStr, name) {
+  var p=parseDate(dobStr);
+  if(!p)return;
+  var cs=digitSum(p.d);
+  var mission=digitSum((p.d.toString()+p.m.toString()+p.y.toString()).split('').reduce(function(a,c){return a+parseInt(c);},0));
+  var dateDigits=new Set((p.d.toString()+p.m.toString()+p.y.toString()).split('').map(Number).filter(function(n){return n>0;}));
+  var matrixOrder=[7,8,9,4,5,6,1,2,3];
+  var ec=ENERGY_COMPAT[cs];
+  var c=getContent(currentLang);
+  var colorCS=c.COLOR_CS[cs];
+  var colorHex=COLOR_MAP[colorCS]||'#B8892A';
+  var activeLines=getLines(currentLang).filter(function(l){return l.nums.every(function(n){return dateDigits.has(n);});});
+  var absentEnergies=[1,2,3,4,5,6,7,8,9].filter(function(n){return !dateDigits.has(n);});
+  var presentEnergies=[1,2,3,4,5,6,7,8,9].filter(function(n){return dateDigits.has(n);});
+  var profBefore=c.PROF_BEFORE33[cs];
+  var profMission=c.PROF_MISSION[mission];
+  var sl=function(t){return '<div class="section-label">'+t+'</div>';};
+  var nameHtml=name?'<div class="name-display">'+name+'</div><div class="name-sub">'+ui('analysis_sub')+'</div>':'';
+
+  var html=nameHtml+
+  '<div class="big-nums-row"><div class="big-num-card"><div class="bn-label">'+ui('cs_lbl')+'</div><div class="bn-num">'+cs+'</div></div><div class="big-num-card"><div class="bn-label">'+ui('mis_lbl')+'</div><div class="bn-num">'+mission+'</div></div></div>'+
+  sl(ui('s_cs')+' '+cs)+
+  '<div class="e-card"><div class="e-body"><div class="e-desc"><pre>'+c.PERSONALITY[cs]+'</pre></div></div></div>'+
+  sl(ui('s_char'))+
+  '<div class="e-card"><div class="e-body"><div class="grid-2">'+
+  '<div class="pm-box"><div class="pm-title">'+ui('dobrata')+'</div><div class="pm-text">'+c.DOBROTAS[cs]+'</div></div>'+
+  '<div class="pm-box"><div class="pm-title">'+ui('soul')+'</div><div class="pm-text">'+c.SOUL[cs]+'</div></div>'+
+  '<div class="pm-box"><div class="pm-title">'+ui('ego_vec')+'</div><div class="pm-text">'+c.EGO_VEC[cs]+'</div></div>'+
+  '<div class="pm-box"><div class="pm-title">'+ui('cs_wants')+'</div><div class="pm-text">'+c.WANTS[cs]+'</div></div>'+
+  '<div class="pm-box"><div class="pm-title">'+ui('cs_goal')+'</div><div class="pm-text">'+c.GOAL_CS[cs]+'</div></div>'+
+  '<div class="pm-box"><div class="pm-title">'+ui('ego_joy')+'</div><div class="pm-text">'+c.EGO_JOY[cs]+'</div></div>'+
+  '</div></div></div>'+
+  sl(ui('s_plus_minus'))+
+  '<div class="e-card"><div class="e-body"><div class="pm-grid"><div class="pm-box plus"><div class="pm-title">'+ui('plus_lbl')+'</div><div class="pm-text">'+c.PLUS_CS[cs]+'</div></div><div class="pm-box minus"><div class="pm-title">'+ui('minus_lbl')+'</div><div class="pm-text">'+c.MINUS_CS[cs]+'</div></div></div></div></div>'+
+  sl(ui('s_destroy'))+
+  '<div class="e-card"><div class="e-body"><div class="pm-box minus"><div class="pm-text">'+c.DESTROY[cs]+'</div></div></div></div>'+
+  sl(ui('s_diseases'))+
+  '<div class="e-card"><div class="e-body"><span class="tag tag-red">'+c.DISEASES[cs]+'</span></div></div>'+
+  '<div class="divider"></div>'+
+  sl(ui('s_prof33'))+
+  '<div class="prof-card"><div class="prof-card-title">'+profBefore.type+'</div><div class="pm-box" style="margin-bottom:0;"><div class="pm-title">'+ui('rec_spheres')+'</div><div class="pm-text">'+profBefore.institutes+'</div></div></div>'+
+  '<div class="divider"></div>'+
+  sl(ui('s_mission')+' '+mission)+
+  '<div class="e-card"><div class="e-body"><div class="e-desc"><pre>'+c.MISSION_TEXT[mission]+'</pre></div></div></div>'+
+  '<div class="e-card"><div class="e-body"><div class="pm-grid"><div class="pm-box plus"><div class="pm-title">'+ui('plus_lbl')+'</div><div class="pm-text">'+c.MISSION_PLUS[mission]+'</div></div><div class="pm-box minus"><div class="pm-title">'+ui('minus_lbl')+'</div><div class="pm-text">'+c.MISSION_MINUS[mission]+'</div></div></div><div class="pm-box" style="margin-top:10px;"><div class="pm-title">'+ui('mission_goal')+'</div><div class="pm-text">'+c.MISSION_GOAL[mission]+'</div></div></div></div>'+
+  sl(ui('s_prof_mission'))+
+  '<div class="prof-card"><div class="grid-2"><div class="pm-box"><div class="pm-title">'+ui('competence')+'</div><div class="pm-text">'+profMission.competence+'</div></div><div class="pm-box"><div class="pm-title">'+ui('industry')+'</div><div class="pm-text">'+profMission.industry+'</div></div></div><div class="pm-box" style="margin-top:10px;"><div class="pm-title">'+ui('activity')+'</div><div class="pm-text">'+profMission.activity+'</div></div></div>'+
+  '<div class="divider"></div>'+
+  sl(ui('s_compat')+' '+cs)+
+  '<div class="e-card"><div class="e-body">'+
+  '<div class="compat-row"><span class="compat-label">'+ui('compat_best')+'</span>'+ec.best.map(function(n){return '<span class="compat-item c-best">'+n+' — '+c.CS_NAMES[n]+'</span>';}).join('')+'</div>'+
+  '<div class="compat-row"><span class="compat-label">'+ui('compat_good')+'</span>'+ec.good.map(function(n){return '<span class="compat-item c-good">'+n+' — '+c.CS_NAMES[n]+'</span>';}).join('')+'</div>'+
+  (ec.neutral.length?'<div class="compat-row"><span class="compat-label">'+ui('compat_neutral')+'</span>'+ec.neutral.map(function(n){return '<span class="compat-item c-neutral">'+n+' — '+c.CS_NAMES[n]+'</span>';}).join('')+'</div>':'')+
+  '<div class="compat-row"><span class="compat-label">'+ui('compat_bad')+'</span>'+ec.bad.map(function(n){return '<span class="compat-item c-bad">'+n+' — '+c.CS_NAMES[n]+'</span>';}).join('')+'</div>'+
+  '</div></div>'+
+  '<div class="divider"></div>'+
+  sl(ui('s_colors'))+
+  '<div class="e-card"><div class="e-body"><div class="grid-2">'+
+  '<div class="pm-box"><div class="pm-title">'+ui('color_num')+'</div><div class="pm-text"><span class="color-dot" style="background:'+colorHex+';"></span>'+colorCS+'</div></div>'+
+  '<div class="pm-box"><div class="pm-title">'+ui('color_clothes')+'</div><div class="pm-text">'+c.COLOR_CLOTHES[cs]+'</div></div>'+
+  '<div class="pm-box"><div class="pm-title">'+ui('color_wallet')+'</div><div class="pm-text">'+c.COLOR_WALLET[cs]+'</div></div>'+
+  '<div class="pm-box"><div class="pm-title">'+ui('week_day')+'</div><div class="pm-text">'+c.WEEK_DAYS[cs]+'</div></div>'+
+  '</div></div></div>'+
+  '<div class="divider"></div>'+
+  sl(ui('s_matrix'))+
+  '<div class="e-card"><div class="e-body"><div style="font-size:11px;color:var(--text3);margin-bottom:10px;">'+ui('matrix_hint')+'</div><div class="matrix-wrap">'+matrixOrder.map(function(n){return '<div class="matrix-cell'+(dateDigits.has(n)?' present':'')+'">'+n+'</div>';}).join('')+'</div></div></div>'+
+  (activeLines.length?sl(ui('s_active_lines'))+'<div class="e-card"><div class="e-body">'+activeLines.map(function(l){return '<div class="line-item"><div class="line-name">'+l.name+'</div><div class="line-desc">'+l.desc+'</div></div>';}).join('')+'</div></div>':'')+
+  '<div class="divider"></div>'+
+  sl(ui('s_energies'))+
+  '<div class="e-card"><div class="e-body"><div class="energy-grid">'+[1,2,3,4,5,6,7,8,9].map(function(n){return '<div class="energy-cell'+(dateDigits.has(n)?' present':' absent')+'"><div class="ec-num">'+n+'</div><div class="ec-label">'+(dateDigits.has(n)?ui('present'):ui('absent'))+'</div></div>';}).join('')+'</div>'+
+  (presentEnergies.length?'<div class="pm-box" style="margin-bottom:8px;"><div class="pm-title">'+ui('present_e')+'</div><div class="pm-text">'+presentEnergies.map(function(n){return '<span class="tag tag-green">'+n+' — '+c.ENERGY_LABELS[n]+'</span>';}).join(' ')+'</div></div>':'')+
+  (absentEnergies.length?'<div class="pm-box minus"><div class="pm-title">'+ui('absent_e')+'</div><div class="pm-text">'+absentEnergies.map(function(n){return '<span class="tag tag-red">'+n+' — '+c.ENERGY_LABELS[n]+'</span>';}).join(' ')+'</div></div>':'<div class="pm-box plus"><div class="pm-title">'+ui('all_e')+'</div></div>')+
+  '</div></div>'+
+  (absentEnergies.length?sl(ui('s_how_to'))+absentEnergies.map(function(n){return '<div class="how-card"><div class="how-title">'+n+' — '+c.ENERGY_LABELS[n]+'</div><div class="how-body">'+c.HOW_TO[n]+'</div></div>';}).join(''):'')+
+  '<div class="divider"></div>'+
+  sl(ui('s_triggers'))+
+  '<div class="e-card"><div class="e-body"><ul class="trigger-list">'+c.TRIGGERS[cs].map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul></div></div>'+
+  '<div class="divider"></div>'+
+  sl(ui('s_gen_rec'))+
+  '<div class="e-card"><div class="e-body"><ul class="gen-rec-list">'+
+  '<li>'+ui('gen_1')+'</li><li>'+ui('gen_2')+'</li><li>'+ui('gen_3')+'</li><li>'+ui('gen_4')+'</li><li>'+ui('gen_5')+'</li><li>'+ui('gen_6')+'</li>'+
+  '<li><strong>'+ui('gen_money')+'</strong> '+ui('gen_money_text')+'</li>'+
+  '<li><strong>'+ui('gen_contracts')+'</strong> '+ui('gen_contracts_text')+'</li>'+
+  '</ul></div></div>';
+
+  var r=document.getElementById('psycho-results');
+  r.innerHTML=html;r.style.display='block';
+  document.getElementById('pdf-btn').style.display='inline-block';
+  initLimitBar();
+  setTimeout(function(){r.scrollIntoView({behavior:'smooth',block:'start'});},100);
 }
 
 async function createLink(){
-  const btn = document.getElementById('pdf-btn');
-  btn.textContent = '⏳ Создаём...';
-  btn.disabled = true;
-
-  const name = document.getElementById('psycho-name').value.trim();
-  const dob = document.getElementById('psycho-dob').value.trim();
-  const p = parseDate(dob);
-  if(!p){ btn.textContent = '🔗 Создать ссылку'; btn.disabled = false; return; }
-
-  const cs = digitSum(p.d);
-  const mission = digitSum((p.d.toString()+p.m.toString()+p.y.toString()).split('').reduce((a,c)=>a+parseInt(c),0));
-
-  // Получаем master_id из URL или сессии (с таймаутом)
-  const urlParams = new URLSearchParams(window.location.search);
-  let masterId = urlParams.get("master") || null;
-  if(!masterId){
-    try {
-      const sessionPromise = getClient().auth.getSession();
-      const timeoutPromise = new Promise(r => setTimeout(()=>r({data:{session:null}}), 2000));
-      const { data: { session } } = await Promise.race([sessionPromise, timeoutPromise]);
-      masterId = session ? session.user.id : null;
-    } catch(e){ masterId = null; }
-  }
-
-  const { data, error } = await getClient().from('psycho_reports').insert({
-    master_id: masterId,
-    client_name: name || 'Клиент',
-    dob: dob,
-    cs: cs,
-    mission: mission
-  }).select().single();
-
-  if(error || !data){
-    btn.textContent = '🔗 Создать ссылку';
-    btn.disabled = false;
-    alert('Ошибка при создании ссылки. Попробуйте ещё раз.');
-    return;
-  }
-
-  const base = window.location.origin + window.location.pathname.replace('psycho-page.html','');
-  const link = base + 'report.html?id=' + data.id;
-
-  // Показываем модальное окно со ссылкой
-  showLinkModal(link, name);
-
-  btn.textContent = '🔗 Создать ссылку';
-  btn.disabled = false;
+  var btn=document.getElementById('pdf-btn');
+  btn.textContent='⏳...';btn.disabled=true;
+  var name=document.getElementById('psycho-name').value.trim();
+  var dob=document.getElementById('psycho-dob').value.trim();
+  var p=parseDate(dob);
+  if(!p){btn.textContent=ui('link_btn');btn.disabled=false;return;}
+  var cs=digitSum(p.d);
+  var mission=digitSum((p.d.toString()+p.m.toString()+p.y.toString()).split('').reduce(function(a,c){return a+parseInt(c);},0));
+  var urlParams=new URLSearchParams(window.location.search);
+  var masterId=urlParams.get('master')||null;
+  if(!masterId){try{var sp=await Promise.race([getClient().auth.getSession(),new Promise(function(r){setTimeout(function(){r({data:{session:null}});},2000)})]);masterId=sp.data&&sp.data.session?sp.data.session.user.id:null;}catch(e){masterId=null;}}
+  var res=await getClient().from('psycho_reports').insert({master_id:masterId,client_name:name||'Client',dob:dob,cs:cs,mission:mission}).select().single();
+  if(res.error||!res.data){btn.textContent=ui('link_btn');btn.disabled=false;alert('Error creating link. Please try again.');return;}
+  var base=window.location.origin+window.location.pathname.replace('psycho-page.html','');
+  var link=base+'report.html?id='+res.data.id;
+  showLinkModal(link,name);
+  btn.textContent=ui('link_btn');btn.disabled=false;
 }
 
-function showLinkModal(link, name){
-  // Удаляем старый модал если есть
-  const old = document.getElementById('link-modal');
-  if(old) old.remove();
-
-  const modal = document.createElement('div');
-  modal.id = 'link-modal';
-  modal.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);`;
-  modal.innerHTML = `
-    <div style="background:var(--bg2);border:1px solid var(--border-gold);border-radius:16px;padding:28px;max-width:480px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,0.2);">
-      <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);margin-bottom:6px;">Ссылка готова ✦</div>
-      <div style="font-size:12px;color:var(--text3);margin-bottom:18px;">Отправьте эту ссылку ${name ? `клиенту <strong style="color:var(--text)">${name}</strong>` : 'клиенту'}</div>
-      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:11px 14px;font-size:12px;color:var(--gold);word-break:break-all;margin-bottom:14px;">${link}</div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button onclick="copyReportLink('${link}',this)" style="flex:1;padding:11px;background:var(--gold);border:none;border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">Скопировать ссылку</button>
-        <button onclick="document.getElementById('link-modal').remove()" style="padding:11px 18px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-family:'Inter',sans-serif;font-size:13px;cursor:pointer;">Закрыть</button>
-      </div>
-      <div style="margin-top:12px;font-size:11px;color:var(--text3);">Ссылка действует бессрочно и открывается на любом устройстве</div>
-    </div>`;
+function showLinkModal(link,name){
+  var old=document.getElementById('link-modal');if(old)old.remove();
+  var modal=document.createElement('div');
+  modal.id='link-modal';
+  modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);';
+  modal.innerHTML='<div style="background:var(--bg2);border:1px solid var(--border-gold);border-radius:16px;padding:28px;max-width:480px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,0.2);">'+
+  '<div style="font-family:\'Playfair Display\',serif;font-size:20px;color:var(--gold);margin-bottom:6px;">'+ui('link_ready')+'</div>'+
+  '<div style="font-size:12px;color:var(--text3);margin-bottom:18px;">'+ui('link_send')+' '+(name?'<strong style="color:var(--text)">'+name+'</strong>':ui('link_client'))+'</div>'+
+  '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:11px 14px;font-size:12px;color:var(--gold);word-break:break-all;margin-bottom:14px;">'+link+'</div>'+
+  '<div style="display:flex;gap:10px;flex-wrap:wrap;">'+
+  '<button onclick="copyReportLink(\''+link+'\',this)" style="flex:1;padding:11px;background:var(--gold);border:none;border-radius:8px;color:#fff;font-family:\'Inter\',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">'+ui('copy_link')+'</button>'+
+  '<button onclick="document.getElementById(\'link-modal\').remove()" style="padding:11px 18px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-family:\'Inter\',sans-serif;font-size:13px;cursor:pointer;">'+ui('close')+'</button>'+
+  '</div><div style="margin-top:12px;font-size:11px;color:var(--text3);">'+ui('link_valid')+'</div></div>';
   document.body.appendChild(modal);
-  modal.addEventListener('click', e => { if(e.target === modal) modal.remove(); });
+  modal.addEventListener('click',function(e){if(e.target===modal)modal.remove();});
 }
 
-function copyReportLink(link, btn){
-  navigator.clipboard.writeText(link).catch(()=>{
-    const el = document.createElement('textarea');
-    el.value = link; document.body.appendChild(el); el.select();
-    document.execCommand('copy'); document.body.removeChild(el);
-  });
-  btn.textContent = 'Скопировано ✓';
-  btn.style.background = '#4A8A60';
-  setTimeout(()=>{ btn.textContent='Скопировать ссылку'; btn.style.background=''; }, 2500);
+function copyReportLink(link,btn){
+  navigator.clipboard.writeText(link).catch(function(){var el=document.createElement('textarea');el.value=link;document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);});
+  btn.textContent=ui('link_copied');btn.style.background='#4A8A60';
+  setTimeout(function(){btn.textContent=ui('copy_link');btn.style.background='';},2500);
 }
 
 function toggleTheme(){
-  const h=document.documentElement;
-  const dark=h.getAttribute('data-theme')==='dark';
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
   h.setAttribute('data-theme',dark?'light':'dark');
   document.getElementById('theme-icon').textContent=dark?'🌙':'☀️';
-  document.getElementById('theme-label').textContent=dark?'Тёмная тема':'Светлая тема';
+  document.getElementById('theme-label').textContent=dark?ui('theme_dark'):ui('theme_light');
 }
 
+applyUI();
 loadMasterProfile();
 </script>
 </body>
