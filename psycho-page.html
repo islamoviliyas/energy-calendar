@@ -296,7 +296,7 @@ function digitSum(n){var s=n.toString().split('').reduce(function(a,c){return a+
 function parseDate(str){var p=str.split('.');if(p.length!==3)return null;var d=parseInt(p[0]),m=parseInt(p[1]),y=parseInt(p[2]);if(isNaN(d)||isNaN(m)||isNaN(y)||d<1||d>31||m<1||m>12||y<1900||y>2030)return null;return{d:d,m:m,y:y};}
 
 function getClient(){
-  if(!window._sbClient){window._sbClient=window.supabase.createClient('https://gigfvlhcrtuosfnkzqpt.supabase.co','sb_publishable_Hw69inUK0lqA5ECoVeGgRQ_kWEyD4Pt');}
+  if(!window._sbClient){window._sbClient=window.supabase.createClient('https://gigfvlhcrtuosfnkzqpt.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpZ2Z2bGhjcnR1b3Nmbmt6cXB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MjkyOTMsImV4cCI6MjA5NTMwNTI5M30.-ZpjdpI8-V7MPdDwLl1BtWTL0R66rWpk5huN7VP7TUE');}
   return window._sbClient;
 }
 
