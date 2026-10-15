@@ -72,7 +72,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .section-title span{color:var(--gold);font-style:italic;}
 .section-sub{text-align:center;font-size:14px;color:var(--text2);margin-bottom:64px;letter-spacing:0.3px;}
 
-.products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:900px;margin:0 auto;}
+.products-grid{display:grid;grid-template-columns:1fr;gap:24px;max-width:460px;margin:0 auto;}
+.product-contact{margin-top:16px;text-align:center;font-size:13px;color:var(--text2);}
+.product-contact a{color:var(--gold);text-decoration:none;}
 
 .product-card{background:var(--dark3);border:1px solid var(--border);border-radius:2px;padding:40px;position:relative;overflow:hidden;transition:transform 0.3s,border-color 0.3s;}
 .product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;transition:opacity 0.3s;}
@@ -149,7 +151,7 @@ footer{padding:40px 48px;border-top:1px solid var(--border);display:flex;align-i
   .hero{padding:100px 24px 60px;}
   .stats{gap:40px;padding:40px 24px;}
   .section,.how-section,.testimonials,.cta-section{padding:60px 24px;}
-  .products-grid,.steps,.features-grid,.testimonials-grid{grid-template-columns:1fr;}
+  .features-grid,.testimonials-grid{grid-template-columns:1fr;}
   footer{padding:30px 24px;flex-direction:column;text-align:center;}
   .footer-contacts{justify-content:center;}
 }
@@ -162,7 +164,6 @@ footer{padding:40px 48px;border-top:1px solid var(--border);display:flex;align-i
   <div class="nav-logo">Энергетический <span>Календарь</span></div>
   <div class="nav-links">
     <a href="#products">Тарифы</a>
-    <a href="#how">Как работает</a>
     <a href="#features">Возможности</a>
   </div>
   <a href="login.html" class="nav-btn">Войти</a>
@@ -182,7 +183,7 @@ footer{padding:40px 48px;border-top:1px solid var(--border);display:flex;align-i
       Планируйте важные события в соответствии с вашим внутренним ритмом.
     </p>
     <div class="hero-actions">
-      <a href="login.html?action=register" class="btn-primary">Начать бесплатно</a>
+      <a href="https://wa.me/77779894366" class="btn-primary" target="_blank" rel="noopener">Обратиться к администратору</a>
       <a href="#products" class="btn-secondary">Узнать больше</a>
     </div>
   </div>
@@ -203,8 +204,8 @@ footer{padding:40px 48px;border-top:1px solid var(--border);display:flex;align-i
     <div class="stat-label">Дней в году</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">2</div>
-    <div class="stat-label">Продукта</div>
+    <div class="stat-num">1</div>
+    <div class="stat-label">Тариф — всё включено</div>
   </div>
   <div class="stat-item">
     <div class="stat-num">∞</div>
@@ -214,63 +215,24 @@ footer{padding:40px 48px;border-top:1px solid var(--border);display:flex;align-i
 
 <!-- Products -->
 <section class="section" id="products">
-  <h2 class="section-title reveal">Выберите свой <span>тариф</span></h2>
-  <p class="section-sub reveal">Два продукта для глубокого понимания себя и своей энергии</p>
+  <h2 class="section-title reveal">Ваш <span>тариф</span></h2>
+  <p class="section-sub reveal">Полный доступ для глубокого понимания себя и своей энергии</p>
   <div class="products-grid reveal">
-    <div class="product-card">
-      <div class="product-badge">Базовый</div>
-      <div class="product-name">Энергетический Календарь</div>
-      <p class="product-desc">Ежедневный компас для планирования жизни по вашей личной энергии</p>
-      <ul class="product-features">
-        <li>Энергия личного дня</li>
-        <li>Энергия общего дня</li>
-        <li>Энергия месяца</li>
-        <li>Энергия года с мантрой</li>
-        <li>Рекомендации на неделю вперёд</li>
-        <li>Утренний ритуал дня</li>
-        <li class="locked">Психоанализ личности (3 попытки)</li>
-      </ul>
-      <div class="product-price">15 000 <span>тг</span></div>
-      <a href="login.html?action=register&plan=basic" class="product-btn">Выбрать тариф</a>
-    </div>
     <div class="product-card featured">
       <div class="product-badge">Полный доступ</div>
       <div class="product-name">Полный пакет</div>
       <p class="product-desc">Календарь + полный психоанализ личности для максимального понимания себя</p>
       <ul class="product-features">
-        <li>Всё из базового тарифа</li>
+        <li>Энергия личного дня, месяца и года</li>
         <li>Психоанализ личности — безлимит</li>
         <li>Число личности и миссия</li>
         <li>Матрица чисел и линии</li>
         <li>Профессиональная ориентация</li>
-        <li>Совместимость с партнёрами</li>
         <li>Скачивание отчёта в PDF</li>
       </ul>
-      <div class="product-price">30 000 <span>тг</span></div>
-      <a href="login.html?action=register&plan=full" class="product-btn primary">Выбрать тариф</a>
-    </div>
-  </div>
-</section>
-
-<!-- How it works -->
-<section class="how-section" id="how">
-  <h2 class="section-title reveal">Как это <span>работает</span></h2>
-  <p class="section-sub reveal">Три простых шага до вашего персонального анализа</p>
-  <div class="steps">
-    <div class="step reveal">
-      <div class="step-num">01</div>
-      <div class="step-title">Зарегистрируйтесь</div>
-      <p class="step-desc">Создайте аккаунт за 30 секунд. Введите email и придумайте пароль.</p>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">02</div>
-      <div class="step-title">Введите дату рождения</div>
-      <p class="step-desc">Система автоматически рассчитает все ваши энергетические показатели.</p>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">03</div>
-      <div class="step-title">Планируйте жизнь</div>
-      <p class="step-desc">Используйте рекомендации каждый день для принятия правильных решений.</p>
+      <div class="product-price">10 000 <span>тг</span> <span>· 2 100 ₽ · 25 $</span></div>
+      <a href="https://wa.me/77779894366" class="product-btn primary" target="_blank" rel="noopener">Для регистрации обратитесь к администратору</a>
+      <p class="product-contact">WhatsApp: <a href="https://wa.me/77779894366" target="_blank" rel="noopener">+7 777 989 43 66</a></p>
     </div>
   </div>
 </section>
@@ -339,9 +301,9 @@ footer{padding:40px 48px;border-top:1px solid var(--border);display:flex;align-i
 <!-- CTA -->
 <section class="cta-section">
   <h2 class="cta-title reveal">Начните действовать<br><span>в потоке своей энергии</span></h2>
-  <p class="cta-sub reveal">Зарегистрируйтесь бесплатно и получите доступ к календарю прямо сейчас</p>
+  <p class="cta-sub reveal">Для регистрации обратитесь к администратору в WhatsApp: +7 777 989 43 66</p>
   <div class="hero-actions reveal">
-    <a href="login.html?action=register" class="btn-primary">Начать бесплатно</a>
+    <a href="https://wa.me/77779894366" class="btn-primary" target="_blank" rel="noopener">Написать в WhatsApp</a>
     <a href="login.html" class="btn-secondary">Войти в кабинет</a>
   </div>
 </section>
@@ -351,7 +313,7 @@ footer{padding:40px 48px;border-top:1px solid var(--border);display:flex;align-i
   <div class="footer-logo">Энергетический <span>Календарь</span></div>
   <div class="footer-text">© 2026 Ислам Iлияс · Digital Consulting</div>
   <div class="footer-contacts">
-    <a href="https://wa.me/77001234567">WhatsApp</a>
+    <a href="https://wa.me/77779894366">WhatsApp</a>
     <a href="https://instagram.com/islam_ilyas">Instagram</a>
   </div>
 </footer>
