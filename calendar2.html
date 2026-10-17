@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="dark">
+<html lang="ru" data-theme="dark" class="gate">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
 <title>Энергетический Календарь 2.0</title>
+<style>html.gate .wrap{visibility:hidden}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&family=Noto+Sans:wght@300;400;500&family=Noto+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
@@ -232,6 +234,10 @@ input#cal-bdate::placeholder{color:var(--text3);opacity:.55;letter-spacing:2px;}
 input#cal-bdate.bad{border-color:#CF5C5C;}
 .dob-err{min-height:18px;margin-top:12px;font-size:12.5px;color:#E08080;}
 [data-theme="light"] .dob-err{color:#A02828;}
+
+.demo-bar{display:flex;align-items:center;gap:12px;background:var(--bg3);border:1px solid var(--border-gold);border-radius:14px;padding:12px 16px;margin-bottom:22px;font-size:13px;color:var(--text2);line-height:1.55;}
+.demo-badge{flex-shrink:0;font-size:10px;letter-spacing:2px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--metal);color:var(--on-gold);}
+@media print{body{display:none!important;}}
 </style>
 </head>
 <body>
@@ -250,6 +256,8 @@ input#cal-bdate.bad{border-color:#CF5C5C;}
     <button class="theme-btn" onclick="toggleTheme()"><span id="theme-icon">☀️</span><span id="theme-label">Светлая тема</span></button>
   </div>
 </header>
+
+<div class="demo-bar" role="note"><span class="demo-badge">DEMO</span><span id="demo-text"></span></div>
 
 <div class="input-card" id="input-card">
   <h2 id="input-title"></h2>
@@ -292,13 +300,14 @@ input#cal-bdate.bad{border-color:#CF5C5C;}
 
 <div class="cal-foot">Digital Consulting</div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="translations-content.js"></script>
 <script src="calendar-data.js"></script>
 <script>
 var currentLang='ru';
 try{var _l=localStorage.getItem('lang');if(_l==='ru'||_l==='en'||_l==='kz')currentLang=_l;}catch(e){}
 var UI={
-ru:{title:'Энергетический Календарь 2.0',logo:'Энергетический <span>Календарь 2.0</span>',theme_dark:'Тёмная тема',theme_light:'Светлая тема',
+ru:{title:'Энергетический Календарь 2.0',demo:'Демо-версия. Полная версия откроется, когда в сервисе будет 150 участников. Пока календарь доступен только вам и не отправляется клиентам.',logo:'Энергетический <span>Календарь 2.0</span>',theme_dark:'Тёмная тема',theme_light:'Светлая тема',
  input_title:'Введите вашу дату рождения',input_sub:'Увидите энергию каждого дня месяца — личного и общего. Нажмите на любой день, чтобы получить рекомендации.',btn:'Показать календарь',
  lbl_dob:'Дата рождения',change:'Изменить',no_date:'Введите дату рождения',bad_date:'Проверьте дату — формат ДД.ММ.ГГГГ',
  s_month:'Энергия личного месяца',s_grid:'Календарь месяца',today:'Сегодня',
@@ -312,7 +321,7 @@ ru:{title:'Энергетический Календарь 2.0',logo:'Энерг
  lg_hint:'● личный день · ○ общий день · нажмите на дату, чтобы открыть рекомендации',
  warn:'Не желательно начинать новые проекты и события. Есть высокая вероятность обнуления всех результатов ваших действий. Отложить на другой день крупные покупки, договоры, кредиты и т.д.',
  pw:'Личный',gw:'Общий',aria:'личный день',aria2:'общий день'},
-en:{title:'Energy Calendar 2.0',logo:'Energy <span>Calendar 2.0</span>',theme_dark:'Dark theme',theme_light:'Light theme',
+en:{title:'Energy Calendar 2.0',demo:'Demo version. The full version opens when the service reaches 150 members. For now the calendar is for you only and cannot be sent to clients.',logo:'Energy <span>Calendar 2.0</span>',theme_dark:'Dark theme',theme_light:'Light theme',
  input_title:'Enter your date of birth',input_sub:'See the energy of every day of the month — personal and general. Tap any day to get recommendations.',btn:'Show calendar',
  lbl_dob:'Date of birth',change:'Change',no_date:'Enter your date of birth',bad_date:'Check the date — format DD.MM.YYYY',
  s_month:'Energy of the personal month',s_grid:'Month calendar',today:'Today',
@@ -326,7 +335,7 @@ en:{title:'Energy Calendar 2.0',logo:'Energy <span>Calendar 2.0</span>',theme_da
  lg_hint:'● personal day · ○ general day · tap a date to open recommendations',
  warn:'Avoid starting new projects and events. There is a high risk that all results of your actions will be reset to zero. Postpone big purchases, contracts, loans and the like to another day.',
  pw:'Personal',gw:'General',aria:'personal day',aria2:'general day'},
-kz:{title:'Энергия күнтізбесі 2.0',logo:'Энергия <span>күнтізбесі 2.0</span>',theme_dark:'Қараңғы тақырып',theme_light:'Жарық тақырып',
+kz:{title:'Энергия күнтізбесі 2.0',demo:'Демо нұсқа. Толық нұсқа сервисте 150 қатысушы болғанда ашылады. Әзірге күнтізбе тек сізге қолжетімді және клиенттерге жіберілмейді.',logo:'Энергия <span>күнтізбесі 2.0</span>',theme_dark:'Қараңғы тақырып',theme_light:'Жарық тақырып',
  input_title:'Туған күніңізді енгізіңіз',input_sub:'Айдың әр күнінің — жеке және жалпы — энергиясын көріңіз. Ұсыныстар алу үшін кез келген күнді басыңыз.',btn:'Күнтізбені көрсету',
  lbl_dob:'Туған күні',change:'Өзгерту',no_date:'Туған күніңізді енгізіңіз',bad_date:'Күнді тексеріңіз — пішім КК.АА.ЖЖЖЖ',
  s_month:'Жеке ай энергиясы',s_grid:'Ай күнтізбесі',today:'Бүгін',
@@ -354,6 +363,7 @@ function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
 
 function applyUI(){
   document.title=u('title');
+  document.getElementById('demo-text').textContent=u('demo');
   document.getElementById('logo-h1').innerHTML=u('logo');
   document.getElementById('input-title').textContent=u('input_title');
   document.getElementById('input-sub').textContent=u('input_sub');
@@ -521,6 +531,23 @@ function showDetail(day,scroll){
   ci.addEventListener('input',function(){fmtDobInput(ci);});
   ci.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();startCalendar();}});
   if(v&&/^\d{4}-\d{2}-\d{2}$/.test(v)){var q=v.split('-');ci.value=q[2]+'.'+q[1]+'.'+q[0];startCalendar();}
+})();
+
+(function gate(){
+  var SB_URL='https://gigfvlhcrtuosfnkzqpt.supabase.co';
+  var SB_KEY='sb_publishable_Hw69inUK0lqA5ECoVeGgRQ_kWEyD4Pt';
+  function deny(){location.replace('login.html');}
+  try{
+    if(!window.supabase){deny();return;}
+    var sb=window.supabase.createClient(SB_URL,SB_KEY);
+    sb.auth.getSession().then(function(r){
+      var ses=r&&r.data&&r.data.session;if(!ses){deny();return;}
+      return sb.from('profiles').select('is_active').eq('id',ses.user.id).single().then(function(p){
+        if(!p||!p.data||!p.data.is_active){deny();return;}
+        document.documentElement.classList.remove('gate');
+      });
+    }).catch(deny);
+  }catch(e){deny();}
 })();
 </script>
 </body>
