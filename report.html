@@ -1,135 +1,74 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
+<html lang="ru" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Психоанализ личности · Digital Consulting</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600&family=Noto+Sans:wght@300;400;500&family=Noto+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="analysis.css">
 <style>
-:root{--gold:#B8892A;--gold-light:#D4A84B;--radius:14px;--transition:0.3s ease;}
-[data-theme="light"]{--bg:#F6F4EF;--bg2:#FFFFFF;--bg3:#F0EDE6;--bg4:#E8E4D8;--text:#1A1814;--text2:#3A3830;--text3:#8A8680;--border:rgba(0,0,0,0.08);--border-gold:rgba(184,137,42,0.3);--shadow:0 2px 20px rgba(0,0,0,0.06);--plus-bg:#F0F7F2;--plus-border:#B8DEC4;--plus-text:#1E5C34;--minus-bg:#FBF0F0;--minus-border:#E8B8B8;--minus-text:#7A1E1E;--tag-green-bg:#E8F7EE;--tag-green-text:#1E5C34;--tag-red-bg:#FBF0F0;--tag-red-text:#7A1E1E;--tag-blue-bg:#EEF4FB;--tag-blue-text:#1E3C6A;--matrix-empty-bg:#F6F4EF;--matrix-empty-border:rgba(0,0,0,0.1);--matrix-empty-text:#C0BDB0;--matrix-full-bg:#F8F0DC;--matrix-full-border:#B8892A;--line-active-bg:#F8F0DC;--line-active-border:rgba(184,137,42,0.4);--how-bg:#FFFBF0;--how-border:rgba(184,137,42,0.25);--how-title:#8B6010;--energy-present-bg:#F0F7F2;--energy-present-border:#B8DEC4;--energy-present-text:#1E5C34;--energy-absent-bg:#FBF0F0;--energy-absent-border:#E8B8B8;--energy-absent-text:#C06060;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'Noto Sans',sans-serif;font-weight:300;min-height:100vh;line-height:1.6;}
-.wrap{max-width:820px;margin:0 auto;padding:0 20px 60px;}
-
-/* Header */
-.report-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:20px 0;margin-bottom:28px;}
-.report-header-inner{max-width:820px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-.logo-text{font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--text);}
-.logo-text span{color:var(--gold);}
-.logo-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-top:2px;}
-.master-badge{display:flex;align-items:center;gap:10px;background:var(--bg3);border:1px solid var(--border-gold);border-radius:40px;padding:8px 16px;}
-.master-av{width:28px;height:28px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:12px;color:#fff;flex-shrink:0;font-weight:600;}
+.report-header{position:relative;padding:22px 0 20px;margin-bottom:6px;}
+.report-header::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--border-gold),transparent);}
+.report-header-inner{max-width:860px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:relative;z-index:1;}
+.logo-text{font-family:var(--f-head);font-size:22px;font-weight:500;color:var(--text);line-height:1.15;}
+.logo-text span{background:var(--metal);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--gold);}
+.logo-sub{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-top:4px;}
+.hdr-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.lang-switch{display:flex;align-items:center;gap:2px;background:var(--bg3);border:1px solid var(--border);border-radius:40px;padding:3px;}
+.lang-btn{background:transparent;border:none;border-radius:30px;padding:6px 11px;font-size:11.5px;font-weight:500;color:var(--text3);cursor:pointer;font-family:var(--f-body);min-height:30px;}
+.lang-btn:hover{color:var(--text);}
+.lang-btn.active{background:var(--metal);color:var(--on-gold);}
+.theme-btn{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;background:var(--bg3);border:1px solid var(--border);border-radius:50%;cursor:pointer;font-size:15px;color:var(--text2);}
+.theme-btn:hover{border-color:var(--border-gold);}
+.master-badge{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--border-gold);border-radius:40px;padding:6px 18px 6px 7px;}
+.master-av{width:32px;height:32px;border-radius:50%;background:var(--metal);display:flex;align-items:center;justify-content:center;font-family:var(--f-head);font-size:17px;color:var(--on-gold);flex-shrink:0;font-weight:700;}
 .master-info{line-height:1.3;}
-.master-name{font-size:12px;color:var(--text);font-weight:500;}
-.master-spec{font-size:10px;color:var(--text3);}
-
-/* Hero */
-.hero{text-align:center;padding:32px 0 24px;}
-.client-name{font-family:'Playfair Display',serif;font-size:32px;font-weight:400;color:var(--gold);margin-bottom:6px;}
-.client-sub{font-size:12px;color:var(--text3);letter-spacing:1px;}
-.nums-row{display:flex;gap:14px;justify-content:center;margin-top:20px;flex-wrap:wrap;}
-.num-card{background:var(--bg2);border:1px solid var(--border-gold);border-radius:var(--radius);padding:16px 28px;text-align:center;box-shadow:var(--shadow);}
-.num-val{font-family:'Playfair Display',serif;font-size:44px;color:var(--gold);line-height:1;margin-bottom:4px;}
-.num-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);}
-
-/* Sections */
-.section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
-.lang-badge{display:inline-block;padding:3px 10px;background:var(--gold);color:#fff;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-left:8px;}
-.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
-.divider{border:none;border-top:1px solid var(--border);margin:18px 0;}
-.e-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);}
-.e-body{padding:18px 20px;display:flex;flex-direction:column;gap:12px;}
-.e-desc{font-size:13px;color:var(--text2);line-height:1.85;}
-.e-desc pre{white-space:pre-wrap;font-family:'Noto Sans',sans-serif;font-size:13px;line-height:1.85;}
-.pm-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.pm-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
-.pm-box.plus{background:var(--plus-bg);border-color:var(--plus-border);}
-.pm-box.minus{background:var(--minus-bg);border-color:var(--minus-border);}
-.pm-title{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:5px;font-weight:500;}
-.pm-box.plus .pm-title{color:var(--plus-text);}
-.pm-box.minus .pm-title{color:var(--minus-text);}
-.pm-text{font-size:12.5px;color:var(--text2);line-height:1.6;}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;margin:2px;}
-.tag-green{background:var(--tag-green-bg);color:var(--tag-green-text);}
-.tag-red{background:var(--tag-red-bg);color:var(--tag-red-text);}
-.tag-blue{background:var(--tag-blue-bg);color:var(--tag-blue-text);}
-.matrix-wrap{display:grid;grid-template-columns:repeat(3,58px);gap:7px;}
-.matrix-cell{width:58px;height:58px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;border:1.5px solid var(--matrix-empty-border);background:var(--matrix-empty-bg);color:var(--matrix-empty-text);}
-.matrix-cell.present{border-color:var(--matrix-full-border);background:var(--matrix-full-bg);color:var(--text);}
-.line-item{padding:10px 13px;border-radius:10px;border:1px solid var(--line-active-border);background:var(--line-active-bg);margin-bottom:6px;}
-.line-name{font-size:12px;font-weight:500;color:var(--gold);margin-bottom:2px;}
-.line-desc{font-size:11.5px;color:var(--text2);line-height:1.5;}
-.energy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
-.energy-cell{border-radius:10px;padding:11px 6px;text-align:center;border:1.5px solid var(--border);}
-.energy-cell.present{background:var(--energy-present-bg);border-color:var(--energy-present-border);}
-.energy-cell.absent{background:var(--energy-absent-bg);border-color:var(--energy-absent-border);}
-.ec-num{font-family:'Playfair Display',serif;font-size:24px;line-height:1;margin-bottom:3px;}
-.energy-cell.present .ec-num{color:var(--energy-present-text);}
-.energy-cell.absent .ec-num{color:var(--energy-absent-text);}
-.ec-label{font-size:8px;color:var(--text3);}
-.how-card{background:var(--how-bg);border:1px solid var(--how-border);border-radius:10px;padding:13px 15px;margin-bottom:7px;}
-.how-title{font-size:10px;font-weight:600;color:var(--how-title);margin-bottom:6px;}
-.how-body{font-size:12px;color:var(--text2);line-height:1.7;white-space:pre-line;}
-.trigger-list{list-style:none;display:flex;flex-direction:column;gap:5px;}
-.trigger-list li{font-size:12.5px;color:var(--text2);padding:7px 11px;background:var(--bg3);border-radius:6px;border:1px solid var(--border);}
-.compat-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px;}
-.compat-label{font-size:10px;color:var(--text3);min-width:90px;}
-.compat-item{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;}
-.c-best{background:var(--tag-green-bg);color:var(--tag-green-text);}
-.c-good{background:var(--tag-blue-bg);color:var(--tag-blue-text);}
-.c-neutral{background:#FDF6E8;color:#7A5010;}
-.c-bad{background:var(--tag-red-bg);color:var(--tag-red-text);}
-.color-dot{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:middle;margin-right:4px;border:2px solid var(--border);}
-.gen-rec-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
-.gen-rec-list li{font-size:12.5px;color:var(--text2);line-height:1.6;padding:9px 13px;background:var(--bg3);border-radius:8px;border:1px solid var(--border);}
-.gen-rec-list li strong{color:var(--gold);}
-.prof-card{background:#EEF4FB;border:1px solid #B8CDE8;border-radius:10px;padding:15px 17px;margin-bottom:10px;}
-.prof-card-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#1E3C6A;margin-bottom:10px;font-weight:600;}
-
-/* Footer мастера */
-.master-footer{margin-top:40px;background:var(--bg2);border:1px solid var(--border-gold);border-radius:var(--radius);padding:24px 28px;text-align:center;}
-.mf-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-bottom:14px;}
-.mf-name{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);margin-bottom:4px;}
-.mf-spec{font-size:12px;color:var(--text3);margin-bottom:16px;}
-.mf-contacts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-.mf-wa{display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;text-decoration:none;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:500;}
-.mf-ig{display:inline-flex;align-items:center;gap:7px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);text-decoration:none;padding:10px 20px;border-radius:8px;font-size:13px;}
-
-/* Loading */
-.loading{text-align:center;padding:80px 20px;}
-.loading-icon{font-size:40px;margin-bottom:16px;animation:spin 1.5s linear infinite;display:inline-block;}
-@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-.loading-text{font-size:14px;color:var(--text3);}
-.error-box{text-align:center;padding:80px 20px;}
-.error-icon{font-size:48px;margin-bottom:16px;}
-
-@media(max-width:640px){
-  .pm-grid,.grid-2{grid-template-columns:1fr;}
-  .nums-row{gap:10px;}
-  .num-card{padding:14px 20px;}
-  .num-val{font-size:36px;}
-  .client-name{font-size:26px;}
-  .master-footer{padding:18px;}
-}
+.master-name{font-size:13px;color:var(--text);font-weight:500;}
+.master-spec{font-size:11px;color:var(--text3);}
+.master-footer{margin-top:44px;background:var(--bg2);border:1px solid var(--border-gold);border-radius:22px;padding:34px 28px;text-align:center;position:relative;}
+.master-footer::before{content:'';position:absolute;inset:6px;border:1px solid var(--border);border-radius:17px;pointer-events:none;}
+.master-footer::after{content:'';position:absolute;top:0;left:14%;right:14%;height:1px;background:linear-gradient(90deg,transparent,var(--gold2),transparent);}
+.mf-label{font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:14px;}
+.mf-av{width:64px;height:64px;margin:0 auto 12px;border-radius:50%;background:var(--metal);display:flex;align-items:center;justify-content:center;font-family:var(--f-head);font-size:32px;font-weight:700;color:var(--on-gold);box-shadow:0 0 0 5px rgba(232,184,75,.12);}
+.mf-name{font-family:var(--f-head);font-size:30px;font-weight:500;color:var(--gold-text);margin-bottom:4px;overflow-wrap:anywhere;}
+.mf-spec{font-size:13px;color:var(--text3);margin-bottom:20px;}
+.mf-contacts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.mf-wa{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#06260F;text-decoration:none;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:600;min-height:46px;}
+.mf-ig{display:inline-flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border-gold);color:var(--text);text-decoration:none;padding:12px 24px;border-radius:10px;font-size:14px;min-height:46px;}
+.report-actions{display:flex;justify-content:center;margin-top:26px;}
+.btn-print{padding:11px 24px;background:transparent;border:1.5px solid var(--gold2);border-radius:10px;color:var(--gold-text);font-family:var(--f-body);font-size:13px;font-weight:500;cursor:pointer;min-height:44px;}
+.btn-print:hover{background:var(--metal);color:var(--on-gold);border-color:transparent;}
+.loading,.error-box{text-align:center;padding:100px 20px;}
+.loading-icon{font-size:34px;margin-bottom:16px;display:inline-block;color:var(--gold2);animation:spin 2.4s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text,.error-box p{font-size:14px;color:var(--text3);}
+.error-icon{font-size:44px;margin-bottom:14px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+#report-content{animation:fadeUp .5s ease both;}
+@media(max-width:640px){.master-footer{padding:28px 16px;}.mf-name{font-size:26px;}.logo-text{font-size:19px;}.mf-wa,.mf-ig{width:100%;justify-content:center;}.master-badge{padding-right:14px;}}
+@media print{.report-header{border:none;}.master-footer{break-inside:avoid;border-color:#9C7220;}.mf-wa{background:#fff!important;color:#06260F!important;border:1px solid #25D366;}.hdr-right{display:none!important;}}
 </style>
 </head>
 <body>
 
 <div class="report-header">
-  <!-- lang indicator injected by JS -->
   <div class="report-header-inner">
     <div>
-      <div class="logo-text">Психоанализ <span>личности</span></div>
+      <div class="logo-text" id="logo-text">Психоанализ <span>личности</span></div>
       <div class="logo-sub">Digital Consulting</div>
     </div>
-    <div class="master-badge" id="master-badge" style="display:none;">
-      <div class="master-av" id="hdr-av">М</div>
-      <div class="master-info">
-        <div class="master-name" id="hdr-name">—</div>
-        <div class="master-spec" id="hdr-spec">—</div>
+    <div class="hdr-right">
+      <div class="master-badge" id="master-badge" style="display:none;">
+        <div class="master-av" id="hdr-av">М</div>
+        <div class="master-info"><div class="master-name" id="hdr-name">—</div><div class="master-spec" id="hdr-spec">—</div></div>
       </div>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button class="lang-btn" id="lang-ru" onclick="setReportLang('ru')">RU</button>
+        <button class="lang-btn" id="lang-en" onclick="setReportLang('en')">EN</button>
+        <button class="lang-btn" id="lang-kz" onclick="setReportLang('kz')">ҚЗ</button>
+      </div>
+      <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Theme">☀️</button>
     </div>
   </div>
 </div>
@@ -138,89 +77,71 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans',sans-serif;f
   <div id="report-content">
     <div class="loading">
       <div class="loading-icon">✦</div>
-      <div class="loading-text">Загружаем анализ...</div>
+      <div class="loading-text">…</div>
     </div>
   </div>
 </div>
 
 <script src="translations-content.js"></script>
+<script src="analysis-ui.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL = 'https://gigfvlhcrtuosfnkzqpt.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpZ2Z2bGhjcnR1b3Nmbmt6cXB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MjkyOTMsImV4cCI6MjA5NTMwNTI5M30.-ZpjdpI8-V7MPdDwLl1BtWTL0R66rWpk5huN7VP7TUE';
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ── Language from URL param ──
-const _urlLang = new URLSearchParams(window.location.search).get('lang');
-const reportLang = (['ru','en','kz'].includes(_urlLang)) ? _urlLang : 'ru';
-document.documentElement.lang = reportLang;
+// ── Язык: ?lang= → иначе сохранённый → ru ──
+let reportLang = (function(){
+  const q = new URLSearchParams(window.location.search).get('lang');
+  if (['ru','en','kz'].includes(q)) return q;
+  try { const l = localStorage.getItem('lang'); if (['ru','en','kz'].includes(l)) return l; } catch(e) {}
+  return 'ru';
+})();
+let _rep = { data: null, master: null, state: 'loading' };
+
+function esc(x){ return String(x==null?'':x).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])); }
+function ri(key){ return aui(reportLang, key); }
 
 function getC() {
   if ((reportLang === 'en' || reportLang === 'kz') && typeof CONTENT !== 'undefined' && CONTENT[reportLang]) {
     return CONTENT[reportLang];
   }
-  // RU fallback — use local constants defined below
   return {
-    PERSONALITY: PERSONALITY, DOBROTAS: DOBROTAS, SOUL: SOUL,
-    EGO_VEC: EGO_VEC, WANTS: WANTS, GOAL_CS: GOAL_CS, EGO_JOY: EGO_JOY,
-    DESTROY: DESTROY, DISEASES: DISEASES, PLUS_CS: PLUS_CS, MINUS_CS: MINUS_CS,
-    MISSION_TEXT: MISSION_TEXT, MISSION_PLUS: MISSION_PLUS,
-    MISSION_MINUS: MISSION_MINUS, MISSION_GOAL: MISSION_GOAL,
-    TRIGGERS: TRIGGERS, HOW_TO: HOW_TO,
-    PROF_BEFORE33: PROF_BEFORE33, PROF_MISSION: PROF_MISSION,
-    CS_NAMES: CS_NAMES, COLOR_CS: COLOR_CS,
-    COLOR_CLOTHES: COLOR_CLOTHES, COLOR_WALLET: COLOR_WALLET,
-    WEEK_DAYS: WEEK_DAYS, ENERGY_LABELS: ENERGY_LABELS
+    PERSONALITY, DOBROTAS, SOUL, EGO_VEC, WANTS, GOAL_CS, EGO_JOY, DESTROY, DISEASES, PLUS_CS, MINUS_CS,
+    MISSION_TEXT, MISSION_PLUS, MISSION_MINUS, MISSION_GOAL, TRIGGERS, HOW_TO, PROF_BEFORE33, PROF_MISSION,
+    CS_NAMES, COLOR_CS, COLOR_CLOTHES, COLOR_WALLET, WEEK_DAYS, ENERGY_LABELS
   };
 }
 function getLines() {
-  if (reportLang === 'en' && typeof CONTENT !== 'undefined') return CONTENT.en.ALL_LINES_EN || ALL_LINES;
-  if (reportLang === 'kz' && typeof CONTENT !== 'undefined') return CONTENT.kz.ALL_LINES_KZ || ALL_LINES;
+  if (reportLang === 'en') return ALL_LINES_EN;
+  if (reportLang === 'kz') return ALL_LINES_KZ;
   return ALL_LINES;
 }
-function ri(key) {
-  var c = getC();
-  var ui = (c.UI || {});
-  var RU_REPORT_UI = {
-    cs_label:'Число личности', mis_label:'Миссия',
-    s_cs:'Число личности', s_char:'Характеристики', s_pm:'В плюсе и в минусе',
-    s_destroy:'Разрушаетесь от', s_diseases:'Заболевания при страдании ЭГО',
-    s_prof33:'Профориентация до 33 лет', s_mission:'Миссия',
-    s_prof_mission:'Профориентация по миссии',
-    s_compat:'Совместимость по числу личности',
-    s_colors:'Цвета и символы', s_matrix:'Матрица чисел',
-    s_active_lines:'Активные линии в вашей матрице',
-    s_no_lines_text:'В вашей матрице нет полных линий.',
-    s_energies:'Энергии в матрице',
-    s_how_to:'Как наработать отсутствующие энергии',
-    s_triggers:'Триггеры — что раздражает',
-    s_gen_rec:'Общие рекомендации',
-    matrix_hint:'Числа, присутствующие в дате рождения, выделены золотым',
-    present:'✓ Есть', absent:'✗ Нет',
-    present_e:'Присутствующие энергии', absent_e:'Отсутствующие энергии',
-    all_e:'✅ В вашей матрице присутствуют все энергии!',
-    compat_best:'Лучшая:', compat_good:'Хорошая:',
-    compat_neutral:'Нейтральная:', compat_bad:'Отрицательная:',
-    color_num:'Цвет числа личности', color_clothes:'Цветовая гамма одежды',
-    color_wallet:'Цвет кошелька / сумки', week_day:'Ваш день недели',
-    dobrata:'Доброта', soul:'Душа реализуется',
-    ego_vec:'Вектор ЭГО направлен', cs_wants:'Число личности хочет',
-    cs_goal:'Цель числа личности', ego_joy:'ЭГО наслаждается от',
-    plus_lbl:'В плюсе', minus_lbl:'В минусе', mission_goal:'Цель миссии',
-    competence:'Личность / Компетентность', industry:'Отрасль / Потребность',
-    activity:'Деятельность', proftype:'Тип личности',
-    rec_spheres:'Рекомендуемые сферы',
-    analysis_sub:'Персональный анализ · Digital Consulting',
-    gen_1:'Стремитесь к выполнению своей Жизненной задачи',
-    gen_2:'Пейте тёплую воду до 45°C (на 30 кг веса — 1 литр воды)',
-    gen_3:'Ежедневно ходите от 6 км со скоростью 5 км/час',
-    gen_4:'Употребляйте кислые фрукты и овощи в течение дня',
-    gen_5:'Принимайте завтрак через 1 час после ходьбы',
-    gen_6:'Посещайте баню не реже 2-х раз в неделю',
-    gen_money:'Деньги:', gen_money_text:'работайте и ешьте лицом на север. Спите головой на юг. Сейф храните в северной части помещения',
-    gen_contracts:'Контракты:', gen_contracts_text:'читайте лицом на север, подписывайте повернувшись на восток'
-  };
-  return ui[key] || RU_REPORT_UI[key] || key;
+const SEC_ICONS = {s_cs:'🔮',s_char:'📜',s_plus_minus:'🌓',s_destroy:'⚠️',s_diseases:'🪷',s_prof33:'🧭',s_mission:'🌅',s_prof_mission:'🧭',s_compat:'💌',s_colors:'🎨',s_matrix:'◈',s_active_lines:'✦',s_energies:'⚡',s_how_to:'🌱',s_triggers:'🔥',s_gen_rec:'🌿'};
+function sl(key, extra){ return '<div class="section-label"><span class="sl-ico">'+(SEC_ICONS[key]||'✦')+'</span><span>'+esc(ri(key))+(extra?' '+esc(extra):'')+'</span></div>'; }
+
+// ── Тема ──
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  const b = document.getElementById('theme-btn');
+  if (b) { b.textContent = t === 'dark' ? '☀️' : '🌙'; b.setAttribute('aria-label', t === 'dark' ? ri('theme_light') : ri('theme_dark')); }
+}
+function toggleTheme(){
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  try { localStorage.setItem('repTheme', next); } catch(e) {}
+  applyTheme(next);
+}
+function setReportLang(l){
+  reportLang = l;
+  try { localStorage.setItem('lang', l); } catch(e) {}
+  try { const u = new URL(window.location.href); u.searchParams.set('lang', l); history.replaceState(null, '', u); } catch(e) {}
+  paint();
+}
+function paintChrome(){
+  document.documentElement.lang = reportLang === 'kz' ? 'kk' : reportLang;
+  ['ru','en','kz'].forEach(l => { const b = document.getElementById('lang-'+l); if (b) b.classList.toggle('active', l === reportLang); });
+  document.getElementById('logo-text').innerHTML = esc(ri('logo_title')).replace(/^(\S+)\s+(.+)$/, (m,a,b2) => reportLang === 'en' ? a+' <span>'+b2+'</span>' : a+' <span>'+b2+'</span>');
+  applyTheme(document.documentElement.getAttribute('data-theme') || 'dark');
 }
 
 // ══ Все данные (копия из psycho-page.html) ══
@@ -229,7 +150,6 @@ const COLOR_CS={1:'Жёлтый',2:'Серебристый',3:'Оранжевы�
 const COLOR_CLOTHES={1:'Красный, белый',2:'Белый, светло-зелёный',3:'Жёлтый',4:'Зелёный, синий, серый',5:'Зелёный, синий',6:'Розовый, бирюзовый, голубой',7:'Зелёный, серый, синий',8:'Синий, голубой',9:'Красный, коричневый, розовый'};
 const COLOR_WALLET={1:'Серебристый',2:'Жёлтый',3:'Красный',4:'Серо-лиловый',5:'Зелёный',6:'Сиреневый',7:'Серо-коричневый',8:'Сиреневый',9:'Оранжевый'};
 const WEEK_DAYS={1:'Воскресенье',2:'Понедельник',3:'Четверг',4:'Четверг',5:'Среда',6:'Пятница',7:'Пятница',8:'Суббота',9:'Вторник'};
-const COLOR_MAP={'Жёлтый':'#fbbf24','Серебристый':'#9ca3af','Оранжевый':'#f97316','Серо-коричневый':'#92400e','Зелёный':'#22c55e','Сиреневый':'#a855f7','Серо-лиловый':'#7c3aed','Чёрный/тёмно-синий':'#1e3a5f','Красный':'#ef4444'};
 const ENERGY_LABELS={1:'Принятие решений',2:'Понимание и чувственность',3:'Анализ, реализация цели',4:'Цель / идея / знания',5:'Адекватная коммуникация',6:'Мудрость, счастье',7:'Энергия кундалини',8:'Труд / опыт',9:'Энергия действия'};
 const DOBROTAS={1:'Щедрая (должна измениться на целесообразную)',2:'Мистическая (должна измениться на заботливую)',3:'Холодная (должна измениться на добрую)',4:'Самая добрая (должна измениться на доброту через анализ)',5:'Неизвестная (должна измениться на безусловную любовь)',6:'Избирательная (должна измениться на доброту через духовность)',7:'Агрессивная (доброты нет, есть агрессия)',8:'Эгоистическая (должна измениться на отзывчивую)',9:'«Ты мне — я тебе» (должна измениться на щедрую)'};
 const SOUL={1:'Через руководство или автономный труд',2:'Через отношения',3:'Через наставничество',4:'Везде через креатив',5:'Через технический интеллект',6:'Через творчество',7:'Везде через йогу и дисциплину тела',8:'Через труд (любая среда)',9:'Через идею'};
@@ -255,6 +175,16 @@ const ALL_LINES=[{name:'Линия 1-9: Программа эгоцентриз�
 
 function digitSum(n){let s=n.toString().split('').reduce((a,c)=>a+parseInt(c),0);return s>9?digitSum(s):s;}
 
+function paintMaster(master){
+  const badge = document.getElementById('master-badge');
+  if (!master) { badge.style.display = 'none'; return; }
+  const nm = master.name || ri('master_default');
+  document.getElementById('hdr-av').textContent = nm.charAt(0).toUpperCase();
+  document.getElementById('hdr-name').textContent = nm;
+  document.getElementById('hdr-spec').textContent = master.specialization || 'Digital Consulting';
+  badge.style.display = 'flex';
+}
+
 function renderReport(data, master){
   const c = getC();
   const {client_name, dob, cs, mission} = data;
@@ -263,179 +193,173 @@ function renderReport(data, master){
   const matrixOrder = [7,8,9,4,5,6,1,2,3];
   const ec = ENERGY_COMPAT[cs];
   const colorCS = c.COLOR_CS[cs];
-  const colorHex = COLOR_MAP[colorCS]||'#B8892A';
+  const colorHex = COLOR_MAP[colorCS]||'#C4922A';
   const activeLines = getLines().filter(l=>l.nums.every(n=>dateDigits.has(n)));
   const absentEnergies = [1,2,3,4,5,6,7,8,9].filter(n=>!dateDigits.has(n));
   const presentEnergies = [1,2,3,4,5,6,7,8,9].filter(n=>dateDigits.has(n));
   const profBefore = c.PROF_BEFORE33[cs];
   const profMission = c.PROF_MISSION[mission];
+  const pn = ri('pn_short');
+  const nm = master ? (master.name || ri('master_default')) : '';
 
-  // Обновляем заголовок страницы
-  document.title = `Психоанализ · ${client_name} · Digital Consulting`;
-
-  // Мастер в хедере
-  if(master){
-    document.getElementById('hdr-av').textContent = (master.name||'М').charAt(0).toUpperCase();
-    document.getElementById('hdr-name').textContent = master.name || 'Мастер';
-    document.getElementById('hdr-spec').textContent = master.specialization || 'Digital Consulting';
-    document.getElementById('master-badge').style.display = 'flex';
-  }
-
-  const sl = t => `<div class="section-label">${t}</div>`;
+  document.title = ri('doc_title') + ' · ' + client_name + ' · Digital Consulting';
+  paintMaster(master);
 
   let html = `
 <div class="hero">
-  <div class="client-name">${client_name}</div>
-  <div class="client-sub">Персональный анализ · Digital Consulting</div>
+  <div class="hero-orn">✦ ✦ ✦</div>
+  <div class="client-name">${esc(client_name)}</div>
+  <div class="client-sub">${esc(ri('analysis_sub'))}</div>
   <div class="nums-row">
-    <div class="num-card"><div class="num-label">Число личности</div><div class="num-val">${cs}</div></div>
-    <div class="num-card"><div class="num-label">Миссия</div><div class="num-val">${mission}</div></div>
+    <div class="num-card"><div class="num-val">${cs}</div><div class="num-label">${esc(ri('cs_lbl'))}</div></div>
+    <div class="num-card"><div class="num-val">${mission}</div><div class="num-label">${esc(ri('mis_lbl'))}</div></div>
   </div>
 </div>
 
-${sl(ri('s_cs')+' ' + cs)}
+${sl('s_cs', cs)}
 <div class="e-card"><div class="e-body"><div class="e-desc"><pre>${c.PERSONALITY[cs]}</pre></div></div></div>
 
-${sl(ri('s_char'))}
+${sl('s_char')}
 <div class="e-card"><div class="e-body"><div class="grid-2">
-  <div class="pm-box"><div class="pm-title">Доброта</div><div class="pm-text">${c.DOBROTAS[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Душа реализуется</div><div class="pm-text">${c.SOUL[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Вектор ЭГО</div><div class="pm-text">${c.EGO_VEC[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Число личности хочет</div><div class="pm-text">${c.WANTS[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Цель</div><div class="pm-text">${c.GOAL_CS[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">ЭГО наслаждается</div><div class="pm-text">${c.EGO_JOY[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">${esc(ri('dobrata'))}</div><div class="pm-text">${c.DOBROTAS[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">${esc(ri('soul'))}</div><div class="pm-text">${c.SOUL[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">${esc(ri('ego_vec'))}</div><div class="pm-text">${c.EGO_VEC[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">${esc(ri('cs_wants'))}</div><div class="pm-text">${c.WANTS[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">${esc(ri('cs_goal'))}</div><div class="pm-text">${c.GOAL_CS[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">${esc(ri('ego_joy'))}</div><div class="pm-text">${c.EGO_JOY[cs]}</div></div>
 </div></div></div>
 
-${sl(ri('s_pm'))}
+${sl('s_plus_minus')}
 <div class="e-card"><div class="e-body"><div class="pm-grid">
-  <div class="pm-box plus"><div class="pm-title">В плюсе</div><div class="pm-text">${c.PLUS_CS[cs]}</div></div>
-  <div class="pm-box minus"><div class="pm-title">В минусе</div><div class="pm-text">${c.MINUS_CS[cs]}</div></div>
+  <div class="pm-box plus"><div class="pm-title">${esc(ri('plus_lbl'))}</div><div class="pm-text">${c.PLUS_CS[cs]}</div></div>
+  <div class="pm-box minus"><div class="pm-title">${esc(ri('minus_lbl'))}</div><div class="pm-text">${c.MINUS_CS[cs]}</div></div>
 </div></div></div>
 
-${sl(ri('s_destroy'))}
+${sl('s_destroy')}
 <div class="e-card"><div class="e-body"><div class="pm-box minus"><div class="pm-text">${c.DESTROY[cs]}</div></div></div></div>
 
-${sl(ri('s_diseases'))}
+${sl('s_diseases')}
 <div class="e-card"><div class="e-body"><span class="tag tag-red">${c.DISEASES[cs]}</span></div></div>
 
 <div class="divider"></div>
-${sl(ri('s_prof33'))}
+${sl('s_prof33')}
 <div class="prof-card">
   <div class="prof-card-title">${profBefore.type}</div>
-  <div class="pm-box"><div class="pm-title">Рекомендуемые сферы</div><div class="pm-text">${profBefore.institutes}</div></div>
+  <div class="pm-box"><div class="pm-title">${esc(ri('rec_spheres'))}</div><div class="pm-text">${profBefore.institutes}</div></div>
 </div>
 
 <div class="divider"></div>
-${sl(ri('s_mission')+' ' + mission)}
-<div class="e-card"><div class="e-body"><div class="e-desc">${c.MISSION_TEXT[mission]}</div></div></div>
+${sl('s_mission', mission)}
+<div class="e-card"><div class="e-body"><div class="e-desc"><pre>${c.MISSION_TEXT[mission]}</pre></div></div></div>
 <div class="e-card"><div class="e-body">
   <div class="pm-grid">
-    <div class="pm-box plus"><div class="pm-title">В плюсе</div><div class="pm-text">${c.MISSION_PLUS[mission]}</div></div>
-    <div class="pm-box minus"><div class="pm-title">В минусе</div><div class="pm-text">${c.MISSION_MINUS[mission]}</div></div>
+    <div class="pm-box plus"><div class="pm-title">${esc(ri('plus_lbl'))}</div><div class="pm-text">${c.MISSION_PLUS[mission]}</div></div>
+    <div class="pm-box minus"><div class="pm-title">${esc(ri('minus_lbl'))}</div><div class="pm-text">${c.MISSION_MINUS[mission]}</div></div>
   </div>
-  <div class="pm-box"><div class="pm-title">Цель миссии</div><div class="pm-text">${c.MISSION_GOAL[mission]}</div></div>
+  <div class="pm-box"><div class="pm-title">${esc(ri('mission_goal'))}</div><div class="pm-text">${c.MISSION_GOAL[mission]}</div></div>
 </div></div>
 
-${sl(ri('s_prof_mission'))}
+${sl('s_prof_mission')}
 <div class="prof-card">
   <div class="grid-2">
-    <div class="pm-box"><div class="pm-title">Компетентность</div><div class="pm-text">${profMission.competence}</div></div>
-    <div class="pm-box"><div class="pm-title">Отрасль</div><div class="pm-text">${profMission.industry}</div></div>
+    <div class="pm-box"><div class="pm-title">${esc(ri('competence'))}</div><div class="pm-text">${profMission.competence}</div></div>
+    <div class="pm-box"><div class="pm-title">${esc(ri('industry'))}</div><div class="pm-text">${profMission.industry}</div></div>
   </div>
-  <div class="pm-box" style="margin-top:10px;"><div class="pm-title">Деятельность</div><div class="pm-text">${profMission.activity}</div></div>
+  <div class="pm-box" style="margin-top:12px;"><div class="pm-title">${esc(ri('activity'))}</div><div class="pm-text">${profMission.activity}</div></div>
 </div>
 
 <div class="divider"></div>
-${sl('Совместимость')}
+${sl('s_compat', cs)}
 <div class="e-card"><div class="e-body">
-  <div class="compat-row"><span class="compat-label">Лучшая:</span>${ec.best.map(n=>`<span class="compat-item c-best">ЧЛ ${n} — ${c.CS_NAMES[n]}</span>`).join('')}</div>
-  <div class="compat-row"><span class="compat-label">Хорошая:</span>${ec.good.map(n=>`<span class="compat-item c-good">ЧЛ ${n} — ${c.CS_NAMES[n]}</span>`).join('')}</div>
-  ${ec.neutral.length?`<div class="compat-row"><span class="compat-label">Нейтральная:</span>${ec.neutral.map(n=>`<span class="compat-item c-neutral">ЧЛ ${n} — ${c.CS_NAMES[n]}</span>`).join('')}</div>`:''}
-  <div class="compat-row"><span class="compat-label">Отрицательная:</span>${ec.bad.map(n=>`<span class="compat-item c-bad">ЧЛ ${n} — ${c.CS_NAMES[n]}</span>`).join('')}</div>
+  <div class="compat-row"><span class="compat-label">${esc(ri('compat_best'))}</span>${ec.best.map(n=>`<span class="compat-item c-best">${esc(pn)} ${n} — ${c.CS_NAMES[n]}</span>`).join('')}</div>
+  <div class="compat-row"><span class="compat-label">${esc(ri('compat_good'))}</span>${ec.good.map(n=>`<span class="compat-item c-good">${esc(pn)} ${n} — ${c.CS_NAMES[n]}</span>`).join('')}</div>
+  ${ec.neutral.length?`<div class="compat-row"><span class="compat-label">${esc(ri('compat_neutral'))}</span>${ec.neutral.map(n=>`<span class="compat-item c-neutral">${esc(pn)} ${n} — ${c.CS_NAMES[n]}</span>`).join('')}</div>`:''}
+  <div class="compat-row"><span class="compat-label">${esc(ri('compat_bad'))}</span>${ec.bad.map(n=>`<span class="compat-item c-bad">${esc(pn)} ${n} — ${c.CS_NAMES[n]}</span>`).join('')}</div>
 </div></div>
 
 <div class="divider"></div>
-${sl(ri('s_colors'))}
+${sl('s_colors')}
 <div class="e-card"><div class="e-body"><div class="grid-2">
-  <div class="pm-box"><div class="pm-title">Цвет числа личности</div><div class="pm-text"><span class="color-dot" style="background:${colorHex};"></span>${colorCS}</div></div>
-  <div class="pm-box"><div class="pm-title">Цветовая гамма одежды</div><div class="pm-text">${c.COLOR_CLOTHES[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Цвет кошелька</div><div class="pm-text">${c.COLOR_WALLET[cs]}</div></div>
-  <div class="pm-box"><div class="pm-title">Ваш день недели</div><div class="pm-text">${c.WEEK_DAYS[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">${esc(ri('color_num'))}</div><div class="pm-text"><span class="color-dot" style="background:${colorHex};"></span>${colorCS}</div></div>
+  <div class="pm-box"><div class="pm-title">${esc(ri('color_clothes'))}</div><div class="pm-text">${c.COLOR_CLOTHES[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">${esc(ri('color_wallet'))}</div><div class="pm-text">${c.COLOR_WALLET[cs]}</div></div>
+  <div class="pm-box"><div class="pm-title">${esc(ri('week_day'))}</div><div class="pm-text">${c.WEEK_DAYS[cs]}</div></div>
 </div></div></div>
 
 <div class="divider"></div>
-${sl(ri('s_matrix'))}
+${sl('s_matrix')}
 <div class="e-card"><div class="e-body">
-  <div style="font-size:11px;color:var(--text3);margin-bottom:10px;">Числа присутствующие в дате рождения выделены золотым</div>
+  <div style="font-size:12.5px;color:var(--text3);text-align:center;">${esc(ri('matrix_hint'))}</div>
   <div class="matrix-wrap">${matrixOrder.map(n=>`<div class="matrix-cell ${dateDigits.has(n)?'present':''}">${n}</div>`).join('')}</div>
 </div></div>
 
-${activeLines.length?`${sl('Активные линии в матрице')}<div class="e-card"><div class="e-body">${activeLines.map(l=>`<div class="line-item"><div class="line-name">${l.name}</div><div class="line-desc">${l.desc}</div></div>`).join('')}</div></div>`:''}
+${activeLines.length?`${sl('s_active_lines')}<div class="e-card"><div class="e-body">${activeLines.map(l=>`<div class="line-item"><div class="line-name">${l.name}</div><div class="line-desc">${l.desc}</div></div>`).join('')}</div></div>`:`${sl('s_active_lines')}<div class="e-card"><div class="e-body"><div class="e-desc">${esc(ri('s_no_lines_text'))}</div></div></div>`}
 
 <div class="divider"></div>
-${sl(ri('s_energies'))}
+${sl('s_energies')}
 <div class="e-card"><div class="e-body">
-  <div class="energy-grid">${[1,2,3,4,5,6,7,8,9].map(n=>`<div class="energy-cell ${dateDigits.has(n)?'present':'absent'}"><div class="ec-num">${n}</div><div class="ec-label">${dateDigits.has(n)?ri('present'):ri('absent')}</div></div>`).join('')}</div>
-  ${presentEnergies.length?`<div class="pm-box" style="margin-bottom:8px;"><div class="pm-title">Присутствующие</div><div class="pm-text">${presentEnergies.map(n=>`<span class="tag tag-green">${n} — ${c.ENERGY_LABELS[n]}</span>`).join(' ')}</div></div>`:''}
-  ${absentEnergies.length?`<div class="pm-box minus"><div class="pm-title">Отсутствующие</div><div class="pm-text">${absentEnergies.map(n=>`<span class="tag tag-red">${n} — ${c.ENERGY_LABELS[n]}</span>`).join(' ')}</div></div>`:`<div class="pm-box plus"><div class="pm-title">✅ Все энергии присутствуют!</div></div>`}
+  <div class="energy-grid">${[1,2,3,4,5,6,7,8,9].map(n=>`<div class="energy-cell ${dateDigits.has(n)?'present':'absent'}"><div class="ec-num">${n}</div><div class="ec-label">${esc(dateDigits.has(n)?ri('present'):ri('absent'))}</div></div>`).join('')}</div>
+  ${presentEnergies.length?`<div class="pm-box plus"><div class="pm-title">${esc(ri('present_e'))}</div><div class="pm-text">${presentEnergies.map(n=>`<span class="tag tag-green">${n} — ${c.ENERGY_LABELS[n]}</span>`).join(' ')}</div></div>`:''}
+  ${absentEnergies.length?`<div class="pm-box minus"><div class="pm-title">${esc(ri('absent_e'))}</div><div class="pm-text">${absentEnergies.map(n=>`<span class="tag tag-red">${n} — ${c.ENERGY_LABELS[n]}</span>`).join(' ')}</div></div>`:`<div class="pm-box plus"><div class="pm-title">${esc(ri('all_e'))}</div></div>`}
 </div></div>
 
-${absentEnergies.length?`${sl(ri('s_how_to'))}${absentEnergies.map(n=>`<div class="how-card"><div class="how-title">Энергия «${n}» — ${c.ENERGY_LABELS[n]}</div><div class="how-body">${c.HOW_TO[n]}</div></div>`).join('')}`:''}
+${absentEnergies.length?`${sl('s_how_to')}${absentEnergies.map(n=>`<div class="how-card"><div class="how-title">${n} — ${c.ENERGY_LABELS[n]}</div><div class="how-body">${c.HOW_TO[n]}</div></div>`).join('')}`:''}
 
 <div class="divider"></div>
-${sl('Триггеры')}
+${sl('s_triggers')}
 <div class="e-card"><div class="e-body"><ul class="trigger-list">${c.TRIGGERS[cs].map(t=>`<li>${t}</li>`).join('')}</ul></div></div>
 
 <div class="divider"></div>
-${sl(ri('s_gen_rec'))}
+${sl('s_gen_rec')}
 <div class="e-card"><div class="e-body"><ul class="gen-rec-list">
-  <li>Пейте тёплую воду до 45°C (на 30 кг — 1 литр воды)</li>
-  <li>Ежедневно ходите от 6 км со скоростью 5 км/час и выше</li>
-  <li>Употребляйте кислые фрукты и овощи в течение дня</li>
-  <li>Принимайте завтрак через 1 час после ходьбы</li>
-  <li>Посещайте баню не реже 2-х раз в неделю</li>
-  <li><strong>Деньги:</strong> работайте и ешьте лицом на север. Спите головой на юг. Сейф храните в северной части помещения</li>
-  <li><strong>Контракты:</strong> читайте лицом на север, подписывайте повернувшись на восток</li>
-</ul></div></div>`;
+  <li>${esc(ri('gen_1'))}</li><li>${esc(ri('gen_2'))}</li><li>${esc(ri('gen_3'))}</li><li>${esc(ri('gen_4'))}</li><li>${esc(ri('gen_5'))}</li><li>${esc(ri('gen_6'))}</li>
+  <li><strong>${esc(ri('gen_money'))}</strong> ${esc(ri('gen_money_text'))}</li>
+  <li><strong>${esc(ri('gen_contracts'))}</strong> ${esc(ri('gen_contracts_text'))}</li>
+</ul></div></div>
+<div class="report-actions"><button class="btn-print" onclick="window.print()">${esc(ri('print_btn'))}</button></div>`;
 
-  // Футер мастера
   if(master){
-    const waClean = master.whatsapp ? master.whatsapp.replace(/\D/g,'') : '';
+    const waClean = master.whatsapp ? String(master.whatsapp).replace(/\D/g,'') : '';
+    const ig = master.instagram ? String(master.instagram).replace(/^@/,'').replace(/[^A-Za-z0-9._]/g,'') : '';
     html += `
 <div class="master-footer">
-  <div class="mf-label">Ваш персональный мастер</div>
-  <div class="mf-name">${master.name || 'Мастер'}</div>
-  <div class="mf-spec">${master.specialization || 'Digital Consulting'}</div>
+  <div class="mf-label">${esc(ri('master_label'))}</div>
+  <div class="mf-av">${esc(nm.charAt(0).toUpperCase())}</div>
+  <div class="mf-name">${esc(nm)}</div>
+  <div class="mf-spec">${esc(master.specialization || 'Digital Consulting')}</div>
   <div class="mf-contacts">
-    ${waClean ? `<a class="mf-wa" href="https://wa.me/${waClean}" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Написать в WhatsApp</a>` : ''}
-    ${master.instagram ? `<a class="mf-ig" href="https://instagram.com/${master.instagram.replace('@','')}" target="_blank">📷 ${master.instagram}</a>` : ''}
+    ${waClean ? `<a class="mf-wa" href="https://wa.me/${waClean}" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>${esc(ri('wa_btn'))}</a>` : ''}
+    ${ig ? `<a class="mf-ig" href="https://instagram.com/${ig}" target="_blank" rel="noopener">📷 @${esc(ig)}</a>` : ''}
   </div>
 </div>`;
   }
-
   document.getElementById('report-content').innerHTML = html;
 }
 
+function paint(){
+  paintChrome();
+  const box = document.getElementById('report-content');
+  if (_rep.state === 'ok') renderReport(_rep.data, _rep.master);
+  else if (_rep.state === 'noid') box.innerHTML = '<div class="error-box"><div class="error-icon">🔍</div><p>'+esc(ri('err_noid'))+'</p></div>';
+  else if (_rep.state === 'gone') box.innerHTML = '<div class="error-box"><div class="error-icon">🔒</div><p>'+esc(ri('err_gone'))+'</p></div>';
+  else box.innerHTML = '<div class="loading"><div class="loading-icon">✦</div><div class="loading-text">'+esc(ri('loading'))+'</div></div>';
+}
+
 async function init(){
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get('id');
-  if(!id){
-    document.getElementById('report-content').innerHTML = `<div class="error-box"><div class="error-icon">🔍</div><p style="color:var(--text3);font-size:14px;">Отчёт не найден. Проверьте ссылку.</p></div>`;
-    return;
-  }
+  try { const t = localStorage.getItem('repTheme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch(e) {}
+  paint();
+  const id = new URLSearchParams(window.location.search).get('id');
+  if (!id) { _rep.state = 'noid'; paint(); return; }
   const { data: report, error } = await sb.from('psycho_reports').select('*').eq('id', id).single();
-  if(error || !report){
-    document.getElementById('report-content').innerHTML = `<div class="error-box"><div class="error-icon">❌</div><p style="color:var(--text3);font-size:14px;">Отчёт не найден или был удалён.</p></div>`;
-    return;
-  }
+  if (error || !report) { _rep.state = 'gone'; paint(); return; }
   let master = null;
-  if(report.master_id){
+  if (report.master_id) {
     const { data: m } = await sb.from('profiles').select('name,specialization,whatsapp,instagram').eq('id', report.master_id).single();
     master = m;
   }
-  renderReport(report, master);
+  _rep = { data: report, master, state: 'ok' };
+  paint();
 }
-
 init();
 </script>
 </body>

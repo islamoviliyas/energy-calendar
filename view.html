@@ -1,133 +1,102 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Энерго Компас</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #F6F4EF 0%, #F0EDE6 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .container {
-      background: white;
-      border-radius: 12px;
-      padding: 40px;
-      max-width: 600px;
-      width: 100%;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      text-align: center;
-    }
-    .icon { font-size: 60px; margin-bottom: 20px; }
-    h1 { font-size: 24px; color: #1A1814; margin-bottom: 10px; }
-    p { font-size: 14px; color: #8A8680; line-height: 1.6; margin-bottom: 10px; }
-    .loading { font-size: 48px; animation: spin 1s linear infinite; }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    .error { color: #7A1E1E; }
-    .success { color: #1E5C34; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Энерго Компас</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500&family=Noto+Sans:wght@300;400;500&family=Noto+Serif:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C4922A;--gold2:#E8B84B;--gold3:#F5D98A;--metal:linear-gradient(135deg,#F5D98A 0%,#E8B84B 28%,#C4922A 55%,#F0CB6E 78%,#9C7220 100%);--f-head:'Cormorant Garamond','Noto Serif',serif;--f-body:'Outfit','Noto Sans',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--f-body);background:#080706;color:#F0EBE0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:-15vh;left:50%;width:90vw;height:70vh;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(232,184,75,.12),transparent 65%);pointer-events:none;}
+.langs{position:fixed;top:16px;right:16px;display:flex;gap:2px;background:#1A180F;border:1px solid rgba(232,184,75,.14);border-radius:40px;padding:3px;z-index:2;}
+.langs button{background:transparent;border:0;color:#8A8368;font:500 11.5px var(--f-body);padding:6px 12px;border-radius:30px;cursor:pointer;min-height:30px;}
+.langs button.on{background:var(--metal);color:#1A1408;}
+.langs button:focus-visible{outline:2px solid var(--gold2);outline-offset:2px;}
+.container{position:relative;background:#0F0E09;border:1px solid rgba(232,184,75,.16);border-radius:22px;padding:46px 38px 38px;max-width:520px;width:100%;text-align:center;box-shadow:0 20px 70px rgba(0,0,0,.6);}
+.container::before{content:'';position:absolute;inset:6px;border:1px solid rgba(232,184,75,.1);border-radius:17px;pointer-events:none;}
+.container::after{content:'';position:absolute;top:0;left:14%;right:14%;height:1px;background:linear-gradient(90deg,transparent,var(--gold2),transparent);}
+.brand{font-size:10.5px;letter-spacing:3.5px;text-transform:uppercase;color:#8A8368;margin-bottom:26px;}
+.ring{width:76px;height:76px;margin:0 auto 22px;border-radius:50%;border:1.5px solid var(--gold2);display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 0 0 6px rgba(232,184,75,.07);background:rgba(232,184,75,.06);}
+.ring.spin{border-color:rgba(232,184,75,.25);border-top-color:var(--gold2);animation:spin 1s linear infinite;box-shadow:none;background:none;}
+.ring.spin span{display:none;}
+@keyframes spin{to{transform:rotate(360deg);}}
+h1{font-family:var(--f-head);font-size:30px;font-weight:500;line-height:1.2;margin-bottom:10px;background:var(--metal);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--gold);}
+p{font-size:14px;color:#BDB59D;line-height:1.7;}
+.hint{margin-top:22px;padding-top:18px;border-top:1px solid rgba(232,184,75,.12);font-size:12.5px;color:#8A8368;}
+.orn{margin-top:22px;color:var(--gold2);letter-spacing:6px;font-size:12px;opacity:.8;}
+.bar{height:3px;background:rgba(232,184,75,.12);border-radius:3px;margin:24px auto 0;max-width:220px;overflow:hidden;}
+.bar i{display:block;height:100%;width:0;background:var(--metal);animation:fill 1.6s ease forwards;}
+@keyframes fill{to{width:100%;}}
+@media(max-width:480px){.container{padding:40px 22px 30px;}h1{font-size:26px;}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;}.bar i{width:100%;}}
+</style>
 </head>
 <body>
-
-<div class="container" id="container">
-  <div class="icon loading">⏳</div>
-  <h1>Загружаем...</h1>
-  <p>Пожалуйста, подождите</p>
+<div class="langs" role="group" aria-label="Language"><button data-l="ru">RU</button><button data-l="en">EN</button><button data-l="kz">ҚЗ</button></div>
+<div class="container" id="container" aria-live="polite">
+  <div class="brand">Энерго Компас · Digital Consulting</div>
+  <div class="ring spin"><span>⏳</span></div>
+  <h1 data-i="loading">Загружаем…</h1>
+  <p data-i="wait">Пожалуйста, подождите</p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   const SUPABASE_URL = 'https://gigfvlhcrtuosfnkzqpt.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpZ2Z2bGhjcnR1b3Nmbmt6cXB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MjkyOTMsImV4cCI6MjA5NTMwNTI5M30.-ZpjdpI8-V7MPdDwLl1BtWTL0R66rWpk5huN7VP7TUE';
-  
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  const I = {
+    ru:{loading:'Загружаем…',wait:'Пожалуйста, подождите',err:'Ошибка',noTok:'Ссылка недействительна — отсутствует токен доступа',nf:'Ссылка не найдена',nfMsg:'Эта ссылка больше не активна или скопирована неверно',lim:'Лимит исчерпан',limMsg:'Эта ссылка уже была открыта {n} раз. Попросите новую ссылку у мастера.',hint:'Свяжитесь с мастером, чтобы получить новую ссылку.',ok:'Открываем ваш календарь',left:'Осталось открытий: {n}. После этого потребуется новая ссылка от мастера.',loadErr:'Ошибка загрузки'},
+    en:{loading:'Loading…',wait:'Please wait',err:'Error',noTok:'The link is invalid — access token is missing',nf:'Link not found',nfMsg:'This link is no longer active or was copied incorrectly',lim:'Limit reached',limMsg:'This link has already been opened {n} times. Please ask your master for a new link.',hint:'Contact your master to get a new link.',ok:'Opening your calendar',left:'Opens left: {n}. After that you will need a new link from your master.',loadErr:'Loading error'},
+    kz:{loading:'Жүктелуде…',wait:'Күте тұрыңыз',err:'Қате',noTok:'Сілтеме жарамсыз — қолжетімділік токені жоқ',nf:'Сілтеме табылмады',nfMsg:'Бұл сілтеме белсенді емес немесе қате көшірілген',lim:'Лимит таусылды',limMsg:'Бұл сілтеме {n} рет ашылды. Шеберден жаңа сілтеме сұраңыз.',hint:'Жаңа сілтеме алу үшін шеберге хабарласыңыз.',ok:'Күнтізбеңіз ашылуда',left:'Қалған ашулар: {n}. Одан кейін шеберден жаңа сілтеме қажет болады.',loadErr:'Жүктеу қатесі'}
+  };
+  let lang = (function(){ try{ const q=new URLSearchParams(location.search).get('lang'); const l=q||localStorage.getItem('lang'); if(I[l]) return l; }catch(e){} return 'ru'; })();
+  let state = {k:'loading'};
+  function T(k,n){ return (I[lang][k]||I.ru[k]||k).replace('{n}',n); }
+  function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+  function render(){
+    document.documentElement.lang = lang==='kz'?'kk':lang;
+    document.querySelectorAll('.langs button').forEach(b=>b.classList.toggle('on',b.dataset.l===lang));
+    const c=document.getElementById('container');
+    const brand='<div class="brand">Энерго Компас · Digital Consulting</div>';
+    if(state.k==='loading'){
+      c.innerHTML=brand+'<div class="ring spin"><span>⏳</span></div><h1>'+T('loading')+'</h1><p>'+T('wait')+'</p>';
+    } else if(state.k==='ok'){
+      let extra=state.left>0&&state.left<=2?'<p class="hint">'+T('left',state.left)+'</p>':'';
+      c.innerHTML=brand+'<div class="ring">🗓️</div><h1>'+T('ok')+'</h1><div class="bar"><i></i></div>'+extra;
+    } else {
+      const m = state.k==='lim' ? T('limMsg',state.n) : state.k==='load' ? esc(state.msg||'') : T(state.k+'Msg')==state.k+'Msg' ? T(state.k) : T(state.k+'Msg');
+      const title = state.k==='noTok' ? T('err') : state.k==='load' ? T('loadErr') : T(state.k);
+      const body = state.k==='noTok' ? T('noTok') : m;
+      c.innerHTML=brand+'<div class="ring">🔒</div><h1>'+title+'</h1><p>'+body+'</p><p class="hint">'+T('hint')+'</p><div class="orn">✦</div>';
+    }
+  }
+  document.querySelector('.langs').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b)return; lang=b.dataset.l; try{localStorage.setItem('lang',lang);}catch(_){} render(); });
 
   async function loadAccess() {
     try {
-      const params = new URLSearchParams(window.location.search);
-      const token = params.get('token');
-
-      console.log('Токен:', token);
-
-      if (!token) {
-        showError('❌ Ошибка', 'Ссылка невалидна — отсутствует токен доступа');
-        return;
-      }
-
-      // Загружаем доступ из БД
-      const { data: grant, error: dbError } = await supabaseClient
-        .from('access_grants')
-        .select('*')
-        .eq('access_token', token)
-        .single();
-
-      console.log('Grant:', grant);
-      console.log('DB Error:', dbError);
-
-      if (dbError || !grant) {
-        showError('❌ Ссылка не найдена', 'Эта ссылка больше не активна или неправильно скопирована');
-        return;
-      }
-
-      // Проверка: исчерпан ли лимит?
-      if (grant.opens_count >= grant.max_opens) {
-        showError('❌ Лимит исчерпан', `Эта ссылка была открыта ${grant.opens_count} раз. Попросите новую ссылку у мастера.`);
-        return;
-      }
-
-      // Увеличиваем счётчик
-      const { error: updateError } = await supabaseClient
-        .from('access_grants')
-        .update({
-          opens_count: grant.opens_count + 1,
-          last_opened_at: new Date().toISOString()
-        })
-        .eq('id', grant.id);
-
-      if (updateError) {
-        console.error('Ошибка обновления:', updateError);
-      }
-
-      // Показываем предупреждение об оставшихся открытиях
+      const token = new URLSearchParams(location.search).get('token');
+      if (!token) { state={k:'noTok'}; render(); return; }
+      const { data: grant, error: dbError } = await supabaseClient.from('access_grants').select('*').eq('access_token', token).single();
+      if (dbError || !grant) { state={k:'nf'}; render(); return; }
+      if (grant.opens_count >= grant.max_opens) { state={k:'lim',n:grant.opens_count}; render(); return; }
+      const { error: updateError } = await supabaseClient.from('access_grants').update({ opens_count: grant.opens_count + 1, last_opened_at: new Date().toISOString() }).eq('id', grant.id);
+      if (updateError) console.error(updateError);
       const remaining = grant.max_opens - grant.opens_count - 1;
-      if (remaining <= 2 && remaining > 0) {
-        setTimeout(() => {
-          alert(`⚠️ Осталось ${remaining} открытий.\nПосле этого потребуется новая ссылка от мастера.`);
-        }, 1000);
-      }
-
-      // Перенаправляем на календарь мастера
-      const masterId = grant.master_id;
-      console.log('Переход на календарь мастера:', masterId);
-      
-      window.location.href = '/personal-energy-calendar.html?master_id=' + masterId + '&token=' + token;
-
+      state={k:'ok',left:remaining}; render();
+      const wait = (remaining>0 && remaining<=2) ? 2800 : 1500;
+      setTimeout(()=>{ location.href = '/personal-energy-calendar.html?master_id=' + encodeURIComponent(grant.master_id) + '&token=' + encodeURIComponent(token); }, wait);
     } catch (err) {
-      console.error('Ошибка:', err);
-      showError('❌ Ошибка загрузки', err.message);
+      console.error(err); state={k:'load',msg:err.message}; render();
     }
   }
-
-  function showError(title, message) {
-    const container = document.getElementById('container');
-    container.innerHTML = `
-      <div class="icon error">❌</div>
-      <h1>${title}</h1>
-      <p>${message}</p>
-      <p style="margin-top: 20px; font-size: 12px; color: #999;">
-        Свяжитесь с мастером для получения новой ссылки.
-      </p>
-    `;
-  }
-
+  render();
   window.addEventListener('load', loadAccess);
 </script>
-
 </body>
 </html>

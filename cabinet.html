@@ -255,7 +255,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 <!-- Sidebar (desktop) -->
 <div class="sidebar">
   <div class="sidebar-logo">
-    <h2>Энергетический <span>Календарь</span></h2>
+    <h2 id="logo-d">Энергетический <span>Календарь</span></h2>
     <p data-i18n="sidebar_sub">Кабинет мастера</p>
   </div>
   <nav class="sidebar-nav">
@@ -281,7 +281,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 
 <div class="mob-wrap">
   <div class="mob-header">
-    <div class="mob-logo">Энергетический <span>Календарь</span></div>
+    <div class="mob-logo" id="logo-m">Энергетический <span>Календарь</span></div>
     <div class="mob-user">
       <div class="mob-avatar" id="mob-avatar">М</div>
       <div class="mob-username" id="mob-username">…</div>
@@ -405,11 +405,11 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
           <div class="form-grid">
             <div class="form-group">
               <label class="form-label" for="inp-client-name" data-i18n="lk_name">Имя клиента</label>
-              <input class="form-input" id="inp-client-name" type="text" placeholder="Анна" autocomplete="off">
+              <input class="form-input" id="inp-client-name" type="text" placeholder="Анна" data-i18n-ph="ph_client" autocomplete="off">
             </div>
             <div class="form-group" id="field-dob">
               <label class="form-label" for="inp-client-dob" data-i18n="lk_dob">Дата рождения клиента</label>
-              <input class="form-input" id="inp-client-dob" type="text" inputmode="numeric" maxlength="10" placeholder="ДД.ММ.ГГГГ" oninput="maskDob(this)" autocomplete="off">
+              <input class="form-input" id="inp-client-dob" type="text" inputmode="numeric" maxlength="10" placeholder="ДД.ММ.ГГГГ" data-i18n-ph="ph_dob" oninput="maskDob(this)" autocomplete="off">
             </div>
             <div class="form-group" id="field-lang">
               <span class="form-label" data-i18n="lk_lang">Язык анализа</span>
@@ -458,11 +458,11 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
           <div class="form-grid">
             <div class="form-group">
               <label class="form-label" for="inp-name" data-i18n="profile_name">Имя (для клиентов)</label>
-              <input class="form-input" id="inp-name" type="text" placeholder="Имя и фамилия" oninput="livePreview()">
+              <input class="form-input" id="inp-name" type="text" placeholder="Имя и фамилия" data-i18n-ph="ph_fullname" oninput="livePreview()">
             </div>
             <div class="form-group">
               <label class="form-label" for="inp-spec" data-i18n="profile_spec">Специализация</label>
-              <input class="form-input" id="inp-spec" type="text" placeholder="Мастер цифровой психологии" oninput="livePreview()">
+              <input class="form-input" id="inp-spec" type="text" placeholder="Мастер цифровой психологии" data-i18n-ph="ph_spec" oninput="livePreview()">
             </div>
             <div class="form-group">
               <label class="form-label" for="inp-wa">WhatsApp <span style="font-size:12px;color:var(--text3);" data-i18n="profile_wa_hint">(только цифры со знаком +)</span></label>
@@ -614,7 +614,7 @@ const TRANSLATIONS = {
     alert_created:'✓ Ссылка создана!', alert_error:'Ошибка: ',
     alert_copied:'✓ Скопировано!', alert_deleted:'✓ Удалено!',
     confirm_delete:'Удалить эту ссылку? Клиент больше не сможет её использовать.',
-    spec_not_set:'Специализация не указана', default_master:'Мастер',
+    spec_not_set:'Специализация не указана', default_master:'Мастер', ph_client:'Анна', ph_dob:'ДД.ММ.ГГГГ', ph_fullname:'Имя и фамилия', ph_spec:'Мастер цифровой психологии', logo_a:'Энергетический', logo_b:'Календарь', page_title:'Кабинет · Энергетический Календарь', prev_name:'Ваше имя',
   },
   en: {
     v2_hero_title:"Everything for your sessions in one cabinet",
@@ -710,7 +710,7 @@ const TRANSLATIONS = {
     alert_created:'✓ Link created!', alert_error:'Error: ',
     alert_copied:'✓ Copied!', alert_deleted:'✓ Deleted!',
     confirm_delete:'Delete this link? The client will no longer be able to use it.',
-    spec_not_set:'Specialization not set', default_master:'Master',
+    spec_not_set:'Specialization not set', default_master:'Master', ph_client:'Anna', ph_dob:'DD.MM.YYYY', ph_fullname:'First and last name', ph_spec:'Digital psychology master', logo_a:'Energy', logo_b:'Calendar', page_title:'Cabinet · Energy Calendar', prev_name:'Your name',
   },
   kz: {
     v2_hero_title:"Кеңестерге қажеттінің бәрі бір кабинетте",
@@ -806,7 +806,7 @@ const TRANSLATIONS = {
     alert_created:'✓ Сілтеме жасалды!', alert_error:'Қате: ',
     alert_copied:'✓ Көшірілді!', alert_deleted:'✓ Жойылды!',
     confirm_delete:'Бұл сілтемені жою керек пе? Клиент оны енді пайдалана алмайды.',
-    spec_not_set:'Мамандандыру көрсетілмеген', default_master:'Мастер',
+    spec_not_set:'Мамандандыру көрсетілмеген', default_master:'Шебер', ph_client:'Айгүл', ph_dob:'КК.АА.ЖЖЖЖ', ph_fullname:'Аты-жөніңіз', ph_spec:'Цифрлық психология шебері', logo_a:'Энергетикалық', logo_b:'Күнтізбе', page_title:'Кабинет · Энергетикалық күнтізбе', prev_name:'Сіздің атыңыз',
   }
 };
 
@@ -860,6 +860,8 @@ function applyTranslations(){
     ['lang-','mlang-'].forEach(p => { const b = document.getElementById(p + l); if(b) b.classList.toggle('active', l === currentLang); });
   });
   document.documentElement.lang = currentLang === 'kz' ? 'kk' : currentLang;
+  ['logo-d','logo-m'].forEach(id => { const e = document.getElementById(id); if(e) e.innerHTML = t('logo_a') + ' <span>' + t('logo_b') + '</span>'; });
+  document.title = t('page_title');
   applyThemeUI();
 }
 function setLang(lang){
@@ -945,10 +947,10 @@ function updateStats(){
 
 /* ── Profile ── */
 function updatePreview(name, spec, wa, ig){
-  const n = name || 'Ваше имя';
+  const n = name || t('prev_name');
   document.getElementById('prev-av').textContent = n.charAt(0).toUpperCase();
   document.getElementById('prev-name').textContent = n;
-  document.getElementById('prev-spec').textContent = spec || 'Специализация';
+  document.getElementById('prev-spec').textContent = spec || t('profile_spec');
   const ct = [wa, ig].filter(Boolean).join(' · ');
   document.getElementById('prev-ct').textContent = ct || 'WhatsApp · Instagram';
   const waClean = wa ? wa.replace(/\D/g, '') : '';
