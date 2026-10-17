@@ -82,12 +82,11 @@ p{font-size:14px;color:#BDB59D;line-height:1.7;}
     try {
       const token = new URLSearchParams(location.search).get('token');
       if (!token) { state={k:'noTok'}; render(); return; }
-      const { data: grant, error: dbError } = await supabaseClient.from('access_grants').select('*').eq('access_token', token).single();
-      if (dbError || !grant) { state={k:'nf'}; render(); return; }
-      if (grant.opens_count >= grant.max_opens) { state={k:'lim',n:grant.opens_count}; render(); return; }
-      const { error: updateError } = await supabaseClient.from('access_grants').update({ opens_count: grant.opens_count + 1, last_opened_at: new Date().toISOString() }).eq('id', grant.id);
-      if (updateError) console.error(updateError);
-      const remaining = grant.max_opens - grant.opens_count - 1;
+      const { data: res, error: rpcError } = await supabaseClient.rpc('open_grant', { p_token: token });
+      if (rpcError || !res || res.status === 'nf') { state={k:'nf'}; render(); return; }
+      if (res.status === 'lim') { state={k:'lim',n:res.opens}; render(); return; }
+      const grant = { master_id: res.master_id };
+      const remaining = res.left;
       state={k:'ok',left:remaining}; render();
       const wait = (remaining>0 && remaining<=2) ? 2800 : 1500;
       setTimeout(()=>{ location.href = '/personal-energy-calendar.html?master_id=' + encodeURIComponent(grant.master_id) + '&token=' + encodeURIComponent(token); }, wait);
