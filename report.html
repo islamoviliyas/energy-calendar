@@ -350,11 +350,27 @@ async function init(){
   paint();
   const id = new URLSearchParams(window.location.search).get('id');
   if (!id) { _rep.state = 'noid'; paint(); return; }
-  const { data: report, error } = await sb.from('psycho_reports').select('*').eq('id', id).single();
+  let report = null, error = null;
+  try {
+    const rr = await sb.rpc('get_report', { p_id: String(id) });
+    if (rr.error) throw rr.error;
+    report = rr.data; if (!report) error = true;
+  } catch(e) {
+    const r2 = await sb.from('psycho_reports').select('*').eq('id', id).single();
+    report = r2.data; error = r2.error;
+  }
   if (error || !report) { _rep.state = 'gone'; paint(); return; }
   let master = null;
   if (report.master_id) {
-    const { data: m } = await sb.from('profiles').select('name,specialization,whatsapp,instagram').eq('id', report.master_id).single();
+    let m = null;
+    try {
+      const mr = await sb.rpc('get_master_public', { p_id: String(report.master_id) });
+      if (mr.error) throw mr.error;
+      m = mr.data;
+    } catch(e) {
+      const m2 = await sb.from('profiles').select('name,specialization,whatsapp,instagram').eq('id', report.master_id).single();
+      m = m2.data;
+    }
     master = m;
   }
   _rep = { data: report, master, state: 'ok' };

@@ -229,11 +229,15 @@ async function loadMaster(){
     return;
   }
 
-  const { data: master } = await supabaseClient
-    .from('profiles')
-    .select('name, specialization, whatsapp, instagram, is_active')
-    .eq('id', masterId)
-    .single();
+  let master = null;
+  try {
+    const r = await supabaseClient.rpc('get_master_public', { p_id: String(masterId) });
+    if (!r.error) master = r.data;
+    else throw r.error;
+  } catch(e) {
+    const r2 = await supabaseClient.from('profiles').select('name, specialization, whatsapp, instagram, is_active').eq('id', masterId).single();
+    master = r2.data;
+  }
 
   document.getElementById('loading-screen').style.display = 'none';
   document.getElementById('main-content').style.display = 'block';
@@ -255,7 +259,7 @@ async function loadMaster(){
     if(master.instagram){
       const ig = document.getElementById('footer-ig');
       ig.style.display = 'block';
-      ig.innerHTML = '<a href="https://instagram.com/' + master.instagram.replace('@','') + '">' + master.instagram + '</a>';
+      ig.innerHTML = '<a href="https://instagram.com/' + encodeURIComponent(master.instagram.replace('@','')) + '">' + String(master.instagram).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}) + '</a>';
     }
   }
 }
