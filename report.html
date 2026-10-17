@@ -117,7 +117,7 @@ function getLines() {
   if (reportLang === 'kz') return ALL_LINES_KZ;
   return ALL_LINES;
 }
-const SEC_ICONS = {s_cs:'🔮',s_char:'📜',s_plus_minus:'🌓',s_destroy:'⚠️',s_diseases:'🪷',s_prof33:'🧭',s_mission:'🌅',s_prof_mission:'🧭',s_compat:'💌',s_colors:'🎨',s_matrix:'◈',s_active_lines:'✦',s_energies:'⚡',s_how_to:'🌱',s_triggers:'🔥',s_gen_rec:'🌿'};
+const SEC_ICONS = {s_cs:'🔮',s_char:'📜',s_plus_minus:'🌓',s_destroy:'⚠️',s_diseases:'🪷',s_name_energy:'🌟',s_prof33:'🧭',s_mission:'🌅',s_prof_mission:'🧭',s_compat:'💌',s_colors:'🎨',s_matrix:'◈',s_active_lines:'✦',s_energies:'⚡',s_how_to:'🌱',s_triggers:'🔥',s_gen_rec:'🌿'};
 function sl(key, extra){ return '<div class="section-label"><span class="sl-ico">'+(SEC_ICONS[key]||'✦')+'</span><span>'+esc(ri(key))+(extra?' '+esc(extra):'')+'</span></div>'; }
 
 // ── Тема ──
@@ -200,6 +200,7 @@ function renderReport(data, master){
   const profBefore = c.PROF_BEFORE33[cs];
   const profMission = c.PROF_MISSION[mission];
   const pn = ri('pn_short');
+  const ne = nameEnergy(client_name);
   const nm = master ? (master.name || ri('master_default')) : '';
 
   document.title = ri('doc_title') + ' · ' + client_name + ' · Digital Consulting';
@@ -215,6 +216,8 @@ function renderReport(data, master){
     <div class="num-card"><div class="num-val">${mission}</div><div class="num-label">${esc(ri('mis_lbl'))}</div></div>
   </div>
 </div>
+
+${ne ? sl('s_name_energy') + neCardHtml(reportLang, ne) : ''}
 
 ${sl('s_cs', cs)}
 <div class="e-card"><div class="e-body"><div class="e-desc"><pre>${c.PERSONALITY[cs]}</pre></div></div></div>

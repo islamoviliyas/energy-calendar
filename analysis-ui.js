@@ -8,3 +8,63 @@ var ALL_LINES_EN=[{name:'Line 1-9: Egocentrism Program',nums:[1,9],desc:'"I want
 var ALL_LINES_KZ=[{name:'1-9 Сызығы: Эгоцентризм бағдарламасы',nums:[1,9],desc:'«Мен барлығының тек мен қалағандай ойлауын және жасауын қалаймын»'},{name:'Денсаулық сызығы (1-2-3)',nums:[1,2,3],desc:'1 — психикалық күй, 2 — өзін сезіну мен түсіну қабілеті, 3 — өзіне-өзі дәрігер'},{name:'Жетістіктер сызығы (3-6-9)',nums:[3,6,9],desc:'3 — талдау арқылы мақсат іске асыру механизмі, 6 — соңғы нәтижені бейнелеу, 9 — мүмкіндіктер мен іс-қимылдар'},{name:'7-8-9 Сызығы: Трансформация және шексіз ақша',nums:[7,8,9],desc:'Бұл сызығы бар адам бір түнде трансформациялана алады.'},{name:'4-8 Сызығы: Білім → Жылдам карма',nums:[4,8],desc:'4 — білім/тәжірибе, 8 — карма. Білім жылдам кармаға айналады.'},{name:'6-8 Сызығы: Сана ішіндегі демалыс',nums:[6,8],desc:'Адам күштерін жылдам қалпына келтіре алады.'},{name:'6-2 Сызығы: Рухани байлық',nums:[6,2],desc:'Адам ерте ме, кеш пе бай болады, бірақ ақша тек сана дамытқанда келеді.'},{name:'6-9 Сызығы: Соңғы нәтиже',nums:[6,9],desc:'Соңғы нәтижені бейнелеу, істерді аяқтай білу.'},{name:'1-4-7 Сызығы: Ақша және сексуалдылық',nums:[1,4,7],desc:'1 — шешім қабылдау, 4 — мақсат қою және ата-бабалар білімі, 7 — сексуалдылық/харизма/данышпандық'},{name:'4-5-6 Сызығы: Интеллект',nums:[4,5,6],desc:'4 — ата-бабалар білімі, 5 — техникалық интеллект/логика, 6 — даналық'},{name:'3-5-7 Сызығы: Табыс сызығы',nums:[3,5,7],desc:'3 — талдау, 5 — іскери коммуникация, 7 — идеяларды жылдам іске асыру/данышпандық'},{name:'2-5-8 Сызығы: Отбасылық ошақ',nums:[2,5,8],desc:'2 — түсіністік/сезімталдық, 5 — дұрыс коммуникация, 8 — тереңгі даналық'},{name:'1-5-9 Сызығы: Коммуникация',nums:[1,5,9],desc:'1 — достыққа шешім, 5 — коммуникация, 9 — эмоциялар'},{name:'4-2 Сызығы: Білім → Шындық',nums:[4,2],desc:'2 — шындықты түсіну, 4 — білім. Білім шындыққа айналады.'}];
 var COLOR_MAP={'Жёлтый':'#fbbf24','Yellow':'#fbbf24','Сары':'#fbbf24','Серебристый':'#9ca3af','Silver':'#9ca3af','Күміс':'#9ca3af','Оранжевый':'#f97316','Orange':'#f97316','Қызғылт сары':'#f97316','Серо-коричневый':'#92400e','Grey-brown':'#92400e','Сұр-қоңыр':'#92400e','Зелёный':'#22c55e','Green':'#22c55e','Жасыл':'#22c55e','Сиреневый':'#a855f7','Lilac':'#a855f7','Сирень':'#a855f7','Серо-лиловый':'#7c3aed','Grey-lilac':'#7c3aed','Сұр-сирень':'#7c3aed','Чёрный/тёмно-синий':'#1e3a5f','Black/dark blue':'#1e3a5f','Қара/қою-көк':'#1e3a5f','Красный':'#ef4444','Red':'#ef4444','Қызыл':'#ef4444'};
 
+
+/* ───────── Энергия имени ───────── */
+var NE_VALUES={a:1,i:1,j:1,q:1,y:1,b:2,k:2,r:2,c:3,l:3,s:3,g:3,d:4,m:4,t:4,e:5,h:5,n:5,x:5,u:6,v:6,w:6,o:7,z:7,f:8,p:8};
+var NE_GROUPS=[[1,'A I J Q Y'],[2,'B K R'],[3,'C L S G'],[4,'D M T'],[5,'E H N X'],[6,'U V W'],[7,'O Z'],[8,'F P']];
+var NE_TR={'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'yo','ж':'zh','з':'z','и':'i','й':'y','к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'kh','ц':'ts','ч':'ch','ш':'sh','щ':'shch','ъ':'','ы':'y','ь':'','э':'e','ю':'yu','я':'ya',
+ 'ә':'a','ғ':'g','қ':'k','ң':'n','ө':'o','ұ':'u','ү':'u','һ':'h','і':'i'};
+function nameEnergy(raw){
+  var first=String(raw||'').trim().split(/\s+/)[0]||'';
+  first=first.toLowerCase();
+  var latin='';
+  for(var i=0;i<first.length;i++){
+    var ch=first.charAt(i);
+    if(NE_TR.hasOwnProperty(ch)) latin+=NE_TR[ch];
+    else if(/[a-z]/.test(ch)) latin+=ch;
+  }
+  if(!latin) return null;
+  var letters=[],sum=0;
+  for(var j=0;j<latin.length;j++){var v=NE_VALUES[latin.charAt(j)];if(v){letters.push({ch:latin.charAt(j).toUpperCase(),v:v});sum+=v;}}
+  if(!letters.length) return null;
+  var root=sum;while(root>9){root=String(root).split('').reduce(function(a,d){return a+parseInt(d,10);},0);}
+  return {latin:latin,letters:letters,sum:sum,root:root};
+}
+var NAME_ENERGY={
+ ru:{1:['Популярность','Хорошее имя для М, для компаний. Для Ж — не всегда хорошая энергия. Придаёт энергию власти, мужскую энергию.'],2:['Личное благополучие, замужество','Всегда есть возможность выйти замуж.'],3:['Солидность','Человек будет солидным, хорошо для М, но плохо для Ж, также хорошо для Компании.'],4:['Отчуждённость','Не очень хорошая энергия. Тебя никто не будет помнить. Для Компании не хорошо.'],5:['Артистизм','Размножает, должен много выступать, свобода. Не живёт дома. Даёт известность. Для Компании нормально.'],6:['Успех, к замужеству','Любовь, быть на позитиве. Комфорт. Для Компании — рестораны, отели — можно.'],7:['Вызов природе','Иллюзии увеличиваются, кризис, может быть успех, а могут быть иллюзии. Нет середины как и в ЧС.'],8:['Постоянный упорный труд','Человек будет много трудиться.'],9:['Эмоциональная глубина','Повышенные, сильные эмоции.']},
+ en:{1:['Popularity','A good name for men and for companies. For women it is not always a good energy. Brings the energy of power, masculine energy.'],2:['Personal well-being, marriage','There is always an opportunity to get married.'],3:['Solidity','The person will be solid and respected — good for men, but bad for women, and also good for a company.'],4:['Detachment','Not a very good energy. No one will remember you. Not good for a company.'],5:['Artistry','Multiplies; the person must perform a lot; freedom. Does not stay at home. Brings fame. Fine for a company.'],6:['Success, leading to marriage','Love, staying positive. Comfort. For a company — restaurants and hotels are fine.'],7:['Challenge to nature','Illusions grow, crisis; there may be success, or there may be only illusions. No middle ground, as in ЧС.'],8:['Constant persistent work','The person will work a great deal.'],9:['Emotional depth','Heightened, strong emotions.']},
+ kz:{1:['Танымалдық','Ер адамдар мен компаниялар үшін жақсы есім. Әйелдер үшін әрқашан жақсы энергия емес. Билік энергиясын, ерлік энергиясын береді.'],2:['Жеке әл-ауқат, тұрмысқа шығу','Тұрмысқа шығу мүмкіндігі әрқашан бар.'],3:['Салмақтылық','Адам салмақты болады — ер адамға жақсы, әйелге жаман, сондай-ақ компанияға да жақсы.'],4:['Жатсыну','Энергиясы онша жақсы емес. Сізді ешкім есіне сақтамайды. Компанияға жақсы емес.'],5:['Артистизм','Көбейтеді, көп өнер көрсету керек, бостандық. Үйде отырмайды. Даңқ береді. Компанияға қалыпты.'],6:['Табыс, тұрмысқа шығуға жетелейді','Махаббат, позитивте болу. Жайлылық. Компания үшін — мейрамханалар, қонақүйлер — болады.'],7:['Табиғатқа сын','Иллюзиялар күшейеді, дағдарыс; табыс болуы мүмкін, иллюзия да болуы мүмкін. Ортасы жоқ, ЧС сияқты.'],8:['Тұрақты табанды еңбек','Адам көп еңбектенеді.'],9:['Эмоционалдық тереңдік','Жоғары, күшті эмоциялар.']}
+};
+(function(){
+  var add={
+   ru:{s_name_energy:'Энергия имени',ne_lbl:'Энергия имени',ne_latin:'Имя латиницей',ne_total:'Итого',ne_how:'Как считается',ne_how_text:'Имя переводится на латиницу, каждая буква имеет значение от 1 до 8 по таблице. Сумма значений сводится к одной цифре — это энергия имени. Для расчёта берётся первое слово (имя).',ne_quote:'Имя — это мантра, энергия имени даёт большое влияние на реализацию и действия человека.'},
+   en:{s_name_energy:'Energy of the name',ne_lbl:'Name energy',ne_latin:'Name in Latin letters',ne_total:'Total',ne_how:'How it is calculated',ne_how_text:'The name is converted to Latin letters; each letter has a value from 1 to 8 according to the table. The sum is reduced to a single digit — this is the energy of the name. The first word (the given name) is used.',ne_quote:'A name is a mantra — the energy of the name has a great influence on a person’s fulfilment and actions.'},
+   kz:{s_name_energy:'Есім энергиясы',ne_lbl:'Есім энергиясы',ne_latin:'Есім латын әріптерімен',ne_total:'Барлығы',ne_how:'Қалай есептеледі',ne_how_text:'Есім латын әріптеріне айналдырылады, әр әріптің кестеге сәйкес 1-ден 8-ге дейінгі мәні бар. Мәндердің қосындысы бір санға келтіріледі — бұл есім энергиясы. Есептеу үшін бірінші сөз (есім) алынады.',ne_quote:'Есім — бұл мантра, есім энергиясы адамның іске асуына және әрекеттеріне зор әсер етеді.'}
+  };
+  for(var l in add){for(var k in add[l]) AUI[l][k]=add[l][k];}
+})();
+function neChipsHtml(ne){
+  return ne.letters.map(function(x){return '<span class="ne-chip"><b>'+x.ch+'</b><i>'+x.v+'</i></span>';}).join('');
+}
+function neBigCardHtml(lang,ne,numFirst){
+  if(!ne) return '';
+  var lb='<div class="bn-label num-label">'+aui(lang,'ne_lbl')+'</div>',nm='<div class="bn-num num-val">'+ne.root+'</div>';
+  return '<div class="big-num-card num-card">'+(numFirst?nm+lb:lb+nm)+'</div>';
+}
+function neLineHtml(lang,ne){
+  if(!ne) return '';
+  var d=(NAME_ENERGY[lang]||NAME_ENERGY.ru)[ne.root];
+  return '<div class="ne-line"><span class="ne-dot">'+ne.root+'</span><span>'+aui(lang,'ne_lbl')+' · '+d[0]+'</span></div>';
+}
+function neCardHtml(lang,ne){
+  if(!ne) return '';
+  var d=(NAME_ENERGY[lang]||NAME_ENERGY.ru)[ne.root];
+  var rows=NE_GROUPS.map(function(g){return '<div class="ne-trow"><span class="ne-tv">'+g[0]+'</span><span>'+g[1]+'</span></div>';}).join('');
+  return '<div class="e-card ne-card"><div class="e-body">'+
+   '<div class="ne-quote">'+aui(lang,'ne_quote')+'</div>'+
+   '<div class="ne-head"><div class="ne-ring">'+ne.root+'</div><div class="ne-head-t"><div class="ne-title">'+d[0]+'</div><div class="ne-text">'+d[1]+'</div></div></div>'+
+   '<div class="pm-box"><div class="pm-title">'+aui(lang,'ne_latin')+': <span class="ne-latin">'+ne.latin.toUpperCase()+'</span></div>'+
+   '<div class="ne-chips">'+neChipsHtml(ne)+'<span class="ne-eq">= '+ne.sum+(ne.sum>9?' → '+ne.root:'')+'</span></div></div>'+
+   '<details class="ne-how"><summary>'+aui(lang,'ne_how')+'</summary><p>'+aui(lang,'ne_how_text')+'</p><div class="ne-table">'+rows+'</div></details>'+
+   '</div></div>';
+}

@@ -198,7 +198,7 @@ var PX={
 };
 function px(k){return (k==='title')?((PX[currentLang]&&PX[currentLang].title)||PX.ru.title):aui(currentLang,k);}
 function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
-var SEC_ICONS={s_cs:'🔮',s_char:'📜',s_plus_minus:'🌓',s_destroy:'⚠️',s_diseases:'🪷',s_prof33:'🧭',s_mission:'🌅',s_prof_mission:'🧭',s_compat:'💌',s_colors:'🎨',s_matrix:'◈',s_active_lines:'✦',s_energies:'⚡',s_how_to:'🌱',s_triggers:'🔥',s_gen_rec:'🌿'};
+var SEC_ICONS={s_cs:'🔮',s_char:'📜',s_plus_minus:'🌓',s_destroy:'⚠️',s_diseases:'🪷',s_name_energy:'🌟',s_prof33:'🧭',s_mission:'🌅',s_prof_mission:'🧭',s_compat:'💌',s_colors:'🎨',s_matrix:'◈',s_active_lines:'✦',s_energies:'⚡',s_how_to:'🌱',s_triggers:'🔥',s_gen_rec:'🌿'};
 function secIcon(t){var best='',ic='✦';for(var k in SEC_ICONS){var u=ui(k);if(u&&t.indexOf(u)===0&&u.length>best.length){best=u;ic=SEC_ICONS[k];}}return ic;}
 function syncTheme(){var dk=document.documentElement.getAttribute('data-theme')==='dark';document.getElementById('theme-icon').textContent=dk?'☀️':'🌙';document.getElementById('theme-label').textContent=dk?px('theme_light'):px('theme_dark');}
 
@@ -348,10 +348,12 @@ function renderPsycho(dobStr, name) {
   var profBefore=c.PROF_BEFORE33[cs];
   var profMission=c.PROF_MISSION[mission];
   var sl=function(t){return '<div class="section-label"><span class="sl-ico">'+secIcon(t)+'</span><span>'+t+'</span></div>';};
-  var nameHtml='<div class="hero"><div class="hero-orn">✦ ✦ ✦</div>'+(name?'<div class="client-name">'+esc(name)+'</div>':'')+'<div class="client-sub">'+ui('analysis_sub')+'</div></div>';
+  var ne=nameEnergy(name);
+  var nameHtml='<div class="hero"><div class="hero-orn">✦ ✦ ✦</div>'+(name?'<div class="client-name">'+esc(name)+'</div>':'')+'<div class="client-sub">'+ui('analysis_sub')+'</div>'+'</div>';
 
   var html=nameHtml+
-  '<div class="big-nums-row"><div class="big-num-card"><div class="bn-label">'+ui('cs_lbl')+'</div><div class="bn-num">'+cs+'</div></div><div class="big-num-card"><div class="bn-label">'+ui('mis_lbl')+'</div><div class="bn-num">'+mission+'</div></div></div>'+
+  '<div class="big-nums-row"><div class="big-num-card"><div class="bn-label">'+ui('cs_lbl')+'</div><div class="bn-num">'+cs+'</div></div><div class="big-num-card"><div class="bn-label">'+ui('mis_lbl')+'</div><div class="bn-num">'+mission+'</div></div>'+'</div>'+
+  (ne?sl(ui('s_name_energy'))+neCardHtml(currentLang,ne):'')+
   sl(ui('s_cs')+' '+cs)+
   '<div class="e-card"><div class="e-body"><div class="e-desc"><pre>'+c.PERSONALITY[cs]+'</pre></div></div></div>'+
   sl(ui('s_char'))+
