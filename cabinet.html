@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
+<html lang="ru" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -7,337 +7,294 @@
 <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Кабинет · Энергетический Календарь</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('cabTheme')||'dark');}catch(e){}</script>
 <style>
-:root{--gold:#B8892A;--gold-light:#D4A84B;--gold-pale:#F8F0DC;--radius:14px;--transition:0.3s ease;}
-[data-theme="light"]{
-  --bg:#F6F4EF;--bg2:#FFFFFF;--bg3:#F0EDE6;--bg4:#E8E4D8;
-  --text:#1A1814;--text2:#3A3830;--text3:#8A8680;
-  --border:rgba(0,0,0,0.08);--border-gold:rgba(184,137,42,0.3);
-  --shadow:0 2px 20px rgba(0,0,0,0.06);
-  --green-bg:#F0F7F2;--green-border:#B8DEC4;--green-text:#1E5C34;
-  --red-bg:#FBF0F0;--red-border:#E8B8B8;--red-text:#7A1E1E;
-  --blue-bg:#EEF4FB;--blue-border:#B8CDE8;--blue-text:#1E3C6A;
-  --warn-bg:#FDF6E8;--warn-border:#E8C870;--warn-text:#7A5010;
-  --sidebar-bg:#1A1814;--sidebar-text:#F0EDE4;--sidebar-muted:#6A6660;
-}
+:root{--gold:#C4922A;--gold2:#E8B84B;--gold3:#F5D98A;--gold-deep:#9C7220;--radius:14px;--ease:0.3s ease;
+  --metal:linear-gradient(135deg,#F5D98A 0%,#E8B84B 28%,#C4922A 55%,#F0CB6E 78%,#9C7220 100%);}
 [data-theme="dark"]{
-  --bg:#0E0D0A;--bg2:#181610;--bg3:#201E16;--bg4:#28261C;
-  --text:#F0EDE4;--text2:#C0BDB0;--text3:#6A6660;
-  --border:rgba(255,255,255,0.07);--border-gold:rgba(184,137,42,0.35);
-  --shadow:0 2px 24px rgba(0,0,0,0.35);
+  --bg:#080706;--bg2:#12100A;--bg3:#1A170F;--bg4:#241F14;
+  --text:#F0EBE0;--text2:#BDB59D;--text3:#8A8368;--gold-text:#E8B84B;
+  --border:rgba(196,146,42,0.16);--border-gold:rgba(196,146,42,0.4);
+  --shadow:0 18px 50px rgba(0,0,0,0.45);
   --green-bg:#0E1C12;--green-border:#1E4228;--green-text:#6ACC84;
-  --red-bg:#1C0E0E;--red-border:#421E1E;--red-text:#E08080;
-  --blue-bg:#0E1220;--blue-border:#1E2E48;--blue-text:#7AAAE0;
-  --warn-bg:#1A1408;--warn-border:#3E3010;--warn-text:#D4A84B;
-  --sidebar-bg:#0A0908;--sidebar-text:#F0EDE4;--sidebar-muted:#5A5850;
+  --red-bg:#1C0E0E;--red-border:#421E1E;--red-text:#E39090;
+  --sidebar-bg:#050504;--sidebar-text:#F0EBE0;--sidebar-muted:#857E64;
 }
-
+[data-theme="light"]{
+  --bg:#F7F3EA;--bg2:#FFFFFF;--bg3:#F1EBDD;--bg4:#E7DFCB;
+  --text:#1B1710;--text2:#4A4333;--text3:#756D58;--gold-text:#8A6218;
+  --border:rgba(60,45,10,0.12);--border-gold:rgba(156,114,32,0.42);
+  --shadow:0 14px 40px rgba(60,45,10,0.09);
+  --green-bg:#EEF7F0;--green-border:#B3D9BF;--green-text:#1E5C34;
+  --red-bg:#FBEFEF;--red-border:#E5B5B5;--red-text:#7A1E1E;
+  --sidebar-bg:#0B0A07;--sidebar-text:#F0EBE0;--sidebar-muted:#857E64;
+}
 *{margin:0;padding:0;box-sizing:border-box;}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:2px;}
+button,a,[onclick]{cursor:pointer;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;display:flex;flex-direction:row;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background var(--ease),color var(--ease);}
 
-/* ── DESKTOP LAYOUT ── */
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Inter',sans-serif;
-  font-weight:300;
-  min-height:100vh;
-  display:flex;
-  flex-direction:row;
-  transition:background var(--transition),color var(--transition);
-}
+/* Sidebar */
+.sidebar{width:264px;min-height:100vh;background:var(--sidebar-bg);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;border-right:1px solid rgba(196,146,42,0.16);}
+.sidebar-logo{padding:34px 24px 26px;border-bottom:1px solid rgba(196,146,42,0.12);}
+.sidebar-logo h2{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--sidebar-text);line-height:1.2;letter-spacing:.5px;}
+.sidebar-logo h2 span{color:var(--gold2);}
+.sidebar-logo p{font-size:11px;letter-spacing:1.6px;color:var(--sidebar-muted);margin-top:8px;}
+.sidebar-nav{padding:20px 14px;flex:1;}
+.nav-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:8px;font-size:14px;color:var(--sidebar-muted);transition:all .2s;margin-bottom:4px;border:1px solid transparent;background:transparent;width:100%;text-align:left;font-family:'Outfit',sans-serif;font-weight:300;}
+.nav-item:hover{background:rgba(196,146,42,0.06);color:var(--sidebar-text);}
+.nav-item.active{background:rgba(196,146,42,0.12);border-color:rgba(196,146,42,0.3);color:var(--gold3);}
+.nav-icon{font-size:16px;width:20px;text-align:center;}
+.sidebar-user{padding:18px 22px;border-top:1px solid rgba(196,146,42,0.12);display:flex;align-items:center;gap:12px;}
+.user-avatar{width:38px;height:38px;border-radius:50%;background:var(--metal);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:19px;color:#17120A;font-weight:600;flex-shrink:0;}
+.user-name-sb{font-size:13px;color:var(--sidebar-text);font-weight:400;}
+.user-role-sb{font-size:11px;color:var(--sidebar-muted);margin-top:1px;}
+.btn-logout{width:100%;padding:10px;background:transparent;border:1px solid rgba(196,146,42,0.14);border-radius:6px;color:var(--sidebar-muted);font-family:'Outfit',sans-serif;font-size:13px;transition:all .2s;margin-top:8px;}
+.btn-logout:hover{border-color:#E39090;color:#E39090;}
 
-.sidebar{
-  width:240px;min-height:100vh;background:var(--sidebar-bg);
-  display:flex;flex-direction:column;
-  position:fixed;top:0;left:0;bottom:0;z-index:100;
-}
-.sidebar-logo{padding:28px 20px 24px;border-bottom:1px solid rgba(255,255,255,0.06);}
-.sidebar-logo h2{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:var(--sidebar-text);line-height:1.3;}
-.sidebar-logo h2 span{color:var(--gold);}
-.sidebar-logo p{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sidebar-muted);margin-top:4px;}
-.sidebar-nav{padding:16px 12px;flex:1;}
-.nav-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--sidebar-muted);transition:all 0.2s;margin-bottom:2px;border:none;background:transparent;width:100%;text-align:left;font-family:'Inter',sans-serif;}
-.nav-item:hover{background:rgba(255,255,255,0.05);color:var(--sidebar-text);}
-.nav-item.active{background:rgba(184,137,42,0.15);color:var(--gold);}
-.nav-icon{font-size:15px;width:18px;text-align:center;}
-.sidebar-user{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:10px;}
-.user-avatar{width:34px;height:34px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:14px;color:#fff;font-weight:600;flex-shrink:0;}
-.user-name-sb{font-size:12px;color:var(--sidebar-text);font-weight:400;}
-.user-role-sb{font-size:10px;color:var(--sidebar-muted);margin-top:1px;}
-
-.main{
-  margin-left:240px;
-  flex:1;min-width:0;
-  width:calc(100% - 240px);
-  padding:36px 36px 80px;
-  min-height:100vh;
-  background:var(--bg);
-}
-.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px;}
-.page-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:400;}
-.page-title span{color:var(--gold);}
-.theme-btn{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:40px;padding:7px 14px;cursor:pointer;font-size:11px;color:var(--text2);font-family:'Inter',sans-serif;transition:all var(--transition);user-select:none;}
-.header-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+/* Main */
+.main{margin-left:264px;flex:1;min-width:0;width:calc(100% - 264px);padding:44px 48px 90px;min-height:100vh;background:var(--bg);background-image:radial-gradient(ellipse 60% 40% at 70% 0%,rgba(196,146,42,.07),transparent 70%);}
+.main-content-wrap{max-width:1040px;margin:0 auto;}
+.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;flex-wrap:wrap;gap:14px;}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;line-height:1.1;letter-spacing:-.3px;}
+.page-title span:last-child{background:var(--metal);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--gold2);font-style:italic;font-weight:400;}
+.page-sub{font-size:13px;color:var(--text3);margin-top:6px;}
+.header-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .lang-switch{display:flex;align-items:center;gap:2px;background:var(--bg3);border:1px solid var(--border);border-radius:40px;padding:3px;}
-.lang-btn{background:transparent;border:none;border-radius:30px;padding:4px 10px;font-size:11px;font-weight:500;color:var(--text3);cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.2s;letter-spacing:0.5px;}
-.lang-btn.active{background:var(--gold);color:#fff;}
-.theme-btn:hover{border-color:var(--gold);color:var(--gold);}
+.lang-btn{background:transparent;border:none;border-radius:30px;padding:5px 12px;font-size:12px;font-weight:500;color:var(--text3);font-family:'Outfit',sans-serif;transition:all .2s;letter-spacing:.5px;}
+.lang-btn.active{background:var(--metal);color:#17120A;}
+.theme-btn{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:40px;padding:8px 16px;font-size:12px;color:var(--text2);font-family:'Outfit',sans-serif;transition:all var(--ease);user-select:none;}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold-text);}
 
-/* ── Tabs ── */
+/* Tabs */
 .tab-content{display:none;}
-.tab-content.active{display:block;animation:fadeUp 0.4s ease both;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.tab-content.active{display:block;animation:fadeUp .45s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
 
-/* ── Stats ── */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
-.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);}
-.stat-card.highlight{border-color:var(--gold);}
-.stat-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
-.stat-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:400;color:var(--gold);line-height:1;margin-bottom:4px;}
-.stat-sub{font-size:11px;color:var(--text3);}
+/* Surfaces */
+.card{position:relative;background:linear-gradient(165deg,var(--bg2),var(--bg3));border:1px solid var(--border);border-radius:var(--radius);padding:28px 30px;margin-bottom:22px;box-shadow:var(--shadow);}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;line-height:1.2;margin-bottom:6px;}
+.card-lead{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:22px;max-width:46em;}
+.section-label{font-size:12px;letter-spacing:2px;color:var(--text3);margin:34px 0 16px;display:flex;align-items:center;gap:14px;text-transform:uppercase;}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--border-gold),transparent);}
 
-/* ── Products ── */
-.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
-.product-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:26px;text-decoration:none;display:block;transition:all 0.3s;position:relative;overflow:hidden;box-shadow:var(--shadow);}
-.product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;transition:opacity 0.3s;}
-.product-card:hover{transform:translateY(-3px);border-color:var(--border-gold);}
+/* Hero */
+.hero-card{position:relative;overflow:hidden;padding:38px 40px;margin-bottom:22px;border-radius:var(--radius);border:1px solid var(--border-gold);background:linear-gradient(135deg,rgba(196,146,42,.14),rgba(196,146,42,.03) 55%),var(--bg2);box-shadow:var(--shadow);}
+.hero-card::before{content:'';position:absolute;top:-1px;left:10%;right:10%;height:1px;background:linear-gradient(to right,transparent,var(--gold3),transparent);}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,44px);font-weight:300;line-height:1.1;letter-spacing:-.5px;max-width:15em;margin-bottom:12px;}
+.hero-sub{font-size:15px;color:var(--text2);max-width:36em;line-height:1.75;margin-bottom:26px;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+
+/* Buttons */
+.btn-gold{position:relative;overflow:hidden;display:inline-block;padding:14px 30px;background:var(--metal);border:none;border-radius:4px;color:#17120A;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;letter-spacing:.4px;text-decoration:none;transition:transform .25s,box-shadow .25s;box-shadow:0 8px 26px rgba(196,146,42,.22);}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(196,146,42,.36);}
+.btn-gold:disabled{opacity:.6;transform:none;}
+.btn-ghost{display:inline-block;padding:14px 26px;background:transparent;border:1px solid var(--border-gold);border-radius:4px;color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;font-weight:400;text-decoration:none;transition:all .25s;}
+.btn-ghost:hover{border-color:var(--gold2);color:var(--gold-text);}
+.btn-save{padding:13px 30px;background:var(--metal);border:none;border-radius:4px;color:#17120A;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;transition:transform .2s;}
+.btn-save:hover{transform:translateY(-1px);}
+.save-ok{font-size:13px;color:var(--green-text);margin-left:12px;display:none;}
+
+/* Stats */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:8px;}
+.stat-card{background:linear-gradient(165deg,var(--bg2),var(--bg3));border:1px solid var(--border);border-radius:var(--radius);padding:22px;}
+.stat-card.highlight{border-color:var(--border-gold);}
+.stat-label{font-size:12px;letter-spacing:.6px;color:var(--text3);margin-bottom:10px;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:400;line-height:1;margin-bottom:6px;background:var(--metal);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--gold2);}
+.stat-sub{font-size:12px;color:var(--text3);}
+
+/* Included cards */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:22px;}
+.product-card{display:block;position:relative;overflow:hidden;background:linear-gradient(165deg,var(--bg2),var(--bg3));border:1px solid var(--border);border-radius:var(--radius);padding:28px 26px;text-decoration:none;color:inherit;transition:transform .3s,border-color .3s,box-shadow .3s;}
+.product-card::before{content:'';position:absolute;top:-1px;left:18%;right:18%;height:1px;background:linear-gradient(to right,transparent,var(--gold3),transparent);opacity:0;transition:opacity .3s;}
+.product-card:hover{transform:translateY(-4px);border-color:var(--border-gold);box-shadow:var(--shadow);}
 .product-card:hover::before{opacity:1;}
-.product-icon{font-size:30px;margin-bottom:14px;}
-.product-name{font-family:'Playfair Display',serif;font-size:19px;font-weight:400;margin-bottom:6px;color:var(--text);}
-.product-desc{font-size:12.5px;color:var(--text3);line-height:1.65;margin-bottom:14px;}
-.product-action{font-size:12px;color:var(--gold);letter-spacing:0.3px;}
-.psycho-limit-bar{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:10px;}
-.plb-text{font-size:11px;color:var(--text3);margin-bottom:6px;}
+.ico{width:54px;height:54px;display:flex;align-items:center;justify-content:center;font-size:25px;border-radius:50%;border:1px solid var(--border-gold);background:radial-gradient(circle at 35% 30%,rgba(245,217,138,.2),rgba(196,146,42,.04) 70%);margin-bottom:18px;flex-shrink:0;}
+.product-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;line-height:1.2;margin-bottom:8px;}
+.product-desc{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:16px;}
+.product-action{font-size:14px;color:var(--gold-text);font-weight:500;}
+.psycho-limit-bar{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
+.plb-text{font-size:12px;color:var(--text3);margin-bottom:7px;}
 .plb-track{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;}
-.plb-fill{height:100%;background:var(--gold);border-radius:2px;transition:width 0.5s;}
+.plb-fill{height:100%;background:var(--metal);border-radius:2px;transition:width .5s;}
+.agreement-box{border:1px solid var(--border);border-radius:10px;padding:18px 22px;font-size:13px;color:var(--text2);line-height:1.75;margin-top:8px;}
+.agreement-box strong{color:var(--text);font-weight:500;}
 
-/* ── Profile ── */
-.profile-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:20px;box-shadow:var(--shadow);}
-.profile-card-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);}
-.profile-avatar-row{display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap;}
-.profile-avatar{width:56px;height:56px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:#fff;flex-shrink:0;}
-.profile-avatar-info h3{font-size:16px;font-weight:500;margin-bottom:3px;}
-.profile-avatar-info p{font-size:12px;color:var(--text3);}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
-.form-group{display:flex;flex-direction:column;gap:7px;}
-.form-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);}
-.form-input{padding:11px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color var(--transition);}
-.form-input:focus{border-color:var(--gold);}
-.form-input::placeholder{color:var(--text3);}
-.btn-save{padding:11px 28px;background:var(--gold);border:none;border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:opacity 0.2s;}
-.btn-save:hover{opacity:0.88;}
-.save-ok{font-size:12px;color:var(--green-text);margin-left:12px;display:none;}
-
-/* Preview */
-.preview-box{background:var(--bg3);border:1px solid var(--border-gold);border-radius:10px;padding:16px 18px;margin-top:16px;}
-.preview-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px;}
-.preview-inner{display:flex;align-items:center;gap:12px;}
-.preview-av{width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;color:#fff;flex-shrink:0;}
-.preview-nm{font-size:14px;font-weight:500;color:var(--text);margin-bottom:2px;}
-.preview-sp{font-size:11px;color:var(--text3);}
-.preview-ct{font-size:11px;color:var(--gold);margin-top:3px;}
-
-/* Badge */
-.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:500;}
+/* Badges */
+.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;letter-spacing:.3px;}
 .badge-active{background:var(--green-bg);color:var(--green-text);border:1px solid var(--green-border);}
-.badge-basic{background:var(--blue-bg);color:var(--blue-text);border:1px solid var(--blue-border);}
-.badge-full{background:rgba(184,137,42,0.12);color:var(--gold-light);border:1px solid var(--border-gold);}
-.section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
-.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
-.btn-logout{width:100%;padding:9px;background:transparent;border:1px solid rgba(255,255,255,0.06);border-radius:6px;color:var(--sidebar-muted);font-family:'Inter',sans-serif;font-size:12px;cursor:pointer;transition:all 0.2s;margin-top:8px;}
-.btn-logout:hover{border-color:#E08080;color:#E08080;}
+.badge-full{background:rgba(196,146,42,.12);color:var(--gold-text);border:1px solid var(--border-gold);}
 
-/* Agreement */
-.agreement-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px 18px;font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:20px;}
-.agreement-box strong{color:var(--text);}
+/* Forms */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px;}
+.form-group{display:flex;flex-direction:column;gap:8px;}
+.form-label{font-size:13px;color:var(--text2);font-weight:400;}
+.form-input{padding:13px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;outline:none;transition:border-color var(--ease),box-shadow var(--ease);}
+.form-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(196,146,42,.14);}
+.form-input::placeholder{color:var(--text3);}
 
-/* ── CLIENT LINKS STYLES ── */
-.client-links-section{margin-bottom:24px;}
-.client-links-grid{display:grid;grid-template-columns:1fr;gap:16px;}
-.client-link-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow);}
-.client-link-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
-.client-link-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--text);}
-.client-link-email{font-size:11px;color:var(--text3);margin-top:2px;}
-.client-link-status{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:500;}
-.client-link-status.active{background:var(--green-bg);color:var(--green-text);border:1px solid var(--green-border);}
-.client-link-status.exhausted{background:var(--red-bg);color:var(--red-text);border:1px solid var(--red-border);}
-.client-link-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);}
-.client-link-stat{font-size:12px;}
-.client-link-stat-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
-.client-link-stat-value{font-size:18px;font-weight:600;color:var(--gold);}
-.client-link-progress{margin-bottom:16px;}
-.client-link-progress-bar{height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;}
-.client-link-progress-fill{height:100%;background:var(--gold);border-radius:2px;transition:width 0.3s;}
-.client-link-url{background:var(--bg3);padding:10px 14px;border-radius:8px;border:1px solid var(--border);font-size:11px;font-family:monospace;color:var(--gold);word-break:break-all;margin-bottom:12px;cursor:pointer;transition:all 0.2s;}
-.client-link-url:hover{background:var(--bg4);}
-.client-link-actions{display:flex;gap:8px;}
-.client-link-btn{flex:1;padding:9px 14px;border:1px solid var(--border);background:transparent;border-radius:8px;font-family:'Inter',sans-serif;font-size:11px;font-weight:500;cursor:pointer;transition:all 0.2s;}
-.client-link-btn-copy{border-color:var(--gold);color:var(--gold);}
-.client-link-btn-copy:hover{background:rgba(184,137,42,0.1);}
-.client-link-btn-delete{border-color:#E08080;color:#E08080;}
-.client-link-btn-delete:hover{background:rgba(224,128,128,0.1);}
-.empty-state{text-align:center;padding:40px 20px;color:var(--text3);}
-.empty-state-icon{font-size:40px;margin-bottom:12px;}
-.empty-state-text{font-size:13px;}
+/* Profile */
+.profile-avatar-row{display:flex;align-items:center;gap:18px;margin-bottom:24px;flex-wrap:wrap;}
+.profile-avatar{width:64px;height:64px;border-radius:50%;background:var(--metal);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:28px;color:#17120A;font-weight:600;flex-shrink:0;}
+.profile-avatar-info h3{font-size:18px;font-weight:500;margin-bottom:3px;}
+.profile-avatar-info p{font-size:13px;color:var(--text3);}
+.preview-box{background:var(--bg);border:1px solid var(--border-gold);border-radius:10px;padding:18px 20px;margin-top:20px;}
+.preview-label{font-size:12px;color:var(--text3);margin-bottom:12px;}
+.preview-inner{display:flex;align-items:center;gap:14px;}
+.preview-av{width:44px;height:44px;border-radius:50%;background:var(--metal);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;color:#17120A;font-weight:600;flex-shrink:0;}
+.preview-nm{font-size:15px;font-weight:500;margin-bottom:2px;}
+.preview-sp{font-size:12px;color:var(--text3);}
+.preview-ct{font-size:12px;color:var(--gold-text);margin-top:3px;}
 
-/* ── MOBILE ── */
+/* Create link */
+.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px;}
+.type-tile{display:flex;gap:16px;align-items:flex-start;text-align:left;padding:20px;background:var(--bg);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:'Outfit',sans-serif;transition:all .25s;}
+.type-tile:hover{border-color:var(--border-gold);}
+.type-tile.selected{border-color:var(--gold2);background:linear-gradient(135deg,rgba(196,146,42,.14),rgba(196,146,42,.03));box-shadow:0 0 0 3px rgba(196,146,42,.1);}
+.type-tile .ico{margin-bottom:0;width:46px;height:46px;font-size:21px;}
+.type-tile b{display:block;font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;margin-bottom:4px;}
+.type-tile span.d{display:block;font-size:13px;color:var(--text2);line-height:1.6;font-weight:300;}
+.lang-pills{display:flex;gap:6px;}
+.pill-btn{padding:11px 18px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-family:'Outfit',sans-serif;font-size:14px;transition:all .2s;}
+.pill-btn.active{border-color:var(--gold2);color:var(--gold-text);background:rgba(196,146,42,.1);}
+#field-dob,#field-lang{display:none;}
+.result-box{display:none;margin-top:22px;padding:22px;border:1px solid var(--border-gold);border-radius:12px;background:linear-gradient(135deg,rgba(196,146,42,.12),rgba(196,146,42,.02));}
+.result-box.show{display:block;animation:fadeUp .4s ease both;}
+.result-title{font-family:'Cormorant Garamond',serif;font-size:24px;margin-bottom:12px;}
+.url-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:13px;font-family:ui-monospace,Menlo,monospace;color:var(--gold-text);word-break:break-all;margin-bottom:14px;}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;}
+.btn-sm{padding:10px 18px;border:1px solid var(--border-gold);background:transparent;border-radius:6px;color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;font-weight:400;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.btn-sm:hover{border-color:var(--gold2);color:var(--gold-text);}
+.btn-sm.primary{background:var(--metal);border-color:transparent;color:#17120A;font-weight:600;}
+.btn-sm.wa{background:#25D366;border-color:#25D366;color:#06210F;font-weight:600;}
+.btn-sm.danger{border-color:var(--red-border);color:var(--red-text);}
+.btn-sm.danger:hover{background:var(--red-bg);}
+
+/* Links list */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+.chip{padding:8px 18px;border:1px solid var(--border);border-radius:30px;background:transparent;color:var(--text2);font-family:'Outfit',sans-serif;font-size:13px;transition:all .2s;}
+.chip.active{border-color:var(--gold2);color:var(--gold-text);background:rgba(196,146,42,.1);}
+.client-links-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+.link-item{min-width:0;}
+.link-item{background:linear-gradient(165deg,var(--bg2),var(--bg3));border:1px solid var(--border);border-radius:var(--radius);padding:22px;}
+.li-top{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.li-top .ico{width:42px;height:42px;font-size:19px;margin:0;}
+.li-main{flex:1;min-width:0;}
+.li-name{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.li-meta{font-size:12px;color:var(--text3);margin-top:2px;}
+.pill{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap;}
+.pill.ok{background:var(--green-bg);color:var(--green-text);border:1px solid var(--green-border);}
+.pill.done{background:var(--red-bg);color:var(--red-text);border:1px solid var(--red-border);}
+.pill.free{background:rgba(196,146,42,.12);color:var(--gold-text);border:1px solid var(--border-gold);}
+.li-info{font-size:13px;color:var(--text2);margin-bottom:10px;}
+.li-info b{color:var(--gold-text);font-weight:500;}
+.li-progress{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;margin-bottom:14px;}
+.li-progress div{height:100%;background:var(--metal);border-radius:2px;}
+.li-url{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:11.5px;font-family:ui-monospace,Menlo,monospace;color:var(--text3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:14px;}
+.li-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.li-actions .btn-sm{padding:8px 14px;font-size:12px;}
+.empty-state{grid-column:1/-1;text-align:center;padding:50px 20px;color:var(--text3);border:1px dashed var(--border-gold);border-radius:var(--radius);}
+.empty-state-icon{font-size:36px;margin-bottom:12px;}
+.empty-state-text{font-size:14px;}
+.notice{font-size:13px;color:var(--text3);margin-bottom:14px;}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,20px);padding:13px 24px;background:var(--bg3);border:1px solid var(--border-gold);border-radius:40px;color:var(--text);font-size:14px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:all .3s;z-index:999;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translate(-50%,0);}
+.toast.err{border-color:var(--red-border);color:var(--red-text);}
+
+/* Mobile */
 .mob-header{display:none;}
 .mob-nav{display:none;}
 .mob-wrap{display:contents;}
-
+@media(max-width:1000px){
+  .products-grid{grid-template-columns:1fr;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .client-links-grid{grid-template-columns:minmax(0,1fr);}
+}
 @media(max-width:768px){
   html,body{overflow-x:hidden;width:100%;}
-  body{flex-direction:column !important;}
-  .sidebar{display:none !important;}
-  .page-header{display:none !important;}
-  .mob-wrap{
-    display:flex !important;
-    flex-direction:column;
-    width:100%;
-    min-height:100vh;
-    background:var(--bg);
-  }
-  .mob-header{
-    display:flex !important;
-    align-items:center;
-    justify-content:space-between;
-    padding:12px 16px;
-    background:var(--sidebar-bg);
-    position:sticky;
-    top:0;
-    z-index:200;
-    width:100%;
-    min-height:52px;
-    border-bottom:1px solid rgba(255,255,255,0.08);
-    box-sizing:border-box;
-    flex-shrink:0;
-  }
-  .mob-logo{font-family:'Playfair Display',serif;font-size:14px;color:#F0EDE4;line-height:1.2;flex-shrink:0;}
-  .mob-logo span{color:var(--gold);}
+  body{flex-direction:column!important;}
+  .sidebar{display:none!important;}
+  .page-header{display:none!important;}
+  .mob-wrap{display:flex!important;flex-direction:column;width:100%;min-height:100vh;background:var(--bg);}
+  .mob-header{display:flex!important;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--sidebar-bg);position:sticky;top:0;z-index:200;width:100%;min-height:56px;border-bottom:1px solid rgba(196,146,42,.18);flex-shrink:0;}
+  .mob-logo{font-family:'Cormorant Garamond',serif;font-size:18px;color:#F0EBE0;line-height:1.2;}
+  .mob-logo span{color:var(--gold2);}
   .mob-user{display:flex;align-items:center;gap:8px;}
-  .mob-avatar{width:30px;height:30px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;flex-shrink:0;font-weight:600;}
-  .mob-username{font-size:12px;color:#C0BDB0;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .main{
-    margin-left:0 !important;
-    width:100% !important;
-    min-width:0 !important;
-    padding:0 !important;
-    flex:1;
-    background:var(--bg);
-  }
-  .main-content-wrap{
-    padding:16px 14px 96px !important;
-    box-sizing:border-box;
-    width:100%;
-    background:var(--bg);
-  }
-  .stats-row{grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
-  .stat-card{padding:14px 12px;}
-  .stat-num{font-size:28px;}
-  .stat-label{font-size:9px;}
-  .products-grid{grid-template-columns:1fr;gap:12px;margin-bottom:16px;}
-  .product-card{padding:18px;}
-  .product-icon{font-size:24px;margin-bottom:10px;}
-  .product-name{font-size:16px;}
-  .product-desc{font-size:12px;margin-bottom:10px;}
-  .profile-card{padding:16px;}
-  .form-grid{grid-template-columns:1fr;gap:12px;}
-  .profile-avatar-row{flex-wrap:wrap;gap:10px;}
-  .mob-nav{
-    display:block !important;
-    position:fixed;
-    bottom:0;left:0;right:0;
-    width:100%;
-    background:var(--sidebar-bg);
-    border-top:1px solid rgba(255,255,255,0.12);
-    z-index:199;
-    padding-bottom:env(safe-area-inset-bottom,0px);
-    box-sizing:border-box;
-  }
-  .mob-nav-inner{
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    padding:6px 0 8px;
-  }
-  .mob-nav-btn{
-    display:flex;flex-direction:column;align-items:center;gap:3px;
-    background:none;border:none;cursor:pointer;
-    padding:4px 6px;flex:1;
-    font-family:'Inter',sans-serif;font-size:9px;
-    color:#5A5850;transition:color 0.2s;
-    -webkit-tap-highlight-color:transparent;
-    touch-action:manipulation;
-  }
-  .mob-nav-btn.active{color:var(--gold);}
+  .mob-avatar{width:32px;height:32px;border-radius:50%;background:var(--metal);display:flex;align-items:center;justify-content:center;font-size:15px;color:#17120A;font-weight:600;flex-shrink:0;}
+  .mob-username{font-size:13px;color:#BDB59D;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .main{margin-left:0!important;width:100%!important;min-width:0!important;padding:0!important;flex:1;}
+  .main-content-wrap{padding:18px 16px 110px!important;width:100%;}
+  .mob-controls{display:flex!important;justify-content:space-between;align-items:center;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+  .hero-card{padding:26px 22px;}
+  .card{padding:22px 20px;}
+  .stat-card{padding:16px 14px;}
+  .stat-num{font-size:34px;}
+  .form-grid{grid-template-columns:1fr;gap:14px;}
+  .type-grid{grid-template-columns:1fr;}
+  .btn-gold,.btn-ghost{width:100%;text-align:center;}
+  .mob-nav{display:block!important;position:fixed;bottom:0;left:0;right:0;width:100%;background:var(--sidebar-bg);border-top:1px solid rgba(196,146,42,.25);z-index:199;padding-bottom:env(safe-area-inset-bottom,0px);}
+  .mob-nav-inner{display:flex;justify-content:space-around;align-items:center;padding:6px 0 8px;}
+  .mob-nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;padding:6px;flex:1;min-height:48px;font-family:'Outfit',sans-serif;font-size:11px;color:#857E64;transition:color .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+  .mob-nav-btn.active{color:var(--gold2);}
   .mob-nav-btn .mob-icon{font-size:20px;line-height:1;}
-  .agreement-box{font-size:11px;padding:12px;margin-bottom:10px;}
-  .section-label{font-size:9px;}
-  .client-link-stats{grid-template-columns:1fr;}
-  .client-link-actions{flex-direction:column;}
 }
+.mob-controls{display:none;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
 </style>
 </head>
 <body>
 
-<!-- ── Sidebar (desktop only) ── -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Sidebar (desktop) -->
 <div class="sidebar">
   <div class="sidebar-logo">
     <h2>Энергетический <span>Календарь</span></h2>
     <p data-i18n="sidebar_sub">Кабинет мастера</p>
   </div>
   <nav class="sidebar-nav">
-    <button class="nav-item active" onclick="showTab('overview')">
-      <span class="nav-icon">◈</span> <span data-i18n="nav_overview">Обзор</span>
-    </button>
-    <button class="nav-item" onclick="showTab('links')">
-      <span class="nav-icon">🔗</span> <span data-i18n="nav_links">Ссылки клиентов</span>
-    </button>
-    <button class="nav-item" onclick="showTab('profile')">
-      <span class="nav-icon">○</span> <span data-i18n="nav_profile">Профиль</span>
-    </button>
-    <button class="nav-item" onclick="window.open('personal-energy-calendar.html','_blank')">
-      <span class="nav-icon">📅</span> <span data-i18n="nav_calendar">Открыть календарь</span>
-    </button>
-    <button class="nav-item" onclick="window.open('psycho-page.html?master='+userId,'_blank')">
-      <span class="nav-icon">🧠</span> <span data-i18n="nav_psycho">Психоанализ</span>
-    </button>
+    <button class="nav-item active" onclick="showTab('overview')"><span class="nav-icon">◈</span> <span data-i18n="nav_overview">Обзор</span></button>
+    <button class="nav-item" onclick="showTab('links')"><span class="nav-icon">💌</span> <span data-i18n="nav_links">Ссылки клиентов</span></button>
+    <button class="nav-item" onclick="showTab('profile')"><span class="nav-icon">👤</span> <span data-i18n="nav_profile">Профиль</span></button>
+    <button class="nav-item" onclick="window.open('personal-energy-calendar.html','_blank')"><span class="nav-icon">🗓️</span> <span data-i18n="nav_calendar">Открыть календарь</span></button>
+    <button class="nav-item" onclick="openPsycho()"><span class="nav-icon">🔮</span> <span data-i18n="nav_psycho">Психоанализ</span></button>
   </nav>
   <div>
     <div class="sidebar-user">
       <div class="user-avatar" id="sb-avatar">М</div>
       <div>
-        <div class="user-name-sb" id="sb-name">Загрузка...</div>
+        <div class="user-name-sb" id="sb-name">…</div>
         <div class="user-role-sb" id="sb-role">Digital Consulting</div>
       </div>
     </div>
-    <div style="padding:0 12px 16px;">
+    <div style="padding:0 14px 18px;">
       <button class="btn-logout" onclick="doLogout()" data-i18n="nav_logout">Выйти</button>
     </div>
   </div>
 </div>
 
-<!-- ── Мобильный хедер + main в одной колонке ── -->
 <div class="mob-wrap">
-
-  <!-- Мобильный хедер -->
   <div class="mob-header">
     <div class="mob-logo">Энергетический <span>Календарь</span></div>
     <div class="mob-user">
       <div class="mob-avatar" id="mob-avatar">М</div>
-      <div class="mob-username" id="mob-username">...</div>
+      <div class="mob-username" id="mob-username">…</div>
     </div>
   </div>
 
-  <!-- Main content -->
   <div class="main">
     <div class="main-content-wrap">
 
       <div class="page-header">
         <div>
           <h1 class="page-title"><span data-i18n="welcome">Добро пожаловать,</span> <span id="welcome-name">—</span></h1>
-          <p style="font-size:13px;color:var(--text3);margin-top:4px;" data-i18n="header_subtitle">Ваш кабинет мастера · Digital Consulting</p>
+          <p class="page-sub" data-i18n="header_subtitle">Ваш кабинет мастера · Digital Consulting</p>
         </div>
         <div class="header-controls">
           <div class="lang-switch">
@@ -345,15 +302,34 @@ body{
             <button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button>
             <button class="lang-btn" id="lang-kz" onclick="setLang('kz')">ҚЗ</button>
           </div>
-          <button class="theme-btn" onclick="toggleTheme()">
-            <span id="theme-icon">🌙</span>
-            <span id="theme-label" data-i18n="theme_dark">Тёмная тема</span>
-          </button>
+          <button class="theme-btn" onclick="toggleTheme()"><span id="theme-icon">☀️</span><span id="theme-label">Светлая тема</span></button>
         </div>
       </div>
 
-      <!-- ======= OVERVIEW TAB ======= -->
+      <div class="mob-controls">
+        <div class="lang-switch">
+          <button class="lang-btn" id="mlang-ru" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="mlang-en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" id="mlang-kz" onclick="setLang('kz')">ҚЗ</button>
+        </div>
+        <button class="theme-btn" onclick="toggleTheme()"><span id="mtheme-icon">☀️</span></button>
+      </div>
+
+      <!-- OVERVIEW -->
       <div id="tab-overview" class="tab-content active">
+        <div class="hero-card">
+          <div class="hero-badges">
+            <span class="badge badge-full">★ <span id="hero-plan">—</span></span>
+            <span class="badge badge-active" data-i18n="stat_active">● Активен</span>
+          </div>
+          <h2 class="hero-title" data-i18n="v2_hero_title">Всё для консультаций в одном кабинете</h2>
+          <p class="hero-sub" data-i18n="v2_hero_sub">Календарь энергий, психоанализ личности и персональные ссылки для ваших клиентов.</p>
+          <div class="hero-actions">
+            <button class="btn-gold" onclick="showTab('links')" data-i18n="v2_cta_link">Создать ссылку клиенту</button>
+            <a class="btn-ghost" href="personal-energy-calendar.html" target="_blank" data-i18n="v2_cta_cal">Открыть календарь</a>
+          </div>
+        </div>
+
         <div class="stats-row">
           <div class="stat-card highlight">
             <div class="stat-label" data-i18n="stat_plan">Тариф</div>
@@ -361,110 +337,140 @@ body{
             <div class="stat-sub" id="stat-plan-name">—</div>
           </div>
           <div class="stat-card">
-            <div class="stat-label" data-i18n="stat_psycho_label">Психоанализов</div>
+            <div class="stat-label" data-i18n="v2_stat_reports">Анализов создано</div>
             <div class="stat-num" id="stat-psycho">—</div>
-            <div class="stat-sub" id="stat-psycho-sub" data-i18n="stat_used">использовано</div>
+            <div class="stat-sub" id="stat-psycho-sub">—</div>
           </div>
           <div class="stat-card">
-            <div class="stat-label" data-i18n="stat_status">Статус</div>
-            <div style="margin-top:10px;">
-              <span class="badge badge-active" id="stat-status" data-i18n="stat_active">● Активен</span>
-            </div>
+            <div class="stat-label" data-i18n="v2_stat_links">Ссылок клиентам</div>
+            <div class="stat-num" id="stat-links">—</div>
+            <div class="stat-sub" data-i18n="v2_stat_links_sub">календарь и анализ</div>
           </div>
           <div class="stat-card">
-            <div class="stat-label" data-i18n="stat_calendar">Дней календаря</div>
-            <div class="stat-num">∞</div>
-            <div class="stat-sub" data-i18n="stat_unlimited">безлимит</div>
+            <div class="stat-label" data-i18n="v2_stat_opens">Открытий календаря</div>
+            <div class="stat-num" id="stat-opens">—</div>
+            <div class="stat-sub" data-i18n="v2_stat_opens_sub">клиентами</div>
           </div>
         </div>
 
-        <div class="section-label" data-i18n="section_products">Продукты</div>
+        <div class="section-label" data-i18n="v2_included">Что входит в ваш доступ</div>
         <div class="products-grid">
           <a href="personal-energy-calendar.html" target="_blank" class="product-card">
-            <div class="product-icon">📅</div>
+            <div class="ico">🗓️</div>
             <div class="product-name" data-i18n="cal_name">Энергетический Календарь</div>
             <p class="product-desc" data-i18n="cal_desc">Узнайте энергию дня, месяца и года. Рекомендации, мантры и утренний ритуал на каждый день.</p>
             <div class="product-action" data-i18n="cal_action">Открыть календарь →</div>
           </a>
-          <div class="product-card" id="psycho-card" style="cursor:pointer;" onclick="openPsycho()">
-            <div class="product-icon">🧠</div>
+          <div class="product-card" id="psycho-card" onclick="openPsycho()">
+            <div class="ico">🔮</div>
             <div class="product-name" data-i18n="psycho_name">Психоанализ личности</div>
-            <p class="product-desc" data-i18n="psycho_desc">Глубокий анализ числа личности, миссии, матрицы чисел, профессиональной ориентации и совместимости.</p>
+            <p class="product-desc" data-i18n="v2_psycho_desc">Глубокий анализ числа личности, миссии, матрицы чисел и профессиональной ориентации.</p>
             <div class="product-action" id="psycho-action" data-i18n="psycho_action">Открыть анализ →</div>
             <div class="psycho-limit-bar" id="psycho-limit-bar" style="display:none;">
-              <div class="plb-text" id="psycho-limit-text">Использовано 0 из 5</div>
+              <div class="plb-text" id="psycho-limit-text"></div>
               <div class="plb-track"><div class="plb-fill" id="psycho-limit-fill" style="width:0%"></div></div>
             </div>
+          </div>
+          <div class="product-card" onclick="showTab('links')">
+            <div class="ico">💌</div>
+            <div class="product-name" data-i18n="v2_link_name">Ссылки для клиентов</div>
+            <p class="product-desc" data-i18n="v2_link_desc">Отправьте клиенту ссылку на календарь или на его психоанализ. Клиенту не нужна регистрация.</p>
+            <div class="product-action" data-i18n="v2_link_action">Создать ссылку →</div>
           </div>
         </div>
 
         <div class="agreement-box">
-          <strong data-i18n="agreement_title">Правила использования:</strong> <span data-i18n="agreement_text">Ваша лицензия предназначена исключительно для личного использования и работы с вашими клиентами через персональную ссылку. Передача доступа третьим лицам нарушает условия соглашения. По вопросам:</span> <strong style="color:var(--gold)">Digital Consulting</strong>
+          <strong data-i18n="agreement_title">Правила использования:</strong> <span data-i18n="agreement_text"></span> <strong style="color:var(--gold-text)">Digital Consulting</strong>
         </div>
       </div>
-      <!-- ======= /OVERVIEW TAB ======= -->
 
-      <!-- ======= CLIENT LINKS TAB ======= -->
+      <!-- LINKS -->
       <div id="tab-links" class="tab-content">
-        <div class="profile-card">
-          <div class="profile-card-title" data-i18n="links_create">Создать новую ссылку для клиента</div>
+        <div class="card">
+          <div class="card-title" data-i18n="lk_title">Ссылки для клиентов</div>
+          <p class="card-lead" data-i18n="lk_lead">Создайте ссылку и отправьте клиенту: он откроет календарь или свой психоанализ без регистрации.</p>
+
+          <div class="form-label" style="margin-bottom:10px;" data-i18n="lk_type">Что отправляем</div>
+          <div class="type-grid">
+            <button type="button" class="type-tile selected" id="tile-calendar" onclick="setLinkType('calendar')">
+              <div class="ico">🗓️</div>
+              <div><b data-i18n="lk_type_cal">Календарь</b><span class="d" data-i18n="lk_type_cal_d">Клиент пользуется календарём энергий. Ссылка открывается 6 раз.</span></div>
+            </button>
+            <button type="button" class="type-tile" id="tile-psycho" onclick="setLinkType('psycho')">
+              <div class="ico">🔮</div>
+              <div><b data-i18n="lk_type_psy">Психоанализ личности</b><span class="d" data-i18n="lk_type_psy_d">Клиент получает свой анализ по дате рождения. Ссылка без ограничения по открытиям.</span></div>
+            </button>
+          </div>
+
           <div class="form-grid">
             <div class="form-group">
-              <label class="form-label" data-i18n="links_client_name">Имя клиента</label>
-              <input class="form-input" id="inp-client-name" type="text" placeholder="Анна">
+              <label class="form-label" for="inp-client-name" data-i18n="lk_name">Имя клиента</label>
+              <input class="form-input" id="inp-client-name" type="text" placeholder="Анна" autocomplete="off">
+            </div>
+            <div class="form-group" id="field-dob">
+              <label class="form-label" for="inp-client-dob" data-i18n="lk_dob">Дата рождения клиента</label>
+              <input class="form-input" id="inp-client-dob" type="text" inputmode="numeric" maxlength="10" placeholder="ДД.ММ.ГГГГ" oninput="maskDob(this)" autocomplete="off">
+            </div>
+            <div class="form-group" id="field-lang">
+              <span class="form-label" data-i18n="lk_lang">Язык анализа</span>
+              <div class="lang-pills">
+                <button type="button" class="pill-btn" id="rl-ru" onclick="setReportLang('ru')">RU</button>
+                <button type="button" class="pill-btn" id="rl-en" onclick="setReportLang('en')">EN</button>
+                <button type="button" class="pill-btn" id="rl-kz" onclick="setReportLang('kz')">ҚЗ</button>
+              </div>
             </div>
           </div>
-          <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;">
-            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:400;color:var(--text);">
-              <input type="checkbox" name="perm" value="calendar" checked style="cursor:pointer;"> <span data-i18n="links_calendar">📅 Календарь</span>
-            </label>
+          <button class="btn-gold" id="btn-create" onclick="createLink()" data-i18n="lk_create">Создать ссылку</button>
+
+          <div class="result-box" id="result-box">
+            <div class="result-title" data-i18n="lk_ready">Ссылка готова</div>
+            <div class="url-box" id="result-url"></div>
+            <div class="btn-row">
+              <button class="btn-sm primary" id="res-copy" onclick="copyResult()" data-i18n="lk_copy">Копировать</button>
+              <a class="btn-sm wa" id="res-wa" href="#" target="_blank" rel="noopener" data-i18n="lk_wa">Отправить в WhatsApp</a>
+              <a class="btn-sm" id="res-open" href="#" target="_blank" rel="noopener" data-i18n="lk_open">Открыть</a>
+            </div>
           </div>
-          <div style="font-size:12px;color:var(--text3);line-height:1.6;margin:16px 0;padding:12px;background:var(--bg3);border-radius:8px;">
-            💡 <strong style="color:var(--text);" data-i18n="links_how">Как это работает:</strong> <span data-i18n="links_how_text">Ссылка будет работать ровно 6 открытий без ограничения по времени. Клиент сможет открывать её в разные дни, но после 6 открытий потребуется новая ссылка. Это защищает от распространения ссылки среди других мастеров.</span>
-          </div>
-          <button class="btn-save" onclick="createClientLink()" style="width:auto;" data-i18n="links_create_btn">Создать ссылку</button>
         </div>
 
-        <div class="client-links-section">
-          <div class="section-label" data-i18n="links_active">Активные ссылки</div>
-          <div class="client-links-grid" id="client-links-list">
-            <div class="empty-state">
-              <div class="empty-state-icon">🔗</div>
-              <div class="empty-state-text" data-i18n="links_empty">Ссылок для клиентов ещё нет</div>
-            </div>
-          </div>
+        <div class="section-label" data-i18n="lk_list">Ваши ссылки</div>
+        <div class="chips">
+          <button class="chip active" id="chip-all" onclick="setFilter('all')" data-i18n="lk_all">Все</button>
+          <button class="chip" id="chip-calendar" onclick="setFilter('calendar')" data-i18n="lk_f_cal">Календарь</button>
+          <button class="chip" id="chip-psycho" onclick="setFilter('psycho')" data-i18n="lk_f_psy">Психоанализ</button>
         </div>
+        <div class="notice" id="list-notice" style="display:none;" data-i18n="lk_err_list">Список анализов сейчас недоступен</div>
+        <div class="client-links-grid" id="client-links-list"></div>
       </div>
-      <!-- ======= /CLIENT LINKS TAB ======= -->
 
-      <!-- ======= PROFILE TAB ======= -->
+      <!-- PROFILE -->
       <div id="tab-profile" class="tab-content">
-        <div class="profile-card">
-          <div class="profile-card-title" data-i18n="profile_title">Мой профиль — что видят клиенты</div>
+        <div class="card">
+          <div class="card-title" data-i18n="profile_title">Мой профиль — что видят клиенты</div>
+          <p class="card-lead" data-i18n="v2_profile_lead">Эти данные клиенты видят в вашем анализе: имя, специализацию и контакты.</p>
           <div class="profile-avatar-row">
             <div class="profile-avatar" id="prof-avatar">М</div>
             <div class="profile-avatar-info">
               <h3 id="prof-name-display">—</h3>
               <p id="prof-spec-display">—</p>
             </div>
-            <span class="badge badge-active" style="margin-left:auto;" data-i18n="stat_active">● Активен</span>
           </div>
           <div class="form-grid">
             <div class="form-group">
-              <label class="form-label" data-i18n="profile_name">Имя (для клиентов)</label>
+              <label class="form-label" for="inp-name" data-i18n="profile_name">Имя (для клиентов)</label>
               <input class="form-input" id="inp-name" type="text" placeholder="Имя и фамилия" oninput="livePreview()">
             </div>
             <div class="form-group">
-              <label class="form-label" data-i18n="profile_spec">Специализация</label>
+              <label class="form-label" for="inp-spec" data-i18n="profile_spec">Специализация</label>
               <input class="form-input" id="inp-spec" type="text" placeholder="Мастер цифровой психологии" oninput="livePreview()">
             </div>
             <div class="form-group">
-              <label class="form-label">WhatsApp <span style="font-size:10px;color:var(--text3);text-transform:none;letter-spacing:0;" data-i18n="profile_wa_hint">(только цифры со знаком +)</span></label>
+              <label class="form-label" for="inp-wa">WhatsApp <span style="font-size:12px;color:var(--text3);" data-i18n="profile_wa_hint">(только цифры со знаком +)</span></label>
               <input class="form-input" id="inp-wa" type="text" placeholder="+7 700 000 00 00" oninput="livePreview()">
-              <div id="wa-hint" style="font-size:11px;color:var(--text3);display:none;" data-i18n="profile_wa_example">Пример: +77001234567 или +996700123456</div>
+              <div id="wa-hint" style="font-size:12px;color:var(--text3);display:none;" data-i18n="profile_wa_example">Пример: +77001234567</div>
             </div>
             <div class="form-group">
-              <label class="form-label">Instagram</label>
+              <label class="form-label" for="inp-ig">Instagram</label>
               <input class="form-input" id="inp-ig" type="text" placeholder="@yourname" oninput="livePreview()">
             </div>
           </div>
@@ -482,42 +488,26 @@ body{
                 <div class="preview-ct" id="prev-ct">WhatsApp · Instagram</div>
               </div>
             </div>
-            <div id="prev-wa-btn" style="display:none;margin-top:12px;">
-              <a id="prev-wa-link" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;text-decoration:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:500;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                <span data-i18n="wa_write">Написать в WhatsApp</span>
-              </a>
+            <div id="prev-wa-btn" style="display:none;margin-top:14px;">
+              <a id="prev-wa-link" href="#" target="_blank" rel="noopener" class="btn-sm wa"><span data-i18n="wa_write">Написать в WhatsApp</span></a>
             </div>
           </div>
         </div>
       </div>
-      <!-- ======= /PROFILE TAB ======= -->
 
     </div>
   </div>
 
-  <!-- Mobile bottom nav -->
   <nav class="mob-nav">
     <div class="mob-nav-inner">
-      <button class="mob-nav-btn active" id="mob-btn-overview" onclick="showTab('overview');setMobActive('overview')">
-        <span class="mob-icon">🏠</span><span data-i18n="mob_overview">Обзор</span>
-      </button>
-      <button class="mob-nav-btn" id="mob-btn-links" onclick="showTab('links');setMobActive('links')">
-        <span class="mob-icon">🔗</span><span data-i18n="mob_links">Ссылки</span>
-      </button>
-      <button class="mob-nav-btn" id="mob-btn-profile" onclick="showTab('profile');setMobActive('profile')">
-        <span class="mob-icon">👤</span><span data-i18n="mob_profile">Профиль</span>
-      </button>
-      <button class="mob-nav-btn" onclick="openPsycho()">
-        <span class="mob-icon">🧠</span><span data-i18n="mob_analysis">Анализ</span>
-      </button>
-      <button class="mob-nav-btn" onclick="doLogout()">
-        <span class="mob-icon">🚪</span><span data-i18n="nav_logout">Выйти</span>
-      </button>
+      <button class="mob-nav-btn active" id="mob-btn-overview" onclick="showTab('overview')"><span class="mob-icon">◈</span><span data-i18n="mob_overview">Обзор</span></button>
+      <button class="mob-nav-btn" id="mob-btn-links" onclick="showTab('links')"><span class="mob-icon">💌</span><span data-i18n="mob_links">Ссылки</span></button>
+      <button class="mob-nav-btn" id="mob-btn-profile" onclick="showTab('profile')"><span class="mob-icon">👤</span><span data-i18n="mob_profile">Профиль</span></button>
+      <button class="mob-nav-btn" onclick="openPsycho()"><span class="mob-icon">🔮</span><span data-i18n="mob_analysis">Анализ</span></button>
+      <button class="mob-nav-btn" onclick="doLogout()"><span class="mob-icon">🚪</span><span data-i18n="nav_logout">Выйти</span></button>
     </div>
   </nav>
-
-</div><!-- /mob-wrap -->
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -527,289 +517,65 @@ const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const PSYCHO_LIMIT = 5;
 let userProfile = null;
 let userId = null;
+const BASE = window.location.origin + window.location.pathname.replace(/cabinet\.html$/, '');
 
-async function init(){
-  applyTranslations();
-  const { data: { session } } = await supabaseClient.auth.getSession();
-  if(!session){ window.location.href = 'login.html'; return; }
-  userId = session.user.id;
-  const { data: profile } = await supabaseClient
-    .from('profiles').select('*').eq('id', session.user.id).single();
-  if(!profile || !profile.is_active){
-    await supabaseClient.auth.signOut();
-    window.location.href = 'login.html';
-    return;
-  }
-  if(profile.role === 'admin'){
-    window.location.href = 'admin.html';
-    return;
-  }
-  userProfile = profile;
-  renderAll(profile);
-  loadClientLinks();
-}
-
-function renderAll(p){
-  const name = p.name || p.email || t('default_master');
-  const firstName = name.split(' ')[0];
-  const isFull = p.plan === 'full';
-  const used = p.psycho_count || 0;
-
-  document.getElementById('sb-avatar').textContent = name.charAt(0).toUpperCase();
-  document.getElementById('sb-name').textContent = name;
-  document.getElementById('sb-role').textContent = p.specialization || 'Digital Consulting';
-
-  const mobAv = document.getElementById('mob-avatar');
-  const mobUn = document.getElementById('mob-username');
-  if(mobAv) mobAv.textContent = name.charAt(0).toUpperCase();
-  if(mobUn) mobUn.textContent = firstName;
-
-  document.getElementById('welcome-name').textContent = firstName;
-
-  document.getElementById('stat-plan-icon').textContent = isFull ? '★' : '◇';
-  document.getElementById('stat-plan-name').textContent = isFull ? t('plan_full') : t('plan_basic');
-  document.getElementById('stat-psycho').textContent = used;
-  document.getElementById('stat-psycho-sub').textContent = isFull ? t('stat_unlimited') : `${t('psycho_limit_of')} ${PSYCHO_LIMIT} ${t('psycho_limit_free')}`;
-
-  if(!isFull){
-    document.getElementById('psycho-limit-bar').style.display = 'block';
-    document.getElementById('psycho-limit-text').textContent = `${t('psycho_limit_used')} ${used} ${t('psycho_limit_of')} ${PSYCHO_LIMIT} ${t('psycho_limit_free')}`;
-    document.getElementById('psycho-limit-fill').style.width = Math.min(100,(used/PSYCHO_LIMIT)*100) + '%';
-    if(used >= PSYCHO_LIMIT){
-      document.getElementById('psycho-action').textContent = t('psycho_upgrade');
-      document.getElementById('psycho-action').style.color = 'var(--red-text)';
-    }
-  }
-
-  document.getElementById('inp-name').value = p.name || '';
-  document.getElementById('inp-spec').value = p.specialization || '';
-  document.getElementById('inp-wa').value = p.whatsapp || '';
-  document.getElementById('inp-ig').value = p.instagram || '';
-
-  document.getElementById('prof-avatar').textContent = name.charAt(0).toUpperCase();
-  document.getElementById('prof-name-display').textContent = name;
-  document.getElementById('prof-spec-display').textContent = p.specialization || t('spec_not_set');
-
-  updatePreview(p.name, p.specialization, p.whatsapp, p.instagram);
-  applyTranslations();
-}
-
-function updatePreview(name, spec, wa, ig){
-  const n = name || 'Ваше имя';
-  document.getElementById('prev-av').textContent = n.charAt(0).toUpperCase();
-  document.getElementById('prev-name').textContent = n;
-  document.getElementById('prev-spec').textContent = spec || 'Специализация';
-  const ct = [wa, ig].filter(Boolean).join(' · ');
-  document.getElementById('prev-ct').textContent = ct || 'WhatsApp · Instagram';
-  const waClean = wa ? wa.replace(/\D/g,'') : '';
-  const waBtn = document.getElementById('prev-wa-btn');
-  const waLink = document.getElementById('prev-wa-link');
-  if(waClean && waClean.length >= 10){
-    waBtn.style.display = 'block';
-    waLink.href = 'https://wa.me/' + waClean;
-    document.getElementById('wa-hint').style.display = 'none';
-  } else if(wa && wa.length > 0){
-    waBtn.style.display = 'none';
-    document.getElementById('wa-hint').style.display = 'block';
-  } else {
-    waBtn.style.display = 'none';
-    document.getElementById('wa-hint').style.display = 'none';
-  }
-}
-
-function livePreview(){
-  updatePreview(
-    document.getElementById('inp-name').value.trim(),
-    document.getElementById('inp-spec').value.trim(),
-    document.getElementById('inp-wa').value.trim(),
-    document.getElementById('inp-ig').value.trim()
-  );
-}
-
-function openPsycho(){
-  if(!userProfile) return;
-  const isFull = userProfile.plan === 'full';
-  const used = userProfile.psycho_count || 0;
-  if(!isFull && used >= PSYCHO_LIMIT){
-    alert(t('psycho_upgrade'));
-    return;
-  }
-  window.open('psycho-page.html?master='+userId,'_blank');
-}
-
-async function saveProfile(){
-  const name = document.getElementById('inp-name').value.trim();
-  const spec = document.getElementById('inp-spec').value.trim();
-  const wa = document.getElementById('inp-wa').value.trim();
-  const ig = document.getElementById('inp-ig').value.trim();
-  const btn = document.querySelector('.btn-save');
-  btn.textContent = t('profile_saving');
-  btn.disabled = true;
-  const { error } = await supabaseClient.from('profiles').update({
-    name, specialization: spec, whatsapp: wa, instagram: ig
-  }).eq('id', userId);
-  btn.textContent = t('profile_save');
-  btn.disabled = false;
-  if(!error){
-    const ok = document.getElementById('save-ok');
-    ok.style.display = 'inline';
-    setTimeout(()=>{ ok.style.display='none'; }, 3000);
-    document.getElementById('sb-avatar').textContent = (name||'М').charAt(0).toUpperCase();
-    document.getElementById('sb-name').textContent = name || t('default_master');
-    document.getElementById('sb-role').textContent = spec || 'Digital Consulting';
-    document.getElementById('welcome-name').textContent = (name||'').split(' ')[0] || t('default_master');
-    document.getElementById('prof-avatar').textContent = (name||'М').charAt(0).toUpperCase();
-    document.getElementById('prof-name-display').textContent = name || '—';
-    document.getElementById('prof-spec-display').textContent = spec || t('spec_not_set');
-    updatePreview(name, spec, wa, ig);
-    if(userProfile){ userProfile.name=name; userProfile.specialization=spec; userProfile.whatsapp=wa; userProfile.instagram=ig; }
-  }
-}
-
-function showTab(tab){
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const tabIndex = {overview:0, links:1, profile:2};
-  const navItems = document.querySelectorAll('.nav-item');
-  if(tabIndex[tab] !== undefined) navItems[tabIndex[tab]].classList.add('active');
-}
-
-function setMobActive(tab){
-  document.querySelectorAll('.mob-nav-btn').forEach(b => b.classList.remove('active'));
-  const btn = document.getElementById('mob-btn-' + tab);
-  if(btn) btn.classList.add('active');
-}
-
-function toggleTheme(){
-  const h = document.documentElement;
-  const dark = h.getAttribute('data-theme') === 'dark';
-  h.setAttribute('data-theme', dark ? 'light' : 'dark');
-  document.getElementById('theme-icon').textContent = dark ? '🌙' : '☀️';
-  document.getElementById('theme-label').textContent = dark ? t('theme_dark') : t('theme_light');
-}
-
-async function doLogout(){
-  await supabaseClient.auth.signOut();
-  window.location.href = 'login.html';
-}
-
-// ── CLIENT LINKS LOGIC ──
-
-function generateToken(){
-  return 'token_' + Math.random().toString(36).substr(2, 32);
-}
-
-async function createClientLink(){
-  if(!userId) return;
-  const name = document.getElementById('inp-client-name').value.trim();
-  
-  if(!name){ alert(t('alert_no_name')); return; }
-
-  const perms = {};
-  document.querySelectorAll('input[name="perm"]:checked').forEach(cb => { perms[cb.value] = true; });
-
-  if(!Object.keys(perms).length){ alert(t('alert_no_perm')); return; }
-
-  const token = generateToken();
-  const { error } = await supabaseClient.from('access_grants').insert({
-    master_id: userId, client_name: name,
-    access_token: token, permissions: perms, max_opens: 6, opens_count: 0
-  });
-
-  if(error){ alert(t('alert_error') + error.message); return; }
-
-  alert(t('alert_created'));
-  document.getElementById('inp-client-name').value = '';
-  loadClientLinks();
-}
-
-async function loadClientLinks(){
-  if(!userId) return;
-  const { data: links } = await supabaseClient
-    .from('access_grants').select('*').eq('master_id', userId)
-    .order('created_at', { ascending: false });
-
-  const container = document.getElementById('client-links-list');
-  container.innerHTML = '';
-
-  if(!links || !links.length){
-    container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔗</div><div class="empty-state-text">${t('links_empty')}</div></div>`;
-    return;
-  }
-
-  links.forEach(link => {
-    const isExhausted = link.opens_count >= link.max_opens;
-    const progress = (link.opens_count / link.max_opens) * 100;
-    const url = window.location.origin + window.location.pathname.replace('cabinet.html', '') + 'view.html?token=' + link.access_token;
-
-    const el = document.createElement('div');
-    el.className = 'client-link-item';
-    el.innerHTML = `
-      <div class="client-link-header">
-        <div><div class="client-link-name">${link.client_name}</div></div>
-        <span class="client-link-status ${isExhausted ? 'exhausted' : 'active'}">
-          ${isExhausted ? t('link_status_exhausted') : t('link_status_active')}
-        </span>
-      </div>
-      <div class="client-link-stats">
-        <div class="client-link-stat">
-          <div class="client-link-stat-label">${t('link_opens_left')}</div>
-          <div class="client-link-stat-value">${Math.max(0, link.max_opens - link.opens_count)} / ${link.max_opens}</div>
-        </div>
-        <div class="client-link-stat">
-          <div class="client-link-stat-label">${t('link_used')}</div>
-          <div class="client-link-stat-value">${link.opens_count} ${t('link_used_times')}</div>
-        </div>
-      </div>
-      <div class="client-link-progress">
-        <div class="client-link-progress-bar">
-          <div class="client-link-progress-fill" style="width: ${Math.min(progress, 100)}%"></div>
-        </div>
-      </div>
-      <div class="client-link-url" onclick="copyUrl(this)">${url}</div>
-      <div class="client-link-actions">
-        <button class="client-link-btn client-link-btn-copy" onclick="copyUrlFromBtn('${url}')">${t('link_copy')}</button>
-        <button class="client-link-btn client-link-btn-delete" onclick="deleteLink('${link.id}')">${t('link_delete')}</button>
-      </div>
-    `;
-    container.appendChild(el);
-  });
-}
-
-function copyUrl(el){
-  const text = el.textContent;
-  navigator.clipboard.writeText(text).catch(() => {
-    const a = document.createElement('textarea');
-    a.value = text; document.body.appendChild(a); a.select();
-    document.execCommand('copy'); document.body.removeChild(a);
-  });
-  alert(t('alert_copied'));
-}
-
-function copyUrlFromBtn(url){
-  navigator.clipboard.writeText(url).catch(() => {
-    const a = document.createElement('textarea');
-    a.value = url; document.body.appendChild(a); a.select();
-    document.execCommand('copy'); document.body.removeChild(a);
-  });
-  alert(t('alert_copied'));
-}
-
-async function deleteLink(id){
-  if(!confirm(t('confirm_delete'))) return;
-  const { error } = await supabaseClient.from('access_grants').delete().eq('id', id);
-  if(!error){
-    alert(t('alert_deleted'));
-    loadClientLinks();
-  } else {
-    alert(t('alert_error') + error.message);
-  }
-}
-
-// ── i18n ──
 const TRANSLATIONS = {
   ru: {
+    v2_hero_title:"Всё для консультаций в одном кабинете",
+    v2_hero_sub:"Календарь энергий, психоанализ личности и персональные ссылки для ваших клиентов.",
+    v2_cta_link:"Создать ссылку клиенту",
+    v2_cta_cal:"Открыть календарь",
+    v2_stat_reports:"Анализов создано",
+    v2_stat_reports_sub:"для клиентов",
+    v2_stat_links:"Ссылок клиентам",
+    v2_stat_links_sub:"календарь и анализ",
+    v2_stat_opens:"Открытий календаря",
+    v2_stat_opens_sub:"клиентами",
+    v2_included:"Что входит в ваш доступ",
+    v2_psycho_desc:"Глубокий анализ числа личности, миссии, матрицы чисел и профессиональной ориентации.",
+    v2_link_name:"Ссылки для клиентов",
+    v2_link_desc:"Отправьте клиенту ссылку на календарь или на его психоанализ. Клиенту не нужна регистрация.",
+    v2_link_action:"Создать ссылку →",
+    v2_profile_lead:"Эти данные клиенты видят в вашем анализе: имя, специализацию и контакты.",
+    lk_title:"Ссылки для клиентов",
+    lk_lead:"Создайте ссылку и отправьте клиенту: он откроет календарь или свой психоанализ без регистрации.",
+    lk_type:"Что отправляем",
+    lk_type_cal:"Календарь",
+    lk_type_cal_d:"Клиент пользуется календарём энергий. Ссылка открывается 6 раз.",
+    lk_type_psy:"Психоанализ личности",
+    lk_type_psy_d:"Клиент получает свой анализ по дате рождения. Ссылка без ограничения по открытиям.",
+    lk_name:"Имя клиента",
+    lk_dob:"Дата рождения клиента",
+    lk_lang:"Язык анализа",
+    lk_create:"Создать ссылку",
+    lk_creating:"Создаём...",
+    lk_ready:"Ссылка готова",
+    lk_copy:"Копировать",
+    lk_wa:"Отправить в WhatsApp",
+    lk_open:"Открыть",
+    lk_list:"Ваши ссылки",
+    lk_all:"Все",
+    lk_f_cal:"Календарь",
+    lk_f_psy:"Психоанализ",
+    lk_empty:"Ссылок пока нет. Создайте первую выше.",
+    lk_unlimited:"без лимита",
+    lk_opens:"Открытий",
+    lk_left:"осталось",
+    lk_numbers:"Число личности",
+    lk_mission:"Миссия",
+    lk_status_active:"Активна",
+    lk_status_done:"Исчерпана",
+    lk_delete:"Удалить",
+    lk_confirm_cal:"Удалить ссылку? Клиент больше не сможет её открыть.",
+    lk_confirm_psy:"Удалить анализ? Ссылка клиента перестанет работать.",
+    lk_err_name:"Введите имя клиента",
+    lk_err_dob:"Введите дату рождения в формате ДД.ММ.ГГГГ",
+    lk_err_save:"Не удалось создать ссылку: ",
+    lk_err_delete:"Не удалось удалить. Попробуйте ещё раз.",
+    lk_deleted:"Ссылка удалена",
+    lk_err_list:"Список созданных анализов сейчас недоступен",
+    lk_wa_cal:"Здравствуйте, {name}! Ваш персональный календарь энергий: {url}",
+    lk_wa_psy:"Здравствуйте, {name}! Ваш персональный анализ личности: {url}",
     sidebar_sub:'Кабинет мастера', nav_overview:'Обзор', nav_links:'Ссылки клиентов',
     nav_profile:'Профиль', nav_calendar:'Открыть календарь', nav_psycho:'Психоанализ',
     nav_logout:'Выйти', welcome:'Добро пожаловать,',
@@ -851,6 +617,61 @@ const TRANSLATIONS = {
     spec_not_set:'Специализация не указана', default_master:'Мастер',
   },
   en: {
+    v2_hero_title:"Everything for your sessions in one cabinet",
+    v2_hero_sub:"Energy calendar, personality psychoanalysis and personal links for your clients.",
+    v2_cta_link:"Create a client link",
+    v2_cta_cal:"Open calendar",
+    v2_stat_reports:"Analyses created",
+    v2_stat_reports_sub:"for clients",
+    v2_stat_links:"Client links",
+    v2_stat_links_sub:"calendar and analysis",
+    v2_stat_opens:"Calendar opens",
+    v2_stat_opens_sub:"by clients",
+    v2_included:"What your access includes",
+    v2_psycho_desc:"In-depth analysis of personality number, mission, number matrix and professional orientation.",
+    v2_link_name:"Client links",
+    v2_link_desc:"Send a client a link to the calendar or to their psychoanalysis. No registration needed.",
+    v2_link_action:"Create a link →",
+    v2_profile_lead:"Clients see these details in their analysis: your name, specialization and contacts.",
+    lk_title:"Client links",
+    lk_lead:"Create a link and send it to your client: they open the calendar or their own analysis without registering.",
+    lk_type:"What to send",
+    lk_type_cal:"Calendar",
+    lk_type_cal_d:"The client uses the energy calendar. The link opens 6 times.",
+    lk_type_psy:"Personality psychoanalysis",
+    lk_type_psy_d:"The client gets their analysis by date of birth. The link has no open limit.",
+    lk_name:"Client name",
+    lk_dob:"Client date of birth",
+    lk_lang:"Analysis language",
+    lk_create:"Create link",
+    lk_creating:"Creating...",
+    lk_ready:"Link is ready",
+    lk_copy:"Copy",
+    lk_wa:"Send via WhatsApp",
+    lk_open:"Open",
+    lk_list:"Your links",
+    lk_all:"All",
+    lk_f_cal:"Calendar",
+    lk_f_psy:"Psychoanalysis",
+    lk_empty:"No links yet. Create the first one above.",
+    lk_unlimited:"no limit",
+    lk_opens:"Opens",
+    lk_left:"left",
+    lk_numbers:"Personality number",
+    lk_mission:"Mission",
+    lk_status_active:"Active",
+    lk_status_done:"Used up",
+    lk_delete:"Delete",
+    lk_confirm_cal:"Delete this link? The client will no longer be able to open it.",
+    lk_confirm_psy:"Delete this analysis? The client link will stop working.",
+    lk_err_name:"Enter the client name",
+    lk_err_dob:"Enter the date of birth as DD.MM.YYYY",
+    lk_err_save:"Could not create the link: ",
+    lk_err_delete:"Could not delete. Please try again.",
+    lk_deleted:"Link deleted",
+    lk_err_list:"The list of created analyses is unavailable right now",
+    lk_wa_cal:"Hello, {name}! Your personal energy calendar: {url}",
+    lk_wa_psy:"Hello, {name}! Your personal personality analysis: {url}",
     sidebar_sub:'Master\'s Cabinet', nav_overview:'Overview', nav_links:'Client Links',
     nav_profile:'Profile', nav_calendar:'Open Calendar', nav_psycho:'Psychoanalysis',
     nav_logout:'Log Out', welcome:'Welcome,',
@@ -892,6 +713,61 @@ const TRANSLATIONS = {
     spec_not_set:'Specialization not set', default_master:'Master',
   },
   kz: {
+    v2_hero_title:"Кеңестерге қажеттінің бәрі бір кабинетте",
+    v2_hero_sub:"Энергия күнтізбесі, тұлға психоанализі және клиенттеріңізге арналған жеке сілтемелер.",
+    v2_cta_link:"Клиентке сілтеме жасау",
+    v2_cta_cal:"Күнтізбені ашу",
+    v2_stat_reports:"Жасалған талдаулар",
+    v2_stat_reports_sub:"клиенттер үшін",
+    v2_stat_links:"Клиент сілтемелері",
+    v2_stat_links_sub:"күнтізбе және талдау",
+    v2_stat_opens:"Күнтізбе ашылымдары",
+    v2_stat_opens_sub:"клиенттер ашқан",
+    v2_included:"Қолжетімділікке не кіреді",
+    v2_psycho_desc:"Тұлға саны, миссия, сандар матрицасы және кәсіби бағдар бойынша терең талдау.",
+    v2_link_name:"Клиент сілтемелері",
+    v2_link_desc:"Клиентке күнтізбеге немесе өз психоанализіне сілтеме жіберіңіз. Тіркелу қажет емес.",
+    v2_link_action:"Сілтеме жасау →",
+    v2_profile_lead:"Клиенттер бұл деректерді талдауда көреді: атыңыз, мамандығыңыз және байланыстарыңыз.",
+    lk_title:"Клиент сілтемелері",
+    lk_lead:"Сілтеме жасап, клиентке жіберіңіз: ол тіркелмей-ақ күнтізбені немесе өз психоанализін ашады.",
+    lk_type:"Не жібереміз",
+    lk_type_cal:"Күнтізбе",
+    lk_type_cal_d:"Клиент энергия күнтізбесін пайдаланады. Сілтеме 6 рет ашылады.",
+    lk_type_psy:"Тұлға психоанализі",
+    lk_type_psy_d:"Клиент туған күні бойынша талдау алады. Ашылым саны шектелмейді.",
+    lk_name:"Клиент аты",
+    lk_dob:"Клиенттің туған күні",
+    lk_lang:"Талдау тілі",
+    lk_create:"Сілтеме жасау",
+    lk_creating:"Жасалуда...",
+    lk_ready:"Сілтеме дайын",
+    lk_copy:"Көшіру",
+    lk_wa:"WhatsApp арқылы жіберу",
+    lk_open:"Ашу",
+    lk_list:"Сілтемелеріңіз",
+    lk_all:"Барлығы",
+    lk_f_cal:"Күнтізбе",
+    lk_f_psy:"Психоанализ",
+    lk_empty:"Сілтеме әзірге жоқ. Жоғарыда біріншісін жасаңыз.",
+    lk_unlimited:"шектеусіз",
+    lk_opens:"Ашылым",
+    lk_left:"қалды",
+    lk_numbers:"Тұлға саны",
+    lk_mission:"Миссия",
+    lk_status_active:"Белсенді",
+    lk_status_done:"Таусылды",
+    lk_delete:"Жою",
+    lk_confirm_cal:"Сілтемені жою керек пе? Клиент оны енді аша алмайды.",
+    lk_confirm_psy:"Талдауды жою керек пе? Клиент сілтемесі жұмыс істемейді.",
+    lk_err_name:"Клиент атын енгізіңіз",
+    lk_err_dob:"Туған күнді КК.АА.ЖЖЖЖ форматында енгізіңіз",
+    lk_err_save:"Сілтеме жасалмады: ",
+    lk_err_delete:"Жою мүмкін болмады. Қайталап көріңіз.",
+    lk_deleted:"Сілтеме жойылды",
+    lk_err_list:"Жасалған талдаулар тізімі қазір қолжетімсіз",
+    lk_wa_cal:"Сәлеметсіз бе, {name}! Сіздің жеке энергия күнтізбеңіз: {url}",
+    lk_wa_psy:"Сәлеметсіз бе, {name}! Сіздің жеке тұлға талдауыңыз: {url}",
     sidebar_sub:'Мастер кабинеті', nav_overview:'Шолу', nav_links:'Клиент сілтемелері',
     nav_profile:'Профиль', nav_calendar:'Күнтізбені ашу', nav_psycho:'Психоанализ',
     nav_logout:'Шығу', welcome:'Қош келдіңіз,',
@@ -934,31 +810,401 @@ const TRANSLATIONS = {
   }
 };
 
-let currentLang = localStorage.getItem('lang') || 'ru';
 
-function t(key){ return TRANSLATIONS[currentLang][key] || TRANSLATIONS.ru[key] || key; }
+let currentLang = 'ru';
+try { currentLang = localStorage.getItem('lang') || 'ru'; } catch(e) {}
+if(!TRANSLATIONS[currentLang]) currentLang = 'ru';
 
-function applyTranslations(){
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    el.textContent = t(key);
+function t(key){ return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) || TRANSLATIONS.ru[key] || key; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+let toastTimer;
+function toast(msg, kind){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show' + (kind ? ' ' + kind : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3400);
+}
+function copyText(text){
+  return (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).catch(() => {
+    const a = document.createElement('textarea');
+    a.value = text; document.body.appendChild(a); a.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(a);
   });
-  // обновляем активную кнопку языка
-  ['ru','en','kz'].forEach(l => {
-    const btn = document.getElementById('lang-' + l);
-    if(btn) btn.classList.toggle('active', l === currentLang);
-  });
-  document.documentElement.lang = currentLang;
 }
 
+/* ── Theme ── */
+function applyThemeUI(){
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const icon = dark ? '☀️' : '🌙';
+  const i1 = document.getElementById('theme-icon'), i2 = document.getElementById('mtheme-icon'), lb = document.getElementById('theme-label');
+  if(i1) i1.textContent = icon;
+  if(i2) i2.textContent = icon;
+  if(lb) lb.textContent = dark ? t('theme_light') : t('theme_dark');
+}
+function toggleTheme(){
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const next = dark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('cabTheme', next); } catch(e) {}
+  applyThemeUI();
+}
+
+/* ── i18n ── */
+function applyTranslations(){
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.getAttribute('data-i18n')); });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.getAttribute('data-i18n-ph')); });
+  ['ru','en','kz'].forEach(l => {
+    ['lang-','mlang-'].forEach(p => { const b = document.getElementById(p + l); if(b) b.classList.toggle('active', l === currentLang); });
+  });
+  document.documentElement.lang = currentLang === 'kz' ? 'kk' : currentLang;
+  applyThemeUI();
+}
 function setLang(lang){
   currentLang = lang;
-  localStorage.setItem('lang', lang);
+  try { localStorage.setItem('lang', lang); } catch(e) {}
   applyTranslations();
-  // перерисовываем динамический контент
+  setReportLang(lang);
   if(userProfile) renderAll(userProfile);
-  loadClientLinks();
+  renderLinks();
 }
+
+/* ── Init ── */
+async function init(){
+  applyTranslations();
+  setReportLang(currentLang);
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if(!session){ window.location.href = 'login.html'; return; }
+  userId = session.user.id;
+  const { data: profile } = await supabaseClient.from('profiles').select('*').eq('id', session.user.id).single();
+  if(!profile || !profile.is_active){
+    await supabaseClient.auth.signOut();
+    window.location.href = 'login.html';
+    return;
+  }
+  if(profile.role === 'admin'){ window.location.href = 'admin.html'; return; }
+  userProfile = profile;
+  renderAll(profile);
+  loadAllLinks();
+}
+
+function renderAll(p){
+  const name = p.name || p.email || t('default_master');
+  const firstName = name.split(' ')[0];
+  const isFull = p.plan === 'full';
+  const used = p.psycho_count || 0;
+  const letter = name.charAt(0).toUpperCase();
+
+  document.getElementById('sb-avatar').textContent = letter;
+  document.getElementById('sb-name').textContent = name;
+  document.getElementById('sb-role').textContent = p.specialization || 'Digital Consulting';
+  document.getElementById('mob-avatar').textContent = letter;
+  document.getElementById('mob-username').textContent = firstName;
+  document.getElementById('welcome-name').textContent = firstName;
+
+  const planName = isFull ? t('plan_full') : t('plan_basic');
+  document.getElementById('hero-plan').textContent = planName;
+  document.getElementById('stat-plan-icon').textContent = isFull ? '★' : '◇';
+  document.getElementById('stat-plan-name').textContent = planName;
+
+  const bar = document.getElementById('psycho-limit-bar');
+  if(!isFull){
+    bar.style.display = 'block';
+    document.getElementById('psycho-limit-text').textContent = `${t('psycho_limit_used')} ${used} ${t('psycho_limit_of')} ${PSYCHO_LIMIT} ${t('psycho_limit_free')}`;
+    document.getElementById('psycho-limit-fill').style.width = Math.min(100, (used / PSYCHO_LIMIT) * 100) + '%';
+    if(used >= PSYCHO_LIMIT){
+      const a = document.getElementById('psycho-action');
+      a.textContent = t('psycho_upgrade');
+      a.style.color = 'var(--red-text)';
+    }
+  } else { bar.style.display = 'none'; }
+
+  document.getElementById('inp-name').value = p.name || '';
+  document.getElementById('inp-spec').value = p.specialization || '';
+  document.getElementById('inp-wa').value = p.whatsapp || '';
+  document.getElementById('inp-ig').value = p.instagram || '';
+  document.getElementById('prof-avatar').textContent = letter;
+  document.getElementById('prof-name-display').textContent = name;
+  document.getElementById('prof-spec-display').textContent = p.specialization || t('spec_not_set');
+  updatePreview(p.name, p.specialization, p.whatsapp, p.instagram);
+  updateStats();
+}
+
+function updateStats(){
+  const isFull = userProfile && userProfile.plan === 'full';
+  const used = (userProfile && userProfile.psycho_count) || 0;
+  const reports = allItems.filter(i => i.kind === 'psycho').length;
+  const opens = allItems.filter(i => i.kind === 'calendar').reduce((s, i) => s + (i.opens_count || 0), 0);
+  document.getElementById('stat-psycho').textContent = listLoaded ? reports : '—';
+  document.getElementById('stat-psycho-sub').textContent = isFull ? t('v2_stat_reports_sub') : `${used} ${t('psycho_limit_of')} ${PSYCHO_LIMIT} ${t('psycho_limit_free')}`;
+  document.getElementById('stat-links').textContent = listLoaded ? allItems.length : '—';
+  document.getElementById('stat-opens').textContent = listLoaded ? opens : '—';
+}
+
+/* ── Profile ── */
+function updatePreview(name, spec, wa, ig){
+  const n = name || 'Ваше имя';
+  document.getElementById('prev-av').textContent = n.charAt(0).toUpperCase();
+  document.getElementById('prev-name').textContent = n;
+  document.getElementById('prev-spec').textContent = spec || 'Специализация';
+  const ct = [wa, ig].filter(Boolean).join(' · ');
+  document.getElementById('prev-ct').textContent = ct || 'WhatsApp · Instagram';
+  const waClean = wa ? wa.replace(/\D/g, '') : '';
+  const waBtn = document.getElementById('prev-wa-btn');
+  const waLink = document.getElementById('prev-wa-link');
+  if(waClean && waClean.length >= 10){
+    waBtn.style.display = 'block';
+    waLink.href = 'https://wa.me/' + waClean;
+    document.getElementById('wa-hint').style.display = 'none';
+  } else if(wa && wa.length > 0){
+    waBtn.style.display = 'none';
+    document.getElementById('wa-hint').style.display = 'block';
+  } else {
+    waBtn.style.display = 'none';
+    document.getElementById('wa-hint').style.display = 'none';
+  }
+}
+function livePreview(){
+  updatePreview(
+    document.getElementById('inp-name').value.trim(),
+    document.getElementById('inp-spec').value.trim(),
+    document.getElementById('inp-wa').value.trim(),
+    document.getElementById('inp-ig').value.trim()
+  );
+}
+function openPsycho(){
+  if(!userProfile) return;
+  const isFull = userProfile.plan === 'full';
+  const used = userProfile.psycho_count || 0;
+  if(!isFull && used >= PSYCHO_LIMIT){ toast(t('psycho_upgrade'), 'err'); return; }
+  window.open('psycho-page.html?master=' + userId, '_blank');
+}
+async function saveProfile(){
+  const name = document.getElementById('inp-name').value.trim();
+  const spec = document.getElementById('inp-spec').value.trim();
+  const wa = document.getElementById('inp-wa').value.trim();
+  const ig = document.getElementById('inp-ig').value.trim();
+  const btn = document.querySelector('.btn-save');
+  btn.textContent = t('profile_saving');
+  btn.disabled = true;
+  const { error } = await supabaseClient.from('profiles').update({ name, specialization: spec, whatsapp: wa, instagram: ig }).eq('id', userId);
+  btn.textContent = t('profile_save');
+  btn.disabled = false;
+  if(error){ toast(t('alert_error') + error.message, 'err'); return; }
+  const ok = document.getElementById('save-ok');
+  ok.style.display = 'inline';
+  setTimeout(() => { ok.style.display = 'none'; }, 3000);
+  if(userProfile){ userProfile.name = name; userProfile.specialization = spec; userProfile.whatsapp = wa; userProfile.instagram = ig; renderAll(userProfile); }
+}
+
+/* ── Tabs ── */
+function showTab(tab){
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  const idx = { overview: 0, links: 1, profile: 2 };
+  const items = document.querySelectorAll('.nav-item');
+  items.forEach(n => n.classList.remove('active'));
+  if(idx[tab] !== undefined) items[idx[tab]].classList.add('active');
+  document.querySelectorAll('.mob-nav-btn').forEach(b => b.classList.remove('active'));
+  const mb = document.getElementById('mob-btn-' + tab);
+  if(mb) mb.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+async function doLogout(){
+  await supabaseClient.auth.signOut();
+  window.location.href = 'login.html';
+}
+
+/* ── Client links ── */
+let linkType = 'calendar';
+let reportLang = currentLang;
+let linkFilter = 'all';
+let allItems = [];
+let listLoaded = false;
+let lastResult = null;
+
+function setLinkType(type){
+  linkType = type;
+  document.getElementById('tile-calendar').classList.toggle('selected', type === 'calendar');
+  document.getElementById('tile-psycho').classList.toggle('selected', type === 'psycho');
+  document.getElementById('field-dob').style.display = type === 'psycho' ? 'flex' : 'none';
+  document.getElementById('field-lang').style.display = type === 'psycho' ? 'flex' : 'none';
+  document.getElementById('result-box').classList.remove('show');
+}
+function setReportLang(l){
+  reportLang = l;
+  ['ru','en','kz'].forEach(x => { const b = document.getElementById('rl-' + x); if(b) b.classList.toggle('active', x === l); });
+}
+function maskDob(el){
+  const d = el.value.replace(/\D/g, '').slice(0, 8);
+  let out = d;
+  if(d.length > 4) out = d.slice(0,2) + '.' + d.slice(2,4) + '.' + d.slice(4);
+  else if(d.length > 2) out = d.slice(0,2) + '.' + d.slice(2);
+  el.value = out;
+}
+function digitSum(n){ const s = String(n).split('').reduce((a, c) => a + parseInt(c, 10), 0); return s > 9 ? digitSum(s) : s; }
+function parseDob(str){
+  const m = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(str.trim());
+  if(!m) return null;
+  const d = +m[1], mo = +m[2], y = +m[3];
+  if(y < 1900 || y > new Date().getFullYear()) return null;
+  const dt = new Date(y, mo - 1, d);
+  if(dt.getFullYear() !== y || dt.getMonth() !== mo - 1 || dt.getDate() !== d) return null;
+  return { d, m: mo, y };
+}
+function generateToken(){ return 'token_' + Math.random().toString(36).substr(2, 32); }
+
+function waShareUrl(kind, name, url){
+  const msg = t(kind === 'psycho' ? 'lk_wa_psy' : 'lk_wa_cal').replace('{name}', name).replace('{url}', url);
+  return 'https://wa.me/?text=' + encodeURIComponent(msg);
+}
+function showResult(kind, name, url){
+  lastResult = url;
+  document.getElementById('result-url').textContent = url;
+  document.getElementById('res-wa').href = waShareUrl(kind, name, url);
+  document.getElementById('res-open').href = url;
+  const b = document.getElementById('result-box');
+  b.classList.add('show');
+  b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+async function copyResult(){
+  if(!lastResult) return;
+  await copyText(lastResult);
+  toast(t('alert_copied'));
+}
+
+async function createLink(){
+  if(!userId) return;
+  const name = document.getElementById('inp-client-name').value.trim();
+  if(!name){ toast(t('lk_err_name'), 'err'); return; }
+  const btn = document.getElementById('btn-create');
+  btn.disabled = true; btn.textContent = t('lk_creating');
+  try {
+    if(linkType === 'calendar'){
+      const token = generateToken();
+      const { error } = await supabaseClient.from('access_grants').insert({
+        master_id: userId, client_name: name, access_token: token,
+        permissions: { calendar: true }, max_opens: 6, opens_count: 0
+      });
+      if(error){ toast(t('lk_err_save') + error.message, 'err'); return; }
+      showResult('calendar', name, BASE + 'view.html?token=' + token);
+    } else {
+      const dobStr = document.getElementById('inp-client-dob').value.trim();
+      const p = parseDob(dobStr);
+      if(!p){ toast(t('lk_err_dob'), 'err'); return; }
+      const isFull = userProfile.plan === 'full';
+      const used = userProfile.psycho_count || 0;
+      if(!isFull && used >= PSYCHO_LIMIT){ toast(t('psycho_upgrade'), 'err'); return; }
+      const cs = digitSum(p.d);
+      const mission = digitSum((String(p.d) + String(p.m) + String(p.y)).split('').reduce((a, c) => a + parseInt(c, 10), 0));
+      const { data, error } = await supabaseClient.from('psycho_reports')
+        .insert({ master_id: userId, client_name: name, dob: dobStr, cs, mission }).select().single();
+      if(error || !data){ toast(t('lk_err_save') + (error ? error.message : ''), 'err'); return; }
+      if(!isFull){
+        await supabaseClient.from('profiles').update({ psycho_count: used + 1 }).eq('id', userId);
+        userProfile.psycho_count = used + 1;
+        renderAll(userProfile);
+      }
+      showResult('psycho', name, BASE + 'report.html?id=' + data.id + '&lang=' + reportLang);
+    }
+    document.getElementById('inp-client-name').value = '';
+    document.getElementById('inp-client-dob').value = '';
+    loadAllLinks();
+  } finally {
+    btn.disabled = false; btn.textContent = t('lk_create');
+  }
+}
+
+async function loadAllLinks(){
+  if(!userId) return;
+  const [g, r] = await Promise.all([
+    supabaseClient.from('access_grants').select('*').eq('master_id', userId),
+    supabaseClient.from('psycho_reports').select('*').eq('master_id', userId)
+  ]);
+  const items = [];
+  (g.data || []).forEach(x => items.push({
+    kind: 'calendar', id: x.id, name: x.client_name, created: x.created_at || '',
+    opens_count: x.opens_count || 0, max_opens: x.max_opens || 6,
+    url: BASE + 'view.html?token=' + x.access_token
+  }));
+  (r.data || []).forEach(x => items.push({
+    kind: 'psycho', id: x.id, name: x.client_name, created: x.created_at || '',
+    dob: x.dob, cs: x.cs, mission: x.mission,
+    url: BASE + 'report.html?id=' + x.id
+  }));
+  items.sort((a, b) => String(b.created).localeCompare(String(a.created)));
+  allItems = items;
+  listLoaded = true;
+  document.getElementById('list-notice').style.display = r.error ? 'block' : 'none';
+  updateStats();
+  renderLinks();
+}
+
+function setFilter(f){
+  linkFilter = f;
+  ['all','calendar','psycho'].forEach(x => document.getElementById('chip-' + x).classList.toggle('active', x === f));
+  renderLinks();
+}
+function fmtDate(s){
+  if(!s) return '';
+  const d = new Date(s);
+  if(isNaN(d)) return '';
+  const loc = currentLang === 'en' ? 'en-GB' : (currentLang === 'kz' ? 'kk-KZ' : 'ru-RU');
+  return d.toLocaleDateString(loc, { day: 'numeric', month: 'long', year: 'numeric' });
+}
+function itemUrl(i){ return i.kind === 'psycho' ? i.url + '&lang=' + currentLang : i.url; }
+function renderLinks(){
+  const box = document.getElementById('client-links-list');
+  if(!box) return;
+  const list = allItems.filter(i => linkFilter === 'all' || i.kind === linkFilter);
+  if(!list.length){
+    box.innerHTML = `<div class="empty-state"><div class="empty-state-icon">💌</div><div class="empty-state-text">${esc(t('lk_empty'))}</div></div>`;
+    return;
+  }
+  box.innerHTML = list.map(i => {
+    const isCal = i.kind === 'calendar';
+    const left = Math.max(0, i.max_opens - i.opens_count);
+    const done = isCal && i.opens_count >= i.max_opens;
+    const pill = isCal ? `<span class="pill ${done ? 'done' : 'ok'}">${esc(t(done ? 'lk_status_done' : 'lk_status_active'))}</span>` : `<span class="pill free">${esc(t('lk_unlimited'))}</span>`;
+    const meta = [t(isCal ? 'lk_type_cal' : 'lk_type_psy'), fmtDate(i.created)].filter(Boolean).join(' · ');
+    const info = isCal
+      ? `${esc(t('lk_opens'))}: <b>${i.opens_count} / ${i.max_opens}</b> · ${esc(t('lk_left'))} ${left}`
+      : `${esc(t('lk_numbers'))}: <b>${esc(i.cs)}</b> · ${esc(t('lk_mission'))}: <b>${esc(i.mission)}</b>${i.dob ? ' · ' + esc(i.dob) : ''}`;
+    const prog = isCal ? `<div class="li-progress"><div style="width:${Math.min(100, (i.opens_count / i.max_opens) * 100)}%"></div></div>` : '';
+    const url = itemUrl(i);
+    return `<div class="link-item">
+      <div class="li-top"><div class="ico">${isCal ? '🗓️' : '🔮'}</div>
+        <div class="li-main"><div class="li-name">${esc(i.name)}</div><div class="li-meta">${esc(meta)}</div></div>${pill}</div>
+      <div class="li-info">${info}</div>${prog}
+      <div class="li-url">${esc(url)}</div>
+      <div class="li-actions">
+        <button class="btn-sm primary" data-act="copy" data-kind="${i.kind}" data-id="${esc(i.id)}">${esc(t('lk_copy'))}</button>
+        <a class="btn-sm wa" target="_blank" rel="noopener" href="${esc(waShareUrl(i.kind, i.name, url))}">WhatsApp</a>
+        <a class="btn-sm" target="_blank" rel="noopener" href="${esc(url)}">${esc(t('lk_open'))}</a>
+        <button class="btn-sm danger" data-act="del" data-kind="${i.kind}" data-id="${esc(i.id)}">${esc(t('lk_delete'))}</button>
+      </div></div>`;
+  }).join('');
+}
+
+document.addEventListener('click', async e => {
+  const b = e.target.closest('[data-act]');
+  if(!b) return;
+  const item = allItems.find(i => i.kind === b.dataset.kind && String(i.id) === b.dataset.id);
+  if(!item) return;
+  if(b.dataset.act === 'copy'){
+    await copyText(itemUrl(item));
+    toast(t('alert_copied'));
+  } else if(b.dataset.act === 'del'){
+    if(!confirm(t(item.kind === 'psycho' ? 'lk_confirm_psy' : 'lk_confirm_cal'))) return;
+    const table = item.kind === 'psycho' ? 'psycho_reports' : 'access_grants';
+    const { data, error } = await supabaseClient.from(table).delete().eq('id', item.id).eq('master_id', userId).select();
+    if(error || !data || !data.length){ toast(t('lk_err_delete'), 'err'); return; }
+    toast(t('lk_deleted'));
+    loadAllLinks();
+  }
+});
 
 init();
 </script>
