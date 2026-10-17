@@ -226,6 +226,12 @@ input[type="date"]:focus{border-color:var(--gold2);}
   .input-card.compact{padding:14px 16px;}
 }
 @media(max-width:380px){.dc .dv .k{display:none;}}
+
+input#cal-bdate{text-align:center;letter-spacing:2px;font-size:17px;width:200px;min-width:0;}
+input#cal-bdate::placeholder{color:var(--text3);opacity:.55;letter-spacing:2px;}
+input#cal-bdate.bad{border-color:#CF5C5C;}
+.dob-err{min-height:18px;margin-top:12px;font-size:12.5px;color:#E08080;}
+[data-theme="light"] .dob-err{color:#A02828;}
 </style>
 </head>
 <body>
@@ -249,9 +255,10 @@ input[type="date"]:focus{border-color:var(--gold2);}
   <h2 id="input-title"></h2>
   <p class="sub" id="input-sub"></p>
   <div class="input-row">
-    <input type="date" id="cal-bdate" max="2015-12-31" min="1900-01-01" aria-label="Date of birth">
+    <input type="text" id="cal-bdate" inputmode="numeric" autocomplete="bday" maxlength="10" placeholder="07.10.1993" aria-label="Date of birth" aria-describedby="dob-err">
     <button class="btn-main" id="btn-calc" onclick="startCalendar()"></button>
   </div>
+  <div class="dob-err" id="dob-err" role="alert"></div>
 </div>
 <div class="input-card compact" id="input-compact" style="display:none;">
   <div class="row-l"><span id="lbl-dob"></span><b id="dob-val"></b></div>
@@ -293,7 +300,7 @@ try{var _l=localStorage.getItem('lang');if(_l==='ru'||_l==='en'||_l==='kz')curre
 var UI={
 ru:{title:'Энергетический Календарь 2.0',logo:'Энергетический <span>Календарь 2.0</span>',theme_dark:'Тёмная тема',theme_light:'Светлая тема',
  input_title:'Введите вашу дату рождения',input_sub:'Увидите энергию каждого дня месяца — личного и общего. Нажмите на любой день, чтобы получить рекомендации.',btn:'Показать календарь',
- lbl_dob:'Дата рождения',change:'Изменить',no_date:'Введите дату рождения',
+ lbl_dob:'Дата рождения',change:'Изменить',no_date:'Введите дату рождения',bad_date:'Проверьте дату — формат ДД.ММ.ГГГГ',
  s_month:'Энергия личного месяца',s_grid:'Календарь месяца',today:'Сегодня',
  lbl_year:'Личный год',lbl_month:'Личный месяц',pday:'Личный день',gday:'Общий день',
  recommended:'Рекомендуется',not_rec:'Не рекомендуется',plus:'В плюсе',minus:'В минусе',mantra:'Мантра дня',
@@ -307,7 +314,7 @@ ru:{title:'Энергетический Календарь 2.0',logo:'Энерг
  pw:'Личный',gw:'Общий',aria:'личный день',aria2:'общий день'},
 en:{title:'Energy Calendar 2.0',logo:'Energy <span>Calendar 2.0</span>',theme_dark:'Dark theme',theme_light:'Light theme',
  input_title:'Enter your date of birth',input_sub:'See the energy of every day of the month — personal and general. Tap any day to get recommendations.',btn:'Show calendar',
- lbl_dob:'Date of birth',change:'Change',no_date:'Enter your date of birth',
+ lbl_dob:'Date of birth',change:'Change',no_date:'Enter your date of birth',bad_date:'Check the date — format DD.MM.YYYY',
  s_month:'Energy of the personal month',s_grid:'Month calendar',today:'Today',
  lbl_year:'Personal year',lbl_month:'Personal month',pday:'Personal day',gday:'General day',
  recommended:'Recommended',not_rec:'Not recommended',plus:'Strengths',minus:'Risks',mantra:'Mantra of the day',
@@ -321,7 +328,7 @@ en:{title:'Energy Calendar 2.0',logo:'Energy <span>Calendar 2.0</span>',theme_da
  pw:'Personal',gw:'General',aria:'personal day',aria2:'general day'},
 kz:{title:'Энергия күнтізбесі 2.0',logo:'Энергия <span>күнтізбесі 2.0</span>',theme_dark:'Қараңғы тақырып',theme_light:'Жарық тақырып',
  input_title:'Туған күніңізді енгізіңіз',input_sub:'Айдың әр күнінің — жеке және жалпы — энергиясын көріңіз. Ұсыныстар алу үшін кез келген күнді басыңыз.',btn:'Күнтізбені көрсету',
- lbl_dob:'Туған күні',change:'Өзгерту',no_date:'Туған күніңізді енгізіңіз',
+ lbl_dob:'Туған күні',change:'Өзгерту',no_date:'Туған күніңізді енгізіңіз',bad_date:'Күнді тексеріңіз — пішім КК.АА.ЖЖЖЖ',
  s_month:'Жеке ай энергиясы',s_grid:'Ай күнтізбесі',today:'Бүгін',
  lbl_year:'Жеке жыл',lbl_month:'Жеке ай',pday:'Жеке күн',gday:'Жалпы күн',
  recommended:'Ұсынылады',not_rec:'Ұсынылмайды',plus:'Артықшылығы',minus:'Қаупі',mantra:'Күн мантрасы',
@@ -379,13 +386,26 @@ function colorCls(cD,d){
   return({3:'c3',6:'c6'})[cD]||'';
 }
 
+function parseDob(t){
+  var m=/^(\d{1,2})[.\-\/ ](\d{1,2})[.\-\/ ](\d{4})$/.exec(String(t).trim());
+  if(!m)return null;
+  var d=+m[1],mo=+m[2],y=+m[3];
+  if(y<1900||y>new Date().getFullYear()||mo<1||mo>12||d<1)return null;
+  if(d>new Date(y,mo,0).getDate())return null;
+  return{d:d,m:mo,y:y};
+}
+function fmtDobInput(el){
+  var dg=el.value.replace(/\D/g,'').slice(0,8),o=dg;
+  if(dg.length>4)o=dg.slice(0,2)+'.'+dg.slice(2,4)+'.'+dg.slice(4);
+  else if(dg.length>2)o=dg.slice(0,2)+'.'+dg.slice(2);
+  el.value=o;
+  el.classList.remove('bad');document.getElementById('dob-err').textContent='';
+}
 function startCalendar(){
-  var v=document.getElementById('cal-bdate').value;
-  if(!v){document.getElementById('cal-bdate').focus();return;}
-  var p=v.split('-');
-  S.by=parseInt(p[0],10);S.bm=parseInt(p[1],10);S.bd=parseInt(p[2],10);
-  if(!S.by||!S.bm||!S.bd)return;
-  lsSet('dob2',v);
+  var inp=document.getElementById('cal-bdate'),r=parseDob(inp.value);
+  if(!r){inp.classList.add('bad');document.getElementById('dob-err').textContent=inp.value.trim()?u('bad_date'):u('no_date');inp.focus();return;}
+  S.by=r.y;S.bm=r.m;S.bd=r.d;
+  lsSet('dob2',r.y+'-'+pad(r.m)+'-'+pad(r.d));
   var now=new Date();S.y=now.getFullYear();S.m=now.getMonth()+1;S.sel=now.getDate();S.has=true;
   document.getElementById('input-card').style.display='none';
   document.getElementById('input-compact').style.display='flex';
@@ -497,7 +517,10 @@ function showDetail(day,scroll){
   var th=lsGet('theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);
   applyUI();
   var v=lsGet('dob2');
-  if(v&&/^\d{4}-\d{2}-\d{2}$/.test(v)){document.getElementById('cal-bdate').value=v;startCalendar();}
+  var ci=document.getElementById('cal-bdate');
+  ci.addEventListener('input',function(){fmtDobInput(ci);});
+  ci.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();startCalendar();}});
+  if(v&&/^\d{4}-\d{2}-\d{2}$/.test(v)){var q=v.split('-');ci.value=q[2]+'.'+q[1]+'.'+q[0];startCalendar();}
 })();
 </script>
 </body>
