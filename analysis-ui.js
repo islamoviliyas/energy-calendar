@@ -63,8 +63,5 @@ function neCardHtml(lang,ne){
   return '<div class="e-card ne-card"><div class="e-body">'+
    '<div class="ne-quote">'+aui(lang,'ne_quote')+'</div>'+
    '<div class="ne-head"><div class="ne-ring">'+ne.root+'</div><div class="ne-head-t"><div class="ne-title">'+d[0]+'</div><div class="ne-text">'+d[1]+'</div></div></div>'+
-   '<div class="pm-box"><div class="pm-title">'+aui(lang,'ne_latin')+': <span class="ne-latin">'+ne.latin.toUpperCase()+'</span></div>'+
-   '<div class="ne-chips">'+neChipsHtml(ne)+'<span class="ne-eq">= '+ne.sum+(ne.sum>9?' → '+ne.root:'')+'</span></div></div>'+
-   '<details class="ne-how"><summary>'+aui(lang,'ne_how')+'</summary><p>'+aui(lang,'ne_how_text')+'</p><div class="ne-table">'+rows+'</div></details>'+
    '</div></div>';
 }
