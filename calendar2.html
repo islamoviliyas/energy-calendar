@@ -376,7 +376,7 @@ function calcDay(y,m,d){
 function isSpecial(d){return d===10||d===20||d===30;}
 function colorCls(cD,d){
   if(isSpecial(d))return'sp';
-  return({3:'c3',6:'c6',8:'c8',1:'c1'})[cD]||'';
+  return({3:'c3',6:'c6'})[cD]||'';
 }
 
 function startCalendar(){
@@ -456,8 +456,6 @@ function render(keepScroll){
   // legend
   var lg='<div class="lg"><i class="c3">3</i><span>'+u('lg3')+'</span></div>'
     +'<div class="lg"><i class="c6">6</i><span>'+u('lg6')+'</span></div>'
-    +'<div class="lg"><i class="c8">8</i><span>'+u('lg8')+'</span></div>'
-    +'<div class="lg"><i class="c1">1</i><span>'+u('lg1')+'</span></div>'
     +'<div class="lg" style="flex-basis:100%"><i class="sp">10<br>20</i><span>'+u('lg_sp')+'</span></div>'
     +'<div class="lg-note">'+u('lg_hint').replace('●','<span>●</span>').replace('○','<span>○</span>')+'</div>';
   document.getElementById('legend').innerHTML=lg;
@@ -475,7 +473,7 @@ function showDetail(day,scroll){
   var d=getData(),DAYS=d.DAYS,y=S.y,m=S.m,c=calcDay(y,m,day),cls=colorCls(c.cD,day);
   var dt=new Date(y,m-1,day).getDay();
   var P=DAYS[c.pD],G=DAYS[c.cD];
-  var cc=({3:'c3',6:'c6',8:'c8',1:'c1'})[c.cD]||'';
+  var cc=({3:'c3',6:'c6'})[c.cD]||'';
   var warn=isSpecial(day)?'<div class="warn-box det-warn" style="display:flex"><span style="font-size:15px;flex-shrink:0;">⚠</span><span>'+u('warn')+'</span></div>':'';
   function lst(a,cls2,title){return'<div class="rec-box '+cls2+'"><div class="rec-title">'+title+'</div><ul>'+a.map(function(t){return'<li>'+t+'</li>';}).join('')+'</ul></div>';}
   var html='<div class="det-card">'
