@@ -89,7 +89,8 @@ p{font-size:14px;color:#BDB59D;line-height:1.7;}
       const remaining = res.left;
       state={k:'ok',left:remaining}; render();
       const wait = (remaining>0 && remaining<=2) ? 2800 : 1500;
-      setTimeout(()=>{ location.href = '/personal-energy-calendar.html?master_id=' + encodeURIComponent(grant.master_id) + '&token=' + encodeURIComponent(token); }, wait);
+      const isC2 = token.indexOf('c2_') === 0;
+      setTimeout(()=>{ location.href = isC2 ? ('/calendar2.html?token=' + encodeURIComponent(token)) : ('/personal-energy-calendar.html?master_id=' + encodeURIComponent(grant.master_id) + '&token=' + encodeURIComponent(token)); }, isC2 ? 1500 : wait);
     } catch (err) {
       console.error(err); state={k:'load',msg:err.message}; render();
     }

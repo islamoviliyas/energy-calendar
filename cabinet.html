@@ -264,7 +264,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
     <button class="nav-item" onclick="showTab('links')"><span class="nav-icon">💌</span> <span data-i18n="nav_links">Ссылки клиентов</span></button>
     <button class="nav-item" onclick="showTab('profile')"><span class="nav-icon">👤</span> <span data-i18n="nav_profile">Профиль</span></button>
     <button class="nav-item" onclick="window.open('personal-energy-calendar.html','_blank')"><span class="nav-icon">🗓️</span> <span data-i18n="nav_calendar">Открыть календарь</span></button>
-    <button class="nav-item" onclick="window.open('calendar2.html','_blank')"><span class="nav-icon">✨</span> <span data-i18n="nav_cal2">Календарь 2.0</span> <span class="demo-tag">DEMO</span></button>
+    <button class="nav-item" onclick="window.open('calendar2.html','_blank')"><span class="nav-icon">✨</span> <span data-i18n="nav_cal2">Календарь 2.0</span></button>
     <button class="nav-item" onclick="openPsycho()"><span class="nav-icon">🔮</span> <span data-i18n="nav_psycho">Психоанализ</span></button>
   </nav>
   <div>
@@ -365,8 +365,8 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
           </a>
           <a href="calendar2.html" target="_blank" class="product-card">
             <div class="ico">✨</div>
-            <div class="product-name"><span data-i18n="cal2_name">Календарь 2.0</span> <span class="demo-tag">DEMO</span></div>
-            <p class="product-desc" data-i18n="cal2_desc">Энергия личного месяца и календарь с личными и общими днями. Нажмите на день — получите рекомендации. Демо-версия: только для вас, без отправки клиентам.</p>
+            <div class="product-name"><span data-i18n="cal2_name">Календарь 2.0</span></div>
+            <p class="product-desc" data-i18n="cal2_desc">Энергия личного месяца и календарь с личными и общими днями. Нажмите на день — получите рекомендации. Доступен до 31 декабря 2027 года.</p>
             <div class="product-action" data-i18n="cal2_action">Открыть демо →</div>
           </a>
           <div class="product-card" id="psycho-card" onclick="openPsycho()">
@@ -407,6 +407,10 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
             <button type="button" class="type-tile" id="tile-psycho" onclick="setLinkType('psycho')">
               <div class="ico">🔮</div>
               <div><b data-i18n="lk_type_psy">Психоанализ личности</b><span class="d" data-i18n="lk_type_psy_d">Клиент получает свой анализ по дате рождения. Ссылка без ограничения по открытиям.</span></div>
+            </button>
+            <button type="button" class="type-tile" id="tile-calendar2" onclick="setLinkType('calendar2')">
+              <div class="ico">✨</div>
+              <div><b data-i18n="lk_type_cal2">Календарь 2.0</b><span class="d" data-i18n="lk_type_cal2_d">Календарь с личными и общими днями до 31 декабря 2027. Ссылка открывается 6 раз и привязывается к устройству клиента: чужим людям не откроется.</span></div>
             </button>
           </div>
 
@@ -549,7 +553,7 @@ const TRANSLATIONS = {
     lk_lead:"Создайте ссылку и отправьте клиенту: он откроет календарь или свой психоанализ без регистрации.",
     lk_type:"Что отправляем",
     lk_type_cal:"Календарь",
-    lk_type_cal_d:"Клиент пользуется календарём энергий. Ссылка открывается 6 раз.",
+    lk_type_cal_d:"Клиент пользуется календарём энергий. Ссылка открывается 6 раз.", lk_devices:"Устройств", lk_reset:"Сбросить устройство", lk_reset_confirm:"Сбросить привязку к устройству? Клиент сможет заново открыть ссылку на новом телефоне.", lk_reset_done:"Привязка сброшена", lk_type_cal2:"Календарь 2.0", lk_type_cal2_d:"Календарь с личными и общими днями до 31 декабря 2027. Ссылка открывается 6 раз и привязывается к устройству клиента: чужим людям не откроется.", lk_wa_cal2:"Здравствуйте, {name}! Ваш энергетический календарь 2.0 до конца 2027 года: {url}",
     lk_type_psy:"Психоанализ личности",
     lk_type_psy_d:"Клиент получает свой анализ по дате рождения. Ссылка без ограничения по открытиям.",
     lk_name:"Имя клиента",
@@ -585,7 +589,7 @@ const TRANSLATIONS = {
     lk_wa_cal:"Здравствуйте, {name}! Ваш персональный календарь энергий: {url}",
     lk_wa_psy:"Здравствуйте, {name}! Ваш персональный анализ личности: {url}",
     sidebar_sub:'Кабинет мастера', nav_overview:'Обзор', nav_links:'Ссылки клиентов',
-    nav_profile:'Профиль', nav_calendar:'Открыть календарь', nav_cal2:'Календарь 2.0', cal2_name:'Календарь 2.0', cal2_desc:'Энергия личного месяца и календарь с личными и общими днями. Нажмите на день — получите рекомендации. Демо-версия: только для вас, без отправки клиентам.', cal2_action:'Открыть демо →', nav_psycho:'Психоанализ',
+    nav_profile:'Профиль', nav_calendar:'Открыть календарь', nav_cal2:'Календарь 2.0', cal2_name:'Календарь 2.0', cal2_desc:'Энергия личного месяца и календарь с личными и общими днями. Нажмите на день — получите рекомендации. Доступен до 31 декабря 2027 года.', cal2_action:'Открыть календарь →', nav_psycho:'Психоанализ',
     nav_logout:'Выйти', welcome:'Добро пожаловать,',
     header_subtitle:'Ваш кабинет мастера · Digital Consulting',
     theme_dark:'Тёмная тема', theme_light:'Светлая тема',
@@ -645,7 +649,7 @@ const TRANSLATIONS = {
     lk_lead:"Create a link and send it to your client: they open the calendar or their own analysis without registering.",
     lk_type:"What to send",
     lk_type_cal:"Calendar",
-    lk_type_cal_d:"The client uses the energy calendar. The link opens 6 times.",
+    lk_type_cal_d:"The client uses the energy calendar. The link opens 6 times.", lk_devices:"Devices", lk_reset:"Reset device", lk_reset_confirm:"Reset the device binding? The client will be able to open the link again on a new phone.", lk_reset_done:"Binding reset", lk_type_cal2:"Calendar 2.0", lk_type_cal2_d:"Calendar with personal and general days until 31 December 2027. The link opens 6 times and is tied to the client’s device, so it won’t open for other people.", lk_wa_cal2:"Hello, {name}! Your energy calendar 2.0 until the end of 2027: {url}",
     lk_type_psy:"Personality psychoanalysis",
     lk_type_psy_d:"The client gets their analysis by date of birth. The link has no open limit.",
     lk_name:"Client name",
@@ -681,7 +685,7 @@ const TRANSLATIONS = {
     lk_wa_cal:"Hello, {name}! Your personal energy calendar: {url}",
     lk_wa_psy:"Hello, {name}! Your personal personality analysis: {url}",
     sidebar_sub:'Master\'s Cabinet', nav_overview:'Overview', nav_links:'Client Links',
-    nav_profile:'Profile', nav_calendar:'Open Calendar', nav_cal2:'Calendar 2.0', cal2_name:'Calendar 2.0', cal2_desc:'Energy of the personal month and a calendar with personal and general days. Tap a day to get recommendations. Demo version: for you only, cannot be sent to clients.', cal2_action:'Open demo →', nav_psycho:'Psychoanalysis',
+    nav_profile:'Profile', nav_calendar:'Open Calendar', nav_cal2:'Calendar 2.0', cal2_name:'Calendar 2.0', cal2_desc:'Energy of the personal month and a calendar with personal and general days. Tap a day to get recommendations. Available until 31 December 2027.', cal2_action:'Open calendar →', nav_psycho:'Psychoanalysis',
     nav_logout:'Log Out', welcome:'Welcome,',
     header_subtitle:'Your Master\'s Cabinet · Digital Consulting',
     theme_dark:'Dark Mode', theme_light:'Light Mode',
@@ -741,7 +745,7 @@ const TRANSLATIONS = {
     lk_lead:"Сілтеме жасап, клиентке жіберіңіз: ол тіркелмей-ақ күнтізбені немесе өз психоанализін ашады.",
     lk_type:"Не жібереміз",
     lk_type_cal:"Күнтізбе",
-    lk_type_cal_d:"Клиент энергия күнтізбесін пайдаланады. Сілтеме 6 рет ашылады.",
+    lk_type_cal_d:"Клиент энергия күнтізбесін пайдаланады. Сілтеме 6 рет ашылады.", lk_devices:"Құрылғылар", lk_reset:"Құрылғыны қалпына келтіру", lk_reset_confirm:"Құрылғыға байланысты қалпына келтіру керек пе? Клиент сілтемені жаңа телефонда қайта аша алады.", lk_reset_done:"Байланыс қалпына келтірілді", lk_type_cal2:"Күнтізбе 2.0", lk_type_cal2_d:"Жеке және жалпы күндері бар күнтізбе, 2027 жылдың 31 желтоқсанына дейін. Сілтеме 6 рет ашылады және клиенттің құрылғысына байланады: бөтен адамдарға ашылмайды.", lk_wa_cal2:"Сәлеметсіз бе, {name}! 2027 жыл соңына дейінгі энергия күнтізбеңіз 2.0: {url}",
     lk_type_psy:"Тұлға психоанализі",
     lk_type_psy_d:"Клиент туған күні бойынша талдау алады. Ашылым саны шектелмейді.",
     lk_name:"Клиент аты",
@@ -777,7 +781,7 @@ const TRANSLATIONS = {
     lk_wa_cal:"Сәлеметсіз бе, {name}! Сіздің жеке энергия күнтізбеңіз: {url}",
     lk_wa_psy:"Сәлеметсіз бе, {name}! Сіздің жеке тұлға талдауыңыз: {url}",
     sidebar_sub:'Мастер кабинеті', nav_overview:'Шолу', nav_links:'Клиент сілтемелері',
-    nav_profile:'Профиль', nav_calendar:'Күнтізбені ашу', nav_cal2:'Күнтізбе 2.0', cal2_name:'Күнтізбе 2.0', cal2_desc:'Жеке ай энергиясы және жеке, жалпы күндері бар күнтізбе. Күнді басыңыз — ұсыныстар аласыз. Демо нұсқа: тек сізге, клиенттерге жіберілмейді.', cal2_action:'Демоны ашу →', nav_psycho:'Психоанализ',
+    nav_profile:'Профиль', nav_calendar:'Күнтізбені ашу', nav_cal2:'Күнтізбе 2.0', cal2_name:'Күнтізбе 2.0', cal2_desc:'Жеке ай энергиясы және жеке, жалпы күндері бар күнтізбе. Күнді басыңыз — ұсыныстар аласыз. 2027 жылдың 31 желтоқсанына дейін қолжетімді.', cal2_action:'Күнтізбені ашу →', nav_psycho:'Психоанализ',
     nav_logout:'Шығу', welcome:'Қош келдіңіз,',
     header_subtitle:'Сіздің мастер кабинеті · Digital Consulting',
     theme_dark:'Күңгірт тақырып', theme_light:'Жарық тақырып',
@@ -946,7 +950,7 @@ function updateStats(){
   const isFull = userProfile && userProfile.plan === 'full';
   const used = (userProfile && userProfile.psycho_count) || 0;
   const reports = allItems.filter(i => i.kind === 'psycho').length;
-  const opens = allItems.filter(i => i.kind === 'calendar').reduce((s, i) => s + (i.opens_count || 0), 0);
+  const opens = allItems.filter(i => i.kind === 'calendar' || i.kind === 'calendar2').reduce((s, i) => s + (i.opens_count || 0), 0);
   document.getElementById('stat-psycho').textContent = listLoaded ? reports : '—';
   document.getElementById('stat-psycho-sub').textContent = isFull ? t('v2_stat_reports_sub') : `${used} ${t('psycho_limit_of')} ${PSYCHO_LIMIT} ${t('psycho_limit_free')}`;
   document.getElementById('stat-links').textContent = listLoaded ? allItems.length : '—';
@@ -1039,6 +1043,7 @@ function setLinkType(type){
   linkType = type;
   document.getElementById('tile-calendar').classList.toggle('selected', type === 'calendar');
   document.getElementById('tile-psycho').classList.toggle('selected', type === 'psycho');
+  document.getElementById('tile-calendar2').classList.toggle('selected', type === 'calendar2');
   document.getElementById('field-dob').style.display = type === 'psycho' ? 'flex' : 'none';
   document.getElementById('field-lang').style.display = type === 'psycho' ? 'flex' : 'none';
   document.getElementById('result-box').classList.remove('show');
@@ -1064,10 +1069,13 @@ function parseDob(str){
   if(dt.getFullYear() !== y || dt.getMonth() !== mo - 1 || dt.getDate() !== d) return null;
   return { d, m: mo, y };
 }
-function generateToken(){ return 'token_' + Math.random().toString(36).substr(2, 32); }
+function generateToken(prefix){
+  const a = new Uint8Array(20); crypto.getRandomValues(a);
+  return (prefix || 'token_') + Array.from(a, b => b.toString(36).padStart(2, '0')).join('').slice(0, 32);
+}
 
 function waShareUrl(kind, name, url){
-  const msg = t(kind === 'psycho' ? 'lk_wa_psy' : 'lk_wa_cal').replace('{name}', name).replace('{url}', url);
+  const msg = t(kind === 'psycho' ? 'lk_wa_psy' : (kind === 'calendar2' ? 'lk_wa_cal2' : 'lk_wa_cal')).replace('{name}', name).replace('{url}', url);
   return 'https://wa.me/?text=' + encodeURIComponent(msg);
 }
 function showResult(kind, name, url){
@@ -1092,7 +1100,15 @@ async function createLink(){
   const btn = document.getElementById('btn-create');
   btn.disabled = true; btn.textContent = t('lk_creating');
   try {
-    if(linkType === 'calendar'){
+    if(linkType === 'calendar2'){
+      const token = generateToken('c2_');
+      const { error } = await supabaseClient.from('access_grants').insert({
+        master_id: userId, client_name: name, access_token: token,
+        permissions: { calendar2: true }, max_opens: 6, opens_count: 0
+      });
+      if(error){ toast(t('lk_err_save') + error.message, 'err'); return; }
+      showResult('calendar2', name, BASE + 'view.html?token=' + token);
+    } else if(linkType === 'calendar'){
       const token = generateToken();
       const { error } = await supabaseClient.from('access_grants').insert({
         master_id: userId, client_name: name, access_token: token,
@@ -1135,8 +1151,8 @@ async function loadAllLinks(){
   ]);
   const items = [];
   (g.data || []).forEach(x => items.push({
-    kind: 'calendar', id: x.id, name: x.client_name, created: x.created_at || '',
-    opens_count: x.opens_count || 0, max_opens: x.max_opens || 6,
+    kind: String(x.access_token || '').indexOf('c2_') === 0 ? 'calendar2' : 'calendar', id: x.id, name: x.client_name, created: x.created_at || '',
+    opens_count: x.opens_count || 0, max_opens: x.max_opens || 6, devices: Array.isArray(x.devices) ? x.devices.length : 0,
     url: BASE + 'view.html?token=' + x.access_token
   }));
   (r.data || []).forEach(x => items.push({
@@ -1168,24 +1184,25 @@ function itemUrl(i){ return i.kind === 'psycho' ? i.url + '&lang=' + currentLang
 function renderLinks(){
   const box = document.getElementById('client-links-list');
   if(!box) return;
-  const list = allItems.filter(i => linkFilter === 'all' || i.kind === linkFilter);
+  const list = allItems.filter(i => linkFilter === 'all' || i.kind === linkFilter || (linkFilter === 'calendar' && i.kind === 'calendar2'));
   if(!list.length){
     box.innerHTML = `<div class="empty-state"><div class="empty-state-icon">💌</div><div class="empty-state-text">${esc(t('lk_empty'))}</div></div>`;
     return;
   }
   box.innerHTML = list.map(i => {
-    const isCal = i.kind === 'calendar';
+    const isC2 = i.kind === 'calendar2';
+    const isCal = i.kind === 'calendar' || isC2;
     const left = Math.max(0, i.max_opens - i.opens_count);
     const done = isCal && i.opens_count >= i.max_opens;
     const pill = isCal ? `<span class="pill ${done ? 'done' : 'ok'}">${esc(t(done ? 'lk_status_done' : 'lk_status_active'))}</span>` : `<span class="pill free">${esc(t('lk_unlimited'))}</span>`;
-    const meta = [t(isCal ? 'lk_type_cal' : 'lk_type_psy'), fmtDate(i.created)].filter(Boolean).join(' · ');
+    const meta = [t(isC2 ? 'lk_type_cal2' : (isCal ? 'lk_type_cal' : 'lk_type_psy')), fmtDate(i.created)].filter(Boolean).join(' · ');
     const info = isCal
-      ? `${esc(t('lk_opens'))}: <b>${i.opens_count} / ${i.max_opens}</b> · ${esc(t('lk_left'))} ${left}`
+      ? `${esc(t('lk_opens'))}: <b>${i.opens_count} / ${i.max_opens}</b> · ${esc(t('lk_left'))} ${left}` + (isC2 ? ` · ${esc(t('lk_devices'))}: <b>${i.devices} / 2</b>` : '')
       : `${esc(t('lk_numbers'))}: <b>${esc(i.cs)}</b> · ${esc(t('lk_mission'))}: <b>${esc(i.mission)}</b>${i.dob ? ' · ' + esc(i.dob) : ''}`;
     const prog = isCal ? `<div class="li-progress"><div style="width:${Math.min(100, (i.opens_count / i.max_opens) * 100)}%"></div></div>` : '';
     const url = itemUrl(i);
     return `<div class="link-item">
-      <div class="li-top"><div class="ico">${isCal ? '🗓️' : '🔮'}</div>
+      <div class="li-top"><div class="ico">${isC2 ? '✨' : (isCal ? '🗓️' : '🔮')}</div>
         <div class="li-main"><div class="li-name">${esc(i.name)}</div><div class="li-meta">${esc(meta)}</div></div>${pill}</div>
       <div class="li-info">${info}</div>${prog}
       <div class="li-url">${esc(url)}</div>
@@ -1193,6 +1210,7 @@ function renderLinks(){
         <button class="btn-sm primary" data-act="copy" data-kind="${i.kind}" data-id="${esc(i.id)}">${esc(t('lk_copy'))}</button>
         <a class="btn-sm wa" target="_blank" rel="noopener" href="${esc(waShareUrl(i.kind, i.name, url))}">WhatsApp</a>
         <a class="btn-sm" target="_blank" rel="noopener" href="${esc(url)}">${esc(t('lk_open'))}</a>
+        ${isC2 ? `<button class="btn-sm" data-act="reset" data-kind="${i.kind}" data-id="${esc(i.id)}">${esc(t('lk_reset'))}</button>` : ''}
         <button class="btn-sm danger" data-act="del" data-kind="${i.kind}" data-id="${esc(i.id)}">${esc(t('lk_delete'))}</button>
       </div></div>`;
   }).join('');
@@ -1206,6 +1224,12 @@ document.addEventListener('click', async e => {
   if(b.dataset.act === 'copy'){
     await copyText(itemUrl(item));
     toast(t('alert_copied'));
+  } else if(b.dataset.act === 'reset'){
+    if(!confirm(t('lk_reset_confirm'))) return;
+    const { error } = await supabaseClient.rpc('reset_grant_devices', { p_id: String(item.id) });
+    if(error){ toast(t('lk_err_save') + error.message, 'err'); return; }
+    toast(t('lk_reset_done'));
+    loadAllLinks();
   } else if(b.dataset.act === 'del'){
     if(!confirm(t(item.kind === 'psycho' ? 'lk_confirm_psy' : 'lk_confirm_cal'))) return;
     const table = item.kind === 'psycho' ? 'psycho_reports' : 'access_grants';
