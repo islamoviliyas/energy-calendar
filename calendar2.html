@@ -288,7 +288,7 @@ input#cal-bdate.bad{border-color:#CF5C5C;}
   <h2 id="input-title"></h2>
   <p class="sub" id="input-sub"></p>
   <div class="input-row">
-    <input type="text" id="cal-bdate" inputmode="numeric" autocomplete="bday" maxlength="10" placeholder="07.10.1993" aria-label="Date of birth" aria-describedby="dob-err">
+    <input type="text" id="cal-bdate" inputmode="numeric" autocomplete="bday" maxlength="10" placeholder="ДД.ММ.ГГГГ" aria-label="Date of birth" aria-describedby="dob-err">
     <button class="btn-main" id="btn-calc" onclick="startCalendar()"></button>
   </div>
   <div class="dob-err" id="dob-err" role="alert"></div>
@@ -334,7 +334,7 @@ try{var _l=localStorage.getItem('lang');if(_l==='ru'||_l==='en'||_l==='kz')curre
 var UI={
 ru:{title:'Энергетический Календарь 2.0',dev_t:'Ссылка уже активирована на другом устройстве',dev_p:'Эта ссылка привязана к устройству клиента и на других устройствах не открывается. Если вы сменили телефон, попросите мастера сбросить привязку.',tip_t:'Добавьте календарь на экран телефона',tip_p:'Пользуйтесь им как приложением. <b>iPhone:</b> Safari → «Поделиться» → «На экран Домой». <b>Android:</b> Chrome → меню ⋮ → «Добавить на главный экран».',tip_w:'⚠ Ссылка из сообщения открывается ограниченное число раз (6). Откройте календарь один раз, сразу добавьте его на экран телефона и дальше заходите через значок, а не по ссылке из чата.',den_t:'Ссылка недействительна',den_p:'Эта ссылка не найдена или больше не активна. Свяжитесь с мастером, чтобы получить новую.',demo:'Демо-версия. Календарь доступен только вам и не отправляется клиентам.',logo:'Энергетический <span>Календарь 2.0</span>',theme_dark:'Тёмная тема',theme_light:'Светлая тема',
  input_title:'Введите вашу дату рождения',input_sub:'Доступен до 31 декабря 2027 года. Увидите энергию каждого дня месяца — личного и общего. Нажмите на любой день, чтобы получить рекомендации.',btn:'Показать календарь',
- lbl_dob:'Дата рождения',change:'Изменить',no_date:'Введите дату рождения',bad_date:'Проверьте дату — формат ДД.ММ.ГГГГ',
+ lbl_dob:'Дата рождения',ph_dob:'ДД.ММ.ГГГГ',change:'Изменить',no_date:'Введите дату рождения',bad_date:'Проверьте дату — формат ДД.ММ.ГГГГ',
  s_month:'Энергия личного месяца',s_grid:'Календарь месяца',today:'Сегодня',
  lbl_year:'Личный год',lbl_month:'Личный месяц',pday:'Личный день',gday:'Общий день',
  recommended:'Рекомендуется',not_rec:'Не рекомендуется',plus:'В плюсе',minus:'В минусе',mantra:'Мантра дня',
@@ -348,7 +348,7 @@ ru:{title:'Энергетический Календарь 2.0',dev_t:'Ссыл�
  pw:'Личный',gw:'Общий',aria:'личный день',aria2:'общий день'},
 en:{title:'Energy Calendar 2.0',dev_t:'The link is already activated on another device',dev_p:'This link is tied to the client’s device and does not open on other devices. If you changed your phone, ask your master to reset the binding.',tip_t:'Add the calendar to your phone’s home screen',tip_p:'Use it like an app. <b>iPhone:</b> Safari → Share → Add to Home Screen. <b>Android:</b> Chrome → menu ⋮ → Add to Home screen.',tip_w:'⚠ The link from the message can only be opened a limited number of times (6). Open the calendar once, add it to your home screen right away, and from then on use the icon instead of the link from the chat.',den_t:'The link is not valid',den_p:'This link was not found or is no longer active. Please contact your master for a new one.',demo:'Demo version. The calendar is for you only and cannot be sent to clients.',logo:'Energy <span>Calendar 2.0</span>',theme_dark:'Dark theme',theme_light:'Light theme',
  input_title:'Enter your date of birth',input_sub:'Available until 31 December 2027. See the energy of every day of the month — personal and general. Tap any day to get recommendations.',btn:'Show calendar',
- lbl_dob:'Date of birth',change:'Change',no_date:'Enter your date of birth',bad_date:'Check the date — format DD.MM.YYYY',
+ lbl_dob:'Date of birth',ph_dob:'DD.MM.YYYY',change:'Change',no_date:'Enter your date of birth',bad_date:'Check the date — format DD.MM.YYYY',
  s_month:'Energy of the personal month',s_grid:'Month calendar',today:'Today',
  lbl_year:'Personal year',lbl_month:'Personal month',pday:'Personal day',gday:'General day',
  recommended:'Recommended',not_rec:'Not recommended',plus:'Strengths',minus:'Risks',mantra:'Mantra of the day',
@@ -362,7 +362,7 @@ en:{title:'Energy Calendar 2.0',dev_t:'The link is already activated on another 
  pw:'Personal',gw:'General',aria:'personal day',aria2:'general day'},
 kz:{title:'Энергия күнтізбесі 2.0',dev_t:'Сілтеме басқа құрылғыда белсендірілген',dev_p:'Бұл сілтеме клиенттің құрылғысына байланған және басқа құрылғыларда ашылмайды. Телефонды ауыстырсаңыз, шеберден байланысты қайта қалпына келтіруді сұраңыз.',tip_t:'Күнтізбені телефон экранына қосыңыз',tip_p:'Қосымша сияқты пайдаланыңыз. <b>iPhone:</b> Safari → «Бөлісу» → «Басты экранға». <b>Android:</b> Chrome → ⋮ мәзірі → «Басты экранға қосу».',tip_w:'⚠ Хабарламадағы сілтеме шектеулі рет (6) ашылады. Күнтізбені бір рет ашып, бірден телефон экранына қосыңыз да, әрі қарай чаттағы сілтеме емес, белгіше арқылы кіріңіз.',den_t:'Сілтеме жарамсыз',den_p:'Бұл сілтеме табылмады немесе енді белсенді емес. Жаңасын алу үшін шеберге хабарласыңыз.',demo:'Демо нұсқа. Күнтізбе тек сізге қолжетімді және клиенттерге жіберілмейді.',logo:'Энергия <span>күнтізбесі 2.0</span>',theme_dark:'Қараңғы тақырып',theme_light:'Жарық тақырып',
  input_title:'Туған күніңізді енгізіңіз',input_sub:'2027 жылдың 31 желтоқсанына дейін қолжетімді. Айдың әр күнінің — жеке және жалпы — энергиясын көріңіз. Ұсыныстар алу үшін кез келген күнді басыңыз.',btn:'Күнтізбені көрсету',
- lbl_dob:'Туған күні',change:'Өзгерту',no_date:'Туған күніңізді енгізіңіз',bad_date:'Күнді тексеріңіз — пішім КК.АА.ЖЖЖЖ',
+ lbl_dob:'Туған күні',ph_dob:'КК.АА.ЖЖЖЖ',change:'Өзгерту',no_date:'Туған күніңізді енгізіңіз',bad_date:'Күнді тексеріңіз — пішім КК.АА.ЖЖЖЖ',
  s_month:'Жеке ай энергиясы',s_grid:'Ай күнтізбесі',today:'Бүгін',
  lbl_year:'Жеке жыл',lbl_month:'Жеке ай',pday:'Жеке күн',gday:'Жалпы күн',
  recommended:'Ұсынылады',not_rec:'Ұсынылмайды',plus:'Артықшылығы',minus:'Қаупі',mantra:'Күн мантрасы',
@@ -395,6 +395,7 @@ function applyUI(){
   document.getElementById('input-title').textContent=u('input_title');
   document.getElementById('input-sub').textContent=u('input_sub');
   document.getElementById('btn-calc').textContent=u('btn');
+  document.getElementById('cal-bdate').placeholder=u('ph_dob');
   document.getElementById('lbl-dob').textContent=u('lbl_dob');
   document.getElementById('btn-change').textContent=u('change');
   document.getElementById('btn-today').textContent=u('today');
