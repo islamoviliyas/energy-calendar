@@ -331,6 +331,7 @@ input#cal-bdate.bad{border-color:#CF5C5C;}
 <div class="cal-foot">Digital Consulting</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="device-guard.js"></script>
 <script src="translations-content.js"></script>
 <script src="calendar-data.js"></script>
 <script>
@@ -618,6 +619,7 @@ function showDetail(day,scroll){
       var ses=r&&r.data&&r.data.session;if(!ses){deny();return;}
       return sb.from('profiles').select('is_active').eq('id',ses.user.id).single().then(function(p){
         if(!p||!p.data||!p.data.is_active){deny();return;}
+        try{DeviceGuard.watch(sb);}catch(e){}
         open_();
       });
     }).catch(deny);

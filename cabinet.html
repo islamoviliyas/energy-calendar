@@ -522,6 +522,7 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="device-guard.js"></script>
 <script>
 const SUPABASE_URL = 'https://gigfvlhcrtuosfnkzqpt.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpZ2Z2bGhjcnR1b3Nmbmt6cXB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MjkyOTMsImV4cCI6MjA5NTMwNTI5M30.-ZpjdpI8-V7MPdDwLl1BtWTL0R66rWpk5huN7VP7TUE';
@@ -603,7 +604,7 @@ const TRANSLATIONS = {
     psycho_desc:'Глубокий анализ числа личности, миссии, матрицы чисел, профессиональной ориентации и совместимости.',
     psycho_action:'Открыть анализ →',
     agreement_title:'Правила использования:',
-    agreement_text:'Ваша лицензия предназначена исключительно для личного использования и работы с вашими клиентами через персональную ссылку. Передача доступа третьим лицам нарушает условия соглашения. По вопросам:',
+    agreement_text:'Ваша лицензия предназначена исключительно для личного использования и работы с вашими клиентами через персональную ссылку. Передача доступа третьим лицам нарушает условия соглашения. По вопросам: ⚠ Один аккаунт — одно устройство. Передача логина и пароля третьим лицам запрещена: при одновременном входе с другого устройства фиксируется нарушение, после 3 нарушений аккаунт блокируется навсегда без права повторного участия и без возврата оплаты.',
     links_create:'Создать новую ссылку для клиента', links_client_name:'Имя клиента',
     links_calendar:'📅 Календарь', links_how:'Как это работает:',
     links_how_text:'Ссылка будет работать ровно 6 открытий без ограничения по времени. Клиент сможет открывать её в разные дни, но после 6 открытий потребуется новая ссылка. Это защищает от распространения ссылки среди других мастеров.',
@@ -699,7 +700,7 @@ const TRANSLATIONS = {
     psycho_desc:'Deep analysis of your personality number, life mission, number matrix, professional direction and compatibility.',
     psycho_action:'Open Analysis →',
     agreement_title:'Terms of Use:',
-    agreement_text:'Your license is intended solely for personal use and working with your clients through a personal link. Sharing access with third parties violates the terms of the agreement. For inquiries:',
+    agreement_text:'Your license is intended solely for personal use and working with your clients through a personal link. Sharing access with third parties violates the terms of the agreement. For inquiries: ⚠ One account — one device. Sharing your login and password is prohibited: a simultaneous sign-in from another device is recorded as a violation; after 3 violations the account is blocked permanently with no right to rejoin and no refund.',
     links_create:'Create a New Client Link', links_client_name:'Client Name',
     links_calendar:'📅 Calendar', links_how:'How it works:',
     links_how_text:'The link will work for exactly 6 opens with no time limit. Your client can open it on different days, but after 6 opens a new link will be needed. This protects against the link being shared among other masters.',
@@ -795,7 +796,7 @@ const TRANSLATIONS = {
     psycho_desc:'Тұлға саны, өмір миссиясы, сандар матрицасы, кәсіби бағдар және үйлесімділіктің терең талдауы.',
     psycho_action:'Талдауды ашу →',
     agreement_title:'Пайдалану шарттары:',
-    agreement_text:'Сіздің лицензияңыз тек жеке пайдалану және жеке сілтеме арқылы клиенттермен жұмыс жасау үшін арналған. Үшінші тұлғаларға қол жеткізуді беру келісім шарттарын бұзады. Сұрақтар бойынша:',
+    agreement_text:'Сіздің лицензияңыз тек жеке пайдалану және жеке сілтеме арқылы клиенттермен жұмыс жасау үшін арналған. Үшінші тұлғаларға қол жеткізуді беру келісім шарттарын бұзады. Сұрақтар бойынша: ⚠ Бір аккаунт — бір құрылғы. Логин мен құпиясөзді үшінші тұлғаларға беруге тыйым салынады: басқа құрылғыдан бір мезгілде кіру бұзушылық болып тіркеледі, 3 бұзушылықтан кейін аккаунт қайта қатысу құқығынсыз және төлемді қайтарусыз мәңгілікке бұғатталады.',
     links_create:'Клиентке жаңа сілтеме жасау', links_client_name:'Клиент аты',
     links_calendar:'📅 Күнтізбе', links_how:'Қалай жұмыс істейді:',
     links_how_text:'Сілтеме уақыт шектеусіз дәл 6 рет ашылады. Клиент оны әртүрлі күндері ашуы мүмкін, бірақ 6 ашылымнан кейін жаңа сілтеме қажет болады. Бұл сілтеменің басқа мастерлер арасында таралуынан қорғайды.',
@@ -900,6 +901,7 @@ async function init(){
   }
   if(profile.role === 'admin'){ window.location.href = 'admin.html'; return; }
   userProfile = profile;
+  try{ DeviceGuard.watch(supabaseClient); }catch(e){}
   renderAll(profile);
   loadAllLinks();
 }

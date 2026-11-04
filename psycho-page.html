@@ -65,6 +65,7 @@ input[type="text"]::placeholder{color:var(--text3);}
 @media(max-width:640px){.input-card{padding:28px 18px;}.input-card h2{font-size:25px;}.logo h1{font-size:23px;}input[type="text"]{min-width:100%;}.btn-main,.btn-pdf{width:100%;}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="device-guard.js"></script>
 <script src="translations-content.js"></script>
 <script src="analysis-ui.js"></script>
 </head>
@@ -479,5 +480,6 @@ function toggleTheme(){
 applyUI();
 loadMasterProfile();
 </script>
+<script>try{getClient().auth.getSession().then(function(r){if(r&&r.data&&r.data.session)DeviceGuard.watch(getClient());});}catch(e){}</script>
 </body>
 </html>
