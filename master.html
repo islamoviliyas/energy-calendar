@@ -27,9 +27,9 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 .input-card h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;margin-bottom:6px;}
 .input-card .sub{font-size:12px;color:var(--text3);margin-bottom:22px;}
 .input-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-input[type="date"]{padding:11px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;outline:none;cursor:pointer;transition:border-color var(--transition);min-width:180px;}
-input[type="date"]:focus{border-color:var(--gold);}
-input[type="date"]::-webkit-calendar-picker-indicator{filter:opacity(0.4);cursor:pointer;}
+input[type="text"]{padding:11px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;outline:none;cursor:pointer;transition:border-color var(--transition);min-width:180px;}
+input[type="text"]:focus{border-color:var(--gold);}
+input[type="text"]::-webkit-calendar-picker-indicator{filter:opacity(0.4);cursor:pointer;}
 .btn-main{padding:11px 32px;background:var(--gold);border:none;border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:opacity 0.2s;}
 .btn-main:hover{opacity:0.88;}
 .today-line{margin-top:12px;font-size:11px;color:var(--text3);}
@@ -167,7 +167,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{filter:opacity(0.4);cursor
     <h2>Ваш персональный энергетический расчёт</h2>
     <p class="sub">Введите дату рождения — получите рекомендации на сегодня и на неделю вперёд</p>
     <div class="input-row">
-      <input type="date" id="bdate" max="2010-12-31" min="1900-01-01">
+      <input type="text" id="bdate" inputmode="numeric" autocomplete="bday" maxlength="10" placeholder="ДД.ММ.ГГГГ" aria-label="Date of birth">
       <button class="btn-main" onclick="calculate()">Рассчитать</button>
     </div>
     <div class="today-line" id="today-line"></div>
@@ -324,9 +324,25 @@ function makeCard(num,data,isYear=false){
   </div>`;
 }
 
+function dobIso(id){
+  var m=/^(\d{1,2})[.\-\/ ](\d{1,2})[.\-\/ ](\d{4})$/.exec(String(document.getElementById(id).value).trim());
+  if(!m)return '';
+  var d=+m[1],mo=+m[2],y=+m[3];
+  if(y<1900||y>new Date().getFullYear()||mo<1||mo>12||d<1||d>new Date(y,mo,0).getDate())return '';
+  return y+'-'+('0'+mo).slice(-2)+'-'+('0'+d).slice(-2);
+}
+function dobMask(id){
+  var el=document.getElementById(id);
+  el.addEventListener('input',function(){
+    var dg=el.value.replace(/\D/g,'').slice(0,8),o=dg;
+    if(dg.length>4)o=dg.slice(0,2)+'.'+dg.slice(2,4)+'.'+dg.slice(4);
+    else if(dg.length>2)o=dg.slice(0,2)+'.'+dg.slice(2);
+    el.value=o;
+  });
+}
 function calculate(){
-  const v=document.getElementById('bdate').value;
-  if(!v){alert('Пожалуйста, введите дату рождения');return;}
+  const v=dobIso('bdate');
+  if(!v){alert('Введите дату рождения в формате ДД.ММ.ГГГГ, например 07.10.1993');return;}
   const[,bm,bd]=v.split('-').map(Number);
   const t=new Date(),td=t.getDate(),tm=t.getMonth()+1,ty=t.getFullYear();
   const pYear=digitalRoot(sumDigits(bd)+sumDigits(bm)+sumDigits(ty));
@@ -415,6 +431,7 @@ const t=new Date();
 document.getElementById('today-line').textContent='Сегодня: '+t.toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'});
 
 loadMaster();
+dobMask('bdate');
 </script>
 </body>
 </html>
